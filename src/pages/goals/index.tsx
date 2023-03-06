@@ -43,8 +43,18 @@ export default function Goals() {
   const [filteredGoals, setFilteredGoals] = useState(GOALS);
 
   function onSearch(search: string) {
+    const searchWithUpperLetter = search
+      .split("")
+      .map((letter, index) => (index === 0 ? letter.toUpperCase() : letter))
+      .join("");
+
     setFilteredGoals(() =>
-      GOALS.filter((goal) => goal.title.startsWith(search))
+      GOALS.filter((goal) => {
+        return (
+          goal.title.includes(search) ||
+          goal.title.includes(searchWithUpperLetter)
+        );
+      })
     );
   }
 
