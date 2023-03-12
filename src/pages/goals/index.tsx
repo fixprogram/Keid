@@ -1,43 +1,47 @@
 import Icon from "@/components/Icon";
 import Layout from "@/components/Layout";
-import SearchPanel from "@/components/Layout/components/SearchPanel/SearchPanel";
+import FilterBar from "@/components/FilterBar";
+import PageHeader from "@/components/PageHeader";
 import Link from "next/link";
 import { useState } from "react";
+import GoalsList from "@/components/GoalsList";
 
 const GOALS = [
   {
     title: "Find a job",
     id: 1,
+    category: "Text",
+    allTasksAmount: 10,
+    completedTasksAmount: 3,
+    color: "#A06AF9",
   },
   {
     title: "Level up relationships",
     id: 2,
+    category: "Text",
+    allTasksAmount: 9,
+    completedTasksAmount: 7,
+    color: "#FBA3FF",
   },
   {
     title: "Launch Keid",
     id: 3,
+    category: "Text",
+    allTasksAmount: 9,
+    completedTasksAmount: 7,
+    color: "#FFDD72",
   },
   {
     title: "Learn how to do 20 pull ups",
     id: 4,
-  },
-  {
-    title: "Find a job",
-    id: 5,
-  },
-  {
-    title: "Level up relationships",
-    id: 6,
-  },
-  {
-    title: "Launch Keid",
-    id: 7,
-  },
-  {
-    title: "Learn how to do 20 pull ups",
-    id: 8,
+    category: "Text",
+    allTasksAmount: 8,
+    completedTasksAmount: 7,
+    color: "#8E96FF",
   },
 ];
+
+const FILTERS = ["Active", "Dreams", "All"];
 
 export default function Goals() {
   const [filteredGoals, setFilteredGoals] = useState(GOALS);
@@ -60,21 +64,16 @@ export default function Goals() {
 
   return (
     <Layout>
-      <div className="flex items-end mb-5">
-        <h2 className="font-medium text-xl">Goals</h2>
+      <PageHeader title="Goals" />
 
-        <span className="font-light text-xs opacity-75 ml-3 pb-[2px]">
-          2023-2024
-        </span>
-
-        <button className="ml-auto">
-          <Icon name="filters" color="#fff" size={30} />
+      <FilterBar filters={FILTERS}>
+        <button type="button">
+          <Icon name="home" width={22} height={22} />
         </button>
-      </div>
+      </FilterBar>
 
-      <SearchPanel onSearch={onSearch} />
-
-      <ul>
+      <GoalsList goals={filteredGoals} />
+      {/* <ul>
         {filteredGoals.map((goal) => (
           <li key={goal.id}>
             <Link href={`goals/${goal.id}`} className="pl-8 pr-3 py-5 block">
@@ -82,7 +81,7 @@ export default function Goals() {
             </Link>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </Layout>
   );
 }

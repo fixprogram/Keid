@@ -2,12 +2,13 @@ import React from "react";
 
 interface Props {
   name: string;
-  color: string;
-  size: number;
+  color?: string;
+  width: number;
+  height: number;
 }
 
-const Icon = ({ name = "", color = "", size = 0 }: Props) => (
-  <svg fill={color} width={size} height={size}>
+const Icon = ({ name = "", color = "", width = 0, height }: Props) => (
+  <svg fill={color} width={width} height={height}>
     <use xlinkHref={`#icon-${name}`} />
   </svg>
 );
