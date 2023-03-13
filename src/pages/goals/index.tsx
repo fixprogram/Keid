@@ -2,7 +2,6 @@ import Icon from "@/components/Icon";
 import Layout from "@/components/Layout";
 import FilterBar from "@/components/FilterBar";
 import PageHeader from "@/components/PageHeader";
-import Link from "next/link";
 import { useState } from "react";
 import GoalsList from "@/components/GoalsList";
 
@@ -41,10 +40,14 @@ const GOALS = [
   },
 ];
 
+// Let's call the page Projects instead of Goals, because Dreams can be here as well
+// Dream is something like a Goal, but without actions and deadlines
+
 const FILTERS = ["Active", "Dreams", "All"];
 
 export default function Goals() {
   const [filteredGoals, setFilteredGoals] = useState(GOALS);
+  const [listStyle, setListStyle] = useState("column");
 
   function onSearch(search: string) {
     const searchWithUpperLetter = search
@@ -62,26 +65,20 @@ export default function Goals() {
     );
   }
 
+  const actionIconName = listStyle === "column" ? "home" : "goals";
+  const newListStyle = listStyle === "column" ? "grid" : "column";
+
   return (
     <Layout>
-      <PageHeader title="Goals" />
+      <PageHeader title="Projects" />
 
       <FilterBar filters={FILTERS}>
-        <button type="button">
-          <Icon name="home" width={22} height={22} />
+        <button type="button" onClick={() => setListStyle(newListStyle)}>
+          <Icon name={actionIconName} width={22} height={22} />
         </button>
       </FilterBar>
 
-      <GoalsList goals={filteredGoals} />
-      {/* <ul>
-        {filteredGoals.map((goal) => (
-          <li key={goal.id}>
-            <Link href={`goals/${goal.id}`} className="pl-8 pr-3 py-5 block">
-              {goal.title}
-            </Link>
-          </li>
-        ))}
-      </ul> */}
+      <GoalsList goals={filteredGoals} listStyle={listStyle} />
     </Layout>
   );
 }

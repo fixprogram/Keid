@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 
 interface Props {
   filters: string[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const FilterBar: FC<Props> = ({ filters = [], children }: Props) => {

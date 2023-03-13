@@ -34,7 +34,7 @@ export default function Navigation() {
   const router = useRouter();
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-background1/[.85] backdrop-blur-[10.8731px]">
+    <nav className="fixed bottom-0 left-0 w-full bg-background1/[.85] backdrop-blur-[10.8731px] z-20">
       <ul className="flex pt-4 pb-10 px-[20px] mx-auto max-w-xs	 justify-between items-center">
         {NAV_LINKS.map((navItem, index, arr) => {
           const isActive = router.pathname === navItem.to;

@@ -7,6 +7,9 @@ module.exports = {
       boxShadow: {
         addBtn: "0px 8px 12px rgba(0, 0, 0, 0.25)",
       },
+      dropShadow: {
+        popup: "0px 8px 12px rgba(0, 0, 0, 0.25)",
+      },
       fontFamily: {
         sans: ["var(--font-inter)"],
         poppins: ["var(--font-poppins)"],
@@ -16,9 +19,15 @@ module.exports = {
         lg: ["16px", "24px"],
         base: ["14px", "24px"],
         sm: ["13px", "24px"],
+        smm: ["12px", "16px"],
+        xs: ["11px", "16px"],
+        xxs: ["10px", "16px"],
       },
       gridTemplateColumns: {
         item: "40px 1fr auto",
+      },
+      letterSpacing: {
+        wide: "0.03125em",
       },
     },
     colors: {

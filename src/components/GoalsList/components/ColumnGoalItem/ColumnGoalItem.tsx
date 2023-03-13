@@ -1,11 +1,15 @@
 import { Gradients, gradients } from "@/gradients";
+import Link from "next/link";
 import Icon from "../../../Icon";
 import { Goal } from "../../GoalsList";
 
-export default function GoalItem({ goal }: { goal: Goal }) {
+export default function ColumnGoalItem({ goal }: { goal: Goal }) {
   const { color, title, category, allTasksAmount, completedTasksAmount } = goal;
   return (
-    <article className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2/50 mt-4">
+    <Link
+      href={`goals/${goal.id}`}
+      className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2/50"
+    >
       <div className="grid grid-cols-item gap-x-5 gap-y-4 ">
         <div
           className={`p-2 rounded-xl w-[40px] h-[40px] mt-1`}
@@ -44,6 +48,6 @@ export default function GoalItem({ goal }: { goal: Goal }) {
           </>
         ) : null}
       </div>
-    </article>
+    </Link>
   );
 }

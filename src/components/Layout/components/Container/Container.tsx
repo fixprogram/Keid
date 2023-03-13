@@ -5,7 +5,9 @@ interface Props {
 }
 
 const Container: FC<Props> = ({ children }) => {
-  return <section className="px-5 pt-6 pb-[120px]">{children}</section>;
+  return (
+    <section className="px-5 pt-6 pb-[120px] relative z-20">{children}</section>
+  );
 };
 
 export default Container;
