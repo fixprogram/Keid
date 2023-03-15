@@ -8,7 +8,7 @@ export default function GridGoalItem({ goal }: { goal: Goal }) {
   const { color, title, category, allTasksAmount, completedTasksAmount } = goal;
   return (
     <Link
-      href={`goals/${goal.id}`}
+      href={`projects/${goal.id}`}
       className="min-h-[100px] p-5 rounded-xl bg-background2/50"
     >
       <div className="flex flex-col h-full ">

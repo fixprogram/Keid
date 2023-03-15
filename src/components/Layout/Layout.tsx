@@ -11,8 +11,11 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <section className="bg-background1 min-h-screen	relative overflow-hidden">
       <Sprite />
-      <Container>{children}</Container>
-      <Navigation />
+
+      <section className="relative z-20">
+        <Container>{children}</Container>
+        <Navigation />
+      </section>
 
       <div
         className="absolute w-[310px] h-[310px] blur-[40.7742px] opacity-50 top-[-11.15%] left-[-32.53%] mix-blend-overlay rounded-full z-10"

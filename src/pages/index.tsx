@@ -1,6 +1,12 @@
+import Router from "next/router";
 import Head from "next/head";
+import { useEffect } from "react";
 
-export default function Home() {
+export default function Index() {
+  useEffect(() => {
+    Router.push("/dashboard");
+  }, []);
+
   return (
     <>
       <Head>

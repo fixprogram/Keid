@@ -5,16 +5,16 @@ import Icon from "@/components/Icon";
 
 const NAV_LINKS = [
   {
-    iconName: "home",
+    iconName: "dashboard",
     iconSize: { width: 20, height: 20 },
-    alt: "Home page",
-    to: "/home",
+    alt: "Dashboard page",
+    to: "/dashboard",
   },
   {
     iconName: "goals",
     iconSize: { width: 19, height: 20 },
-    alt: "Goals page",
-    to: "/goals",
+    alt: "Projects page",
+    to: "/projects",
   },
   {
     iconName: "notification",

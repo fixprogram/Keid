@@ -3,7 +3,7 @@ export default function Sprite() {
     <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
       <defs>
         <symbol
-          id="icon-home"
+          id="icon-dashboard"
           width="20"
           height="20"
           viewBox="0 0 22 22"
@@ -49,7 +49,7 @@ export default function Sprite() {
         </symbol>
 
         <symbol
-          id="icon-home-active"
+          id="icon-dashboard-active"
           width="20"
           height="20"
           viewBox="0 0 20 20"
@@ -316,6 +316,69 @@ export default function Sprite() {
           <path
             d="M7.99998 11.4001L2.59998 6.0001L3.99998 4.6001L7.99998 8.6001L12 4.6001L13.4 6.0001L7.99998 11.4001Z"
             fill="white"
+          />
+        </symbol>
+
+        <symbol
+          id="icon-avatar"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+        >
+          <circle cx="24" cy="24" r="24" fill="#A06AF9" />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M6.98608 40.9273C8.52005 36.5089 11.7344 32.8706 15.8565 30.7681C18.1029 32.5357 20.9265 33.6001 23.9997 33.6001C27.0729 33.6001 29.8965 32.5357 32.1429 30.7681C36.265 32.8706 39.4794 36.5089 41.0133 40.9273C36.6668 45.2958 30.6491 47.9999 23.9997 47.9999C17.3504 47.9999 11.3326 45.2958 6.98608 40.9273Z"
+            fill="white"
+          />
+          <path
+            d="M24 9.6001C18.0456 9.6001 13.2 14.4457 13.2 20.4001C13.2 26.3545 18.0456 31.2001 24 31.2001C29.9544 31.2001 34.8 26.3545 34.8 20.4001C34.8 14.4457 29.9544 9.6001 24 9.6001Z"
+            fill="white"
+          />
+        </symbol>
+
+        <symbol
+          id="icon-filter"
+          width="25"
+          height="24"
+          viewBox="0 0 25 24"
+          fill="none"
+        >
+          <path
+            opacity="0.4"
+            d="M10.5387 17.9867H3.00317"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M21.9978 17.9869C21.9978 19.5775 20.6547 20.8669 18.9978 20.8669C17.3409 20.8669 15.9978 19.5775 15.9978 17.9869C15.9978 16.3952 17.3409 15.1069 18.9978 15.1069C20.6547 15.1069 21.9978 16.3952 21.9978 17.9869Z"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            opacity="0.4"
+            d="M14.4611 6.26255H21.9979"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M3.00269 6.26232C3.00269 7.85409 4.34582 9.14232 6.00269 9.14232C7.65955 9.14232 9.00269 7.85409 9.00269 6.26232C9.00269 4.67174 7.65955 3.38232 6.00269 3.38232C4.34582 3.38232 3.00269 4.67174 3.00269 6.26232Z"
+            stroke="white"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </symbol>
       </defs>

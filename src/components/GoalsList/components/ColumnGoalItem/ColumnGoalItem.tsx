@@ -7,7 +7,7 @@ export default function ColumnGoalItem({ goal }: { goal: Goal }) {
   const { color, title, category, allTasksAmount, completedTasksAmount } = goal;
   return (
     <Link
-      href={`goals/${goal.id}`}
+      href={`projects/${goal.id}`}
       className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2/50"
     >
       <div className="grid grid-cols-item gap-x-5 gap-y-4 ">

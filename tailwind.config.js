@@ -6,6 +6,8 @@ module.exports = {
     extend: {
       boxShadow: {
         addBtn: "0px 8px 12px rgba(0, 0, 0, 0.25)",
+        button: "0px 8px 16px rgba(0, 0, 0, 0.5)",
+        switch: "0px 4px 4px rgba(0, 0, 0, 0.25",
       },
       dropShadow: {
         popup: "0px 8px 12px rgba(0, 0, 0, 0.25)",
@@ -15,6 +17,7 @@ module.exports = {
         poppins: ["var(--font-poppins)"],
       },
       fontSize: {
+        xxl: ["36px", "40px"],
         xl: ["18px", "24px"],
         lg: ["16px", "24px"],
         base: ["14px", "24px"],
@@ -37,6 +40,8 @@ module.exports = {
       background2: "#262A34",
       white: "#ffffff",
       deactive: "#5E6272",
+      active: "#200745",
+      deactiveCheck: "#4D5362",
     },
   },
   plugins: [],

@@ -65,7 +65,7 @@ export default function Goals() {
     );
   }
 
-  const actionIconName = listStyle === "column" ? "home" : "goals";
+  const actionIconName = listStyle === "column" ? "dashboard" : "goals";
   const newListStyle = listStyle === "column" ? "grid" : "column";
 
   return (

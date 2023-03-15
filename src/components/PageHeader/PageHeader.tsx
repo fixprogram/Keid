@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import Icon from "../Icon";
 
 interface Props {
@@ -5,9 +6,10 @@ interface Props {
 }
 
 export default function PageHeader({ title }: Props) {
+  const router = useRouter();
   return (
     <div className="flex items-center justify-between">
-      <button type="button">
+      <button type="button" onClick={() => router.back()}>
         <Icon name="back" height={27} width={27} />
       </button>
 
