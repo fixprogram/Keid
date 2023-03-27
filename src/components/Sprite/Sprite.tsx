@@ -381,6 +381,17 @@ export default function Sprite() {
             strokeLinejoin="round"
           />
         </symbol>
+
+        <symbol id="icon-letter" width="16" height="16" viewBox="0 0 16 16">
+          <path
+            d="M15 1H1C0.4 1 0 1.4 0 2V3.4L8 7.9L16 3.5V2C16 1.4 15.6 1 15 1Z"
+            fill="white"
+          />
+          <path
+            d="M7.5 9.89995L0 5.69995V14C0 14.6 0.4 15 1 15H15C15.6 15 16 14.6 16 14V5.69995L8.5 9.89995C8.22 10.04 7.78 10.04 7.5 9.89995Z"
+            fill="white"
+          />
+        </symbol>
       </defs>
     </svg>
   );

@@ -1,13 +1,15 @@
 import { FC } from "react";
 
 interface Props {
+  withNav?: boolean;
   children: React.ReactNode;
 }
 
-const Container: FC<Props> = ({ children }) => {
+const Container: FC<Props> = ({ withNav = true, children }) => {
   return (
-    <section className="px-6 pt-6 pb-[120px]">{children}</section>
-    // <section className="px-6 pt-6 pb-[120px] relative z-20">{children}</section>
+    <section className={`${withNav ? "px-6 pt-6 pb-[120px]" : "p-10"}`}>
+      {children}
+    </section>
   );
 };
 

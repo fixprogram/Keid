@@ -1,11 +1,20 @@
 import Router from "next/router";
 import Head from "next/head";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Index() {
+  const { status } = useSession();
+
   useEffect(() => {
-    Router.push("/dashboard");
-  }, []);
+    if (status === "unauthenticated") {
+      Router.push("/welcome");
+    }
+
+    if (status === "authenticated") {
+      Router.push("/dashboard");
+    }
+  }, [status]);
 
   return (
     <>

@@ -1,6 +1,7 @@
 import "@/index.css";
 import { Inter, Poppins } from "next/font/google";
 import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
@@ -16,8 +17,10 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${inter.variable} ${poppins.variable} font-sans`}>
-      <Component {...pageProps} />
-    </main>
+    <SessionProvider session={pageProps.session}>
+      <main className={`${inter.variable} ${poppins.variable} font-sans`}>
+        <Component {...pageProps} />
+      </main>
+    </SessionProvider>
   );
 }

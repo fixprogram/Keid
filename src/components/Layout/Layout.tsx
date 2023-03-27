@@ -4,17 +4,18 @@ import Container from "./components/Container";
 import Sprite from "../Sprite";
 
 interface Props {
+  withNav?: boolean;
   children: React.ReactNode;
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ withNav = true, children }) => {
   return (
     <section className="bg-background1 min-h-screen	relative overflow-hidden">
       <Sprite />
 
       <section className="relative z-20">
-        <Container>{children}</Container>
-        <Navigation />
+        <Container withNav={withNav}>{children}</Container>
+        {withNav ? <Navigation /> : null}
       </section>
 
       <div

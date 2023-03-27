@@ -5,7 +5,20 @@ import Cards from "./components/Cards";
 import Filter from "./components/Filter";
 import PriorityTasks from "./components/PriorityTasks";
 
+import { useSession, signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
 export default function Dashboard() {
+  const { status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/welcome");
+    }
+  }, [status, router]);
+
   return (
     <Layout>
       <div className="flex items-center justify-between">
@@ -36,4 +49,12 @@ export default function Dashboard() {
       />
     </Layout>
   );
+
+  // return (
+  //   <>
+  //     Not signed in <br />
+  //     <button onClick={() => signIn()}>Sign in</button>
+  //     <Link href="/signup">Sign up</Link>
+  //   </>
+  // );
 }
