@@ -1,4 +1,5 @@
-import { createUser, findUserByEmail } from "@/shared/models/user";
+import { createUser } from "@/entities/user/models/createUser";
+import { findUserByEmail } from "@/entities/user/models/findUserByEmail";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,7 +11,6 @@ export default async function handler(
 
   // Optional logging to see the responses
   // in the command line where next.js app is running.
-  console.log("body: ", body);
 
   // Guard clause checks for first and last name,
   // and returns early if they are not found
@@ -29,7 +29,6 @@ export default async function handler(
 
   const user = await createUser({ email, name, password });
 
-  console.log(user);
   // Found the name.
   // Sends a HTTP success code
   res.status(200).json(user);

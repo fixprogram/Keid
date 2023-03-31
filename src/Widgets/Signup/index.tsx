@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/widgets/Layout";
 import RouterBack from "@/shared/components/RouterBack";
 import InputLabel from "@/shared/ui/InputLabel";
 import PageTitle from "@/shared/ui/PageTitle";

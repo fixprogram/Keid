@@ -1,4 +1,4 @@
-import Icon from "@/components/Icon";
+import Icon from "@/shared/ui/Icon";
 
 type Props = {
   type?: "button" | "submit" | "reset";

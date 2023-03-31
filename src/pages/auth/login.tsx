@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { getSession } from "next-auth/react";
-import Layout from "@/components/Layout";
-import Signin from "@/Widgets/Signin";
-import Signup from "@/Widgets/Signup";
+import Layout from "@/widgets/Layout";
+import Signin from "@/widgets/Signin";
+import Signup from "@/widgets/Signup";
 import PageTitle from "@/shared/ui/PageTitle";
-import CheckEmail from "@/Widgets/CheckEmail";
+import CheckEmail from "@/widgets/CheckEmail";
 import RouterBack from "@/shared/components/RouterBack";
 import { GetStaticProps } from "next/types";
 

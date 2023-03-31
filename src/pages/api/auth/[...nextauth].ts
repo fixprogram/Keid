@@ -2,8 +2,8 @@ import { User } from "@prisma/client";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { findUserByEmail } from "@/shared/models/user";
 import bcryptjs from "bcryptjs";
+import { findUserByEmail } from "@/entities/user/models/findUserByEmail";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NextAuth_SECRET,

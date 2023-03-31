@@ -1,4 +1,4 @@
-import Icon from "@/components/Icon";
+import Icon from "@/shared/ui/Icon";
 import { useRouter } from "next/router";
 
 type Props = {

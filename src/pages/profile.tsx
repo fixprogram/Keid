@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/widgets/Layout";
 import { useSession, signOut } from "next-auth/react";
 
 export default function Profile() {

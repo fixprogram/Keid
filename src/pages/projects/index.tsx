@@ -1,9 +1,9 @@
-import Icon from "@/components/Icon";
-import Layout from "@/components/Layout";
-import FilterBar from "@/components/FilterBar";
-import PageHeader from "@/components/PageHeader";
+import Icon from "@/shared/ui/Icon";
+import Layout from "@/widgets/Layout";
+import FilterBar from "@/features/FilterBar";
+import PageHeader from "@/features/PageHeader";
 import { useState } from "react";
-import GoalsList from "@/components/GoalsList";
+import GoalsList from "@/features/GoalsList";
 
 const GOALS = [
   {
@@ -12,7 +12,8 @@ const GOALS = [
     category: "Text",
     allTasksAmount: 10,
     completedTasksAmount: 3,
-    color: "#A06AF9",
+    color: "colorful01",
+    // color: "#A06AF9",
   },
   {
     title: "Level up relationships",
@@ -49,21 +50,21 @@ export default function Goals() {
   const [filteredGoals, setFilteredGoals] = useState(GOALS);
   const [listStyle, setListStyle] = useState("column");
 
-  function onSearch(search: string) {
-    const searchWithUpperLetter = search
-      .split("")
-      .map((letter, index) => (index === 0 ? letter.toUpperCase() : letter))
-      .join("");
+  // function onSearch(search: string) {
+  //   const searchWithUpperLetter = search
+  //     .split("")
+  //     .map((letter, index) => (index === 0 ? letter.toUpperCase() : letter))
+  //     .join("");
 
-    setFilteredGoals(() =>
-      GOALS.filter((goal) => {
-        return (
-          goal.title.includes(search) ||
-          goal.title.includes(searchWithUpperLetter)
-        );
-      })
-    );
-  }
+  //   setFilteredGoals(() =>
+  //     GOALS.filter((goal) => {
+  //       return (
+  //         goal.title.includes(search) ||
+  //         goal.title.includes(searchWithUpperLetter)
+  //       );
+  //     })
+  //   );
+  // }
 
   const actionIconName = listStyle === "column" ? "dashboard" : "goals";
   const newListStyle = listStyle === "column" ? "grid" : "column";

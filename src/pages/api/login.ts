@@ -1,4 +1,4 @@
-import { findUserByEmail } from "@/shared/models/user";
+import { findUserByEmail } from "@/entities/user/models/findUserByEmail";
 import { NextApiRequest, NextApiResponse } from "next/types";
 
 export default async function handler(
@@ -13,8 +13,6 @@ export default async function handler(
     const body = req.body;
 
     const { email } = body;
-
-    console.log("email: ", email);
 
     const user = await findUserByEmail(email);
 
