@@ -3,11 +3,11 @@ import Popup from "@/shared/ui/Popup";
 import PopupLine from "@/shared/ui/PopupLine";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { closePopupAdd } from "../../store/navigationSlice";
-import PopupIdle from "../PopupIdle";
-import PopupProject from "../PopupProject";
-import PopupTask from "../PopupTask";
+import PopupIdle from "./components/PopupIdle";
+import PopupProject from "./components/PopupProject";
+import PopupTask from "./components/PopupTask";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 
 const POPUP_CONTENT = {
   idle: {
@@ -22,7 +22,7 @@ const POPUP_CONTENT = {
 };
 
 export default function PopupAdd() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const popupAddOpened = useAppSelector(
     (state) => state.navigation.popupAddOpened
   );
@@ -31,6 +31,10 @@ export default function PopupAdd() {
   );
 
   const Component = POPUP_CONTENT[popupAddState].component;
+  const popupShowedStyles =
+    popupAddState === "idle"
+      ? { bottom: 32 }
+      : { bottom: 0, left: 0, right: 0, borderRadius: "24px 24px 0 0" };
 
   return (
     <Fragment>
@@ -38,7 +42,7 @@ export default function PopupAdd() {
         isHidden={!popupAddOpened}
         popupStyle={{
           hidden: { bottom: -1000 },
-          showed: { bottom: 32, zIndex: 30 },
+          showed: { zIndex: 30, ...popupShowedStyles },
         }}
       >
         <PopupLine />

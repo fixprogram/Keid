@@ -1,12 +1,17 @@
-import { projectStyles } from "@/shared/config/projectStyles";
+import { ProjectType } from "@/app/store/projectsSlice";
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import Link from "next/link";
-import Icon from "../../../../shared/ui/Icon";
+import Icon from "@/shared/ui/Icon";
 
-export default function GridGoalItem({ project }) {
-  const { style, title, category, allTasksAmount, completedTasksAmount } =
-    project;
+type Props = {
+  project: ProjectType;
+};
 
-  const goalStyle = projectStyles[style];
+export default function GridGoalItem({ project }: Props) {
+  const { style, title, taskAmount, completedTaskAmount } = project;
+  const category = "Category";
+
+  const projectStyle = projectStyles[style as keyof ProjectStyleType];
   return (
     <Link
       href={`projects/${project.id}`}
@@ -15,7 +20,7 @@ export default function GridGoalItem({ project }) {
       <div className="flex flex-col h-full ">
         <div
           className={`p-2 rounded-xl w-[40px] h-[40px]`}
-          style={{ backgroundColor: goalStyle.background }}
+          style={{ backgroundColor: projectStyle.background }}
         >
           <Icon name="goal" width={24} height={24} />
         </div>
@@ -25,20 +30,20 @@ export default function GridGoalItem({ project }) {
           <p className="font-medium text-deactive text-sm">{category}</p>
         </div>
 
-        {allTasksAmount && completedTasksAmount ? (
+        {taskAmount !== 0 ? (
           <div className="mt-auto flex items-center justify-between">
             <div className="w-full h-1 bg-white/10 rounded-full">
               <div
                 className="rounded-full h-full"
                 style={{
-                  width: `${(completedTasksAmount / allTasksAmount) * 100}%`,
-                  background: goalStyle.gradient,
+                  width: `${(completedTaskAmount / taskAmount) * 100}%`,
+                  background: projectStyle.gradient,
                 }}
               ></div>
             </div>
 
             <div className={`text-xs text-white font-medium ml-[14px]`}>
-              {completedTasksAmount}/{allTasksAmount}
+              {completedTaskAmount}/{taskAmount}
             </div>
           </div>
         ) : null}

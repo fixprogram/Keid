@@ -2,16 +2,12 @@ import Link from "next/link";
 
 import { useRouter } from "next/router";
 import Icon from "@/shared/ui/Icon";
-import { Fragment, useState } from "react";
-import Popup from "@/shared/ui/Popup";
-import PopupLine from "@/shared/ui/PopupLine";
-import { CARDS_CONFIG } from "@/widgets/Overview/lib/config";
-import { useDispatch, useSelector } from "react-redux";
-import { closePopupAdd, openPopupAdd } from "./store/navigationSlice";
-import Overlay from "@/shared/ui/Overlay";
+import { Fragment } from "react";
+import { openPopupAdd } from "./store/navigationSlice";
 import PopupAdd from "./components/PopupAdd";
 import AddButton from "@/shared/ui/AddButton";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 
 const NAV_LINKS = [
   {
@@ -42,7 +38,7 @@ const NAV_LINKS = [
 
 export default function Navigation() {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const popupAddOpened = useAppSelector(
     (state) => state.navigation.popupAddOpened

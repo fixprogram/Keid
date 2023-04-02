@@ -1,12 +1,17 @@
-import { projectStyles } from "@/shared/config/projectStyles";
+import { ProjectType } from "@/app/store/projectsSlice";
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import Link from "next/link";
 import Icon from "../../../../shared/ui/Icon";
 
-export default function ColumnGoalItem({ project }) {
-  const { style, title, category, allTasksAmount, completedTasksAmount } =
-    project;
+type Props = {
+  project: ProjectType;
+};
 
-  const goalStyle = projectStyles[style];
+export default function ColumnGoalItem({ project }: Props) {
+  const { style, title, taskAmount, completedTaskAmount } = project;
+  const category = "Category";
+
+  const projectStyle = projectStyles[style as keyof ProjectStyleType];
 
   return (
     <Link
@@ -16,7 +21,7 @@ export default function ColumnGoalItem({ project }) {
       <div className="grid grid-cols-item gap-x-5 gap-y-4 ">
         <div
           className={`p-2 rounded-xl w-[40px] h-[40px] mt-1`}
-          style={{ backgroundColor: goalStyle.background }}
+          style={{ backgroundColor: projectStyle.background }}
         >
           <Icon name="goal" width={24} height={24} />
         </div>
@@ -26,13 +31,13 @@ export default function ColumnGoalItem({ project }) {
           <p className="font-medium text-deactive text-sm">{category}</p>
         </div>
 
-        {allTasksAmount && completedTasksAmount ? (
+        {taskAmount !== 0 ? (
           <>
             <div
               className={`text-sm text-white font-bold px-3 rounded-full h-[24px]`}
-              style={{ backgroundColor: goalStyle.background }}
+              style={{ backgroundColor: projectStyle.background }}
             >
-              {completedTasksAmount}/{allTasksAmount}
+              {completedTaskAmount}/{taskAmount}
             </div>
 
             <div
@@ -42,9 +47,8 @@ export default function ColumnGoalItem({ project }) {
               <div
                 className="rounded-full h-full"
                 style={{
-                  width: `${(completedTasksAmount / allTasksAmount) * 100}%`,
-                  // background: gradients[color as keyof Gradients],
-                  background: goalStyle.gradient,
+                  width: `${(completedTaskAmount / taskAmount) * 100}%`,
+                  background: projectStyle.gradient,
                 }}
               ></div>
             </div>

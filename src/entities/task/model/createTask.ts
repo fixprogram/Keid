@@ -16,12 +16,9 @@ export const createTask = async ({
   taskStyle,
   deadline,
 }: Props) => {
-  console.log("userId: ", userId);
-  console.log("projectName: ", projectName);
-
   const project = (await prisma.project.findFirst({
     where: { userId, title: projectName },
-    select: { id: true },
+    select: { id: true, taskIds: true },
   })) as Project;
   const projectId = project.id;
 
@@ -32,6 +29,11 @@ export const createTask = async ({
       style: taskStyle,
       deadline,
     },
+  });
+
+  await prisma.project.update({
+    where: { id: projectId },
+    data: { taskIds: [...project.taskIds, task.id] },
   });
 
   return task;

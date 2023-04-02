@@ -4,22 +4,20 @@ import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
 import { closePopupAdd } from "../store/navigationSlice";
 
-export function useTaskFormSubmit() {
+export function useProjectFormSubmit() {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
 
   const userId = useAppSelector((state) => state.overview.userId);
-  const taskName = useAppSelector((state) => state.addTask.taskName);
-  const taskStyle = useAppSelector((state) => state.addTask.taskStyle);
-  const deadline = useAppSelector((state) => state.addTask.deadline);
-  const projectName = useAppSelector((state) => state.addTask.taskProject);
+  const projectName = useAppSelector((state) => state.addProject.projectName);
+  const projectStyle = useAppSelector((state) => state.addProject.projectStyle);
 
   const handleFormSubmit = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch("http://localhost:3000/api/addTask", {
+      fetch("http://localhost:3000/api/addProject", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -27,10 +25,8 @@ export function useTaskFormSubmit() {
         },
         body: JSON.stringify({
           userId,
-          taskName,
-          taskStyle,
-          deadline,
           projectName,
+          projectStyle,
         }),
       }).then(async (res) => {
         console.log("Res: ", res);
@@ -40,10 +36,10 @@ export function useTaskFormSubmit() {
         dispatch(closePopupAdd());
 
         console.log("body: ", body);
-        if (body.id) router.push(`/tasks/${body.id}`);
+        if (body.id) router.push(`/projects/${body.id}`);
       });
     },
-    [userId, taskName, taskStyle, deadline, projectName, dispatch, router]
+    [userId, projectName, projectStyle, dispatch, router]
   );
 
   return handleFormSubmit;

@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { setPopupAddState } from "../../store/navigationSlice";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { setPopupAddState } from "../../../../store/navigationSlice";
 
 const popupButtons = [
   {
@@ -13,7 +13,7 @@ const popupButtons = [
 ];
 
 export default function PopupIdle() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <ul className="mt-2">

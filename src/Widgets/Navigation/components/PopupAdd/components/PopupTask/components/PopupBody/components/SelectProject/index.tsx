@@ -1,10 +1,10 @@
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setTaskProject } from "../../../../store/addTaskSlice";
+import { setTaskProject } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 
 export default function SelectProject() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const projects = useAppSelector((state) => state.navigation.projects);
   const activeProject = useAppSelector((state) => state.addTask.taskProject);
 

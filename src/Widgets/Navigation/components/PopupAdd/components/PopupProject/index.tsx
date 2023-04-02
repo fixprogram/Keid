@@ -1,50 +1,33 @@
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import AddButton from "@/shared/ui/AddButton";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { closePopupAdd } from "../../store/navigationSlice";
-import { setProjectName } from "./store/addProjectSlice";
+import { useProjectFormSubmit } from "@/widgets/Navigation/hooks/useProjectFormSubmit";
+import { SyntheticEvent, useCallback, useEffect } from "react";
+import { setProjectName, setProjectStyle } from "./store/addProjectSlice";
 
 export default function PopupProject() {
-  const session = useSession();
-  const router = useRouter();
-
-  const dispatch = useDispatch();
-  const userId = useAppSelector((state) => state.overview.userId);
+  const dispatch = useAppDispatch();
+  const handleFormSubmit = useProjectFormSubmit();
   const projectName = useAppSelector((state) => state.addProject.projectName);
   const projectStyle = useAppSelector((state) => state.addProject.projectStyle);
   const error = useAppSelector((state) => state.addProject.error);
+  const style = projectStyles[projectStyle as keyof ProjectStyleType];
+
+  const projectAmount = useAppSelector((state) => state.overview.projectAmount);
 
   const handleProjectNameChange = useCallback(
-    (e) => {
-      return dispatch(setProjectName(e.target.value));
+    (e: SyntheticEvent) => {
+      const target = e.target as HTMLInputElement;
+      return dispatch(setProjectName(target.value));
     },
     [dispatch]
   );
 
-  const handleFormSubmit = useCallback(
-    (event) => {
-      event.preventDefault();
+  useEffect(() => {
+    dispatch(setProjectStyle(projectAmount <= 6 ? `0${projectAmount}` : "01"));
+  }, [dispatch, projectAmount]);
 
-      fetch("http://localhost:3000/api/addProject", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, projectName, projectStyle }),
-      }).then(async (res) => {
-        const body = await res.json();
-
-        dispatch(closePopupAdd());
-
-        if (body.id) router.push(`/projects/${body.id}`);
-      });
-    },
-    [userId, projectName, projectStyle]
-  );
   return (
     <section className="px-5 my-5">
       <form method="post" onSubmit={handleFormSubmit}>
@@ -52,6 +35,7 @@ export default function PopupProject() {
           <button
             type="button"
             className="w-4 h-4 bg-primary rounded mr-4 mb-[5px]"
+            style={{ background: style.gradient }}
           ></button>
 
           <input

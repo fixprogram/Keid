@@ -1,3 +1,13 @@
+export type ProjectStyleType = {
+  "01": string;
+  "02": string;
+  "03": string;
+  "04": string;
+  "05": string;
+  "06": string;
+  "07": string;
+};
+
 export const projectStyles = {
   "01": {
     background: "#A06AF9",

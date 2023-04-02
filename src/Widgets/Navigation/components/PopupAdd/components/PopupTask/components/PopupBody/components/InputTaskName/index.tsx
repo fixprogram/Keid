@@ -1,10 +1,10 @@
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { setTaskName } from "../../../../store/addTaskSlice";
 
 export default function InputTaskName() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const taskName = useAppSelector((state) => state.addTask.taskName);
 
   const error = useAppSelector((state) => state.addProject.error);

@@ -1,12 +1,12 @@
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Calendar from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import useInitialDeadline from "@/widgets/Navigation/hooks/useInitialDeadline";
-import { useDispatch } from "react-redux";
 import { setCalendarClose, setTaskDeadline } from "../../store/addTaskSlice";
 
 export default function PopupCalendar() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const deadline = useAppSelector((state) => state.addTask.deadline);
   const initialDeadline = useInitialDeadline(deadline);
 

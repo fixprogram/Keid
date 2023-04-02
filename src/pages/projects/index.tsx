@@ -12,7 +12,7 @@ import {
 } from "@/app/store/projectsSlice";
 import { wrapper } from "@/app/store/store";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 
 const GOALS = [
   {
@@ -51,23 +51,7 @@ const GOALS = [
 ];
 
 export default function Projects() {
-  // function onSearch(search: string) {
-  //   const searchWithUpperLetter = search
-  //     .split("")
-  //     .map((letter, index) => (index === 0 ? letter.toUpperCase() : letter))
-  //     .join("");
-
-  //   setFilteredGoals(() =>
-  //     GOALS.filter((goal) => {
-  //       return (
-  //         goal.title.includes(search) ||
-  //         goal.title.includes(searchWithUpperLetter)
-  //       );
-  //     })
-  //   );
-  // }
-
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const projects = useAppSelector((state) => state.projects.projects);
   const filters = useAppSelector((state) => state.projects.filters);
   const activeFilter = useAppSelector((state) => state.projects.activeFilter);
@@ -75,7 +59,7 @@ export default function Projects() {
 
   const actionIconName = listStyle === "column" ? "dashboard" : "goals";
 
-  // console.log("projects: ", projects);
+  console.log("Projects: ", projects);
 
   return (
     <Layout>

@@ -1,10 +1,14 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Cards from "./components/Cards";
 import Filter from "./components/Filter";
 import PriorityTasks from "./components/PriorityTasks";
 
 export default function Overview() {
-  const projectAmount = useSelector((state) => state.overview.projectAmount);
+  const projectAmount = useAppSelector((state) => state.overview.projectAmount);
+
+  const projects = useAppSelector((state) => state.projects.projects);
+
+  console.log("Overview Projects: ", projects);
 
   return (
     <>

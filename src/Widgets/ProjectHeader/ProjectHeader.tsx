@@ -1,4 +1,4 @@
-import { projectStyles } from "@/shared/config/projectStyles";
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Icon from "../../shared/ui/Icon";
 import ScreenList from "./ScreenList";
@@ -8,12 +8,15 @@ export default function ProjectHeader() {
 
   const { title, style, tasks } = project;
 
-  const projectStyle = projectStyles[style];
+  const projectStyle = projectStyles[style as keyof ProjectStyleType];
   const screens = ["Overview"];
   if (tasks.length) {
     screens.push("Task List");
   }
 
+  if (projectStyle === undefined) {
+    return null;
+  }
   return (
     <section className="flex items-start gap-6">
       <div
