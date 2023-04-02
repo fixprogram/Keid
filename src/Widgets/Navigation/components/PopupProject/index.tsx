@@ -12,7 +12,7 @@ export default function PopupProject() {
   const router = useRouter();
 
   const dispatch = useDispatch();
-  const userId = session.data?.user.id as string;
+  const userId = useAppSelector((state) => state.overview.userId);
   const projectName = useAppSelector((state) => state.addProject.projectName);
   const projectStyle = useAppSelector((state) => state.addProject.projectStyle);
   const error = useAppSelector((state) => state.addProject.error);
@@ -36,13 +36,10 @@ export default function PopupProject() {
         },
         body: JSON.stringify({ userId, projectName, projectStyle }),
       }).then(async (res) => {
-        console.log("Res: ", res);
-
         const body = await res.json();
 
         dispatch(closePopupAdd());
 
-        console.log("body: ", body);
         if (body.id) router.push(`/projects/${body.id}`);
       });
     },
@@ -60,7 +57,7 @@ export default function PopupProject() {
           <input
             type="text"
             name="name"
-            placeholder="Project Name"
+            placeholder="Project Name..."
             className="block text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
             style={{ background: "inherit" }}
             value={projectName}

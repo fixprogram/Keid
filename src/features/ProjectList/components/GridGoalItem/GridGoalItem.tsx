@@ -1,20 +1,21 @@
+import { projectStyles } from "@/shared/config/projectStyles";
 import Link from "next/link";
-
-import { Gradients, gradients } from "@/gradients";
 import Icon from "../../../../shared/ui/Icon";
-import { Goal } from "../../GoalsList";
 
-export default function GridGoalItem({ goal }: { goal: Goal }) {
-  const { color, title, category, allTasksAmount, completedTasksAmount } = goal;
+export default function GridGoalItem({ project }) {
+  const { style, title, category, allTasksAmount, completedTasksAmount } =
+    project;
+
+  const goalStyle = projectStyles[style];
   return (
     <Link
-      href={`projects/${goal.id}`}
+      href={`projects/${project.id}`}
       className="min-h-[100px] p-5 rounded-xl bg-background2/50"
     >
       <div className="flex flex-col h-full ">
         <div
           className={`p-2 rounded-xl w-[40px] h-[40px]`}
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: goalStyle.background }}
         >
           <Icon name="goal" width={24} height={24} />
         </div>
@@ -31,7 +32,7 @@ export default function GridGoalItem({ goal }: { goal: Goal }) {
                 className="rounded-full h-full"
                 style={{
                   width: `${(completedTasksAmount / allTasksAmount) * 100}%`,
-                  background: gradients[color as keyof Gradients],
+                  background: goalStyle.gradient,
                 }}
               ></div>
             </div>

@@ -1,9 +1,11 @@
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 import addProjectSlice from "@/widgets/Navigation/components/PopupProject/store/addProjectSlice";
 import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
 import overviewSlice from "@/widgets/Overview/store/overviewSlice";
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
 import projectSlice from "./projectSlice";
+import projectsSlice from "./projectsSlice";
+import addTaskSlice from "@/widgets/Navigation/components/PopupTask/store/addTaskSlice";
 
 const makeStore = () =>
   configureStore({
@@ -11,7 +13,9 @@ const makeStore = () =>
       overview: overviewSlice,
       navigation: navigationSlice,
       addProject: addProjectSlice,
+      addTask: addTaskSlice,
       project: projectSlice,
+      projects: projectsSlice,
     },
   });
 

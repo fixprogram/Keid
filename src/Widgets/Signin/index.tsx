@@ -30,8 +30,6 @@ export default function Signin({ email, goBack }: Props) {
           error: "Password is not correct",
         }));
       if (res.url) router.push("/");
-
-      console.log("resp: ", res);
     },
     [router]
   );

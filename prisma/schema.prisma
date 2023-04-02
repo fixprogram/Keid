@@ -34,4 +34,6 @@ model Task {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   title          String    
   projectId      String    @db.ObjectId
+  style          String
+  deadline       String
 }

@@ -9,7 +9,7 @@ export interface AddProjectState {
 
 const initialState: AddProjectState = {
   projectName: "",
-  projectStyle: "colorful01",
+  projectStyle: "01",
   error: "",
 };
 

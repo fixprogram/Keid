@@ -102,3 +102,49 @@ a {
     color-scheme: dark;
   }
 }
+
+/* React Calendar styles */
+
+.react-calendar__navigation {
+  display: flex;
+  padding: 24px;
+  justify-content: space-between;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-family: "__Poppins_e48358", "__Poppins_Fallback_e48358";
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #a5f59c;
+}
+
+.react-calendar__tile abbr {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 8px auto;
+}
+
+.react-calendar__tile--active abbr {
+  background: #246bfd; /* Primary */
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #5e6272; /* Deactive */
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #5e6272;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  height: 32px;
+  margin-bottom: 8px;
+}

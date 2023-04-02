@@ -3,10 +3,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { Task } from "@prisma/client";
 import { HYDRATE } from "next-redux-wrapper";
 
-// export type Task = {
-
-// }
-
 export interface ProjectState {
   title: string;
   style: string;

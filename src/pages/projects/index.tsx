@@ -2,8 +2,17 @@ import Icon from "@/shared/ui/Icon";
 import Layout from "@/widgets/Layout";
 import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
-import { useState } from "react";
-import GoalsList from "@/features/GoalsList";
+import ProjectList from "@/features/ProjectList";
+import { getSession } from "next-auth/react";
+import { getUserProjects } from "@/entities/user/models/getUserProjects";
+import {
+  setActiveFilter,
+  setupProjects,
+  toggleListStyle,
+} from "@/app/store/projectsSlice";
+import { wrapper } from "@/app/store/store";
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { useDispatch } from "react-redux";
 
 const GOALS = [
   {
@@ -41,15 +50,7 @@ const GOALS = [
   },
 ];
 
-// Let's call the page Projects instead of Goals, because Dreams can be here as well
-// Dream is something like a Goal, but without actions and deadlines
-
-const FILTERS = ["Active", "Dreams", "All"];
-
-export default function Goals() {
-  const [filteredGoals, setFilteredGoals] = useState(GOALS);
-  const [listStyle, setListStyle] = useState("column");
-
+export default function Projects() {
   // function onSearch(search: string) {
   //   const searchWithUpperLetter = search
   //     .split("")
@@ -66,20 +67,45 @@ export default function Goals() {
   //   );
   // }
 
+  const dispatch = useDispatch();
+  const projects = useAppSelector((state) => state.projects.projects);
+  const filters = useAppSelector((state) => state.projects.filters);
+  const activeFilter = useAppSelector((state) => state.projects.activeFilter);
+  const listStyle = useAppSelector((state) => state.projects.listStyle);
+
   const actionIconName = listStyle === "column" ? "dashboard" : "goals";
-  const newListStyle = listStyle === "column" ? "grid" : "column";
+
+  // console.log("projects: ", projects);
 
   return (
     <Layout>
       <PageHeader title="Projects" />
 
-      <FilterBar filters={FILTERS}>
-        <button type="button" onClick={() => setListStyle(newListStyle)}>
+      <FilterBar
+        filters={filters}
+        activeFilter={activeFilter}
+        filterClickHandler={(filter: string) =>
+          dispatch(setActiveFilter(filter))
+        }
+      >
+        <button type="button" onClick={() => dispatch(toggleListStyle())}>
           <Icon name={actionIconName} width={22} height={22} />
         </button>
       </FilterBar>
 
-      <GoalsList goals={filteredGoals} listStyle={listStyle} />
+      <ProjectList />
     </Layout>
   );
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    const session = await getSession(context);
+
+    const userId = session?.user.id as string;
+
+    const projects = await getUserProjects(userId);
+
+    store.dispatch(setupProjects(projects));
+  }
+);

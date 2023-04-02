@@ -1,3 +1,4 @@
+import { projectStyles } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Icon from "../../shared/ui/Icon";
 import ScreenList from "./ScreenList";
@@ -7,14 +8,18 @@ export default function ProjectHeader() {
 
   const { title, style, tasks } = project;
 
-  const bgColor = `bg-${style}`;
+  const projectStyle = projectStyles[style];
   const screens = ["Overview"];
   if (tasks.length) {
     screens.push("Task List");
   }
+
   return (
     <section className="flex items-start gap-6">
-      <div className={`p-2 rounded-xl w-[40px] h-[40px] ${bgColor}`}>
+      <div
+        className={`p-2 rounded-xl w-[40px] h-[40px]`}
+        style={{ background: projectStyle.background }}
+      >
         <Icon name="goal" width={24} height={24} />
       </div>
 

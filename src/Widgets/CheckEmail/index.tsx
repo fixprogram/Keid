@@ -22,7 +22,6 @@ export default function CheckEmail({ email, setEmail, setType }: Props) {
         body: JSON.stringify({ email }),
       }).then(async (res) => {
         const body = await res.json();
-        console.log("body: ", body);
         setType(body.type);
       });
     },

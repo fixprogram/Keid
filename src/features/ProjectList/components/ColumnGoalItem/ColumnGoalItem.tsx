@@ -1,22 +1,22 @@
-import { Gradients, gradients } from "@/gradients";
+import { projectStyles } from "@/shared/config/projectStyles";
 import Link from "next/link";
 import Icon from "../../../../shared/ui/Icon";
-import { Goal } from "../../GoalsList";
 
-export default function ColumnGoalItem({ goal }: { goal: Goal }) {
-  const { color, title, category, allTasksAmount, completedTasksAmount } = goal;
+export default function ColumnGoalItem({ project }) {
+  const { style, title, category, allTasksAmount, completedTasksAmount } =
+    project;
 
-  const bgColor = `bg-${color}`;
+  const goalStyle = projectStyles[style];
 
   return (
     <Link
-      href={`projects/${goal.id}`}
+      href={`projects/${project.id}`}
       className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2/50"
     >
       <div className="grid grid-cols-item gap-x-5 gap-y-4 ">
         <div
-          className={`p-2 rounded-xl w-[40px] h-[40px] mt-1 ${bgColor}`}
-          // style={{ backgroundColor: color }}
+          className={`p-2 rounded-xl w-[40px] h-[40px] mt-1`}
+          style={{ backgroundColor: goalStyle.background }}
         >
           <Icon name="goal" width={24} height={24} />
         </div>
@@ -29,8 +29,8 @@ export default function ColumnGoalItem({ goal }: { goal: Goal }) {
         {allTasksAmount && completedTasksAmount ? (
           <>
             <div
-              className={`text-sm text-white font-bold px-3 rounded-full h-[24px] ${bgColor}`}
-              // style={{ backgroundColor: color }}
+              className={`text-sm text-white font-bold px-3 rounded-full h-[24px]`}
+              style={{ backgroundColor: goalStyle.background }}
             >
               {completedTasksAmount}/{allTasksAmount}
             </div>
@@ -43,8 +43,8 @@ export default function ColumnGoalItem({ goal }: { goal: Goal }) {
                 className="rounded-full h-full"
                 style={{
                   width: `${(completedTasksAmount / allTasksAmount) * 100}%`,
-                  background: gradients[color as keyof Gradients],
-                  // backgroundColor: color,
+                  // background: gradients[color as keyof Gradients],
+                  background: goalStyle.gradient,
                 }}
               ></div>
             </div>
