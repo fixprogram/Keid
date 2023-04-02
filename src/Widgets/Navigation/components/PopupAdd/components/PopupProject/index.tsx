@@ -25,7 +25,9 @@ export default function PopupProject() {
   );
 
   useEffect(() => {
-    dispatch(setProjectStyle(projectAmount <= 6 ? `0${projectAmount}` : "01"));
+    dispatch(
+      setProjectStyle(projectAmount <= 6 ? `0${projectAmount + 1}` : "01")
+    );
   }, [dispatch, projectAmount]);
 
   return (

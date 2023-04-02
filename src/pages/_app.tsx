@@ -2,7 +2,7 @@ import "@/index.css";
 import { Inter, Poppins } from "next/font/google";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
-import { wrapper } from "../app/store/store";
+import { wrapper } from "../application/store/store";
 import { Provider } from "react-redux";
 
 const inter = Inter({

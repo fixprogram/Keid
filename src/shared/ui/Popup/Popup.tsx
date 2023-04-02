@@ -10,7 +10,7 @@ interface Props {
 const Popup = ({ isHidden = true, popupStyle, children }: Props) => {
   return (
     <section
-      className={`pt-1 pb-2 rounded-3xl bg-background2 drop-shadow-popup fixed left-3 right-3 `}
+      className={`pt-1 pb-2 px-5 rounded-3xl bg-background2 drop-shadow-popup fixed left-3 right-3 `}
       style={isHidden ? popupStyle.hidden : popupStyle.showed}
     >
       {children}

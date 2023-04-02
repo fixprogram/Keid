@@ -1,4 +1,4 @@
-import { wrapper } from "@/app/store/store";
+import { wrapper } from "@/application/store/store";
 import {
   setUserId,
   setUserProjectAmount,

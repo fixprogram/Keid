@@ -1,9 +1,12 @@
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import Icon from "../../shared/ui/Icon";
+import Icon from "../../../../shared/ui/Icon";
+import { openSettings } from "../../store/projectSlice";
 import ScreenList from "./ScreenList";
 
 export default function ProjectHeader() {
+  const dispatch = useAppDispatch();
   const project = useAppSelector((state) => state.project);
 
   const { title, style, tasks } = project;
@@ -32,7 +35,11 @@ export default function ProjectHeader() {
         <ScreenList screens={screens} />
       </div>
 
-      <button type="button" className="mr-[10px]">
+      <button
+        type="button"
+        className="mr-[10px]"
+        onClick={() => dispatch(openSettings())}
+      >
         <Icon name="settings" width={24} height={24} />
       </button>
     </section>

@@ -2,6 +2,7 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
+import { setProjectName } from "../components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import { closePopupAdd } from "../store/navigationSlice";
 
 export function useProjectFormSubmit() {
@@ -33,6 +34,7 @@ export function useProjectFormSubmit() {
 
         const body = await res.json();
 
+        dispatch(setProjectName(""));
         dispatch(closePopupAdd());
 
         console.log("body: ", body);

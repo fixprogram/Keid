@@ -7,8 +7,10 @@ export default async function handler(
 ) {
   const { userId, projectName, projectStyle } = req.body;
 
-  if (!projectName) {
-    return res.status(400).json({ data: "Project name can't be empty" });
+  if (!projectName || !userId) {
+    return res
+      .status(400)
+      .json({ data: "Project name and userId can't be empty" });
   }
 
   const project = await createProject(userId, projectName, projectStyle);

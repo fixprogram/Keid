@@ -9,8 +9,8 @@ import {
   setActiveFilter,
   setupProjects,
   toggleListStyle,
-} from "@/app/store/projectsSlice";
-import { wrapper } from "@/app/store/store";
+} from "@/application/store/projectsSlice";
+import { wrapper } from "@/application/store/store";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 

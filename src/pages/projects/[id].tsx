@@ -1,45 +1,12 @@
-import Layout from "@/widgets/Layout";
-import { wrapper } from "@/app/store/store";
+import { wrapper } from "@/application/store/store";
 import { getProjectById } from "@/entities/project/models/getProjectById";
-import { setupProjectData } from "@/app/store/projectSlice";
+import { setupProjectData } from "@/templates/ProjectPage/store/projectSlice";
 import { getTasksByIds } from "@/entities/task/model/getTasksByIds";
-import ProjectHeader from "@/widgets/ProjectHeader";
-import ProjectBody from "@/widgets/ProjectBody";
+import ProjectPage from "@/templates/ProjectPage";
 
-// const DATA = {
-//   title: "Launch Keid",
-//   id: 3,
-//   category: "Text",
-//   allTasksAmount: 9,
-//   completedTasksAmount: 7,
-//   color: "#FFDD72",
-//   tasks: [
-//     {
-//       id: 1,
-//       progress: 70,
-//       title: "Some task",
-//       deadline: "Today",
-//     },
-//   ],
-//   ideas: [
-//     {
-//       title: "Some idea",
-//       description: "Idea description",
-//     },
-//   ],
-// };
-
-const Project = () => {
-  return (
-    <Layout>
-      <ProjectHeader />
-
-      <ProjectBody screen="Task List" />
-    </Layout>
-  );
-};
-
-export default Project;
+export default function Project() {
+  return <ProjectPage />;
+}
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {

@@ -2,7 +2,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
 import overviewSlice from "@/widgets/Overview/store/overviewSlice";
-import projectSlice from "./projectSlice";
+import projectSlice from "../../templates/ProjectPage/store/projectSlice";
 import projectsSlice from "./projectsSlice";
 import addProjectSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
