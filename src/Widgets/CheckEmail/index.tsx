@@ -1,6 +1,6 @@
 import EmailFieldset from "@/shared/components/EmailFieldset";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
-import { useCallback } from "react";
+import { SyntheticEvent, useCallback } from "react";
 
 interface Props {
   email: string;
@@ -10,7 +10,7 @@ interface Props {
 
 export default function CheckEmail({ email, setEmail, setType }: Props) {
   const onSubmit = useCallback(
-    (event) => {
+    (event: SyntheticEvent) => {
       event.preventDefault();
 
       fetch("http://localhost:3000/api/login", {

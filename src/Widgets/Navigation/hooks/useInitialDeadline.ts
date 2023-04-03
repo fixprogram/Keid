@@ -11,7 +11,7 @@ export default function useInitialDeadline(deadline: string) {
     if (isCalendarOpen) {
       initialDeadline.current = deadline;
     }
-  }, [isCalendarOpen]);
+  }, [isCalendarOpen, deadline]);
 
   return JSON.parse(initialDeadline.current);
 }
