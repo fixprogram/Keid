@@ -3,9 +3,10 @@ import { createWrapper } from "next-redux-wrapper";
 import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
 import overviewSlice from "@/widgets/Overview/store/overviewSlice";
 import projectSlice from "../../templates/ProjectPage/store/projectSlice";
-import projectsSlice from "./projectsSlice";
+import projectsSlice from "../../templates/ProjectsPage/store/projectsSlice";
 import addProjectSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import tasksSlice from "@/templates/TasksPage/store/tasksSlice";
 
 const makeStore = () =>
   configureStore({
@@ -16,6 +17,7 @@ const makeStore = () =>
       addTask: addTaskSlice,
       project: projectSlice,
       projects: projectsSlice,
+      tasks: tasksSlice,
     },
   });
 

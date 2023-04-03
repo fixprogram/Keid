@@ -1,7 +1,7 @@
 import { wrapper } from "@/application/store/store";
 import { getProjectById } from "@/entities/project/models/getProjectById";
 import { setupProjectData } from "@/templates/ProjectPage/store/projectSlice";
-import { getTasksByIds } from "@/entities/task/model/getTasksByIds";
+import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
 import ProjectPage from "@/templates/ProjectPage";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
 import { getSession } from "next-auth/react";

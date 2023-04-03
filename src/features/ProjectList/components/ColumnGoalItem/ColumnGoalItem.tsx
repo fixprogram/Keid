@@ -1,4 +1,4 @@
-import { ProjectType } from "@/application/store/projectsSlice";
+import { ProjectType } from "@/templates/ProjectsPage/store/projectsSlice";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import Link from "next/link";
 import Icon from "../../../../shared/ui/Icon";

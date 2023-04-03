@@ -1,4 +1,4 @@
-import { createTask } from "@/entities/task/model/createTask";
+import { createTask } from "@/entities/task/models/createTask";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
