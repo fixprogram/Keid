@@ -13,6 +13,7 @@ import {
 import { wrapper } from "@/application/store/store";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
+import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
 
 const GOALS = [
   {
@@ -89,7 +90,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const userId = session?.user.id as string;
 
     const projects = await getUserProjects(userId);
+    const userProjectNames = projects.map((project) => project.title);
 
     store.dispatch(setupProjects(projects));
+    store.dispatch(setUserProjectNames(userProjectNames));
   }
 );

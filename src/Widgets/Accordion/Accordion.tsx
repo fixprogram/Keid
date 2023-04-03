@@ -1,10 +1,12 @@
+import TaskCard from "@/features/TaskCard";
+import { TaskType } from "@/templates/ProjectPage/types/Task";
 import Link from "next/link";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 
 interface Props {
   topic: string;
-  items: [];
+  items: TaskType[];
 }
 
 export default function Accordion({ topic, items = [] }: Props) {
@@ -34,18 +36,13 @@ export default function Accordion({ topic, items = [] }: Props) {
         <ul className="mt-6 flex flex-col gap-4">
           {items.map((item) => (
             <li key={item.id}>
-              <Link href={"#"}>
-                <div className="bg-background2 p-5 flex gap-5 rounded-xl ">
-                  <div className="w-[40px] h-[40px] rounded-full bg-background1"></div>
-
-                  <div>
-                    <b className="text-lg text-white font-semibold">
-                      {item.title}
-                    </b>
-                    <p className="text-smm font-medium">{item.deadline}</p>
-                  </div>
-                </div>
-              </Link>
+              <TaskCard
+                link={`/tasks/${item.id}`}
+                title={item.title}
+                deadline={item.completed ? item.completed : item.deadline}
+                style={item.style}
+                progress={55}
+              />
             </li>
           ))}
         </ul>

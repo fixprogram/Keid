@@ -15,7 +15,7 @@ export const projectStyles = {
   },
   "02": {
     background: "#FBA3FF",
-    gradient: "linear-gradient(270deg, #C393FF 34.57%, #E42A6C 100%)",
+    gradient: "linear-gradient(270deg, #FBA3FF 34.57%, #E42A6C 100%)",
   },
   "03": {
     background: "#FFDD72",

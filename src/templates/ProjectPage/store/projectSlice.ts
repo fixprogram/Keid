@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Task } from "@prisma/client";
 import { HYDRATE } from "next-redux-wrapper";
+import { FILTERS } from "../config/filters";
+import { TaskType } from "../types/Task";
+import { getDateString } from "@/shared/lib/utils/getDateString";
 
 type SetupDataType = {
   title: string;
   style: string;
-  tasks: Task[];
+  tasks: TaskType[];
 };
 
 export interface ProjectState {
   title: string;
   style: string;
-  tasks: Task[];
+  tasks: TaskType[];
   settingsOpened: boolean;
+  activeFilter: string;
+  filteredTasks: TaskType[];
 }
 
 const initialState: ProjectState = {
@@ -21,6 +25,8 @@ const initialState: ProjectState = {
   style: "",
   tasks: [],
   settingsOpened: false,
+  activeFilter: FILTERS[0],
+  filteredTasks: [],
 };
 
 const ProjectSlice = createSlice({
@@ -32,13 +38,52 @@ const ProjectSlice = createSlice({
 
       state.title = title;
       state.style = style;
-      state.tasks = tasks;
+      state.tasks = tasks.map((task) => {
+        if (task.completed) {
+          return {
+            ...task,
+            state: "Completed",
+            completed: getDateString(
+              new Date(JSON.parse(task.completed)),
+              false
+            ),
+          };
+        }
+        if (task.deadline) {
+          return {
+            ...task,
+            state: "Task",
+            deadline: getDateString(new Date(JSON.parse(task.deadline)), false),
+          };
+        }
+        return { ...task, state: "Idea" };
+      });
+      state.filteredTasks = state.tasks;
     },
     openSettings: (state) => {
       state.settingsOpened = true;
     },
     closeSettings: (state) => {
       state.settingsOpened = false;
+    },
+    setActiveFilter: (state, action: PayloadAction<string>) => {
+      state.activeFilter = action.payload;
+
+      if (action.payload === "Ideas") {
+        state.filteredTasks = state.tasks.filter(
+          (task) => task.state === "Idea"
+        );
+      }
+
+      if (action.payload === "Completed") {
+        state.filteredTasks = state.tasks.filter(
+          (task) => task.state === "Completed"
+        );
+      }
+
+      if (action.payload === "All tasks") {
+        state.filteredTasks = state.tasks;
+      }
     },
   },
   extraReducers: {
@@ -51,7 +96,11 @@ const ProjectSlice = createSlice({
   },
 });
 
-export const { setupProjectData, openSettings, closeSettings } =
-  ProjectSlice.actions;
+export const {
+  setupProjectData,
+  openSettings,
+  closeSettings,
+  setActiveFilter,
+} = ProjectSlice.actions;
 
 export default ProjectSlice.reducer;

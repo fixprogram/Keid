@@ -36,4 +36,5 @@ model Task {
   projectId      String    @db.ObjectId
   style          String
   deadline       String
+  completed      String
 }

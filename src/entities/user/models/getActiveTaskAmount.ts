@@ -1,5 +1,5 @@
-import { getUserProjects } from "./getUserProjects";
+// import { getUserProjects } from "./getUserProjects";
 
-export async function getActiveTaskAmount({ userId }: { userId: string }) {
-  const projects = await getUserProjects({ userId });
-}
+// export async function getActiveTaskAmount({ userId }: { userId: string }) {
+//   const projects = await getUserProjects({ userId });
+// }
