@@ -1,1 +1,1 @@
-export const FILTERS = ["All tasks"];
+export const FILTERS = ["To do", "Completed", "All"];

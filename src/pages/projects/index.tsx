@@ -16,6 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const userId = session?.user.id as string;
 
     const projects = await getUserProjects(userId);
+
     const userProjectNames = projects.map((project) => project.title);
 
     store.dispatch(setupProjects(projects));

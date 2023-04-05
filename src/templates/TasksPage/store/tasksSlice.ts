@@ -9,6 +9,7 @@ export type TaskType = {
   title: string;
   style: string;
   deadline: string;
+  completed: string;
 };
 
 export interface TasksState {
@@ -34,6 +35,9 @@ const TasksSlice = createSlice({
       state.tasks = action.payload.map((task) => ({
         ...task,
         deadline: getDateString(new Date(JSON.parse(task.deadline)), false),
+        completed: task.completed
+          ? getDateString(new Date(JSON.parse(task.completed)), false)
+          : "",
       }));
     },
   },

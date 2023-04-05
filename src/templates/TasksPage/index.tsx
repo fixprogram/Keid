@@ -12,9 +12,6 @@ import TaskList from "./components/TaskList";
 export default function TasksPage() {
   const dispatch = useAppDispatch();
 
-  const state = useAppSelector((state) => state);
-  console.log("stateee: ", state);
-
   const filters = useAppSelector((state) => state.tasks.filters);
   const activeFilter = useAppSelector((state) => state.tasks.activeFilter);
   //   const listStyle = useAppSelector((state) => state.tasks.listStyle);

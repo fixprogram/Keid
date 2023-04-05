@@ -42,7 +42,6 @@ const OverviewSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log("payload: ", action.payload);
       return {
         ...state,
         ...action.payload.overview,

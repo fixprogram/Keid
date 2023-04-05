@@ -14,7 +14,7 @@ export default function AllTaskAccordions() {
           return (
             <Accordion
               key={filter}
-              topic="Tasks"
+              topic="To do"
               items={tasks.filter((task) => task.state === "Task")}
             />
           );

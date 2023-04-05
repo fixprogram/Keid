@@ -431,6 +431,50 @@ export default function Sprite() {
             </clipPath>
           </defs>
         </symbol>
+
+        <symbol
+          id="icon-complete"
+          width="19"
+          height="14"
+          viewBox="0 0 19 14"
+          fill="none"
+        >
+          <path
+            d="M1.3335 8.14328L5.90492 12.7147L17.3335 1.28613"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </symbol>
+
+        <symbol
+          id="icon-completed"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+        >
+          <circle cx="20" cy="20" r="20" fill="#262A34" />
+          <circle cx="20" cy="20" r="12" fill="url(#paint0_linear_413_6492)" />
+          <path
+            d="M26 17.6471L24.25 16L19.25 20.7059L16.75 18.3529L15 20L19.25 24L26 17.6471Z"
+            fill="white"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_413_6492"
+              x1="8"
+              y1="8"
+              x2="8"
+              y2="32"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#9ADB7F" />
+              <stop offset="1" stopColor="#6EA95C" />
+            </linearGradient>
+          </defs>
+        </symbol>
       </defs>
     </svg>
   );

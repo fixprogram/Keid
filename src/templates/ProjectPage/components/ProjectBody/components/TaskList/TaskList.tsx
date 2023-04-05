@@ -24,8 +24,6 @@ export default function TaskList() {
   const activeFilter = useAppSelector((state) => state.project.activeFilter);
   const tasks = useAppSelector((state) => state.project.filteredTasks);
 
-  console.log("filtered tasks: ", tasks);
-
   return (
     <>
       <FilterBar

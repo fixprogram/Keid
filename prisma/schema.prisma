@@ -37,4 +37,13 @@ model Task {
   style          String
   deadline       String
   completed      String
+  subtaskIds     String[]
+}
+
+model Subtask {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String  
+  taskId         String
+  deadline       String
+  completed      String
 }

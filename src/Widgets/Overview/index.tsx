@@ -6,10 +6,6 @@ import PriorityTasks from "./components/PriorityTasks";
 export default function Overview() {
   const projectAmount = useAppSelector((state) => state.overview.projectAmount);
 
-  const projects = useAppSelector((state) => state.projects.projects);
-
-  console.log("Overview Projects: ", projects);
-
   return (
     <>
       <Filter />

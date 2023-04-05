@@ -30,10 +30,12 @@ export default function ProjectSettings() {
         </b>
 
         <ul className="mt-6">
-          {SETTINGS.map((setting) => (
+          {SETTINGS.map((setting, index) => (
             <li
               key={setting.title}
-              className="border-b-[1px] border-white/5 p-5 flex items-center gap-5"
+              className={`border-b-[1px] border-white/5 flex items-center gap-5 ${
+                index === 0 ? "pb-5" : "py-5"
+              }`}
               onClick={setting.hook()}
             >
               <Icon name={setting.iconName} width={16} height={16} />

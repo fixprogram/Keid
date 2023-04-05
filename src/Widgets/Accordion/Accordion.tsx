@@ -42,6 +42,7 @@ export default function Accordion({ topic, items = [] }: Props) {
                 deadline={item.completed ? item.completed : item.deadline}
                 style={item.style}
                 progress={55}
+                completed={item.completed}
               />
             </li>
           ))}

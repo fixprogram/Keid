@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { Project } from "@prisma/client";
 
-const FILTERS = ["Active", "Dreams", "All"];
+const FILTERS = ["Active", "Dreams", "Completed"];
 
 export type ProjectType = {
   id: string;
@@ -11,13 +10,14 @@ export type ProjectType = {
   style: string;
   taskAmount: number;
   completedTaskAmount: number;
+  taskIds: string[];
 };
 
 export interface ProjectsState {
   filters: string[];
   activeFilter: string;
   listStyle: "column" | "grid";
-  projects: ProjectType[];
+  projects: Omit<ProjectType, "taskIds">[];
 }
 
 const initialState: ProjectsState = {
@@ -37,13 +37,13 @@ const ProjectsSlice = createSlice({
     setActiveFilter: (state, action: PayloadAction<string>) => {
       state.activeFilter = action.payload;
     },
-    setupProjects: (state, action: PayloadAction<Project[]>) => {
+    setupProjects: (state, action: PayloadAction<ProjectType[]>) => {
       const projects = action.payload.map((project) => ({
         id: project.id,
         title: project.title,
         style: project.style,
         taskAmount: project.taskIds.length,
-        completedTaskAmount: 0,
+        completedTaskAmount: project.completedTaskAmount,
       }));
 
       state.projects = projects;
@@ -52,6 +52,7 @@ const ProjectsSlice = createSlice({
   extraReducers: {
     [HYDRATE]: (state, action) => {
       return {
+        ...state,
         ...action.payload.projects,
       };
     },

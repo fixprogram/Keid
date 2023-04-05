@@ -5,8 +5,6 @@ import { Fragment } from "react";
 export default function TaskList() {
   const tasks = useAppSelector((state) => state.tasks.tasks);
 
-  console.log("Tasks: ", tasks);
-
   return (
     <section className="mt-8 flex flex-col gap-4">
       {tasks.map((task) => (
@@ -17,6 +15,7 @@ export default function TaskList() {
           deadline={task.deadline}
           style={task.style}
           progress={50}
+          completed={task.completed}
         />
       ))}
     </section>

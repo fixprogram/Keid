@@ -1,6 +1,5 @@
-import { projectStyles } from "@/shared/config/projectStyles";
-import RoundProgressBar from "@/shared/ui/RoundProgressBar";
-import Link from "next/link";
+import CompletedTask from "./components/CompletedTask";
+import TaskInProgress from "./components/TaskInProgress";
 
 type Props = {
   link: string;
@@ -8,6 +7,7 @@ type Props = {
   deadline: string;
   style: string;
   progress: number;
+  completed: string;
 };
 
 export default function TaskCard({
@@ -16,23 +16,19 @@ export default function TaskCard({
   deadline,
   style,
   progress,
+  completed,
 }: Props) {
-  const taskStyle = projectStyles[style];
-  return (
-    <Link href={link}>
-      <div className="bg-background2 p-5 flex gap-5 rounded-xl ">
-        <RoundProgressBar progress={progress} />
+  if (completed) {
+    return <CompletedTask link={link} title={title} completed={completed} />;
+  }
 
-        <div>
-          <b className="text-lg text-white font-semibold">{title}</b>
-          <p
-            className="text-smm font-medium"
-            style={{ color: taskStyle.background }}
-          >
-            {deadline}
-          </p>
-        </div>
-      </div>
-    </Link>
+  return (
+    <TaskInProgress
+      link={link}
+      title={title}
+      deadline={deadline}
+      style={style}
+      progress={progress}
+    />
   );
 }

@@ -9,8 +9,6 @@ export function getDateString(date: Date, withYear = true) {
   da.setMonth(date.getMonth());
   const month = da.toLocaleString("en-US", { month: "short" });
 
-  console.log("is date today: ", isDateToday(date));
-
   if (!withYear) {
     if (isDateToday(date)) {
       return "Today";
