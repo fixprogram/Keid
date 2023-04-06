@@ -1,15 +1,49 @@
+import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { getDateString } from "@/shared/lib/utils/getDateString";
+import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { useDispatch } from "react-redux";
 import { openPopup } from "../../../AddSubtaskPopup/store/addSubtaskSlice";
+import CompletedSubtask from "../CompletedSubtask";
+import SubtaskInProgress from "../SubtaskInProgress";
 
 export default function SubtaskList() {
   const dispatch = useDispatch();
+  const subtasks = useAppSelector((state) => state.task.subtasks);
 
   return (
-    <div className="mt-6">
-      <b className="text-white">Subtask list</b>
-      <button type="button" onClick={() => dispatch(openPopup())}>
-        Add subtask
-      </button>
+    <div className="mt-6 flex flex-col gap-2">
+      <ul>
+        {subtasks.map((subtask) => (
+          <li key={subtask.id}>
+            {subtask.completed ? (
+              <CompletedSubtask
+                link={`subtasks/${subtask.id}`}
+                title={subtask.title}
+                completed={getDateString(
+                  new Date(JSON.parse(subtask.completed)),
+                  false
+                )}
+              />
+            ) : (
+              <SubtaskInProgress
+                link={`subtasks/${subtask.id}`}
+                deadline={getDateString(
+                  new Date(JSON.parse(subtask.deadline)),
+                  false
+                )}
+                title={subtask.title}
+                style="01"
+              />
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <PrimaryButton
+        type="button"
+        text="Add subtask"
+        onClick={() => dispatch(openPopup())}
+      />
     </div>
   );
 }

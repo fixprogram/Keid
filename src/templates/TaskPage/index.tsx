@@ -6,10 +6,6 @@ import TaskHeader from "./components/TaskHeader";
 import TaskSettings from "./components/TaskSettings";
 
 export default function TaskPage() {
-  const addSubtaskPopupOpened = useAppSelector(
-    (state) => state.addSubtask.addSubtaskPopupOpened
-  );
-
   return (
     <Layout withNav={false}>
       <TaskHeader />
@@ -18,7 +14,7 @@ export default function TaskPage() {
 
       <TaskSettings />
 
-      {addSubtaskPopupOpened ? <AddSubtaskPopup /> : null}
+      <AddSubtaskPopup />
     </Layout>
   );
 }

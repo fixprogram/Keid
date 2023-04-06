@@ -12,6 +12,7 @@ export const createSubtask = async ({ taskId, title, deadline }: Props) => {
     where: { id: taskId },
     select: { id: true, subtaskIds: true },
   })) as Task;
+
   const subtask = await prisma.subtask.create({
     data: {
       taskId,
@@ -20,9 +21,11 @@ export const createSubtask = async ({ taskId, title, deadline }: Props) => {
       completed: "",
     },
   });
+
   await prisma.task.update({
     where: { id: taskId },
     data: { subtaskIds: [...task.subtaskIds, subtask.id] },
   });
-  return task;
+
+  return subtask;
 };

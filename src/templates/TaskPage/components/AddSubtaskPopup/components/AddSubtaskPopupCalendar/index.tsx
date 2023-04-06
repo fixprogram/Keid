@@ -3,29 +3,32 @@ import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Calendar from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import useInitialDeadline from "@/widgets/Navigation/hooks/useInitialDeadline";
-import { setCalendarClose, setTaskDeadline } from "../../store/addTaskSlice";
+import {
+  closePopupCalendar,
+  setSubtaskDeadline,
+} from "../../store/addSubtaskSlice";
 
-export default function PopupCalendar() {
+export default function AddSubtaskPopupCalendar() {
   const dispatch = useAppDispatch();
-  const deadline = useAppSelector((state) => state.addTask.deadline);
+  const deadline = useAppSelector((state) => state.addSubtask.deadline);
   const isCalendarOpen = useAppSelector(
-    (state) => state.addTask.isCalendarOpen
+    (state) => state.addSubtask.isCalendarOpen
   );
   const initialDeadline = useInitialDeadline(deadline, isCalendarOpen);
 
   const date = new Date(JSON.parse(deadline));
 
   function setDeadline(deadline: Date) {
-    dispatch(setTaskDeadline(JSON.stringify(deadline)));
+    dispatch(setSubtaskDeadline(JSON.stringify(deadline)));
   }
 
   function cancelCalendar() {
     setDeadline(initialDeadline);
-    dispatch(setCalendarClose());
+    dispatch(closePopupCalendar());
   }
 
   function saveDeadline() {
-    dispatch(setCalendarClose());
+    dispatch(closePopupCalendar());
   }
 
   return (

@@ -1,30 +1,44 @@
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import AddButton from "@/shared/ui/AddButton";
-import InputTaskName from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/components/PopupBody/components/InputTaskName";
-import TaskDeadline from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/components/PopupBody/components/TaskDeadline";
-import PopupCalendar from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/components/PopupCalendar";
-import SubtaskDeadline from "./components/SubtaskDeadline";
+import Overlay from "@/shared/ui/Overlay";
+import Popup from "@/shared/ui/Popup";
+import PopupLine from "@/shared/ui/PopupLine";
+import { Fragment } from "react";
+import AddSubtaskPopupBody from "./components/AddSubtaskPopupBody";
+import { closePopup } from "./store/addSubtaskSlice";
 
 export default function AddSubtaskPopup() {
-  //   const handleFormSubmit = useTaskFormSubmit();
-
-  const isCalendarOpen = useAppSelector(
-    (state) => state.addSubtask.isCalendarOpen
+  const dispatch = useAppDispatch();
+  const isAddSubtaskPopupOpened = useAppSelector(
+    (state) => state.addSubtask.isAddSubtaskPopupOpened
   );
-
-  if (isCalendarOpen) return <PopupCalendar />;
+  const popupShowedStyles =
+    isAddSubtaskPopupOpened === false
+      ? { bottom: 32 }
+      : { bottom: 0, left: 0, right: 0, borderRadius: "24px 24px 0 0" };
 
   return (
-    <section className="px-5 pb-16 my-5">
-      <form method="post" onSubmit={() => {}}>
-        <InputTaskName />
+    <Fragment>
+      <Popup
+        isHidden={!isAddSubtaskPopupOpened}
+        popupStyle={{
+          hidden: { bottom: -1000 },
+          showed: { zIndex: 30, ...popupShowedStyles },
+        }}
+      >
+        <PopupLine />
 
-        <SubtaskDeadline />
+        <AddSubtaskPopupBody />
+      </Popup>
 
-        <div className="absolute right-[20px] bottom-[26px]">
-          <AddButton type="submit" />
+      {isAddSubtaskPopupOpened ? (
+        <div
+          className="absolute top-0 left-0"
+          onClick={() => dispatch(closePopup())}
+        >
+          <Overlay />
         </div>
-      </form>
-    </section>
+      ) : null}
+    </Fragment>
   );
 }

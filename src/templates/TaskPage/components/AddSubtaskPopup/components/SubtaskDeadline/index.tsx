@@ -6,7 +6,7 @@ import { openPopupCalendar } from "../../store/addSubtaskSlice";
 
 export default function SubtaskDeadline() {
   const dispatch = useAppDispatch();
-  const deadline = useAppSelector((state) => state.addTask.deadline);
+  const deadline = useAppSelector((state) => state.addSubtask.deadline);
 
   const date = getDateString(new Date(JSON.parse(deadline)), false);
 

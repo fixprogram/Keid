@@ -21,7 +21,7 @@ export default function TaskBody() {
         {title}
       </h2>
 
-      <div className="flex flex-wrap items-end gap-6">
+      <div className="flex flex-wrap items-end gap-6 mt-6">
         <div className="flex gap-4">
           <ProjectInfo
             backgroundColor={parentProjectStyle.background}

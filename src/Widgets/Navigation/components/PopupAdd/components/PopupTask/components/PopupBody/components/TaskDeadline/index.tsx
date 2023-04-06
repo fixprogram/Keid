@@ -14,5 +14,9 @@ export default function TaskDeadline() {
     dispatch(setCalendarOpen());
   }
 
-  return <DueDate date={date} onClick={openCalendar} />;
+  return (
+    <div className="mt-6">
+      <DueDate date={date} onClick={openCalendar} />
+    </div>
+  );
 }
