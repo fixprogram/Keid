@@ -9,6 +9,7 @@ import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/Po
 import tasksSlice from "@/templates/TasksPage/store/tasksSlice";
 import taskSlice from "@/templates/TaskPage/store/taskSlice";
 import addSubtaskSlice from "@/templates/TaskPage/components/AddSubtaskPopup/store/addSubtaskSlice";
+import subtaskSlice from "@/templates/SubtaskPage/store/subtaskSlice";
 
 const makeStore = () =>
   configureStore({
@@ -22,6 +23,7 @@ const makeStore = () =>
       projects: projectsSlice,
       tasks: tasksSlice,
       task: taskSlice,
+      subtask: subtaskSlice,
     },
   });
 

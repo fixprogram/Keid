@@ -14,5 +14,9 @@ export default function SubtaskDeadline() {
     dispatch(openPopupCalendar());
   }
 
-  return <DueDate date={date} onClick={openCalendar} />;
+  return (
+    <div className="mt-4">
+      <DueDate date={date} onClick={openCalendar} />
+    </div>
+  );
 }

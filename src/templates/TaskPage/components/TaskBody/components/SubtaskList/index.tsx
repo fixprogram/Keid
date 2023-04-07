@@ -11,13 +11,13 @@ export default function SubtaskList() {
   const subtasks = useAppSelector((state) => state.task.subtasks);
 
   return (
-    <div className="mt-6 flex flex-col gap-2">
-      <ul>
+    <div className="mt-6">
+      <ul className="flex flex-col gap-2">
         {subtasks.map((subtask) => (
           <li key={subtask.id}>
             {subtask.completed ? (
               <CompletedSubtask
-                link={`subtasks/${subtask.id}`}
+                link={`/subtasks/${subtask.id}`}
                 title={subtask.title}
                 completed={getDateString(
                   new Date(JSON.parse(subtask.completed)),
@@ -26,7 +26,7 @@ export default function SubtaskList() {
               />
             ) : (
               <SubtaskInProgress
-                link={`subtasks/${subtask.id}`}
+                link={`/subtasks/${subtask.id}`}
                 deadline={getDateString(
                   new Date(JSON.parse(subtask.deadline)),
                   false
