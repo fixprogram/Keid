@@ -2,7 +2,7 @@ import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import AddButton from "@/shared/ui/AddButton";
-import { useProjectFormSubmit } from "@/widgi/Navigation/hooks/useProjectFormSubmit";
+import { useProjectFormSubmit } from "@/widgets/Navigation/hooks/useProjectFormSubmit";
 import { SyntheticEvent, useCallback, useEffect } from "react";
 import { setProjectName, setProjectStyle } from "./store/addProjectSlice";
 
