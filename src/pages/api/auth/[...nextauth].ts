@@ -4,6 +4,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcryptjs from "bcryptjs";
 import { findUserByEmail } from "@/entities/user/models/findUserByEmail";
+import { links } from "@/shared/config/links";
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NextAuth_SECRET,
@@ -16,7 +17,8 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       async authorize(credentials: { email: string; password: string }, req) {
         const { email, password } = credentials;
-        const res = await fetch("http://localhost:3000/api/login", {
+        const res = await fetch(links.login, {
+          // const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

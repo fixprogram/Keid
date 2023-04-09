@@ -1,3 +1,4 @@
+import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -10,7 +11,8 @@ export function useDeleteProject() {
   const projectId = router.query.id;
 
   const handleDeleteProject = useCallback(() => {
-    fetch("http://localhost:3000/api/deleteProject", {
+    fetch(links.project.delete, {
+      // fetch("http://localhost:3000/api/deleteProject", {
       method: "POST",
       headers: {
         Accept: "application/json",

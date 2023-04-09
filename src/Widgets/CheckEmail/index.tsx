@@ -1,4 +1,5 @@
 import EmailFieldset from "@/shared/components/EmailFieldset";
+import { links } from "@/shared/config/links";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { SyntheticEvent, useCallback } from "react";
 
@@ -10,10 +11,10 @@ interface Props {
 
 export default function CheckEmail({ email, setEmail, setType }: Props) {
   const onSubmit = useCallback(
-    (event: SyntheticEvent) => {
+    async (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch("http://localhost:3000/api/login", {
+      await fetch(links.login, {
         method: "POST",
         headers: {
           Accept: "application/json",

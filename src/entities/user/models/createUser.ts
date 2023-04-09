@@ -22,7 +22,7 @@ export async function createUser({ email, name, password }: CreateUserProps) {
 
   await MailService.sendActivationMail(
     email,
-    `${process.env.NEXTAUTH_URL}api/activate/12343`
+    `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/activate/12343`
   );
 
   return user;

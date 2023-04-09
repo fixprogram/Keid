@@ -6,6 +6,7 @@ import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { FormEvent, useRef } from "react";
+import { links } from "@/shared/config/links";
 
 interface Props {
   email: string;
@@ -24,7 +25,7 @@ export default function Signup({ email, goBack }: Props) {
       const name = nameRef.current.value;
       const password = passwordRef.current.value;
 
-      fetch("http://localhost:3000/api/signup", {
+      fetch(links.signup, {
         method: "POST",
         headers: {
           Accept: "application/json",

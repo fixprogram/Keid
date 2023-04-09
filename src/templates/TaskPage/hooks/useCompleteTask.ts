@@ -1,3 +1,4 @@
+import { links } from "@/shared/config/links";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 
@@ -7,7 +8,7 @@ export function useCompleteTask() {
   const taskId = router.query.id;
 
   const handleCompleteTask = useCallback(() => {
-    fetch("http://localhost:3000/api/completeTask", {
+    fetch(links.task.complete, {
       method: "POST",
       headers: {
         Accept: "application/json",

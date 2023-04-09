@@ -1,3 +1,4 @@
+import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -10,7 +11,7 @@ export function useDeleteTask() {
   const taskId = router.query.id;
 
   const handleDeleteTask = useCallback(() => {
-    fetch("http://localhost:3000/api/deleteTask", {
+    fetch(links.task.delete, {
       method: "POST",
       headers: {
         Accept: "application/json",

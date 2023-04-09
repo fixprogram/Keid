@@ -11,10 +11,11 @@ export default function Welcome({ providers }) {
   return (
     <Layout withNav={false}>
       <section
-        className="h-[460px] mt-[-40px] ml-[-40px] w-screen"
+        className="h-[460px] mt-[-40px] ml-[-40px]"
         style={{
           background: `url(${WelcomeImage.src})`,
           backgroundPosition: "-140px -260px",
+          width: "calc(100vw + 40px)",
         }}
       />
 

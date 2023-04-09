@@ -1,3 +1,4 @@
+import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
@@ -18,7 +19,7 @@ export function useProjectFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch("http://localhost:3000/api/addProject", {
+      fetch(links.project.add, {
         method: "POST",
         headers: {
           Accept: "application/json",

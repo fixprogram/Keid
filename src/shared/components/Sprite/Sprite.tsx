@@ -319,13 +319,7 @@ export default function Sprite() {
           />
         </symbol>
 
-        <symbol
-          id="icon-avatar"
-          width="48"
-          height="48"
-          viewBox="0 0 48 48"
-          fill="none"
-        >
+        <symbol id="icon-avatar" viewBox="0 0 48 48" fill="none">
           <circle cx="24" cy="24" r="24" fill="#A06AF9" />
           <path
             fillRule="evenodd"

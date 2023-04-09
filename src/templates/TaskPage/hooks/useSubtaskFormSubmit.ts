@@ -1,3 +1,4 @@
+import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
@@ -17,7 +18,7 @@ export function useSubtaskFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch("http://localhost:3000/api/subtask/add", {
+      fetch(links.subtask.add, {
         method: "POST",
         headers: {
           Accept: "application/json",
