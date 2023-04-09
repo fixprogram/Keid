@@ -4,11 +4,12 @@ import { HYDRATE } from "next-redux-wrapper";
 import { FILTERS } from "../config/filters";
 import { TaskType } from "../types/Task";
 import { getDateString } from "@/shared/lib/utils/getDateString";
+import { Task } from "@prisma/client";
 
 type SetupDataType = {
   title: string;
   style: string;
-  tasks: TaskType[];
+  tasks: Task[];
 };
 
 export interface ProjectState {

@@ -38,13 +38,7 @@ const ProjectsSlice = createSlice({
       state.activeFilter = action.payload;
     },
     setupProjects: (state, action: PayloadAction<ProjectType[]>) => {
-      const projects = action.payload.map((project) => ({
-        id: project.id,
-        title: project.title,
-        style: project.style,
-        taskAmount: project.taskIds.length,
-        completedTaskAmount: project.completedTaskAmount,
-      }));
+      const projects = action.payload;
 
       state.projects = projects;
     },

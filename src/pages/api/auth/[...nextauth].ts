@@ -10,15 +10,19 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NextAuth_SECRET,
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
     }),
 
     CredentialsProvider({
-      async authorize(credentials: { email: string; password: string }, req) {
-        const { email, password } = credentials;
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials) {
+        const email = credentials?.email as string;
+        const password = credentials?.password as string;
         const res = await fetch(links.login, {
-          // const res = await fetch("http://localhost:3000/api/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +51,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user = token;
       return session;
     },

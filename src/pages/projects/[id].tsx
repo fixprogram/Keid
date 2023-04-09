@@ -15,7 +15,12 @@ export default function Project() {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const session = await getSession(context);
-    const userId = session?.user.id as string;
+    if (!session) {
+      throw new Error("session is not defined");
+    }
+
+    const user = session.user as { id: string };
+    const userId = user.id;
     const userProjectNames = await getUserProjectNames(userId);
 
     const id = context.query.id as string;
@@ -32,5 +37,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
     );
     store.dispatch(setUserProjectNames(userProjectNames));
     store.dispatch(setUserId(userId));
+
+    return {
+      props: {},
+    };
   }
 );

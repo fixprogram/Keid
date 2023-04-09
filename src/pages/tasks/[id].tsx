@@ -35,5 +35,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
         subtasks,
       })
     );
+
+    return {
+      props: {},
+    };
   }
 );

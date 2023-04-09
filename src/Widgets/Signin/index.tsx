@@ -2,7 +2,7 @@ import Layout from "@/widgets/Layout";
 import PageTitle from "@/shared/ui/PageTitle";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import RouterBack from "@/shared/components/RouterBack";
-import { signIn } from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import InputLabel from "@/shared/ui/InputLabel";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
@@ -16,23 +16,21 @@ export default function Signin({ email, goBack }: Props) {
   const [password, setPassword] = useState({ value: "", error: "" });
   const router = useRouter();
 
-  const login = useCallback(
-    async (email: string, password: string) => {
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+  const login = useCallback(async () => {
+    const res = (await signIn("credentials", {
+      email,
+      password: password.value,
+      redirect: false,
+    })) as SignInResponse;
 
-      if (res?.error)
-        setPassword((prevPassword) => ({
-          ...prevPassword,
-          error: "Password is not correct",
-        }));
-      if (res.url) router.push("/");
-    },
-    [router]
-  );
+    if (res.error)
+      setPassword((prevPassword) => ({
+        ...prevPassword,
+        error: "Password is not correct",
+      }));
+
+    if (res.url) router.push("/");
+  }, [router, email, password.value]);
 
   const error = password.error ? (
     <span className="text-red mt-2">{password.error}</span>
@@ -72,10 +70,7 @@ export default function Signin({ email, goBack }: Props) {
           {error}
         </fieldset>
 
-        <PrimaryButton
-          text="Sign in"
-          onClick={() => login(email, password.value)}
-        />
+        <PrimaryButton text="Sign in" onClick={login} />
       </form>
     </Layout>
   );

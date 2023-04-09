@@ -37,9 +37,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
     async ({ req }) => {
       const session = await getSession({ req });
 
-      // console.log("session: ", session);
+      if (!session) {
+        throw new Error("session is not defined");
+      }
 
-      const userId = session?.user.id as string;
+      const user = session.user as { id: string };
+      const userId = user.id;
       const userProjectNames = await getUserProjectNames(userId);
 
       const projectAmount = userProjectNames.length;
@@ -48,5 +51,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(setUserProjectAmount(projectAmount));
       store.dispatch(setUserProjectNames(userProjectNames));
       // console.log("State on server", store.getState());
+
+      return { props: {} };
     }
 );

@@ -34,5 +34,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
         deadline,
       })
     );
+
+    return {
+      props: {},
+    };
   }
 );

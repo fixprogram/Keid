@@ -6,7 +6,7 @@ import Signup from "@/widgets/Signup";
 import PageTitle from "@/shared/ui/PageTitle";
 import CheckEmail from "@/widgets/CheckEmail";
 import RouterBack from "@/shared/components/RouterBack";
-import { GetStaticProps } from "next/types";
+import { GetServerSideProps, GetStaticProps } from "next/types";
 
 export default function Login() {
   const [type, setType] = useState("");
@@ -35,13 +35,13 @@ export default function Login() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
   const session = await getSession({ req });
 
   if (session) {
     return {
-      redirect: { destination: "/" },
+      redirect: { destination: "/dashboard", permanent: false },
     };
   }
 

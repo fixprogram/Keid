@@ -1,13 +1,11 @@
-import { getProviders, getSession, signIn, useSession } from "next-auth/react";
+import { getProviders, getSession, signIn } from "next-auth/react";
 import Layout from "@/widgets/Layout";
 import WelcomeImage from "~/public/graphic.svg";
 import Link from "next/link";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
+import { GetServerSideProps } from "next/types";
 
-export default function Welcome({ providers }) {
-  const session = useSession();
-
-  // console.log("session: ", session);
+export default function Welcome() {
   return (
     <Layout withNav={false}>
       <section
@@ -24,21 +22,15 @@ export default function Welcome({ providers }) {
           Manage Everything on Phone
         </h2>
 
-        <Link
-          href="/auth/login"
-          // className="bg-primary w-full h-12 flex items-center justify-center gap-3 rounded-full mt-[40px] shadow-button"
-        >
+        <Link href="/auth/login">
           <PrimaryButton iconName="letter" text="Continue with email" />
-          {/* <Icon name="letter" width={16} height={16} />
-          <b className="text-white">Continue with email</b> */}
         </Link>
 
-        <div className="flex gap-4 mt-4">
+        {/* <div className="flex gap-4 mt-4">
           {providers &&
             Object.values(providers).map((provider) => {
               if (provider.name !== "Credentials") {
                 return (
-                  // <div key={provider.name} style={{ marginBottom: 0 }}>
                   <a
                     href="#"
                     className="flex items-center justify-center rounded-full h-12 border-[1px] border-border flex-grow "
@@ -47,11 +39,10 @@ export default function Welcome({ providers }) {
                   >
                     <span className="text-white">{provider.name}</span>
                   </a>
-                  // </div>
                 );
               }
             })}
-        </div>
+        </div> */}
 
         <p className="mt-4 text-deactive text-center text-smm">
           By continuing you agree Keid’s Terms of Services & Privacy Policy
@@ -61,14 +52,14 @@ export default function Welcome({ providers }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req } = context;
   const session = await getSession({ req });
   const providers = await getProviders();
 
   if (session) {
     return {
-      redirect: { destination: "/" },
+      redirect: { destination: "/dashboard", permanent: false },
     };
   }
 
@@ -77,4 +68,4 @@ export async function getServerSideProps(context) {
       providers,
     },
   };
-}
+};

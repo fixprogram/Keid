@@ -12,7 +12,6 @@ export function useDeleteProject() {
 
   const handleDeleteProject = useCallback(() => {
     fetch(links.project.delete, {
-      // fetch("http://localhost:3000/api/deleteProject", {
       method: "POST",
       headers: {
         Accept: "application/json",

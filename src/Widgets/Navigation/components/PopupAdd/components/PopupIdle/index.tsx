@@ -1,13 +1,15 @@
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { setPopupAddState } from "../../../../store/navigationSlice";
 
+type PopupAddState = "task" | "project";
+
 const popupButtons = [
   {
-    type: "task",
+    type: "task" as PopupAddState,
     name: "Create Task",
   },
   {
-    type: "project",
+    type: "project" as PopupAddState,
     name: "Create Project",
   },
 ];
