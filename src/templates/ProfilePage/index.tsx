@@ -21,7 +21,6 @@ export default function ProfilePage() {
         text="Sign out"
         onClick={() => signOut({ callbackUrl: "/" })}
       />
-      {/* <button onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button> */}
     </Layout>
   );
 }

@@ -1,6 +1,3 @@
-import InputLabel from "@/shared/ui/InputLabel";
-import InputText from "@/shared/ui/InputText";
-
 type Props = {
   email: string;
   setEmail: Function;
@@ -9,19 +6,12 @@ type Props = {
 export default function EmailFieldset({ email, setEmail }: Props) {
   return (
     <fieldset>
-      {/* <InputLabel htmlFor="email" text="Your email" /> */}
       <label
         htmlFor={email}
         className="block text-darkDeactive text-xxs uppercase"
       >
         Your email
       </label>
-      {/* <InputText
-        type="email"
-        name="email"
-        placeholder="Email"
-        required={true}
-      /> */}
 
       <input
         type="email"

@@ -1,14 +1,17 @@
-import nodemailer from "nodemailer";
+import nodemailer, { Transporter } from "nodemailer";
 
 class MailServiceClass {
+  transporter: Transporter;
   constructor() {
     this.transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_SERVER_HOST,
-      port: process.env.EMAIL_SERVER_PORT,
+      host: "smtp.gmail.com",
+      // host: process.env.EMAIL_SERVER_HOST,
+      port: 587,
+      // port: process.env.EMAIL_SERVER_PORT,
       secure: false,
       auth: {
-        user: process.env.EMAIL_SERVER_USER,
-        pass: process.env.EMAIL_SERVER_PASSWORD,
+        user: process.env.EMAIL_SERVER_USER as string,
+        pass: process.env.EMAIL_SERVER_PASSWORD as string,
       },
     });
   }

@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useCallback } from "react";
+import { SyntheticEvent, useCallback } from "react";
 import { setTaskName } from "../../../../store/addTaskSlice";
 
 export default function InputTaskName() {
@@ -10,8 +10,9 @@ export default function InputTaskName() {
   const error = useAppSelector((state) => state.addProject.error);
 
   const handleTaskNameChange = useCallback(
-    (e) => {
-      return dispatch(setTaskName(e.target.value));
+    (event: SyntheticEvent) => {
+      const target = event.target as HTMLInputElement;
+      return dispatch(setTaskName(target.value));
     },
     [dispatch]
   );
