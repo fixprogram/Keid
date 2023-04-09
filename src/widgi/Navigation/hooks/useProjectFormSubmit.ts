@@ -6,7 +6,7 @@ import { SyntheticEvent, useCallback } from "react";
 import { setProjectName } from "../components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import { closePopupAdd } from "../store/navigationSlice";
 
-export default function useProjectFormSubmit() {
+export function useProjectFormSubmit() {
   const router = useRouter();
 
   const dispatch = useAppDispatch();

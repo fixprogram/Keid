@@ -1,4 +1,4 @@
-import Accordion from "@/widgets/Accordion";
+import Accordion from "@/widgi/Accordion";
 import FilterBar from "@/features/FilterBar";
 import { useState } from "react";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
