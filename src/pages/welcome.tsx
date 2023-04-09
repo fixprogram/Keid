@@ -1,9 +1,9 @@
-import { getProviders, getSession, signIn } from "next-auth/react";
-import Layout from "@/widgets/Layout";
-import WelcomeImage from "~/public/graphic.svg";
+import { getProviders, getSession } from "next-auth/react";
+import WelcomeImage from "~/public/graphic.png";
 import Link from "next/link";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { GetServerSideProps } from "next/types";
+import Layout from "@/widgets/Layout";
 
 export default function Welcome() {
   return (
