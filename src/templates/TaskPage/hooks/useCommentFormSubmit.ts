@@ -14,7 +14,8 @@ export function useCommentFormSubmit() {
 
   const taskId = useAppSelector((state) => state.task.taskId);
   const content = useAppSelector((state) => state.task.commentContent);
-  const userId = session.data?.user ? session.data.user.id : "";
+  const user = session.data?.user as { id: string };
+  const userId = user?.id;
 
   const handleFormSubmit = useCallback(
     (event: SyntheticEvent) => {
