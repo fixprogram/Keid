@@ -38,6 +38,7 @@ model Task {
   deadline       String
   completed      String
   subtaskIds     String[]
+  comments       Comment[]
 }
 
 model Subtask {
@@ -46,4 +47,11 @@ model Subtask {
   taskId         String
   deadline       String
   completed      String
+  comments       Comment[]
+}
+
+type Comment {
+  userId    String
+  content   String
+  time      String
 }

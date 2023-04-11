@@ -13,7 +13,7 @@ const Layout: FC<Props> = ({ withNav = true, children }) => {
     <section className="bg-background1 min-h-screen	relative overflow-hidden">
       <Sprite />
 
-      <section className="relative z-20">
+      <section className="relative z-20 min-h-screen flex flex-col">
         <Container withNav={withNav}>{children}</Container>
         {withNav ? <Navigation /> : null}
       </section>

@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { Subtask } from "@prisma/client";
+import { CommentType } from "@/application/types/comment";
 
 type SetupDataType = {
   taskId: string;
@@ -12,6 +13,7 @@ type SetupDataType = {
   projectTitle: string;
   projectStyle: string;
   subtasks: Subtask[];
+  comments: CommentType[];
 };
 
 export interface TaskState {
@@ -19,10 +21,13 @@ export interface TaskState {
   title: string;
   style: string;
   deadline: string;
+  commentContent: string;
   settingsOpened: boolean;
+  addCommentOpened: boolean;
   projectTitle: string;
   projectStyle: string;
   subtasks: Subtask[];
+  comments: CommentType[];
 }
 
 const initialState: TaskState = {
@@ -30,10 +35,13 @@ const initialState: TaskState = {
   title: "",
   style: "",
   deadline: "",
+  commentContent: "",
   settingsOpened: false,
+  addCommentOpened: false,
   projectTitle: "",
   projectStyle: "",
   subtasks: [],
+  comments: [],
 };
 
 const TaskSlice = createSlice({
@@ -49,6 +57,7 @@ const TaskSlice = createSlice({
         projectStyle,
         taskId,
         subtasks,
+        comments,
       } = action.payload;
 
       state.title = title;
@@ -58,12 +67,22 @@ const TaskSlice = createSlice({
       state.projectStyle = projectStyle;
       state.taskId = taskId;
       state.subtasks = subtasks;
+      state.comments = comments;
     },
     openSettings: (state) => {
       state.settingsOpened = true;
     },
     closeSettings: (state) => {
       state.settingsOpened = false;
+    },
+    openAddComment: (state) => {
+      state.addCommentOpened = true;
+    },
+    closeAddComment: (state) => {
+      state.addCommentOpened = false;
+    },
+    setCommentContent: (state, action: PayloadAction<string>) => {
+      state.commentContent = action.payload;
     },
   },
   extraReducers: {
@@ -76,6 +95,13 @@ const TaskSlice = createSlice({
   },
 });
 
-export const { setupTaskData, openSettings, closeSettings } = TaskSlice.actions;
+export const {
+  setupTaskData,
+  openSettings,
+  closeSettings,
+  openAddComment,
+  closeAddComment,
+  setCommentContent,
+} = TaskSlice.actions;
 
 export default TaskSlice.reducer;

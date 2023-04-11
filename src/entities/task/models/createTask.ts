@@ -29,6 +29,7 @@ export const createTask = async ({
       style: taskStyle,
       deadline,
       completed: "",
+      comments: [],
     },
   });
 

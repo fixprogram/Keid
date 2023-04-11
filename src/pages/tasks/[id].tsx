@@ -4,6 +4,8 @@ import { getTaskById } from "@/entities/task/models/getTaskById";
 import { setupTaskData } from "@/templates/TaskPage/store/taskSlice";
 import { getProjectById } from "@/entities/project/models/getProjectById";
 import { getSubtasksByIds } from "@/entities/subtask/models/getSubtasksByIds";
+import { CommentType } from "@/application/types/comment";
+import { getSession } from "next-auth/react";
 
 export default function Task() {
   return <TaskPage />;
@@ -11,6 +13,13 @@ export default function Task() {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
+    const session = await getSession(context);
+
+    if (!session) {
+      throw new Error("session is not defined");
+    }
+
+    const user = session.user as { name: string };
     const taskId = context.query.id as string;
     const data = await getTaskById(taskId);
 
@@ -26,6 +35,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const subtasks = await getSubtasksByIds(data.subtaskIds);
 
+    const comments: CommentType[] = [];
+    data.comments.forEach((comment) => {
+      comments.push({ ...comment, userName: user.name });
+    });
+
     store.dispatch(
       setupTaskData({
         ...data,
@@ -33,6 +47,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         projectStyle: parentProject.style,
         taskId,
         subtasks,
+        comments,
       })
     );
 

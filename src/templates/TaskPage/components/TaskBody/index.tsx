@@ -1,7 +1,11 @@
 import DueDate from "@/features/DueDate";
 import ProjectInfo from "@/features/ProjectInfo";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { openAddComment } from "../../store/taskSlice";
+import AddCommentPopup from "../AddCommentPopup";
+import CommentList from "./components/CommentList";
 import SubtaskList from "./components/SubtaskList";
 
 export default function TaskBody() {
@@ -10,13 +14,14 @@ export default function TaskBody() {
   const style = useAppSelector((state) => state.task.style);
   const projectTitle = useAppSelector((state) => state.task.projectTitle);
   const projectStyle = useAppSelector((state) => state.task.projectStyle);
+  const dispatch = useAppDispatch();
 
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
   const parentProjectStyle =
     projectStyles[projectStyle as keyof ProjectStyleType];
 
   return (
-    <section>
+    <section className="flex flex-col grow">
       <h2 className="text-xxl text-poppins text-white mt-8 font-semibold">
         {title}
       </h2>
@@ -45,6 +50,20 @@ export default function TaskBody() {
       </div>
 
       <SubtaskList />
+
+      <CommentList />
+
+      <AddCommentPopup />
+
+      <div className="flex mt-auto p-9 pb-3 placeholder:text-white">
+        <input
+          type="text"
+          placeholder="Post your comment..."
+          onClick={() => dispatch(openAddComment())}
+          className="ml-8 placeholder:text-white"
+          style={{ background: "inherit" }}
+        />
+      </div>
     </section>
   );
 }

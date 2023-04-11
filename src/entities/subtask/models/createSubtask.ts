@@ -19,6 +19,7 @@ export const createSubtask = async ({ taskId, title, deadline }: Props) => {
       title,
       deadline,
       completed: "",
+      comments: [],
     },
   });
 

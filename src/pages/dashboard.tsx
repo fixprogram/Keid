@@ -11,6 +11,7 @@ import Overview from "@/widgets/Overview";
 import Link from "next/link";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import { prisma } from "@/db.server";
 
 export default function DashboardPage() {
   return (
@@ -51,6 +52,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(setUserProjectAmount(projectAmount));
       store.dispatch(setUserProjectNames(userProjectNames));
       // console.log("State on server", store.getState());
+
+      // await prisma.task.updateMany({ data: { comments: [] } }); Add this trick to Anki in order to remember
 
       return { props: {} };
     }
