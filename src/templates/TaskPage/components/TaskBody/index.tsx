@@ -3,10 +3,10 @@ import ProjectInfo from "@/features/ProjectInfo";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import SubtaskList from "@/widgets/SubtaskList";
 import { openAddComment } from "../../store/taskSlice";
 import AddCommentPopup from "../AddCommentPopup";
 import CommentList from "./components/CommentList";
+import SubtaskList from "./components/SubtaskList";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.task.title);
