@@ -30,7 +30,7 @@ export default function PopupCalendar() {
 
   return (
     <section className="px-5 pb-6">
-      <Calendar date={date} setDate={setDeadline} />;
+      <Calendar date={date} setDate={setDeadline} />
       <div className="flex justify-between items-end mt-[20px]">
         <button
           type="button"
