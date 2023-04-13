@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
         <main className={`${inter.variable} ${poppins.variable} font-sans`}>
-          <Component {...props.pageProps} />
+          <Component {...props.pageProps} {...pageProps} />
         </main>
       </Provider>
     </SessionProvider>
