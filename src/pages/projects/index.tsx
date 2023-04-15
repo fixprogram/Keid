@@ -25,7 +25,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
       taskAmount: project.taskIds.length,
     }));
 
-    const userProjectNames = projects.map((project) => project.title);
+    const userProjectNames = projects.map((project) => ({
+      title: project.title,
+      style: project.style,
+    }));
 
     store.dispatch(setupProjects(projects));
     store.dispatch(setUserProjectNames(userProjectNames));

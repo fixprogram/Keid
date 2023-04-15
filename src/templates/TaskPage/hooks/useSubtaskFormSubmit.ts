@@ -3,7 +3,7 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
-import { closePopup } from "../components/AddSubtaskPopup/store/addSubtaskSlice";
+import { closePopup } from "../ui/AddSubtaskPopup/store/addSubtaskSlice";
 
 export function useSubtaskFormSubmit() {
   const router = useRouter();
@@ -38,13 +38,15 @@ export function useSubtaskFormSubmit() {
           dispatch(closePopup());
           // dispatch add subtask
 
-          console.log("body: ", body);
+          if (res.status === 200) {
+            router.push(`/tasks/${body.id}`);
+          }
         })
         .catch((err) => {
           throw new Error(err);
         });
     },
-    [taskId, title, deadline, dispatch]
+    [taskId, title, deadline, dispatch, router]
   );
 
   return handleSubtaskFormSubmit;

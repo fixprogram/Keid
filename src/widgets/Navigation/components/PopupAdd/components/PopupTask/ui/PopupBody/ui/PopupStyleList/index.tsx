@@ -2,19 +2,19 @@ import StyleList from "@/features/StyleList";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRef } from "react";
-import { closeStyleList, setProjectStyle } from "../../store/addProjectSlice";
+import { closeStyleList, setTaskStyle } from "../../../../store/addTaskSlice";
 
 export default function PopupStyleList() {
   const dispatch = useAppDispatch();
-  const projectStyle = useAppSelector((state) => state.addProject.projectStyle);
-  const initialStyle = useRef({ projectStyle });
+  const taskStyle = useAppSelector((state) => state.addTask.taskStyle);
+  const initialStyle = useRef({ taskStyle });
 
   function setStyle(style: string) {
-    dispatch(setProjectStyle(style));
+    dispatch(setTaskStyle(style));
   }
 
   function cancelStyleList() {
-    setStyle(initialStyle.current.projectStyle);
+    setStyle(initialStyle.current.taskStyle);
     dispatch(closeStyleList());
   }
 
@@ -24,7 +24,7 @@ export default function PopupStyleList() {
 
   return (
     <StyleList
-      projectStyle={projectStyle}
+      projectStyle={taskStyle}
       setStyle={setStyle}
       cancelStyleList={cancelStyleList}
       saveStyle={saveStyle}

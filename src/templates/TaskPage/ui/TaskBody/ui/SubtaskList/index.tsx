@@ -1,3 +1,4 @@
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
@@ -9,6 +10,9 @@ import SubtaskInProgress from "../SubtaskInProgress";
 export default function SubtaskList() {
   const dispatch = useDispatch();
   const subtasks = useAppSelector((state) => state.task.subtasks);
+  const taskStyle = useAppSelector((state) => state.task.style);
+
+  const style = projectStyles[taskStyle as keyof ProjectStyleType];
 
   return (
     <div className="mt-6">
@@ -32,7 +36,7 @@ export default function SubtaskList() {
                   false
                 )}
                 title={subtask.title}
-                style="01"
+                style={style}
               />
             )}
           </li>

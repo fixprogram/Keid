@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-
+import { Project } from "../models";
 export interface NavigationState {
   popupAddState: "idle" | "task" | "project";
   popupAddOpened: boolean;
-  projects: string[];
+  projects: Project[];
 }
 
 const initialState: NavigationState = {
@@ -28,7 +28,7 @@ const NavigationSlice = createSlice({
     setPopupAddState: (state, action: PayloadAction<"task" | "project">) => {
       state.popupAddState = action.payload;
     },
-    setUserProjectNames: (state, action: PayloadAction<string[]>) => {
+    setUserProjectNames: (state, action: PayloadAction<Project[]>) => {
       state.projects = action.payload;
     },
   },

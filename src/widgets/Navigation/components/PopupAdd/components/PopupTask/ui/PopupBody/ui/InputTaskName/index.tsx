@@ -1,13 +1,25 @@
+import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { SyntheticEvent, useCallback } from "react";
-import { setTaskName } from "../../../../store/addTaskSlice";
+import { SyntheticEvent, useCallback, useEffect } from "react";
+import {
+  openStyleList,
+  setTaskName,
+  setTaskStyle,
+} from "../../../../store/addTaskSlice";
 
 export default function InputTaskName() {
   const dispatch = useAppDispatch();
   const taskName = useAppSelector((state) => state.addTask.taskName);
+  const taskStyle = useAppSelector((state) => state.addTask.taskStyle);
+  const activeProject = useAppSelector((state) => state.addTask.taskProject);
+  const error = useAppSelector((state) => state.addTask.error);
 
-  const error = useAppSelector((state) => state.addProject.error);
+  useEffect(() => {
+    if (taskStyle === "") {
+      dispatch(setTaskStyle(activeProject.style));
+    }
+  }, [taskStyle, activeProject.style, dispatch]);
 
   const handleTaskNameChange = useCallback(
     (event: SyntheticEvent) => {
@@ -17,11 +29,19 @@ export default function InputTaskName() {
     [dispatch]
   );
 
+  const style = projectStyles[taskStyle as keyof ProjectStyleType];
+
+  if (!style) {
+    return null;
+  }
+
   return (
     <div className="flex items-end mt-4">
       <button
         type="button"
-        className="w-4 h-4 bg-primary rounded mr-4 mb-[5px]"
+        className="w-4 h-4 rounded mr-4 mb-[5px]"
+        style={{ background: style.gradient }}
+        onClick={() => dispatch(openStyleList())}
       ></button>
 
       <input

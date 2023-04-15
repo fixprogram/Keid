@@ -1,14 +1,14 @@
 import CompletedTask from "./components/CompletedTask";
 import TaskInProgress from "./components/TaskInProgress";
 
-type Props = {
+interface Props {
   link: string;
   title: string;
   deadline: string;
   style: string;
   progress: number;
   completed: string;
-};
+}
 
 export default function TaskCard({
   link,

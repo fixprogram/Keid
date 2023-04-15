@@ -20,12 +20,9 @@ const AddProjectSlice = createSlice({
   initialState,
   reducers: {
     setProjectName: (state, action: PayloadAction<string>) => {
-      console.log("!@#: ", action.payload);
-
       state.projectName = action.payload;
     },
     setProjectStyle: (state, action: PayloadAction<string>) => {
-      console.log("!@#: ", action.payload);
       state.projectStyle = action.payload;
     },
     openStyleList: (state) => {

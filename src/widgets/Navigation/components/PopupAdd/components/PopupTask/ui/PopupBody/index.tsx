@@ -1,8 +1,8 @@
 import AddButton from "@/shared/ui/AddButton";
 import { useTaskFormSubmit } from "@/widgets/Navigation/hooks/useTaskFormSubmit";
-import InputTaskName from "./components/InputTaskName";
-import SelectProject from "./components/SelectProject";
-import TaskDeadline from "./components/TaskDeadline";
+import InputTaskName from "./ui/InputTaskName";
+import SelectProject from "./ui/SelectProject";
+import TaskDeadline from "./ui/TaskDeadline";
 
 export default function PopupBody() {
   const handleFormSubmit = useTaskFormSubmit();

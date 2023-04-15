@@ -23,5 +23,5 @@ export default async function handler(
     deadline,
   });
 
-  res.status(200).json({ id: subtask.id });
+  res.status(200).json({ id: subtask.taskId });
 }

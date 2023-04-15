@@ -5,8 +5,8 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { openAddComment } from "../../store/taskSlice";
 import AddCommentPopup from "../AddCommentPopup";
-import CommentList from "./components/CommentList";
-import SubtaskList from "./components/SubtaskList";
+import CommentList from "./ui/CommentList";
+import SubtaskList from "./ui/SubtaskList";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.task.title);
@@ -19,6 +19,10 @@ export default function TaskBody() {
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
   const parentProjectStyle =
     projectStyles[projectStyle as keyof ProjectStyleType];
+
+  if (!parentProjectStyle) {
+    return null;
+  }
 
   return (
     <section className="flex flex-col grow">

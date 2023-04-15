@@ -24,7 +24,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const userId = user.id;
 
     const projects = await getUserProjects(userId);
-    const userProjectNames = projects.map((project) => project.title);
+    const userProjectNames = projects.map((project) => ({
+      title: project.title,
+      style: project.style,
+    }));
 
     const tasksIds: string[] = [];
     projects.forEach((project) => {

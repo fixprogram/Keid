@@ -12,6 +12,10 @@ export default function TaskBody() {
 
   const parentTaskStyle = projectStyles[style as keyof ProjectStyleType];
 
+  if (!parentTaskStyle) {
+    return null;
+  }
+
   return (
     <section>
       <b

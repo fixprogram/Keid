@@ -3,6 +3,10 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
+import {
+  resetTask,
+  setTaskDeadline,
+} from "../components/PopupAdd/components/PopupTask/store/addTaskSlice";
 import { closePopupAdd } from "../store/navigationSlice";
 
 export function useTaskFormSubmit() {
@@ -31,13 +35,14 @@ export function useTaskFormSubmit() {
           taskName,
           taskStyle,
           deadline,
-          projectName,
+          projectName: projectName.title,
         }),
       }).then(async (res) => {
         console.log("Res: ", res);
 
         const body = await res.json();
 
+        dispatch(resetTask());
         dispatch(closePopupAdd());
 
         console.log("body: ", body);
