@@ -18,10 +18,15 @@ export default function TaskInProgress({
   progress,
 }: Props) {
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
+
   return (
     <Link href={link}>
       <div className="bg-background2 p-5 flex gap-5 rounded-xl ">
-        <RoundProgressBar progress={progress} />
+        <RoundProgressBar
+          id={link}
+          progress={progress}
+          stopColors={taskStyle.progressGradient}
+        />
 
         <div>
           <b className="text-lg text-white font-semibold">{title}</b>

@@ -5,6 +5,8 @@ export const deleteTask = async (taskId: string) => {
     where: { id: taskId },
   });
 
+  await prisma.subtask.deleteMany({ where: { id: { in: task.subtaskIds } } });
+
   const project = await prisma.project.findUnique({
     where: { id: task.projectId },
   });

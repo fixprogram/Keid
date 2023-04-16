@@ -1,4 +1,19 @@
-export default function RoundProgressBar({ progress = 0 }) {
+interface RoundProgressBarProps {
+  id: string;
+  progress: number;
+  stopColors: {
+    firstStopColor: string;
+    secondStopColor: string;
+  };
+}
+
+export default function RoundProgressBar({
+  id,
+  progress = 0,
+  stopColors,
+}: RoundProgressBarProps) {
+  // console.log("Stop colors: ", stopColors);
+
   return (
     <div className="w-[40px] h-[40px] rounded-full bg-background1 grid place-items-center relative">
       <svg
@@ -9,9 +24,11 @@ export default function RoundProgressBar({ progress = 0 }) {
         style={{ transform: "rotate(280deg" }}
       >
         <defs>
-          <linearGradient id="GradientColor">
-            <stop offset="0%" stopColor="#E42A6C" />
-            <stop offset="70%" stopColor="#C393FF" />
+          <linearGradient id={id}>
+            <stop offset="0%" stopColor={stopColors.firstStopColor} />
+            <stop offset="70%" stopColor={stopColors.secondStopColor} />
+            {/* <stop offset="0%" stopColor="#E42A6C" />
+            <stop offset="70%" stopColor="#C393FF" /> */}
           </linearGradient>
         </defs>
         <circle
@@ -21,7 +38,7 @@ export default function RoundProgressBar({ progress = 0 }) {
           strokeLinecap="round"
           style={{
             fill: "none",
-            stroke: "url(#GradientColor)",
+            stroke: `url(#${id})`,
             strokeWidth: 6,
             strokeDasharray: 100,
             strokeDashoffset: `calc(100 - ${progress * 0.75})`, // 25 = 100%

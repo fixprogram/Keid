@@ -8,7 +8,8 @@ type Props = {
 };
 
 export default function GridGoalItem({ project }: Props) {
-  const { style, title, taskAmount, completedTaskAmount } = project;
+  const { style, title, taskAmount, completedTaskAmount, projectProgress } =
+    project;
   const category = "Category";
 
   const projectStyle = projectStyles[style as keyof ProjectStyleType];
@@ -30,7 +31,7 @@ export default function GridGoalItem({ project }: Props) {
               <div
                 className="rounded-full h-full"
                 style={{
-                  width: `${(completedTaskAmount / taskAmount) * 100}%`,
+                  width: `${projectProgress}%`,
                   background: projectStyle.gradient,
                 }}
               ></div>

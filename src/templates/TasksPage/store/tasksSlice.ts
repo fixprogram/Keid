@@ -9,6 +9,7 @@ export type TaskType = {
   title: string;
   style: string;
   deadline: string;
+  progress: number;
   completed: string;
 };
 

@@ -10,6 +10,7 @@ import overviewSlice from "@/widgets/Overview/store/overviewSlice";
 import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
 import addProjectSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import progressSlice from "@/features/Progress/store/progressSlice";
 
 const makeStore = () =>
   configureStore({
@@ -24,6 +25,7 @@ const makeStore = () =>
       tasks: tasksSlice,
       task: taskSlice,
       subtask: subtaskSlice,
+      progress: progressSlice,
     },
   });
 

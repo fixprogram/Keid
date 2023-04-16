@@ -7,8 +7,8 @@ export default function ActivityStats({ maxActivity }: ActivityStatsProps) {
 
   return (
     <ul className="flex flex-col gap-2">
-      {activityStats.map((stat) => (
-        <li key={stat}>
+      {activityStats.map((stat, index) => (
+        <li key={index}>
           <b className="font-700 text-xxs text-deactive text-right block">
             {stat}
           </b>

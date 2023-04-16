@@ -25,6 +25,7 @@ export default function InputSubtaskTitle() {
         style={{ background: "inherit" }}
         value={title}
         onChange={handleSubtaskTitleChange}
+        autoComplete="off"
       />
 
       {/* <p>{error}</p> */}

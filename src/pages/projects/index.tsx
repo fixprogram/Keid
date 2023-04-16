@@ -20,10 +20,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const user = session.user as { id: string };
     const userId = user.id;
 
-    const projects = (await getUserProjects(userId)).map((project) => ({
-      ...project,
-      taskAmount: project.taskIds.length,
-    }));
+    const projects = await getUserProjects(userId);
 
     const userProjectNames = projects.map((project) => ({
       title: project.title,

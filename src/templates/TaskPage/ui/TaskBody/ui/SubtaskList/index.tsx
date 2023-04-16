@@ -43,11 +43,13 @@ export default function SubtaskList() {
         ))}
       </ul>
 
-      <PrimaryButton
-        type="button"
-        text="Add subtask"
-        onClick={() => dispatch(openPopup())}
-      />
+      <div className="mt-6">
+        <PrimaryButton
+          type="button"
+          text="Add subtask"
+          onClick={() => dispatch(openPopup())}
+        />
+      </div>
     </div>
   );
 }

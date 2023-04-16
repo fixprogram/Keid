@@ -66,6 +66,7 @@ export default function TaskBody() {
           onClick={() => dispatch(openAddComment())}
           className="ml-8 placeholder:text-white"
           style={{ background: "inherit" }}
+          autoComplete="off"
         />
       </div>
     </section>

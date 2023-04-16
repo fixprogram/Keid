@@ -10,6 +10,7 @@ export const links = {
   task: {
     add: `${apiLnk}task/add`,
     delete: `${apiLnk}task/delete`,
+    updateProgress: `${apiLnk}task/updateProgress`,
     complete: `${apiLnk}task/complete`,
     addComment: `${apiLnk}task/addComment`,
     deleteComment: `${apiLnk}task/deleteComment`,

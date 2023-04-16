@@ -53,7 +53,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(setUserProjectNames(userProjectNames));
       // console.log("State on server", store.getState());
 
-      // await prisma.task.updateMany({ data: { comments: [] } }); Add this trick to Anki in order to remember
+      // await prisma.subtask.updateMany({ data: { progress: 0 } }); // Add this trick to Anki in order to remember
 
       return { props: {} };
     }

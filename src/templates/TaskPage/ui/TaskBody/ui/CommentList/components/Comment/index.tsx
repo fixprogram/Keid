@@ -8,6 +8,7 @@ type CommentPropsType = {
   userName: string;
   time: string;
   content: string;
+  serviceContent?: string;
 };
 
 export default function Comment({
@@ -15,6 +16,7 @@ export default function Comment({
   userName,
   time,
   content,
+  serviceContent,
 }: CommentPropsType) {
   const image = userImg ? (
     <Image src={userImg} alt={userName} width={40} height={40} />
@@ -30,7 +32,12 @@ export default function Comment({
         <div className="w-10">{image}</div>
 
         <div>
-          <b className="font-bold text-sm text-white block">{userName}</b>
+          <div className="flex gap-1">
+            <b className="font-bold text-sm text-white block">{userName}</b>
+            <p className="text-sm text-deactive">
+              {serviceContent ? serviceContent : null}
+            </p>
+          </div>
           <span
             className="text-sm text-deactive block"
             style={{ marginTop: -5, lineHeight: "20px" }}

@@ -42,6 +42,7 @@ export default function PopupBody() {
             style={{ background: "inherit" }}
             value={projectName}
             onChange={handleProjectNameChange}
+            autoComplete="off"
           />
 
           <p>{error}</p>

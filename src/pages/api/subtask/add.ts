@@ -1,11 +1,12 @@
 import { createSubtask } from "@/entities/subtask/models/createSubtask";
+import { getTaskById } from "@/entities/task/models/getTaskById";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { taskId, title, deadline } = req.body;
+  const { userId, taskId, title, deadline } = req.body;
 
   if (!taskId) {
     return res
@@ -18,6 +19,7 @@ export default async function handler(
   }
 
   const subtask = await createSubtask({
+    userId,
     taskId,
     title,
     deadline,

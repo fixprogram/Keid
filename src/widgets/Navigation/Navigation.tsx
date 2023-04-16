@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { useRouter } from "next/router";
 import Icon from "@/shared/ui/Icon";
 import { Fragment } from "react";
@@ -7,33 +6,7 @@ import { openPopupAdd } from "./store/navigationSlice";
 import PopupAdd from "./components/PopupAdd";
 import AddButton from "@/shared/ui/AddButton";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-
-const NAV_LINKS = [
-  {
-    iconName: "dashboard",
-    iconSize: { width: 20, height: 20 },
-    alt: "Dashboard page",
-    to: "/dashboard",
-  },
-  {
-    iconName: "goals",
-    iconSize: { width: 19, height: 20 },
-    alt: "Projects page",
-    to: "/projects",
-  },
-  {
-    iconName: "notification",
-    iconSize: { width: 20, height: 22 },
-    alt: "Profile page",
-    to: "/profile",
-  },
-  {
-    iconName: "search",
-    iconSize: { width: 21, height: 21 },
-    alt: "Search page",
-    to: "/search",
-  },
-];
+import { NAV_LINKS } from "./config/links";
 
 export default function Navigation() {
   const router = useRouter();

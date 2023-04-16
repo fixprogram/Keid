@@ -1,4 +1,5 @@
 import { prisma } from "@/db.server";
+import { serviceComments } from "@/shared/config/serviceComments";
 import { Project } from "@prisma/client";
 
 type Props = {
@@ -28,8 +29,16 @@ export const createTask = async ({
       title: taskName,
       style: taskStyle,
       deadline,
+      progress: 0,
       completed: "",
-      comments: [],
+      comments: [
+        {
+          userId,
+          content: "",
+          time: Date.now().toString(),
+          serviceContent: serviceComments.task.created,
+        },
+      ],
     },
   });
 

@@ -1,12 +1,16 @@
 import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
 import { closePopup } from "../ui/AddSubtaskPopup/store/addSubtaskSlice";
 
 export function useSubtaskFormSubmit() {
   const router = useRouter();
+  const session = useSession();
+  const user = session.data?.user as { id: string };
+  const userId = user?.id;
 
   const dispatch = useAppDispatch();
 
@@ -25,6 +29,7 @@ export function useSubtaskFormSubmit() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          userId,
           taskId,
           title,
           deadline,
@@ -46,7 +51,7 @@ export function useSubtaskFormSubmit() {
           throw new Error(err);
         });
     },
-    [taskId, title, deadline, dispatch, router]
+    [userId, taskId, title, deadline, dispatch, router]
   );
 
   return handleSubtaskFormSubmit;

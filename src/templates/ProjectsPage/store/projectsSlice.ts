@@ -10,6 +10,7 @@ export type ProjectType = {
   style: string;
   taskAmount: number;
   completedTaskAmount: number;
+  projectProgress: number;
 };
 
 export interface ProjectsState {

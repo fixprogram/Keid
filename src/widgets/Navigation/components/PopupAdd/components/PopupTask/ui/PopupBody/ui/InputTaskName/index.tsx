@@ -52,6 +52,7 @@ export default function InputTaskName() {
         style={{ background: "inherit" }}
         value={taskName}
         onChange={handleTaskNameChange}
+        autoComplete="off"
       />
 
       <p>{error}</p>

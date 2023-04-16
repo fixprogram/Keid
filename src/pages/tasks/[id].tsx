@@ -6,6 +6,7 @@ import { getProjectById } from "@/entities/project/models/getProjectById";
 import { getSubtasksByIds } from "@/entities/subtask/models/getSubtasksByIds";
 import { CommentType } from "@/application/types/comment";
 import { getSession } from "next-auth/react";
+import { setupProgress } from "@/features/Progress/store/progressSlice";
 
 export default function Task() {
   return <TaskPage />;
@@ -50,6 +51,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
         comments,
       })
     );
+
+    store.dispatch(setupProgress(data.progress));
 
     return {
       props: {},

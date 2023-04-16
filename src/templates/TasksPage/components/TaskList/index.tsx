@@ -14,7 +14,7 @@ export default function TaskList() {
           title={task.title}
           deadline={task.deadline}
           style={task.style}
-          progress={50}
+          progress={task.progress}
           completed={task.completed}
         />
       ))}

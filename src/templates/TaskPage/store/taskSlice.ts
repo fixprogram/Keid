@@ -10,6 +10,7 @@ type SetupDataType = {
   title: string;
   style: string;
   deadline: string;
+  // progress: number,
   projectTitle: string;
   projectStyle: string;
   subtasks: Subtask[];
@@ -21,6 +22,7 @@ export interface TaskState {
   title: string;
   style: string;
   deadline: string;
+  // progress: number,
   commentContent: string;
   settingsOpened: boolean;
   addCommentOpened: boolean;
@@ -35,6 +37,7 @@ const initialState: TaskState = {
   title: "",
   style: "",
   deadline: "",
+  // progress: 0,
   commentContent: "",
   settingsOpened: false,
   addCommentOpened: false,
@@ -58,6 +61,7 @@ const TaskSlice = createSlice({
         taskId,
         subtasks,
         comments,
+        // progress,
       } = action.payload;
 
       state.title = title;
@@ -68,6 +72,7 @@ const TaskSlice = createSlice({
       state.taskId = taskId;
       state.subtasks = subtasks;
       state.comments = comments;
+      // state.progress = progress
     },
     openSettings: (state) => {
       state.settingsOpened = true;

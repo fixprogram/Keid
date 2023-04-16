@@ -1,3 +1,4 @@
+import UpdateProgress from "@/features/Progress";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import Icon from "@/shared/ui/Icon";
 import { useRouter } from "next/router";
@@ -20,6 +21,9 @@ export default function TaskHeader() {
         <button type="button" onClick={completeTaskHandler}>
           <Icon name="complete" height={14} width={19} />
         </button>
+
+        {/* <button type="button" onClick={}>Update</button> */}
+        <UpdateProgress />
 
         <button type="button" onClick={() => dispatch(openSettings())}>
           <Icon name="settings" height={24} width={24} />

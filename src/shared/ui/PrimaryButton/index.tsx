@@ -21,7 +21,7 @@ export default function PrimaryButton({
   return (
     <button
       type={type}
-      className="bg-primary w-full h-12 flex items-center justify-center gap-3 rounded-full mt-[40px] shadow-button"
+      className="bg-primary w-full h-12 flex items-center justify-center gap-3 rounded-full shadow-button"
       onClick={onClick}
       {...props}
     >

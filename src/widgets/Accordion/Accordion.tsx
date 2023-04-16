@@ -1,6 +1,5 @@
 import TaskCard from "@/features/TaskCard";
 import { TaskType } from "@/templates/ProjectPage/types/Task";
-import Link from "next/link";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 
@@ -41,7 +40,7 @@ export default function Accordion({ topic, items = [] }: Props) {
                 title={item.title}
                 deadline={item.completed ? item.completed : item.deadline}
                 style={item.style}
-                progress={55}
+                progress={item.progress}
                 completed={item.completed}
               />
             </li>
