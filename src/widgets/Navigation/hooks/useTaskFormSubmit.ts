@@ -24,6 +24,13 @@ export function useTaskFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
+      const deadlineTimestamp = new Date(JSON.parse(deadline)).setHours(
+        23,
+        59,
+        59,
+        999
+      );
+
       fetch(links.task.add, {
         method: "POST",
         headers: {
@@ -34,7 +41,7 @@ export function useTaskFormSubmit() {
           userId,
           taskName,
           taskStyle,
-          deadline,
+          deadline: deadlineTimestamp,
           projectName: projectName.title,
         }),
       }).then(async (res) => {

@@ -7,7 +7,7 @@ type Props = {
   projectName: string;
   taskName: string;
   taskStyle: string;
-  deadline: string;
+  deadline: number;
 };
 
 export const createTask = async ({
@@ -30,7 +30,7 @@ export const createTask = async ({
       style: taskStyle,
       deadline,
       progress: 0,
-      completed: "",
+      completed: 0,
       comments: [
         {
           userId,

@@ -10,8 +10,10 @@ type Props = {
 export default function CompletedTask({ link, title, completed }: Props) {
   return (
     <Link href={link}>
-      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl ">
-        <Icon name="completed" width={40} height={40} />
+      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl">
+        <div className="min-w-[40px]">
+          <Icon name="completed" width={40} height={40} />
+        </div>
 
         <div>
           <b className="text-lg text-white font-semibold">{title}</b>

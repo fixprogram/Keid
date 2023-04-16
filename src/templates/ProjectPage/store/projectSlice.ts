@@ -45,17 +45,16 @@ const ProjectSlice = createSlice({
           return {
             ...task,
             state: "Completed",
-            completed: getDateString(
-              new Date(JSON.parse(task.completed)),
-              false
-            ),
+            deadline: getDateString(new Date(task.deadline), false),
+            completed: getDateString(new Date(task.completed), false),
           };
         }
         if (task.deadline) {
           return {
             ...task,
             state: "Task",
-            deadline: getDateString(new Date(JSON.parse(task.deadline)), false),
+            deadline: getDateString(new Date(task.deadline), false),
+            completed: "",
           };
         }
         return { ...task, state: "Idea" };

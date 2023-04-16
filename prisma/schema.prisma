@@ -35,9 +35,9 @@ model Task {
   title          String    
   projectId      String    @db.ObjectId
   style          String
-  deadline       String
+  deadline       Int
   progress       Int
-  completed      String
+  completed      Int
   subtaskIds     String[]
   comments       Comment[]
 }

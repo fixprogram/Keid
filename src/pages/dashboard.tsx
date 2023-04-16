@@ -12,6 +12,8 @@ import Link from "next/link";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { prisma } from "@/db.server";
+import { getWeekTasks } from "@/features/WeekTasks/api";
+import { setupWeekTasks } from "@/features/WeekTasks/store/WeekTasksSlice";
 
 export default function DashboardPage() {
   return (
@@ -45,15 +47,23 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const user = session.user as { id: string };
       const userId = user.id;
       const userProjectNames = await getUserProjectNames(userId);
+      const projectIDs = await (
+        await prisma.project.findMany({
+          where: { userId },
+          select: { id: true },
+        })
+      ).map((projectId) => projectId.id);
 
       const projectAmount = userProjectNames.length;
+
+      const weekTasks = await getWeekTasks(projectIDs);
 
       store.dispatch(setUserId(userId));
       store.dispatch(setUserProjectAmount(projectAmount));
       store.dispatch(setUserProjectNames(userProjectNames));
+      store.dispatch(setupWeekTasks(weekTasks));
       // console.log("State on server", store.getState());
-
-      // await prisma.subtask.updateMany({ data: { progress: 0 } }); // Add this trick to Anki in order to remember
+      // await prisma.task.updateMany({ data: { completed: 0 } }); // Add this trick to Anki in order to remember
 
       return { props: {} };
     }

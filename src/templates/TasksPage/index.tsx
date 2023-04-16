@@ -14,6 +14,7 @@ export default function TasksPage() {
 
   const filters = useAppSelector((state) => state.tasks.filters);
   const activeFilter = useAppSelector((state) => state.tasks.activeFilter);
+
   //   const listStyle = useAppSelector((state) => state.tasks.listStyle);
 
   //   const actionIconName = listStyle === "column" ? "dashboard" : "goals";
