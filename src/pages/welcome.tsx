@@ -22,7 +22,7 @@ export default function Welcome() {
           Manage Everything on Phone
         </h2>
 
-        <Link href="/auth/login">
+        <Link href="/auth/login" className="mt-10">
           <PrimaryButton iconName="letter" text="Continue with email" />
         </Link>
 

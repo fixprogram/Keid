@@ -13,7 +13,7 @@ export default function RoundProgressBar({
   stopColors,
 }: RoundProgressBarProps) {
   return (
-    <div className="w-[40px] h-[40px] rounded-full bg-background1 grid place-items-center relative">
+    <div className="min-w-[40px] h-[40px] rounded-full bg-background1 grid place-items-center relative">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"

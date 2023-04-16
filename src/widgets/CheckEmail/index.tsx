@@ -38,11 +38,13 @@ export default function CheckEmail({ email, setEmail, setType }: Props) {
     >
       <EmailFieldset email={email} setEmail={setEmail} />
 
-      <PrimaryButton
-        type="submit"
-        text="Continue with Email"
-        iconName={"letter"}
-      />
+      <div className="mt-10">
+        <PrimaryButton
+          type="submit"
+          text="Continue with Email"
+          iconName={"letter"}
+        />
+      </div>
     </form>
   );
 }

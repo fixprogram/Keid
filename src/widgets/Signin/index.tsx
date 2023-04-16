@@ -70,7 +70,9 @@ export default function Signin({ email, goBack }: Props) {
           {error}
         </fieldset>
 
-        <PrimaryButton text="Sign in" onClick={login} />
+        <div className="mt-10">
+          <PrimaryButton text="Sign in" onClick={login} />
+        </div>
       </form>
     </Layout>
   );
