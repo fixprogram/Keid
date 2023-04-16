@@ -5,11 +5,12 @@ import { FILTERS } from "../config/filters";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { TaskType } from "../types/Task";
 import { sortTask } from "../lib/sortTask";
+import { Task } from "@prisma/client";
 
 type SetupDataType = {
   title: string;
   style: string;
-  tasks: TaskType[];
+  tasks: Task[];
 };
 
 export interface ProjectState {
