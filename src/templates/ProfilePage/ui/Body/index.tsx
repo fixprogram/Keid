@@ -1,17 +1,14 @@
+import { User, useUser } from "@/shared/lib/hooks/useUser";
 import Icon from "@/shared/ui/Icon";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 
 export default function Body() {
-  const session = useSession();
-  const router = useRouter();
+  const user = useUser() as User;
 
-  if (!session) {
-    router.replace("/welcome");
+  if (!user) {
+    return null;
   }
 
-  const data = session.data as { user: { name: string; email: string } };
-  const { name, email } = data.user;
+  const { name, email } = user;
 
   return (
     <section className="mt-8 mx-auto flex flex-col justify-center items-center">

@@ -5,9 +5,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { taskId, progress } = req.body;
+  const { comment, taskId, progress } = req.body;
 
-  await updateProgress(taskId, progress);
+  await updateProgress(taskId, progress, comment);
 
   res.status(200).json({ body: "" });
 }

@@ -1,17 +1,14 @@
 import { links } from "@/shared/config/links";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useSession } from "next-auth/react";
+import { useUser } from "@/shared/lib/hooks/useUser";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
 import { closePopup } from "../ui/AddSubtaskPopup/store/addSubtaskSlice";
 
 export function useSubtaskFormSubmit() {
   const router = useRouter();
-  const session = useSession();
-  const user = session.data?.user as { id: string };
-  const userId = user?.id;
-
+  const user = useUser();
   const dispatch = useAppDispatch();
 
   const taskId = useAppSelector((state) => state.task.taskId);
@@ -22,36 +19,40 @@ export function useSubtaskFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch(links.subtask.add, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          taskId,
-          title,
-          deadline,
-        }),
-      })
-        .then(async (res) => {
-          console.log("Res: ", res);
+      if (user) {
+        const userId = user.id;
 
-          const body = await res.json();
-
-          dispatch(closePopup());
-          // dispatch add subtask
-
-          if (res.status === 200) {
-            router.push(`/tasks/${body.id}`);
-          }
+        fetch(links.subtask.add, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId,
+            taskId,
+            title,
+            deadline,
+          }),
         })
-        .catch((err) => {
-          throw new Error(err);
-        });
+          .then(async (res) => {
+            console.log("Res: ", res);
+
+            const body = await res.json();
+
+            dispatch(closePopup());
+            // dispatch add subtask
+
+            if (res.status === 200) {
+              router.push(`/tasks/${body.id}`);
+            }
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      }
     },
-    [userId, taskId, title, deadline, dispatch, router]
+    [user, taskId, title, deadline, dispatch, router]
   );
 
   return handleSubtaskFormSubmit;

@@ -12,8 +12,6 @@ export default function RoundProgressBar({
   progress = 0,
   stopColors,
 }: RoundProgressBarProps) {
-  // console.log("Stop colors: ", stopColors);
-
   return (
     <div className="w-[40px] h-[40px] rounded-full bg-background1 grid place-items-center relative">
       <svg

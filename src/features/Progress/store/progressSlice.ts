@@ -6,12 +6,14 @@ export interface ProgressState {
   initialProgress: number;
   progress: number;
   popupOpened: boolean;
+  comment: string;
 }
 
 const initialState: ProgressState = {
   initialProgress: 0,
   progress: 0,
   popupOpened: false,
+  comment: "",
 };
 
 const ProgressSlice = createSlice({
@@ -31,6 +33,9 @@ const ProgressSlice = createSlice({
     changeProgress: (state, action: PayloadAction<number>) => {
       state.progress = action.payload;
     },
+    changeComment: (state, action: PayloadAction<string>) => {
+      state.comment = action.payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -42,7 +47,12 @@ const ProgressSlice = createSlice({
   },
 });
 
-export const { setupProgress, openPopup, closePopup, changeProgress } =
-  ProgressSlice.actions;
+export const {
+  setupProgress,
+  openPopup,
+  closePopup,
+  changeProgress,
+  changeComment,
+} = ProgressSlice.actions;
 
 export default ProgressSlice.reducer;

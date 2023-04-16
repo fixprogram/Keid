@@ -1,9 +1,13 @@
-import { useSession } from "next-auth/react";
+import { User, useUser } from "@/shared/lib/hooks/useUser";
 
 export default function Greeting() {
-  const { data } = useSession();
+  const user = useUser() as User;
 
-  const name = data?.user ? data.user.name : "";
+  if (!user) {
+    return null;
+  }
+
+  const { name } = user;
 
   return (
     <h2 className="text-white font-poppins font-semibold text-xxl mt-[22px]">

@@ -10,31 +10,24 @@ export function getActivityDays(lastWeekActiveTasks: LastWeekActiveTasks) {
   const days = [
     {
       title: "M",
-      // weekDay: 6,
     },
     {
       title: "T",
-      // weekDay: 5,
     },
     {
       title: "W",
-      // weekDay: 4,
     },
     {
       title: "T",
-      // weekDay: 3,
     },
     {
       title: "F",
-      // weekDay: 2,
     },
     {
       title: "S",
-      // weekDay: 1,
     },
     {
       title: "S",
-      // weekDay: 0,
     },
   ].map((day, idx, arr) => {
     // const today = new Date();
@@ -65,8 +58,6 @@ export function getActivityDays(lastWeekActiveTasks: LastWeekActiveTasks) {
 
     return { ...day, taskAmount };
   });
-
-  // console.log("lastWeekActiveTasks: ", lastWeekActiveTasks);
 
   return days;
 }

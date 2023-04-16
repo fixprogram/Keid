@@ -4,12 +4,18 @@ import Overlay from "@/shared/ui/Overlay";
 import Popup from "@/shared/ui/Popup";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { useUpdateProgress } from "./hooks/useUpdateProgress";
-import { changeProgress, closePopup, openPopup } from "./store/progressSlice";
+import {
+  changeComment,
+  changeProgress,
+  closePopup,
+  openPopup,
+} from "./store/progressSlice";
 
 export default function UpdateProgress() {
   const dispatch = useAppDispatch();
   const popupOpened = useAppSelector((state) => state.progress.popupOpened);
   const progress = useAppSelector((state) => state.progress.progress);
+  const comment = useAppSelector((state) => state.progress.comment);
   const handleUpdateProgress = useUpdateProgress();
 
   return (
@@ -29,7 +35,7 @@ export default function UpdateProgress() {
           showed: { top: "80px", zIndex: 20 },
         }}
       >
-        <div>
+        <div className="p-5">
           <b className="block text-white">Update progress</b>
           <input
             type="range"
@@ -37,6 +43,15 @@ export default function UpdateProgress() {
             max={100}
             value={progress}
             onChange={(event) => dispatch(changeProgress(+event.target.value))}
+            className="w-full mt-4"
+          />
+
+          <textarea
+            value={comment}
+            onChange={(event) => dispatch(changeComment(event.target.value))}
+            placeholder="Leave a comment..."
+            className="text-white mt-4 w-full"
+            style={{ background: "inherit" }}
           />
 
           <div className="mt-4">

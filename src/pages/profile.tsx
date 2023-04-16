@@ -9,8 +9,6 @@ interface ProfilePageProps {
 }
 
 function Profile({ activityData }: ProfilePageProps) {
-  console.log(activityData);
-
   return <ProfilePage activityData={activityData} />;
 }
 

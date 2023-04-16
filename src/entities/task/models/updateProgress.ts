@@ -1,10 +1,11 @@
 import { prisma } from "@/db.server";
+import { serviceComments } from "@/shared/config/serviceComments";
 import { Comment } from "@prisma/client";
 
 export const updateProgress = async (
   taskId: string,
   newProgress: number,
-  comment?: Comment
+  comment: Comment
 ) => {
   const task = await prisma.task.findUnique({
     where: { id: taskId },
@@ -14,11 +15,15 @@ export const updateProgress = async (
     throw new Error(`Task with id ${taskId} wasn't found`);
   }
 
-  const data = { progress: newProgress, comments: task.comments };
+  const newComment = {
+    ...comment,
+    serviceContent: serviceComments.task.changedProgress,
+  };
 
-  if (comment) {
-    data.comments.push(comment);
-  }
+  const data = {
+    progress: newProgress,
+    comments: [...task.comments, newComment],
+  };
 
   await prisma.task.update({ where: { id: task.id }, data });
 

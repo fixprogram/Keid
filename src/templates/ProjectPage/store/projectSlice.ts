@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { FILTERS } from "../config/filters";
-import { TaskType } from "../types/Task";
 import { getDateString } from "@/shared/lib/utils/getDateString";
-import { Task } from "@prisma/client";
+import { TaskType } from "../types/Task";
+import { sortTask } from "../lib/sortTask";
 
 type SetupDataType = {
   title: string;
   style: string;
-  tasks: Task[];
+  tasks: TaskType[];
 };
 
 export interface ProjectState {
@@ -59,7 +59,9 @@ const ProjectSlice = createSlice({
         }
         return { ...task, state: "Idea" };
       });
-      state.filteredTasks = state.tasks;
+
+      const sortedTasks = state.tasks.sort(sortTask);
+      state.filteredTasks = sortedTasks;
     },
     openSettings: (state) => {
       state.settingsOpened = true;
