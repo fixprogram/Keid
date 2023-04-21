@@ -1,11 +1,9 @@
 import TaskCard from "@/features/TaskCard";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { Task } from "@prisma/client";
 
 export default function TaskList() {
   const tasks = useAppSelector((state) => state.weekTasks.tasks);
 
-  console.log("Tasks: ", tasks);
   return (
     <ul className="mt-4 flex flex-col gap-4">
       {tasks.map((task) => (

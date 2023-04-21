@@ -3,15 +3,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { FILTERS } from "../config/filters";
 import { getDateString } from "@/shared/lib/utils/getDateString";
-
-export type TaskType = {
-  id: string;
-  title: string;
-  style: string;
-  deadline: string;
-  progress: number;
-  completed: string;
-};
+import { Task } from "@prisma/client";
+import { TaskType } from "@/entities/task/types";
 
 export interface TasksState {
   filters: string[];
@@ -32,12 +25,12 @@ const TasksSlice = createSlice({
     setActiveFilter: (state, action: PayloadAction<string>) => {
       state.activeFilter = action.payload;
     },
-    setupTasks: (state, action: PayloadAction<TaskType[]>) => {
+    setupTasks: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload.map((task) => ({
         ...task,
-        deadline: getDateString(new Date(JSON.parse(task.deadline)), false),
+        deadline: getDateString(new Date(task.deadline), false),
         completed: task.completed
-          ? getDateString(new Date(JSON.parse(task.completed)), false)
+          ? getDateString(new Date(task.completed), false)
           : "",
       }));
     },

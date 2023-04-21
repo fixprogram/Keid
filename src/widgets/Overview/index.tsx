@@ -2,7 +2,6 @@ import WeekTasks from "@/features/WeekTasks";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Cards from "./components/Cards";
 import Filter from "./components/Filter";
-// import PriorityTasks from "./components/PriorityTasks";
 
 export default function Overview() {
   const projectAmount = useAppSelector((state) => state.overview.projectAmount);

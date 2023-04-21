@@ -2,12 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { Task } from "@prisma/client";
-import { getDateString } from "@/shared/lib/utils/getDateString";
 import { sortTask } from "../lib";
+import { convertTaskDatesIntoString } from "@/entities/task/lib/convertTaskDatesIntoString";
+import { TaskType } from "@/entities/task/types";
 
 export interface WeekTasksState {
   isOpened: boolean;
-  tasks: Task[];
+  tasks: TaskType[];
   taskAmount: number;
   completedTaskAmount: number;
   progress: number;
@@ -26,26 +27,15 @@ const WeekTasksSlice = createSlice({
   initialState,
   reducers: {
     setupWeekTasks: (state, action: PayloadAction<Task[]>) => {
-      const tasks = action.payload
-        .filter((payload) => {
-          if (payload.completed === 0) {
-            return {
-              ...payload,
-              deadline: getDateString(new Date(payload.deadline), false),
-              completed:
-                payload.completed === 0
-                  ? ""
-                  : getDateString(new Date(payload.completed), false),
-            };
-          }
-        })
-        .sort(sortTask);
+      const uncompletedTasks = convertTaskDatesIntoString(
+        action.payload.filter((task) => task.completed === 0)
+      ).sort(sortTask);
 
-      const completedTasks = action.payload.filter(
-        (payload) => payload.completed
+      const completedTasks = convertTaskDatesIntoString(
+        action.payload.filter((payload) => payload.completed)
       );
 
-      state.tasks = [...tasks, ...completedTasks];
+      state.tasks = [...uncompletedTasks, ...completedTasks];
 
       const taskAmount = state.tasks.length;
       state.taskAmount = taskAmount;
