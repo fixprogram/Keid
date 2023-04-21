@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { FILTERS } from "../config/filters";
-import { getDateString } from "@/shared/lib/utils/getDateString";
-import { TaskType } from "../types/Task";
-import { sortTask } from "../lib/sortTask";
 import { Task } from "@prisma/client";
+import { FILTERS } from "../config/consts";
+import { FilterType } from "../config/types";
+import { TaskType } from "@/entities/task/types";
+import { convertTaskDatesIntoString } from "@/entities/task/lib/convertTaskDatesIntoString";
 
 type SetupDataType = {
   title: string;
@@ -16,19 +16,17 @@ type SetupDataType = {
 export interface ProjectState {
   title: string;
   style: string;
-  tasks: TaskType[];
+  tasks: Record<FilterType, TaskType[]>;
   settingsOpened: boolean;
-  activeFilter: string;
-  filteredTasks: TaskType[];
+  activeFilter: FilterType;
 }
 
 const initialState: ProjectState = {
   title: "",
   style: "",
-  tasks: [],
+  tasks: { "To do": [], Completed: [], All: [] },
   settingsOpened: false,
   activeFilter: FILTERS[0],
-  filteredTasks: [],
 };
 
 const ProjectSlice = createSlice({
@@ -40,28 +38,13 @@ const ProjectSlice = createSlice({
 
       state.title = title;
       state.style = style;
-      state.tasks = tasks.map((task) => {
-        if (task.completed) {
-          return {
-            ...task,
-            state: "Completed",
-            deadline: getDateString(new Date(task.deadline), false),
-            completed: getDateString(new Date(task.completed), false),
-          };
-        }
-        if (task.deadline) {
-          return {
-            ...task,
-            state: "Task",
-            deadline: getDateString(new Date(task.deadline), false),
-            completed: "",
-          };
-        }
-        return { ...task, state: "Idea" };
-      });
 
-      const sortedTasks = state.tasks.sort(sortTask);
-      state.filteredTasks = sortedTasks;
+      const allTasks = convertTaskDatesIntoString(tasks);
+      state.tasks.All = allTasks;
+      state.tasks.Completed = allTasks.filter((task) =>
+        Boolean(task.completed)
+      );
+      state.tasks["To do"] = allTasks.filter((task) => task.completed === "");
     },
     openSettings: (state) => {
       state.settingsOpened = true;
@@ -69,24 +52,8 @@ const ProjectSlice = createSlice({
     closeSettings: (state) => {
       state.settingsOpened = false;
     },
-    setActiveFilter: (state, action: PayloadAction<string>) => {
+    setActiveFilter: (state, action: PayloadAction<FilterType>) => {
       state.activeFilter = action.payload;
-
-      if (action.payload === "Ideas") {
-        state.filteredTasks = state.tasks.filter(
-          (task) => task.state === "Idea"
-        );
-      }
-
-      if (action.payload === "Completed") {
-        state.filteredTasks = state.tasks.filter(
-          (task) => task.state === "Completed"
-        );
-      }
-
-      if (action.payload === "All tasks") {
-        state.filteredTasks = state.tasks;
-      }
     },
   },
   extraReducers: {

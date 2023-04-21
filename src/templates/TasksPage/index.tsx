@@ -3,8 +3,8 @@ import PageHeader from "@/features/PageHeader";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Layout from "@/widgets/Layout";
-import { setActiveFilter } from "../ProjectPage/store/projectSlice";
 import TaskList from "./components/TaskList";
+import { setActiveFilter } from "./store/tasksSlice";
 
 export default function TasksPage() {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ export default function TasksPage() {
         filterClickHandler={(filter: string) =>
           dispatch(setActiveFilter(filter))
         }
-      ></FilterBar>
+      />
 
       <TaskList />
     </Layout>

@@ -23,16 +23,3 @@ export function getFirstDayOfTheWeek() {
 
   return new Date(today.setDate(diff)).setHours(0, 0, 0, 0);
 }
-
-export function sortTask(a, b) {
-  //   if (a.completed || b.completed) {
-  //     return 1;
-  //   }
-  if (a.progress > b.progress) {
-    return -1;
-  }
-  if (a.progress < b.progress) {
-    return 1;
-  }
-  return 0;
-}

@@ -1,32 +1,21 @@
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { FILTERS } from "@/templates/ProjectPage/config/filters";
+import { FILTERS } from "@/templates/ProjectPage/config/consts";
 import Accordion from "@/widgets/Accordion";
 import { Fragment } from "react";
 
 export default function AllTaskAccordions() {
-  const filters = FILTERS;
-  const tasks = useAppSelector((state) => state.project.filteredTasks);
+  const tasks = useAppSelector((state) => state.project.tasks);
 
   return (
     <Fragment>
-      {filters.map((filter) => {
-        if (filter === "All tasks") {
+      {FILTERS.map((filter) => {
+        if (filter === "All") {
           return (
-            <Accordion
-              key={filter}
-              topic="To do"
-              items={tasks.filter((task) => task.state === "Task")}
-            />
+            <Accordion key={filter} topic="All tasks" items={tasks["All"]} />
           );
         }
 
-        return (
-          <Accordion
-            key={filter}
-            topic={filter}
-            items={tasks.filter((task) => task.state === filter)}
-          />
-        );
+        return <Accordion key={filter} topic={filter} items={tasks[filter]} />;
       })}
     </Fragment>
   );

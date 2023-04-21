@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { Task } from "@prisma/client";
-import { sortTask } from "../lib";
 import { convertTaskDatesIntoString } from "@/entities/task/lib/convertTaskDatesIntoString";
 import { TaskType } from "@/entities/task/types";
+import { sortTask } from "@/entities/task/lib/sortTask";
 
 export interface WeekTasksState {
   isOpened: boolean;

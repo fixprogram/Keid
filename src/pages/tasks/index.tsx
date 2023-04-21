@@ -5,6 +5,7 @@ import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice"
 import { setupTasks } from "@/templates/TasksPage/store/tasksSlice";
 import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
 import TasksPage from "@/templates/TasksPage";
+import { prisma } from "@/db.server";
 
 export default function Tasks() {
   return <TasksPage />;
@@ -21,7 +22,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const user = session.user as { id: string };
     const userId = user.id;
 
-    const projects = await getUserProjects(userId);
+    // const projects = await getUserProjects(userId);
+    const projects = await prisma.project.findMany({
+      where: { userId },
+      select: { title: true, style: true, taskIds: true },
+    });
     const userProjectNames = projects.map((project) => ({
       title: project.title,
       style: project.style,
