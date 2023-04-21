@@ -9,7 +9,7 @@ type SetupDataType = {
   taskId: string;
   title: string;
   style: string;
-  deadline: string;
+  deadline: number;
   // progress: number,
   projectTitle: string;
   projectStyle: string;
@@ -66,7 +66,7 @@ const TaskSlice = createSlice({
 
       state.title = title;
       state.style = style;
-      state.deadline = getDateString(new Date(JSON.parse(deadline)), false);
+      state.deadline = getDateString(new Date(deadline), false);
       state.projectTitle = projectTitle;
       state.projectStyle = projectStyle;
       state.taskId = taskId;

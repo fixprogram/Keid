@@ -1,4 +1,8 @@
-import { toggleListStyle } from "@/templates/ProjectsPage/store/projectsSlice";
+import {
+  FilterType,
+  setActiveFilter,
+  toggleListStyle,
+} from "@/templates/ProjectsPage/store/projectsSlice";
 import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import ProjectList from "@/features/ProjectList";
@@ -6,7 +10,6 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Icon from "@/shared/ui/Icon";
 import Layout from "@/widgets/Layout";
-import { setActiveFilter } from "../ProjectPage/store/projectSlice";
 
 export default function ProjectsPage() {
   const dispatch = useAppDispatch();
@@ -23,7 +26,7 @@ export default function ProjectsPage() {
       <FilterBar
         filters={filters}
         activeFilter={activeFilter}
-        filterClickHandler={(filter: string) =>
+        filterClickHandler={(filter: FilterType) =>
           dispatch(setActiveFilter(filter))
         }
       >

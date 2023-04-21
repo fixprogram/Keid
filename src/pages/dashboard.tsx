@@ -13,7 +13,7 @@ import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice"
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { prisma } from "@/db.server";
 import { getWeekTasks } from "@/features/WeekTasks/api";
-import { setupWeekTasks } from "@/features/WeekTasks/store/WeekTasksSlice";
+import { setupWeekTasks } from "@/features/WeekTasks/store/weekTasksSlice";
 
 export default function DashboardPage() {
   return (

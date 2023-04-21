@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { toggleWeekTasks } from "./store/WeekTasksSlice";
+import { toggleWeekTasks } from "./store/weekTasksSlice";
 import TaskList from "./ui/TaskList";
 
 export default function WeekTasks() {

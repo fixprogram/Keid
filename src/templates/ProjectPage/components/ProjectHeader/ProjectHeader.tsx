@@ -13,7 +13,7 @@ export default function ProjectHeader() {
 
   const projectStyle = projectStyles[style as keyof ProjectStyleType];
   const screens = ["Overview"];
-  if (tasks.length) {
+  if (tasks["All"].length) {
     screens.push("Task List");
   }
 

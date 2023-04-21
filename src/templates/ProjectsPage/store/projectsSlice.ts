@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
-const FILTERS = ["Active", "Dreams", "Completed"];
+const FILTERS: FilterType[] = ["Active", "Dreams", "Completed"];
+export type FilterType = "Active" | "Dreams" | "Completed";
 
 export type ProjectType = {
   id: string;
@@ -14,8 +15,8 @@ export type ProjectType = {
 };
 
 export interface ProjectsState {
-  filters: string[];
-  activeFilter: string;
+  filters: FilterType[];
+  activeFilter: FilterType;
   listStyle: "column" | "grid";
   projects: Omit<ProjectType, "taskIds">[];
 }
@@ -34,7 +35,7 @@ const ProjectsSlice = createSlice({
     toggleListStyle: (state) => {
       state.listStyle = state.listStyle === "column" ? "grid" : "column";
     },
-    setActiveFilter: (state, action: PayloadAction<string>) => {
+    setActiveFilter: (state, action: PayloadAction<FilterType>) => {
       state.activeFilter = action.payload;
     },
     setupProjects: (state, action: PayloadAction<ProjectType[]>) => {

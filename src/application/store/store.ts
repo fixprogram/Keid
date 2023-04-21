@@ -11,7 +11,7 @@ import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
 import addProjectSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupProject/store/addProjectSlice";
 import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
 import progressSlice from "@/features/Progress/store/progressSlice";
-import WeekTasksSlice from "@/features/WeekTasks/store/WeekTasksSlice";
+import WeekTasksSlice from "@/features/WeekTasks/store/weekTasksSlice";
 
 const makeStore = () =>
   configureStore({

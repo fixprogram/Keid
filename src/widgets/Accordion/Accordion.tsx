@@ -1,5 +1,5 @@
+import { TaskType } from "@/entities/task/types";
 import TaskCard from "@/features/TaskCard";
-import { TaskType } from "@/templates/ProjectPage/types/Task";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 
