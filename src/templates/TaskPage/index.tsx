@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Layout from "@/widgets/Layout";
 import AddSubtaskPopup from "./ui/AddSubtaskPopup";
 import TaskBody from "./ui/TaskBody";
@@ -7,7 +6,7 @@ import TaskSettings from "./ui/TaskSettings";
 
 export default function TaskPage() {
   return (
-    <Layout withNav={false}>
+    <Layout withNav={false} isBottomGradientShowed={false}>
       <TaskHeader />
 
       <TaskBody />

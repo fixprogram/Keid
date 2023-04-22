@@ -11,8 +11,6 @@ export default async function handler(
     return res.status(400).json({ data: "Task name can't be empty" });
   }
 
-  console.log("deadline: ", deadline);
-
   const task = await createTask({
     userId,
     projectName,

@@ -4,9 +4,9 @@ import { getTaskById } from "@/entities/task/models/getTaskById";
 import { setupTaskData } from "@/templates/TaskPage/store/taskSlice";
 import { getProjectById } from "@/entities/project/models/getProjectById";
 import { getSubtasksByIds } from "@/entities/subtask/models/getSubtasksByIds";
-import { CommentType } from "@/application/types/comment";
 import { getSession } from "next-auth/react";
 import { setupProgress } from "@/features/Progress/store/progressSlice";
+import { CommentType } from "@/features/Comments/models/types";
 
 export default function Task() {
   return <TaskPage />;

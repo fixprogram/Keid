@@ -22,7 +22,6 @@ export default function TaskHeader() {
           <Icon name="complete" height={14} width={19} />
         </button>
 
-        {/* <button type="button" onClick={}>Update</button> */}
         <UpdateProgress />
 
         <button type="button" onClick={() => dispatch(openSettings())}>

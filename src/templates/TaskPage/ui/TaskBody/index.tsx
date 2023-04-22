@@ -1,11 +1,10 @@
+import { Comments } from "@/features/Comments";
 import DueDate from "@/features/DueDate";
 import ProjectInfo from "@/features/ProjectInfo";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { openAddComment } from "../../store/taskSlice";
-import AddCommentPopup from "../AddCommentPopup";
-import CommentList from "./ui/CommentList";
+import { useAddComment } from "../../hooks/useAddComment";
+import { useDeleteComment } from "../../hooks/useDeleteComment";
 import SubtaskList from "./ui/SubtaskList";
 
 export default function TaskBody() {
@@ -14,7 +13,9 @@ export default function TaskBody() {
   const style = useAppSelector((state) => state.task.style);
   const projectTitle = useAppSelector((state) => state.task.projectTitle);
   const projectStyle = useAppSelector((state) => state.task.projectStyle);
-  const dispatch = useAppDispatch();
+  const comments = useAppSelector((state) => state.task.comments);
+  const handleAddComment = useAddComment();
+  const handleDeleteComment = useDeleteComment();
 
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
   const parentProjectStyle =
@@ -55,18 +56,11 @@ export default function TaskBody() {
 
       <SubtaskList />
 
-      <CommentList />
-
-      <AddCommentPopup />
-
-      <div className="flex mt-auto p-9 pb-3 placeholder:text-white">
-        <input
-          type="text"
-          placeholder="Post your comment..."
-          onClick={() => dispatch(openAddComment())}
-          className="ml-8 placeholder:text-white"
-          style={{ background: "inherit" }}
-          autoComplete="off"
+      <div className="mt-auto">
+        <Comments
+          comments={comments}
+          onSubmit={handleAddComment}
+          onDelete={handleDeleteComment}
         />
       </div>
     </section>

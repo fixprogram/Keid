@@ -1,6 +1,9 @@
+import { Comments } from "@/features/Comments";
 import DueDate from "@/features/DueDate";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { useAddComment } from "../../hooks/useAddComment";
+import { useDeleteComment } from "../../hooks/useDeleteComment";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.subtask.title);
@@ -9,6 +12,10 @@ export default function TaskBody() {
     (state) => state.subtask.parentTaskName
   );
   const style = useAppSelector((state) => state.subtask.parentTaskStyle);
+  const comments = useAppSelector((state) => state.subtask.comments);
+
+  const handleAddComment = useAddComment();
+  const handleDeleteComment = useDeleteComment();
 
   const parentTaskStyle = projectStyles[style as keyof ProjectStyleType];
 
@@ -17,7 +24,7 @@ export default function TaskBody() {
   }
 
   return (
-    <section>
+    <section className="flex flex-col grow">
       <b
         className="mt-8 font-semibold font-lg block"
         style={{ color: parentTaskStyle.background }}
@@ -42,6 +49,14 @@ export default function TaskBody() {
         <p className="text-deactive text-sm">
           4,648 curated design resources to energize your creative workflow
         </p>
+      </div>
+
+      <div className="mt-auto">
+        <Comments
+          comments={comments}
+          onSubmit={(comment) => handleAddComment(comment)}
+          onDelete={handleDeleteComment}
+        />
       </div>
     </section>
   );

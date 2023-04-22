@@ -3,7 +3,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { Subtask } from "@prisma/client";
-import { CommentType } from "@/application/types/comment";
+import { CommentType } from "@/features/Comments/models/types";
+// import { CommentType } from "@/application/types/comment";
 
 type SetupDataType = {
   taskId: string;
@@ -30,6 +31,7 @@ export interface TaskState {
   projectStyle: string;
   subtasks: Subtask[];
   comments: CommentType[];
+  // comments: CommentType[];
 }
 
 const initialState: TaskState = {

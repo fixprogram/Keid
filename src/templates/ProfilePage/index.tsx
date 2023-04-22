@@ -3,13 +3,14 @@ import PageHeader from "@/features/PageHeader";
 import DangerButton from "@/shared/ui/DangerButton";
 import Layout from "@/widgets/Layout";
 import { useSession, signOut } from "next-auth/react";
+import { FC } from "react";
 import Body from "./ui/Body";
 
-interface ProfilePageProps {
+interface ProfilePagePropsType {
   activityData: ActivityProps;
 }
 
-export default function ProfilePage({ activityData }: ProfilePageProps) {
+export const ProfilePage: FC<ProfilePagePropsType> = ({ activityData }) => {
   const { status } = useSession();
 
   if (status !== "authenticated") {
@@ -17,7 +18,7 @@ export default function ProfilePage({ activityData }: ProfilePageProps) {
   }
 
   return (
-    <Layout withNav={false}>
+    <Layout withNav={false} isBottomGradientShowed={false}>
       <PageHeader title="Profile" />
 
       <Body />
@@ -30,4 +31,4 @@ export default function ProfilePage({ activityData }: ProfilePageProps) {
       <Activity {...activityData} />
     </Layout>
   );
-}
+};

@@ -11,8 +11,6 @@ export default function WeekTasks() {
     (state) => state.weekTasks.completedTaskAmount
   );
   const progress = useAppSelector((state) => state.weekTasks.progress);
-  console.log("progress: ", progress);
-
   return (
     <section
       className="mt-8 p-1 rounded-[20px] relative"

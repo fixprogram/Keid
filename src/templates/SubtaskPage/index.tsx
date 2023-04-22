@@ -5,7 +5,7 @@ import Settings from "./components/Settings";
 
 export default function SubtaskPage() {
   return (
-    <Layout withNav={false}>
+    <Layout withNav={false} isBottomGradientShowed={false}>
       <Header />
 
       <Body />

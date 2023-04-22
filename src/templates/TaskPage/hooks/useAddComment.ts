@@ -1,25 +1,18 @@
 import { links } from "@/shared/config/links";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { User, useUser } from "@/shared/lib/hooks/useUser";
+import { useUser } from "@/shared/lib/hooks/useUser";
 import { useRouter } from "next/router";
-import { SyntheticEvent, useCallback } from "react";
-import { closeAddComment } from "../store/taskSlice";
+import { useCallback } from "react";
 
-export function useCommentFormSubmit() {
+export function useAddComment() {
   const router = useRouter();
   const user = useUser();
 
-  const dispatch = useAppDispatch();
-
   const taskId = useAppSelector((state) => state.task.taskId);
-  const content = useAppSelector((state) => state.task.commentContent);
 
-  const handleFormSubmit = useCallback(
-    (event: SyntheticEvent) => {
-      event.preventDefault();
-
-      if (content.length < 3) {
+  const handleAddComment = useCallback(
+    (comment: string) => {
+      if (comment.length < 3) {
         return null;
       }
 
@@ -35,22 +28,20 @@ export function useCommentFormSubmit() {
           body: JSON.stringify({
             userId,
             taskId,
-            content,
+            content: comment,
           }),
         }).then(async (res) => {
           console.log("Res: ", res);
 
           const body = await res.json();
 
-          dispatch(closeAddComment());
-
           console.log("body: ", body);
           if (body.id) router.push(`/tasks/${body.id}`);
         });
       }
     },
-    [user, taskId, content, dispatch, router]
+    [user, taskId, router]
   );
 
-  return handleFormSubmit;
+  return handleAddComment;
 }

@@ -1,6 +1,6 @@
 import { ActivityProps } from "@/features/Activity";
 import { getWeeklyActivityData } from "@/features/Activity/api";
-import ProfilePage from "@/templates/ProfilePage";
+import { ProfilePage } from "@/templates/ProfilePage";
 import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next/types";
 

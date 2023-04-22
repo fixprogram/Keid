@@ -1,30 +1,29 @@
+import { CommentType } from "@/features/Comments/models/types";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import Icon from "@/shared/ui/Icon";
-import { useDeleteComment } from "@/templates/TaskPage/hooks/useDeleteComment";
+// import { useDeleteComment } from "@/templates/TaskPage/hooks/useDeleteComment";
 import Image from "next/image";
+import { FC } from "react";
 
-type CommentPropsType = {
-  userImg?: string;
-  userName: string;
-  time: string;
-  content: string;
-  serviceContent?: string;
+type CommentPropsType = CommentType & {
+  onDelete: (time: string) => void;
 };
 
-export default function Comment({
+export const Comment: FC<CommentPropsType> = ({
   userImg,
   userName,
   time,
   content,
   serviceContent,
-}: CommentPropsType) {
+  onDelete,
+}) => {
   const image = userImg ? (
     <Image src={userImg} alt={userName} width={40} height={40} />
   ) : (
     <Icon name="avatar" width={40} height={40} />
   );
 
-  const handleDeleteComment = useDeleteComment();
+  // const handleDeleteComment = useDeleteComment();
 
   return (
     <div>
@@ -46,11 +45,11 @@ export default function Comment({
           </span>
         </div>
 
-        <button className="ml-auto" onClick={() => handleDeleteComment(time)}>
+        <button className="ml-auto" onClick={() => onDelete(time)}>
           <Icon name="delete" width={16} height={16} />
         </button>
       </div>
       <p className="mt-3 text-white">{content}</p>
     </div>
   );
-}
+};

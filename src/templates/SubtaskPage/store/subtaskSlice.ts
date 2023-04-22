@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { getDateString } from "@/shared/lib/utils/getDateString";
+import { Comment } from "@prisma/client";
+import { CommentType } from "@/features/Comments/models/types";
 
 type SetupDataType = {
   parentTaskName: string;
@@ -9,6 +11,7 @@ type SetupDataType = {
   subtaskId: string;
   title: string;
   deadline: string;
+  comments: CommentType[];
 };
 
 export interface SubtaskState {
@@ -18,6 +21,7 @@ export interface SubtaskState {
   title: string;
   deadline: string;
   settingsOpened: boolean;
+  comments: CommentType[];
 }
 
 const initialState: SubtaskState = {
@@ -27,6 +31,7 @@ const initialState: SubtaskState = {
   title: "",
   deadline: "",
   settingsOpened: false,
+  comments: [],
 };
 
 const SubtaskSlice = createSlice({
@@ -34,14 +39,21 @@ const SubtaskSlice = createSlice({
   initialState,
   reducers: {
     setupSubtaskData: (state, action: PayloadAction<SetupDataType>) => {
-      const { parentTaskName, parentTaskStyle, subtaskId, title, deadline } =
-        action.payload;
+      const {
+        parentTaskName,
+        parentTaskStyle,
+        subtaskId,
+        title,
+        deadline,
+        comments,
+      } = action.payload;
 
       state.subtaskId = subtaskId;
       state.parentTaskName = parentTaskName;
       state.parentTaskStyle = parentTaskStyle;
       state.title = title;
       state.deadline = getDateString(new Date(JSON.parse(deadline)), false);
+      state.comments = comments;
     },
     openSettings: (state) => {
       state.settingsOpened = true;

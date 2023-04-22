@@ -19,5 +19,7 @@ export const links = {
     add: `${apiLnk}subtask/add`,
     delete: `${apiLnk}subtask/delete`,
     complete: `${apiLnk}subtask/complete`,
+    addComment: `${apiLnk}subtask/addComment`,
+    deleteComment: `${apiLnk}subtask/deleteComment`,
   },
 };

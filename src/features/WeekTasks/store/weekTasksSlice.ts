@@ -43,7 +43,9 @@ const WeekTasksSlice = createSlice({
         (task) => task.completed
       ).length;
       state.completedTaskAmount = completedTaskAmount;
-      state.progress = Math.floor((completedTaskAmount / taskAmount) * 100);
+      state.progress = taskAmount
+        ? Math.floor((completedTaskAmount / taskAmount) * 100)
+        : 0;
     },
     toggleWeekTasks: (state) => {
       state.isOpened = !state.isOpened;

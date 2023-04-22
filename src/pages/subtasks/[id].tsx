@@ -3,6 +3,8 @@ import { getTaskById } from "@/entities/task/models/getTaskById";
 import SubtaskPage from "@/templates/SubtaskPage";
 import { getSubtaskById } from "@/entities/subtask/models/getSubtaskById";
 import { setupSubtaskData } from "@/templates/SubtaskPage/store/subtaskSlice";
+import { CommentType } from "@/features/Comments/models/types";
+import { getSession } from "next-auth/react";
 
 export default function Subtask() {
   return <SubtaskPage />;
@@ -10,6 +12,14 @@ export default function Subtask() {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
+    const session = await getSession(context);
+
+    if (!session) {
+      throw new Error("session is not defined");
+    }
+
+    const user = session.user as { name: string };
+
     const subtaskId = context.query.id as string;
     const data = await getSubtaskById(subtaskId);
 
@@ -25,6 +35,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const { title, deadline } = data;
 
+    const comments: CommentType[] = [];
+    data.comments.forEach((comment) => {
+      comments.push({ ...comment, userName: user.name });
+    });
+
     store.dispatch(
       setupSubtaskData({
         parentTaskName: parentTask.title,
@@ -32,6 +47,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         subtaskId,
         title,
         deadline,
+        comments,
       })
     );
 
