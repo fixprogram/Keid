@@ -1,7 +1,9 @@
 import { wrapper } from "@/application/store/store";
 import {
   setUserId,
+  setUserOverdueTaskAmount,
   setUserProjectAmount,
+  setUserTaskAmount,
 } from "@/widgets/Overview/store/overviewSlice";
 import { getSession } from "next-auth/react";
 import Layout from "@/widgets/Layout";
@@ -47,19 +49,30 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const user = session.user as { id: string };
       const userId = user.id;
       const userProjectNames = await getUserProjectNames(userId);
-      const projectIDs = await (
-        await prisma.project.findMany({
-          where: { userId },
-          select: { id: true },
-        })
-      ).map((projectId) => projectId.id);
+      const projects = await await prisma.project.findMany({
+        where: { userId },
+        select: { id: true, taskIds: true },
+      });
 
-      const projectAmount = userProjectNames.length;
+      const projectIDs = projects.map((projectId) => projectId.id);
 
       const weekTasks = await getWeekTasks(projectIDs);
 
+      const projectAmount = userProjectNames.length;
+      const totalTasksIds: string[] = [];
+      projects.forEach((project) => {
+        totalTasksIds.push(...project.taskIds);
+      });
+
+      const overdueTasks = await prisma.task.findMany({
+        where: { id: { in: totalTasksIds }, deadline: { lt: Date.now() } },
+        select: { id: true },
+      });
+
       store.dispatch(setUserId(userId));
       store.dispatch(setUserProjectAmount(projectAmount));
+      store.dispatch(setUserTaskAmount(totalTasksIds.length));
+      store.dispatch(setUserOverdueTaskAmount(overdueTasks.length));
       store.dispatch(setUserProjectNames(userProjectNames));
       store.dispatch(setupWeekTasks(weekTasks));
       // console.log("State on server", store.getState());

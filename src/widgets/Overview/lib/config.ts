@@ -16,9 +16,9 @@ export const CARDS_CONFIG = {
     title: "Total Project",
   },
   Habit: {
-    icon: TotalHabit,
-    color: "#A5F59C",
-    to: "/habits",
-    title: "Total Habit",
+    icon: TotalTask,
+    color: "#FF968E",
+    to: "/tasks/overdue",
+    title: "Total overdue",
   },
 };

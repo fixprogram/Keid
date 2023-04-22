@@ -5,6 +5,12 @@ import Filter from "./components/Filter";
 
 export default function Overview() {
   const projectAmount = useAppSelector((state) => state.overview.projectAmount);
+  const totalTaskAmount = useAppSelector(
+    (state) => state.overview.totalTaskAmount
+  );
+  const overdueTaskAmount = useAppSelector(
+    (state) => state.overview.overdueTaskAmount
+  );
 
   return (
     <>
@@ -14,8 +20,8 @@ export default function Overview() {
 
       <Cards
         cards={[
-          { type: "Task", amount: 10 },
-          { type: "Habit", amount: 4 },
+          { type: "Task", amount: totalTaskAmount },
+          { type: "Habit", amount: overdueTaskAmount },
           { type: "Project", amount: projectAmount },
         ]}
       />

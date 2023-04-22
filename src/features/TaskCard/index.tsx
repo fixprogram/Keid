@@ -1,5 +1,4 @@
-import CompletedTask from "./components/CompletedTask";
-import TaskInProgress from "./components/TaskInProgress";
+import { CompletedTask, InProgressTask, OverdueTask } from "@/entities/task";
 
 interface Props {
   link: string;
@@ -18,12 +17,27 @@ export default function TaskCard({
   progress,
   completed,
 }: Props) {
-  if (completed) {
+  const isCompleted = Boolean(completed);
+  const isOverdue = Date.now() > new Date(deadline).getTime();
+
+  if (isCompleted) {
     return <CompletedTask link={link} title={title} completed={completed} />;
   }
 
+  if (isOverdue) {
+    return (
+      <OverdueTask
+        link={link}
+        title={title}
+        deadline={deadline}
+        style={style}
+        progress={progress}
+      />
+    );
+  }
+
   return (
-    <TaskInProgress
+    <InProgressTask
       link={link}
       title={title}
       deadline={deadline}

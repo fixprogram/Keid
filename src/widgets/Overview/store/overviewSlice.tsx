@@ -9,6 +9,8 @@ export interface OverviewState {
   settingsOpened: boolean;
   userId: string;
   projectAmount: number;
+  totalTaskAmount: number;
+  overdueTaskAmount: number;
 }
 
 const initialState: OverviewState = {
@@ -18,6 +20,8 @@ const initialState: OverviewState = {
   settingsOpened: false,
   userId: "",
   projectAmount: 0,
+  totalTaskAmount: 0,
+  overdueTaskAmount: 0,
 };
 
 const OverviewSlice = createSlice({
@@ -39,6 +43,12 @@ const OverviewSlice = createSlice({
     setUserProjectAmount: (state, action: PayloadAction<number>) => {
       state.projectAmount = action.payload;
     },
+    setUserTaskAmount: (state, action: PayloadAction<number>) => {
+      state.totalTaskAmount = action.payload;
+    },
+    setUserOverdueTaskAmount: (state, action: PayloadAction<number>) => {
+      state.overdueTaskAmount = action.payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -56,6 +66,8 @@ export const {
   setUserId,
   openSettings,
   closeSettings,
+  setUserTaskAmount,
+  setUserOverdueTaskAmount,
 } = OverviewSlice.actions;
 
 export default OverviewSlice.reducer;

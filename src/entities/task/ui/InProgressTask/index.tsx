@@ -1,8 +1,9 @@
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import RoundProgressBar from "@/shared/ui/RoundProgressBar";
 import Link from "next/link";
+import { FC } from "react";
 
-type Props = {
+type InProgressTaskPropsType = {
   link: string;
   title: string;
   deadline: string;
@@ -10,13 +11,13 @@ type Props = {
   progress: number;
 };
 
-export default function TaskInProgress({
+export const InProgressTask: FC<InProgressTaskPropsType> = ({
   link,
   title,
   deadline,
   style,
   progress,
-}: Props) {
+}) => {
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
 
   return (
@@ -40,4 +41,4 @@ export default function TaskInProgress({
       </div>
     </Link>
   );
-}
+};

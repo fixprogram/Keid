@@ -1,13 +1,18 @@
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
+import { FC } from "react";
 
-type Props = {
+type CompletedTaskPropsType = {
   link: string;
   title: string;
   completed: string;
 };
 
-export default function CompletedTask({ link, title, completed }: Props) {
+export const CompletedTask: FC<CompletedTaskPropsType> = ({
+  link,
+  title,
+  completed,
+}) => {
   return (
     <Link href={link}>
       <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl">
@@ -22,4 +27,4 @@ export default function CompletedTask({ link, title, completed }: Props) {
       </div>
     </Link>
   );
-}
+};
