@@ -22,7 +22,7 @@ export interface TaskState {
   taskId: string;
   title: string;
   style: string;
-  deadline: string;
+  deadline: number;
   // progress: number,
   commentContent: string;
   settingsOpened: boolean;
@@ -38,7 +38,7 @@ const initialState: TaskState = {
   taskId: "",
   title: "",
   style: "",
-  deadline: "",
+  deadline: 0,
   // progress: 0,
   commentContent: "",
   settingsOpened: false,
@@ -68,7 +68,7 @@ const TaskSlice = createSlice({
 
       state.title = title;
       state.style = style;
-      state.deadline = getDateString(new Date(deadline), false);
+      state.deadline = deadline;
       state.projectTitle = projectTitle;
       state.projectStyle = projectStyle;
       state.taskId = taskId;

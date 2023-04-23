@@ -5,7 +5,7 @@ export const convertTaskDatesIntoString = (tasks: Task[]) => {
   return tasks.map((task) => {
     return {
       ...task,
-      deadline: getDateString(new Date(task.deadline), false),
+      // deadline: getDateString(new Date(task.deadline), false),
       completed:
         task.completed === 0
           ? ""

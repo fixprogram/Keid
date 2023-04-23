@@ -19,7 +19,7 @@ export default function Welcome() {
 
       <section className="flex mt-[-24px] flex-col">
         <h2 className="text-white font-poppins font-semibold text-xxxl pr-5">
-          Manage Everything on Phone
+          Manage Everything on your Phone
         </h2>
 
         <Link href="/auth/login" className="mt-10">

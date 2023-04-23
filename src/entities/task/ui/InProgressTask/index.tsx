@@ -6,7 +6,7 @@ import { FC } from "react";
 type InProgressTaskPropsType = {
   link: string;
   title: string;
-  deadline: string;
+  deadline: string | null;
   style: string;
   progress: number;
 };
@@ -29,14 +29,16 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
           stopColors={taskStyle.progressGradient}
         />
 
-        <div>
+        <div className="flex flex-col justify-center align-center">
           <b className="text-lg text-white font-semibold">{title}</b>
-          <p
-            className="text-smm font-medium"
-            style={{ color: taskStyle.background }}
-          >
-            {deadline}
-          </p>
+          {deadline ? (
+            <p
+              className="text-smm font-medium"
+              style={{ color: taskStyle.background }}
+            >
+              {deadline}
+            </p>
+          ) : null}
         </div>
       </div>
     </Link>

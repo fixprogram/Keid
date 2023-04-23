@@ -6,7 +6,7 @@ import { FC } from "react";
 type OverdueTaskPropsType = {
   link: string;
   title: string;
-  deadline: string;
+  deadline: string | null;
   style: string;
   progress: number;
 };
@@ -36,9 +36,11 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
           >
             {title}
           </b>
-          <p className="text-smm font-medium" style={{ color: "#FF968E" }}>
-            {deadline}
-          </p>
+          {deadline ? (
+            <p className="text-smm font-medium" style={{ color: "#FF968E" }}>
+              {deadline}
+            </p>
+          ) : null}
         </div>
       </div>
     </Link>

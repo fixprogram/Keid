@@ -1,13 +1,12 @@
 import { Comments } from "@/features/Comments";
-import DueDate from "@/features/DueDate";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAddComment } from "../../hooks/useAddComment";
 import { useDeleteComment } from "../../hooks/useDeleteComment";
+import { SubtaskDeadline } from "./ui/SubtaskDeadline";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.subtask.title);
-  const deadline = useAppSelector((state) => state.subtask.deadline);
   const parentTaskName = useAppSelector(
     (state) => state.subtask.parentTaskName
   );
@@ -36,13 +35,7 @@ export default function TaskBody() {
         {title}
       </h2>
 
-      <div className="flex flex-wrap items-end gap-6 mt-6">
-        <DueDate
-          date={deadline}
-          dateColor={parentTaskStyle.background}
-          circleColor={"#246BFD"}
-        />
-      </div>
+      <SubtaskDeadline />
 
       <div className="mt-6">
         <p className="text-white text-sm font-medium">Description</p>

@@ -1,4 +1,4 @@
-import TaskCard from "@/features/TaskCard";
+import { TaskCard } from "@/features/TaskCard";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 
 export default function TaskList() {
@@ -8,15 +8,7 @@ export default function TaskList() {
     <ul className="mt-4 flex flex-col gap-4">
       {tasks.map((task) => (
         <li key={task.id}>
-          <TaskCard
-            key={task.id}
-            link={`/tasks/${task.id}`}
-            title={task.title}
-            deadline={task.deadline}
-            style={task.style}
-            progress={task.progress}
-            completed={task.completed}
-          />
+          <TaskCard key={task.id} link={`/tasks/${task.id}`} {...task} />
         </li>
       ))}
     </ul>

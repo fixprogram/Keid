@@ -5,7 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { userId, taskName, taskStyle, deadline, projectName } = req.body;
+  const { userId, taskName, taskStyle, deadline, projectName, repeats } =
+    req.body;
 
   if (!taskName) {
     return res.status(400).json({ data: "Task name can't be empty" });
@@ -17,6 +18,7 @@ export default async function handler(
     taskName,
     taskStyle,
     deadline,
+    repeats,
   });
 
   res.status(200).json({ id: task.id });

@@ -18,7 +18,7 @@ export default function ProjectInfo({
         className={`p-2 rounded-xl w-[40px] h-[40px] mt-1`}
         style={{ backgroundColor }}
       >
-        <Icon name="goal" width={24} height={24} />
+        <Icon name="project" width={24} height={24} />
       </div>
 
       <div>

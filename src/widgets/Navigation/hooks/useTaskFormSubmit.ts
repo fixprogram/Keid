@@ -3,10 +3,7 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
-import {
-  resetTask,
-  setTaskDeadline,
-} from "../components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import { resetTask } from "../components/PopupAdd/components/PopupTask/store/addTaskSlice";
 import { closePopupAdd } from "../store/navigationSlice";
 
 export function useTaskFormSubmit() {
@@ -18,18 +15,16 @@ export function useTaskFormSubmit() {
   const taskName = useAppSelector((state) => state.addTask.taskName);
   const taskStyle = useAppSelector((state) => state.addTask.taskStyle);
   const deadline = useAppSelector((state) => state.addTask.deadline);
+  const repeats = useAppSelector((state) => state.addTask.activeRepeatsOption);
   const projectName = useAppSelector((state) => state.addTask.taskProject);
 
   const handleFormSubmit = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      const deadlineTimestamp = new Date(JSON.parse(deadline)).setHours(
-        23,
-        59,
-        59,
-        999
-      );
+      const deadlineTimestamp = deadline
+        ? new Date(deadline).setHours(23, 59, 59, 999)
+        : deadline;
 
       fetch(links.task.add, {
         method: "POST",
@@ -43,6 +38,7 @@ export function useTaskFormSubmit() {
           taskStyle,
           deadline: deadlineTimestamp,
           projectName: projectName.title,
+          repeats,
         }),
       }).then(async (res) => {
         console.log("Res: ", res);
@@ -56,7 +52,16 @@ export function useTaskFormSubmit() {
         if (body.id) router.push(`/tasks/${body.id}`);
       });
     },
-    [userId, taskName, taskStyle, deadline, projectName, dispatch, router]
+    [
+      userId,
+      taskName,
+      taskStyle,
+      deadline,
+      projectName,
+      repeats,
+      dispatch,
+      router,
+    ]
   );
 
   return handleFormSubmit;

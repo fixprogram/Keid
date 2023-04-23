@@ -1,23 +1,20 @@
 import { Comments } from "@/features/Comments";
-import DueDate from "@/features/DueDate";
 import ProjectInfo from "@/features/ProjectInfo";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAddComment } from "../../hooks/useAddComment";
 import { useDeleteComment } from "../../hooks/useDeleteComment";
 import SubtaskList from "./ui/SubtaskList";
+import { TaskDeadline } from "./ui/TaskDeadline";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.task.title);
-  const deadline = useAppSelector((state) => state.task.deadline);
-  const style = useAppSelector((state) => state.task.style);
   const projectTitle = useAppSelector((state) => state.task.projectTitle);
   const projectStyle = useAppSelector((state) => state.task.projectStyle);
   const comments = useAppSelector((state) => state.task.comments);
   const handleAddComment = useAddComment();
   const handleDeleteComment = useDeleteComment();
 
-  const taskStyle = projectStyles[style as keyof ProjectStyleType];
   const parentProjectStyle =
     projectStyles[projectStyle as keyof ProjectStyleType];
 
@@ -40,11 +37,7 @@ export default function TaskBody() {
           />
         </div>
 
-        <DueDate
-          date={deadline}
-          dateColor={taskStyle.background}
-          circleColor={"#246BFD"}
-        />
+        <TaskDeadline />
       </div>
 
       <div className="mt-6">

@@ -1,5 +1,5 @@
 import { TaskType } from "@/entities/task/types";
-import TaskCard from "@/features/TaskCard";
+import { TaskCard } from "@/features/TaskCard";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 
@@ -37,11 +37,8 @@ export default function Accordion({ topic, items = [] }: Props) {
             <li key={item.id}>
               <TaskCard
                 link={`/tasks/${item.id}`}
-                title={item.title}
-                deadline={item.completed ? item.completed : item.deadline}
-                style={item.style}
-                progress={item.progress}
-                completed={item.completed}
+                // deadline={item.completed ? item.completed : item.deadline}
+                {...item}
               />
             </li>
           ))}

@@ -2,7 +2,7 @@ import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRef, useEffect } from "react";
 
 export default function useInitialDeadline(
-  deadline: string,
+  deadline: number,
   isCalendarOpen: boolean
 ) {
   const initialDeadline = useRef(deadline);
@@ -16,5 +16,5 @@ export default function useInitialDeadline(
     }
   }, [isCalendarOpen, deadline]);
 
-  return JSON.parse(initialDeadline.current);
+  return initialDeadline.current;
 }

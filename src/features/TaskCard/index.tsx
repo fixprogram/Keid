@@ -1,27 +1,57 @@
-import { CompletedTask, InProgressTask, OverdueTask } from "@/entities/task";
+import {
+  CompletedTask,
+  InProgressTask,
+  OverdueTask,
+  RepeatedTask,
+} from "@/entities/task";
+import { getDateString } from "@/shared/lib/utils/getDateString";
+import { getDifferenceBetweenDates } from "@/shared/lib/utils/getDifferenceBetweenDates";
+import { Task } from "@prisma/client";
+import { FC } from "react";
 
-interface Props {
+type TaskCardProps = Pick<
+  Task,
+  "title" | "style" | "progress" | "repeats" | "comments"
+> & {
   link: string;
-  title: string;
-  deadline: string;
-  style: string;
-  progress: number;
+  deadline: number;
   completed: string;
-}
+  daysToRepeat?: number;
+};
 
-export default function TaskCard({
+export const TaskCard: FC<TaskCardProps> = ({
   link,
   title,
   deadline,
   style,
   progress,
   completed,
-}: Props) {
+  repeats,
+  comments,
+}) => {
   const isCompleted = Boolean(completed);
-  const isOverdue = Date.now() > new Date(deadline).getTime();
+  const isOverdue = deadline && Date.now() > new Date(deadline).getTime();
+  const isRepeated = repeats !== "Once";
+
+  const formattedDeadline =
+    deadline === 0 ? null : getDateString(new Date(deadline), false);
 
   if (isCompleted) {
     return <CompletedTask link={link} title={title} completed={completed} />;
+  }
+
+  if (isRepeated) {
+    const daysToRepeat = getDifferenceBetweenDates(+comments[0].time, deadline);
+    return (
+      <RepeatedTask
+        link={link}
+        title={title}
+        deadline={formattedDeadline}
+        style={style}
+        progress={progress}
+        daysToRepeat={daysToRepeat}
+      />
+    );
   }
 
   if (isOverdue) {
@@ -29,7 +59,7 @@ export default function TaskCard({
       <OverdueTask
         link={link}
         title={title}
-        deadline={deadline}
+        deadline={formattedDeadline}
         style={style}
         progress={progress}
       />
@@ -40,9 +70,9 @@ export default function TaskCard({
     <InProgressTask
       link={link}
       title={title}
-      deadline={deadline}
+      deadline={formattedDeadline}
       style={style}
       progress={progress}
     />
   );
-}
+};

@@ -26,7 +26,7 @@ export default function ProjectHeader() {
         className={`p-2 rounded-xl w-[40px] h-[40px]`}
         style={{ background: projectStyle.background }}
       >
-        <Icon name="goal" width={24} height={24} />
+        <Icon name="project" width={24} height={24} />
       </div>
 
       <div className="grow">

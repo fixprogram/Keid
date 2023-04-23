@@ -29,6 +29,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         item: "40px 1fr auto",
+        task: "1fr auto",
       },
       letterSpacing: {
         wide: "0.03125em",

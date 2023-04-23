@@ -10,7 +10,7 @@ type SetupDataType = {
   parentTaskStyle: string;
   subtaskId: string;
   title: string;
-  deadline: string;
+  deadline: number;
   comments: CommentType[];
 };
 
@@ -19,7 +19,7 @@ export interface SubtaskState {
   parentTaskStyle: string;
   subtaskId: string;
   title: string;
-  deadline: string;
+  deadline: number;
   settingsOpened: boolean;
   comments: CommentType[];
 }
@@ -29,7 +29,7 @@ const initialState: SubtaskState = {
   parentTaskStyle: "",
   subtaskId: "",
   title: "",
-  deadline: "",
+  deadline: 0,
   settingsOpened: false,
   comments: [],
 };
@@ -52,7 +52,7 @@ const SubtaskSlice = createSlice({
       state.parentTaskName = parentTaskName;
       state.parentTaskStyle = parentTaskStyle;
       state.title = title;
-      state.deadline = getDateString(new Date(JSON.parse(deadline)), false);
+      state.deadline = deadline;
       state.comments = comments;
     },
     openSettings: (state) => {

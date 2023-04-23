@@ -15,7 +15,7 @@ export default function SearchPanel({ onSearch }: Props) {
       </div>
       <input
         type="search"
-        placeholder="Search goal..."
+        placeholder="Search project..."
         className="py-3 pl-11 pr-5 w-full bg-gray-100 border-[1px] border-lightGray rounded"
         // value={search}
         onChange={(e) => onSearch(e.target.value)}

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { setTaskProject } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { Project } from "@/widgets/Navigation/models";
+import Icon from "@/shared/ui/Icon";
 
 export default function SelectProject() {
   const dispatch = useAppDispatch();
@@ -20,25 +21,29 @@ export default function SelectProject() {
   }
 
   return (
-    <select
-      className="ml-8 mt-5 text-white font-bold"
-      style={{ background: "inherit" }}
-      value={taskProject.title}
-      onChange={(e) =>
-        dispatch(
-          setTaskProject(
-            projects.find(
-              (project) => project.title === e.target.value
-            ) as Project
+    <div className="flex items-center gap-4 mt-5">
+      <Icon name="project" width={16} height={16} />
+
+      <select
+        className="text-white font-bold"
+        style={{ background: "inherit" }}
+        value={taskProject.title}
+        onChange={(e) =>
+          dispatch(
+            setTaskProject(
+              projects.find(
+                (project) => project.title === e.target.value
+              ) as Project
+            )
           )
-        )
-      }
-    >
-      {projects.map((pr) => (
-        <option key={pr.title} value={pr.title}>
-          {pr.title}
-        </option>
-      ))}
-    </select>
+        }
+      >
+        {projects.map((pr) => (
+          <option key={pr.title} value={pr.title}>
+            {pr.title}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }

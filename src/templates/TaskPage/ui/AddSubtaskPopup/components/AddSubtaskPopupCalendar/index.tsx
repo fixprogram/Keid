@@ -16,10 +16,10 @@ export default function AddSubtaskPopupCalendar() {
   );
   const initialDeadline = useInitialDeadline(deadline, isCalendarOpen);
 
-  const date = new Date(JSON.parse(deadline));
+  const date = new Date(deadline);
 
-  function setDeadline(deadline: Date) {
-    dispatch(setSubtaskDeadline(JSON.stringify(deadline)));
+  function setDeadline(deadline: number) {
+    dispatch(setSubtaskDeadline(deadline));
   }
 
   function cancelCalendar() {

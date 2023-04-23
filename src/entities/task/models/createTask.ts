@@ -1,5 +1,6 @@
 import { prisma } from "@/db.server";
 import { serviceComments } from "@/shared/config/serviceComments";
+import { RepeatsOptionType } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/ui/PopupBody/ui/TaskRepeats";
 import { Project } from "@prisma/client";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   taskName: string;
   taskStyle: string;
   deadline: number;
+  repeats: RepeatsOptionType;
 };
 
 export const createTask = async ({
@@ -16,6 +18,7 @@ export const createTask = async ({
   taskName,
   taskStyle,
   deadline,
+  repeats,
 }: Props) => {
   const project = (await prisma.project.findFirst({
     where: { userId, title: projectName },
@@ -31,6 +34,7 @@ export const createTask = async ({
       deadline,
       progress: 0,
       completed: 0,
+      repeats,
       comments: [
         {
           userId,

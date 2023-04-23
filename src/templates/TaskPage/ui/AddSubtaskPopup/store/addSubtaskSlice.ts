@@ -2,16 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface addSubtaskState {
   title: string;
-  deadline: string;
+  deadline: number;
   isAddSubtaskPopupOpened: boolean;
   isCalendarOpen: boolean;
+  isWithDeadline: boolean;
 }
 
 const initialState: addSubtaskState = {
   title: "",
-  deadline: JSON.stringify(new Date()),
+  deadline: Date.now(),
   isAddSubtaskPopupOpened: false,
   isCalendarOpen: false,
+  isWithDeadline: true,
 };
 
 const AddSubtaskClice = createSlice({
@@ -33,8 +35,19 @@ const AddSubtaskClice = createSlice({
     closePopupCalendar: (state) => {
       state.isCalendarOpen = false;
     },
-    setSubtaskDeadline: (state, action: PayloadAction<string>) => {
+    setSubtaskDeadline: (state, action: PayloadAction<number>) => {
       state.deadline = action.payload;
+    },
+    toggleSubtaskWithDeadline: (state) => {
+      state.isWithDeadline = !state.isWithDeadline;
+
+      if (state.isWithDeadline === false) {
+        state.deadline = 0;
+      }
+
+      if (state.isWithDeadline === true) {
+        state.deadline = Date.now();
+      }
     },
   },
 });
@@ -46,6 +59,7 @@ export const {
   openPopupCalendar,
   closePopupCalendar,
   setSubtaskDeadline,
+  toggleSubtaskWithDeadline,
 } = AddSubtaskClice.actions;
 
 export default AddSubtaskClice.reducer;
