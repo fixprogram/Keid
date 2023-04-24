@@ -48,12 +48,11 @@ export const getServerSideProps = wrapper.getServerSideProps(
         where: {
           id: { in: totalTasksIds },
           deadline: { lt: Date.now() },
+          AND: { completed: 0 },
           NOT: { deadline: 0 },
         },
-        select: { id: true, title: true },
+        select: { id: true },
       });
-
-      // console.log("Overdue tasks: ", overdueTasks);
 
       store.dispatch(setUserId(userId));
       store.dispatch(setUserProjectAmount(projectAmount));
@@ -62,8 +61,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(setUserProjectNames(userProjectNames));
       store.dispatch(setupWeekTasks(weekTasks));
       // console.log("State on server", store.getState());
-      // await prisma.subtask.updateMany({
-      //   data: { deadline: Date.now() },
+      // await prisma.task.updateMany({
+      //   data: { repeats: "Once" },
       // }); // Add this trick to Anki in order to remember
 
       return { props: {} };

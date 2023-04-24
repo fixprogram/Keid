@@ -1,7 +1,6 @@
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/application/store/store";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
-import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
 import { prisma } from "@/db.server";
 import { OverdueTasksPage } from "@/templates/OverdueTaskPage";
 import { Task } from "@prisma/client";
@@ -39,14 +38,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
       tasksIds.push(...project.taskIds);
     });
 
-    const tasks = await getTasksByIds(tasksIds);
-
-    const overdueTasks = tasks.filter(
-      (task) =>
-        task.deadline !== 0 &&
-        task.deadline < Date.now() &&
-        !Boolean(task.completed)
-    );
+    const overdueTasks = await prisma.task.findMany({
+      where: {
+        id: { in: tasksIds },
+        deadline: { lt: Date.now() },
+        AND: { completed: 0 },
+        NOT: { deadline: 0 },
+      },
+    });
 
     store.dispatch(setUserProjectNames(userProjectNames));
 
