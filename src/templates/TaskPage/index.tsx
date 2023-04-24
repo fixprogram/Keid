@@ -1,6 +1,7 @@
 import Layout from "@/widgets/Layout";
 import AddSubtaskPopup from "./ui/AddSubtaskPopup";
 import TaskBody from "./ui/TaskBody";
+import { TaskCalendar } from "./ui/TaskBody/ui/TaskCalendar";
 import TaskHeader from "./ui/TaskHeader";
 import TaskSettings from "./ui/TaskSettings";
 
@@ -14,6 +15,8 @@ export default function TaskPage() {
       <TaskSettings />
 
       <AddSubtaskPopup />
+
+      <TaskCalendar />
     </Layout>
   );
 }

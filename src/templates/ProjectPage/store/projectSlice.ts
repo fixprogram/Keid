@@ -39,12 +39,12 @@ const ProjectSlice = createSlice({
       state.title = title;
       state.style = style;
 
-      const allTasks = convertTaskDatesIntoString(tasks);
+      const allTasks = tasks;
       state.tasks.All = allTasks;
       state.tasks.Completed = allTasks.filter((task) =>
         Boolean(task.completed)
       );
-      state.tasks["To do"] = allTasks.filter((task) => task.completed === "");
+      state.tasks["To do"] = allTasks.filter((task) => task.completed === 0);
     },
     openSettings: (state) => {
       state.settingsOpened = true;

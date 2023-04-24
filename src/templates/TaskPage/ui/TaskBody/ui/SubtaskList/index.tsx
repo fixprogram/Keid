@@ -23,18 +23,12 @@ export default function SubtaskList() {
               <CompletedSubtask
                 link={`/subtasks/${subtask.id}`}
                 title={subtask.title}
-                completed={getDateString(
-                  new Date(JSON.parse(subtask.completed)),
-                  false
-                )}
+                completed={getDateString(new Date(subtask.completed), false)}
               />
             ) : (
               <SubtaskInProgress
                 link={`/subtasks/${subtask.id}`}
-                deadline={getDateString(
-                  new Date(JSON.parse(subtask.deadline)),
-                  false
-                )}
+                deadline={getDateString(new Date(subtask.deadline), false)}
                 title={subtask.title}
                 style={style}
               />

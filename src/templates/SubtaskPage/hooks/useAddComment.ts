@@ -19,8 +19,6 @@ export function useAddComment() {
       if (user) {
         const userId = user.id;
 
-        // console.log("subtask: ", userId);
-
         fetch(links.subtask.addComment, {
           method: "POST",
           headers: {

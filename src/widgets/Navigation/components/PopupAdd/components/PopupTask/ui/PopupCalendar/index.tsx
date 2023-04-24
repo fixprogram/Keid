@@ -13,10 +13,10 @@ export default function PopupCalendar() {
   );
   const initialDeadline = useInitialDeadline(deadline, isCalendarOpen);
 
-  const date = new Date(JSON.parse(deadline));
+  const date = new Date(deadline);
 
-  function setDeadline(deadline: Date) {
-    dispatch(setTaskDeadline(JSON.stringify(deadline)));
+  function setDeadline(deadline: number) {
+    dispatch(setTaskDeadline(deadline));
   }
 
   function cancelCalendar() {

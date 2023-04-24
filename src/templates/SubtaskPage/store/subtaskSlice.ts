@@ -22,6 +22,7 @@ export interface SubtaskState {
   deadline: number;
   settingsOpened: boolean;
   comments: CommentType[];
+  isCalendarOpened: boolean;
 }
 
 const initialState: SubtaskState = {
@@ -32,6 +33,7 @@ const initialState: SubtaskState = {
   deadline: 0,
   settingsOpened: false,
   comments: [],
+  isCalendarOpened: false,
 };
 
 const SubtaskSlice = createSlice({
@@ -61,6 +63,12 @@ const SubtaskSlice = createSlice({
     closeSettings: (state) => {
       state.settingsOpened = false;
     },
+    openCalendar: (state) => {
+      state.isCalendarOpened = true;
+    },
+    closeCalendar: (state) => {
+      state.isCalendarOpened = false;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -72,7 +80,12 @@ const SubtaskSlice = createSlice({
   },
 });
 
-export const { setupSubtaskData, openSettings, closeSettings } =
-  SubtaskSlice.actions;
+export const {
+  setupSubtaskData,
+  openSettings,
+  closeSettings,
+  openCalendar,
+  closeCalendar,
+} = SubtaskSlice.actions;
 
 export default SubtaskSlice.reducer;

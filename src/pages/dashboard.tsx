@@ -45,9 +45,15 @@ export const getServerSideProps = wrapper.getServerSideProps(
       });
 
       const overdueTasks = await prisma.task.findMany({
-        where: { id: { in: totalTasksIds }, deadline: { lt: Date.now() } },
-        select: { id: true },
+        where: {
+          id: { in: totalTasksIds },
+          deadline: { lt: Date.now() },
+          NOT: { deadline: 0 },
+        },
+        select: { id: true, title: true },
       });
+
+      // console.log("Overdue tasks: ", overdueTasks);
 
       store.dispatch(setUserId(userId));
       store.dispatch(setUserProjectAmount(projectAmount));

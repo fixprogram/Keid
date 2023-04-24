@@ -33,26 +33,6 @@ export default function Calendar({ date, setDate }: Props) {
         next2Label={""}
         navigationLabel={() => getDateString(date)}
       />
-
-      {/* <div className="mt-4">
-        <b className="text-lg text-white font-bold">No deadline</b>
-        <div>
-          <input
-            type="checkbox"
-            id="no_deadline"
-            className="hidden peer"
-            onChange={(e) => {
-              if (e.target.checked) {
-                setDate(0);
-              }
-            }}
-          />
-          <label
-            htmlFor="no_deadline"
-            className="block w-[48px] h-[24px] bg-background2 rounded-full border-[1px] border-white/10 relative after:block after:w-5 after:h-5 after:rounded-full after:bg-deactiveCheck after:absolute after:top-[1px] after:left-[1px] after:shadow-switch peer-checked:bg-primary peer-checked:after:bg-white peer-checked:after:right-[2px] peer-checked:after:top-[2px] peer-checked:after:left-auto peer-checked:border-0"
-          />
-        </div>
-      </div> */}
     </div>
   );
 }

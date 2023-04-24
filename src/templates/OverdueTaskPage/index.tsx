@@ -1,14 +1,19 @@
 import PageHeader from "@/features/PageHeader";
 import Layout from "@/widgets/Layout";
+import { Task } from "@prisma/client";
 import { FC } from "react";
-import TaskList from "../TasksPage/components/TaskList";
+import { TaskList } from "./ui/TaskList";
 
-export const OverdueTasksPage: FC = () => {
+interface OverdueTasksPagePropsType {
+  tasks: Task[];
+}
+
+export const OverdueTasksPage: FC<OverdueTasksPagePropsType> = ({ tasks }) => {
   return (
     <Layout>
       <PageHeader title="Overdue tasks" />
 
-      <TaskList />
+      <TaskList tasks={tasks} />
     </Layout>
   );
 };

@@ -27,12 +27,12 @@ const WeekTasksSlice = createSlice({
   initialState,
   reducers: {
     setupWeekTasks: (state, action: PayloadAction<Task[]>) => {
-      const uncompletedTasks = convertTaskDatesIntoString(
-        action.payload.filter((task) => task.completed === 0)
-      ).sort(sortTask);
+      const uncompletedTasks = action.payload
+        .filter((task) => task.completed === 0)
+        .sort(sortTask);
 
-      const completedTasks = convertTaskDatesIntoString(
-        action.payload.filter((payload) => payload.completed)
+      const completedTasks = action.payload.filter(
+        (payload) => payload.completed
       );
 
       state.tasks = [...uncompletedTasks, ...completedTasks];

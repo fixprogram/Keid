@@ -15,7 +15,7 @@ type TaskCardProps = Pick<
 > & {
   link: string;
   deadline: number;
-  completed: string;
+  completed: number;
   daysToRepeat?: number;
 };
 
@@ -30,14 +30,18 @@ export const TaskCard: FC<TaskCardProps> = ({
   comments,
 }) => {
   const isCompleted = Boolean(completed);
-  const isOverdue = deadline && Date.now() > new Date(deadline).getTime();
+  const isOverdue =
+    deadline === 0 ? false : Date.now() > new Date(deadline).getTime();
   const isRepeated = repeats !== "Once";
 
   const formattedDeadline =
     deadline === 0 ? null : getDateString(new Date(deadline), false);
+  const formattedCompleted = getDateString(new Date(completed), false);
 
   if (isCompleted) {
-    return <CompletedTask link={link} title={title} completed={completed} />;
+    return (
+      <CompletedTask link={link} title={title} completed={formattedCompleted} />
+    );
   }
 
   if (isRepeated) {

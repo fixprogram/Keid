@@ -14,6 +14,7 @@ export const links = {
     complete: `${apiLnk}task/complete`,
     addComment: `${apiLnk}task/addComment`,
     deleteComment: `${apiLnk}task/deleteComment`,
+    updateDeadline: `${apiLnk}task/updateDeadline`,
   },
   subtask: {
     add: `${apiLnk}subtask/add`,
@@ -21,5 +22,6 @@ export const links = {
     complete: `${apiLnk}subtask/complete`,
     addComment: `${apiLnk}subtask/addComment`,
     deleteComment: `${apiLnk}subtask/deleteComment`,
+    updateDeadline: `${apiLnk}subtask/updateDeadline`,
   },
 };

@@ -1,15 +1,17 @@
 import { getSession } from "next-auth/react";
-import { getUserProjects } from "@/entities/user/models/getUserProjects";
 import { wrapper } from "@/application/store/store";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
-import { setupTasks } from "@/templates/TasksPage/store/tasksSlice";
 import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
-import TasksPage from "@/templates/TasksPage";
 import { prisma } from "@/db.server";
 import { OverdueTasksPage } from "@/templates/OverdueTaskPage";
+import { Task } from "@prisma/client";
 
-export default function OverdueTasks() {
-  return <OverdueTasksPage />;
+interface OverdueTasksPropsType {
+  tasks: Task[];
+}
+
+export default function OverdueTasks({ tasks }: OverdueTasksPropsType) {
+  return <OverdueTasksPage tasks={tasks} />;
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -23,7 +25,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const user = session.user as { id: string };
     const userId = user.id;
 
-    // const projects = await getUserProjects(userId);
     const projects = await prisma.project.findMany({
       where: { userId },
       select: { title: true, style: true, taskIds: true },
@@ -41,14 +42,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const tasks = await getTasksByIds(tasksIds);
 
     const overdueTasks = tasks.filter(
-      (task) => task.deadline < Date.now() && !Boolean(task.completed)
+      (task) =>
+        task.deadline !== 0 &&
+        task.deadline < Date.now() &&
+        !Boolean(task.completed)
     );
 
-    store.dispatch(setupTasks(overdueTasks));
     store.dispatch(setUserProjectNames(userProjectNames));
 
     return {
-      props: {},
+      props: { tasks: overdueTasks },
     };
   }
 );

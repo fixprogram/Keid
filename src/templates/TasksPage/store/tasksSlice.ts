@@ -25,13 +25,13 @@ const TasksSlice = createSlice({
   initialState,
   reducers: {
     setupTasks: (state, action: PayloadAction<Task[]>) => {
-      const allTasks = convertTaskDatesIntoString(action.payload);
+      const allTasks = action.payload;
       state.tasks["All"] = allTasks;
       state.tasks["Completed"] = allTasks.filter((task) =>
         Boolean(task.completed)
       );
       state.tasks["To do"] = allTasks
-        .filter((task) => task.completed === "")
+        .filter((task) => task.completed === 0)
         .sort(sortTask);
     },
     setActiveFilter: (state, action: PayloadAction<string>) => {

@@ -1,7 +1,6 @@
+import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import Overlay from "@/shared/ui/Overlay";
-import Popup from "@/shared/ui/Popup";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { useUpdateProgress } from "./hooks/useUpdateProgress";
 import {
@@ -17,6 +16,7 @@ export default function UpdateProgress() {
   const progress = useAppSelector((state) => state.progress.progress);
   const comment = useAppSelector((state) => state.progress.comment);
   const handleUpdateProgress = useUpdateProgress();
+  const handlePopupClose = () => dispatch(closePopup());
 
   return (
     <div>
@@ -28,12 +28,10 @@ export default function UpdateProgress() {
         Update
       </button>
 
-      <Popup
-        isHidden={!popupOpened}
-        popupStyle={{
-          hidden: { top: "-1000px" },
-          showed: { top: "80px", zIndex: 20 },
-        }}
+      <PopupWithOverlay
+        isShowed={popupOpened}
+        positioned="Top"
+        onClose={handlePopupClose}
       >
         <div className="p-5">
           <b className="block text-white">Update progress</b>
@@ -58,12 +56,7 @@ export default function UpdateProgress() {
             <PrimaryButton text="Update" onClick={handleUpdateProgress} />
           </div>
         </div>
-      </Popup>
-      {popupOpened ? (
-        <div onClick={() => dispatch(closePopup())}>
-          <Overlay />
-        </div>
-      ) : null}
+      </PopupWithOverlay>
     </div>
   );
 }

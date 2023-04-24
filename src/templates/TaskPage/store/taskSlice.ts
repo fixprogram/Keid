@@ -23,7 +23,6 @@ export interface TaskState {
   title: string;
   style: string;
   deadline: number;
-  // progress: number,
   commentContent: string;
   settingsOpened: boolean;
   addCommentOpened: boolean;
@@ -31,7 +30,7 @@ export interface TaskState {
   projectStyle: string;
   subtasks: Subtask[];
   comments: CommentType[];
-  // comments: CommentType[];
+  isCalendarOpened: boolean;
 }
 
 const initialState: TaskState = {
@@ -39,7 +38,6 @@ const initialState: TaskState = {
   title: "",
   style: "",
   deadline: 0,
-  // progress: 0,
   commentContent: "",
   settingsOpened: false,
   addCommentOpened: false,
@@ -47,6 +45,7 @@ const initialState: TaskState = {
   projectStyle: "",
   subtasks: [],
   comments: [],
+  isCalendarOpened: false,
 };
 
 const TaskSlice = createSlice({
@@ -63,7 +62,6 @@ const TaskSlice = createSlice({
         taskId,
         subtasks,
         comments,
-        // progress,
       } = action.payload;
 
       state.title = title;
@@ -74,7 +72,6 @@ const TaskSlice = createSlice({
       state.taskId = taskId;
       state.subtasks = subtasks;
       state.comments = comments;
-      // state.progress = progress
     },
     openSettings: (state) => {
       state.settingsOpened = true;
@@ -90,6 +87,12 @@ const TaskSlice = createSlice({
     },
     setCommentContent: (state, action: PayloadAction<string>) => {
       state.commentContent = action.payload;
+    },
+    openCalendar: (state) => {
+      state.isCalendarOpened = true;
+    },
+    closeCalendar: (state) => {
+      state.isCalendarOpened = false;
     },
   },
   extraReducers: {
@@ -109,6 +112,8 @@ export const {
   openAddComment,
   closeAddComment,
   setCommentContent,
+  openCalendar,
+  closeCalendar,
 } = TaskSlice.actions;
 
 export default TaskSlice.reducer;
