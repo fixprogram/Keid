@@ -17,7 +17,8 @@ export default function Calendar({ date, setDate }: Props) {
             return setDate(0);
           }
           const newDate = value as Date;
-          setDate(newDate.getTime());
+
+          setDate(newDate.setHours(23, 59, 59, 999));
         }}
         className="text-white text-base font-bold mt-4"
         formatShortWeekday={(locale, date) =>

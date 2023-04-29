@@ -30,8 +30,7 @@ export const TaskCard: FC<TaskCardProps> = ({
   comments,
 }) => {
   const isCompleted = Boolean(completed);
-  const isOverdue =
-    deadline === 0 ? false : Date.now() > new Date(deadline).getTime();
+  const isOverdue = deadline === 0 ? false : Date.now() > deadline;
   const isRepeated = repeats !== "Once";
 
   const formattedDeadline =
@@ -40,7 +39,12 @@ export const TaskCard: FC<TaskCardProps> = ({
 
   if (isCompleted) {
     return (
-      <CompletedTask link={link} title={title} completed={formattedCompleted} />
+      <CompletedTask
+        link={link}
+        title={title}
+        isExpired={completed > deadline}
+        completed={formattedCompleted}
+      />
     );
   }
 

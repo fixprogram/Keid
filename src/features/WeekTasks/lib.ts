@@ -19,7 +19,7 @@ export function getFirstDayOfTheWeek() {
     return today.setHours(0, 0, 0, 0);
   }
 
-  const diff = date - 6 + today.getDay();
+  const diff = date - today.getDay() + 2;
 
   return new Date(today.setDate(diff)).setHours(0, 0, 0, 0);
 }

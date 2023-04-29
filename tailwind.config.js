@@ -48,6 +48,7 @@ module.exports = {
       border: "#494C54",
       red: "#FF968E",
       green: "#A5F59C",
+      expired: "#FF968E",
     },
   },
   plugins: [],

@@ -5,12 +5,14 @@ import { FC } from "react";
 type CompletedTaskPropsType = {
   link: string;
   title: string;
+  isExpired: boolean;
   completed: string;
 };
 
 export const CompletedTask: FC<CompletedTaskPropsType> = ({
   link,
   title,
+  isExpired,
   completed,
 }) => {
   return (
@@ -22,7 +24,13 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
 
         <div>
           <b className="text-lg text-white font-semibold">{title}</b>
-          <p className="text-smm font-medium text-green">{completed}</p>
+          <p
+            className={`text-smm font-medium ${
+              isExpired ? "text-expired" : "text-green"
+            }`}
+          >
+            {completed}
+          </p>
         </div>
       </div>
     </Link>

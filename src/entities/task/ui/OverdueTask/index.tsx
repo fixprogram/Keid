@@ -30,16 +30,9 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
         />
 
         <div>
-          <b
-            className="text-lg text-white font-semibold"
-            style={{ color: "#FF968E" }}
-          >
-            {title}
-          </b>
+          <b className="text-lg text-white font-semibold">{title}</b>
           {deadline ? (
-            <p className="text-smm font-medium" style={{ color: "#FF968E" }}>
-              {deadline}
-            </p>
+            <p className="text-smm font-medium text-expired">{deadline}</p>
           ) : null}
         </div>
       </div>
