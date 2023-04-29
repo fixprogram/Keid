@@ -4,6 +4,7 @@ import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Icon from "../../../../shared/ui/Icon";
 import { useToggleStarred } from "../../hooks/useToggleStarred";
 import { openSettings } from "../../store/projectSlice";
+import { ProjectTitle } from "./ProjectTitle";
 import ScreenList from "./ScreenList";
 
 export default function ProjectHeader() {
@@ -32,7 +33,8 @@ export default function ProjectHeader() {
       </div>
 
       <div className="grow">
-        <h2 className="text-xl text-white font-semibold">{title}</h2>
+        <ProjectTitle initialTitle={title} />
+        {/* <h2 className="text-xl text-white font-semibold">{title}</h2> */}
 
         <ScreenList screens={screens} />
       </div>

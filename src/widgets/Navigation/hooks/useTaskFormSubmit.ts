@@ -22,10 +22,6 @@ export function useTaskFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      // const deadlineTimestamp = deadline
-      //   ? new Date(deadline).setHours(23, 59, 59, 999)
-      //   : deadline;
-
       fetch(links.task.add, {
         method: "POST",
         headers: {
@@ -37,7 +33,8 @@ export function useTaskFormSubmit() {
           taskName,
           taskStyle,
           deadline,
-          projectName: projectName.title,
+          projectName:
+            projectName.title === "No project" ? "" : projectName.title,
           repeats,
         }),
       }).then(async (res) => {

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { FC } from "react";
 
 export const DashboardPage: FC = () => {
+  // console.log("Comment date: ", new Date(1682775143592));
+
   return (
     <Layout>
       <div className="flex items-center justify-between">

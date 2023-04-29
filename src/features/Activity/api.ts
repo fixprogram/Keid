@@ -9,11 +9,13 @@ export async function getWeeklyActivityData(userId: string) {
     select: { id: true },
   });
   const tasks = await prisma.task.findMany({
-    where: { projectId: { in: projects.map((project) => project.id) } },
+    where: {
+      projectId: { in: [...projects.map((project) => project.id), userId] },
+    },
     select: { comments: true, projectId: true },
   });
 
-  const firstWeekdayTimestamp = getMonday(new Date()).valueOf();
+  const firstWeekdayTimestamp = getMonday(new Date()).setHours(3, 0, 0, 0);
 
   // Getting an array of tasks updated this week
   const lastWeekActiveTasks = tasks.filter((task) =>

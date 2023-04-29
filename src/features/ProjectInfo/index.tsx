@@ -12,6 +12,10 @@ export default function ProjectInfo({
   title,
   category,
 }: Props) {
+  if (title === "No project") {
+    return null;
+  }
+
   return (
     <Fragment>
       <div

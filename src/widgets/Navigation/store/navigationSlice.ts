@@ -11,7 +11,12 @@ export interface NavigationState {
 const initialState: NavigationState = {
   popupAddState: "idle",
   popupAddOpened: false,
-  projects: [],
+  projects: [
+    {
+      title: "No project",
+      style: "01",
+    },
+  ],
 };
 
 const NavigationSlice = createSlice({
@@ -29,7 +34,7 @@ const NavigationSlice = createSlice({
       state.popupAddState = action.payload;
     },
     setUserProjectNames: (state, action: PayloadAction<Project[]>) => {
-      state.projects = action.payload;
+      state.projects = [...state.projects, ...action.payload];
     },
   },
   extraReducers: {

@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useEffect } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { setTaskProject } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { Project } from "@/widgets/Navigation/models";
@@ -16,6 +16,15 @@ export default function SelectProject() {
     }
   }, [dispatch, projects, taskProject.title]);
 
+  const handleSelectChange = (event: SyntheticEvent) => {
+    const target = event.target as HTMLSelectElement;
+    return dispatch(
+      setTaskProject(
+        projects.find((project) => project.title === target.value) as Project
+      )
+    );
+  };
+
   if (projects.length === 0) {
     return null;
   }
@@ -28,21 +37,14 @@ export default function SelectProject() {
         className="text-white font-bold"
         style={{ background: "inherit" }}
         value={taskProject.title}
-        onChange={(e) =>
-          dispatch(
-            setTaskProject(
-              projects.find(
-                (project) => project.title === e.target.value
-              ) as Project
-            )
-          )
-        }
+        onChange={handleSelectChange}
       >
         {projects.map((pr) => (
           <option key={pr.title} value={pr.title}>
             {pr.title}
           </option>
         ))}
+        {/* <option value={""}>No project</option> */}
       </select>
     </div>
   );

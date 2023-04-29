@@ -26,24 +26,29 @@ export const getServerSideProps = wrapper.getServerSideProps(
         throw new Error("session is not defined");
       }
 
-      // await prisma.project.updateMany({
-      //   data: { isStarred: false },
-      // }); // Add this trick to Anki in order to remember
-
       const user = session.user as { id: string };
       const userId = user.id;
       const userProjectNames = await getUserProjectNames(userId);
-      const projects = await await prisma.project.findMany({
+      const projects = await prisma.project.findMany({
         where: { userId },
         select: { id: true, taskIds: true },
       });
 
       const projectIDs = projects.map((projectId) => projectId.id);
+      projectIDs.push(userId);
 
       const weekTasks = await getWeekTasks(projectIDs);
 
       const projectAmount = userProjectNames.length;
       const totalTasksIds: string[] = [];
+
+      const taskWithoutProjectIds = await prisma.task.findMany({
+        where: { projectId: userId },
+        select: { id: true },
+      });
+      taskWithoutProjectIds.forEach((task) => {
+        totalTasksIds.push(task.id);
+      });
       projects.forEach((project) => {
         totalTasksIds.push(...project.taskIds);
       });

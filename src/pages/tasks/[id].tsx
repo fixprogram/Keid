@@ -28,12 +28,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
       throw new Error(`Task with id: ${taskId} wasn't found`);
     }
 
-    const parentProject = await getProjectById(data.projectId);
-
-    if (!parentProject) {
-      throw new Error(`Project with id: ${taskId} wasn't found`);
-    }
-
     const subtasks = await getSubtasksByIds(data.subtaskIds);
 
     const comments: CommentType[] = [];
@@ -41,16 +35,32 @@ export const getServerSideProps = wrapper.getServerSideProps(
       comments.push({ ...comment, userName: user.name });
     });
 
-    store.dispatch(
-      setupTaskData({
-        ...data,
-        projectTitle: parentProject.title,
-        projectStyle: parentProject.style,
-        taskId,
-        subtasks,
-        comments,
-      })
-    );
+    const taskData = {
+      ...data,
+      taskId,
+      subtasks,
+      comments,
+    };
+
+    const parentProject = await getProjectById(data.projectId);
+
+    if (parentProject) {
+      store.dispatch(
+        setupTaskData({
+          ...taskData,
+          projectTitle: parentProject.title,
+          projectStyle: parentProject.style,
+        })
+      );
+    } else {
+      store.dispatch(
+        setupTaskData({
+          ...taskData,
+          projectTitle: "No project",
+          projectStyle: "01",
+        })
+      );
+    }
 
     store.dispatch(setupProgress(data.progress));
 

@@ -1,4 +1,3 @@
-import { getWeekDayTimestamp } from "@/shared/lib/utils/getWeekDay";
 import { Comment } from "@prisma/client";
 
 type LastWeekActiveTasks = {
@@ -33,7 +32,7 @@ export function getActivityDays(lastWeekActiveTasks: LastWeekActiveTasks) {
     // const today = new Date();
     const todayDate = new Date().getDate();
     const dayDate = new Date(
-      new Date().setDate(todayDate - (arr.length - 1 - idx))
+      new Date().setDate(todayDate - (arr.length - 2 - idx))
     ).getDate();
     // const dayDate = new Date(today.setDate(todayDate - day.weekDay)).getDate();
 

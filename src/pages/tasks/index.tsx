@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/react";
-import { getUserProjects } from "@/entities/user/models/getUserProjects";
 import { wrapper } from "@/application/store/store";
 import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
 import { setupTasks } from "@/templates/TasksPage/store/tasksSlice";
@@ -22,7 +21,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const user = session.user as { id: string };
     const userId = user.id;
 
-    // const projects = await getUserProjects(userId);
     const projects = await prisma.project.findMany({
       where: { userId },
       select: { title: true, style: true, taskIds: true },
@@ -33,6 +31,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }));
 
     const tasksIds: string[] = [];
+    const taskWithoutProjectIds = await prisma.task.findMany({
+      where: { projectId: userId },
+      select: { id: true },
+    });
+    taskWithoutProjectIds.forEach((task) => {
+      tasksIds.push(task.id);
+    });
+
     projects.forEach((project) => {
       tasksIds.push(...project.taskIds);
     });

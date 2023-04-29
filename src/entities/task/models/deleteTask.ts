@@ -12,7 +12,7 @@ export const deleteTask = async (taskId: string) => {
   });
 
   if (!project) {
-    throw new Error(`Project with id: ${task.projectId} wasn't found `);
+    return task;
   }
 
   const newTaskIds = project.taskIds.filter((id) => {
