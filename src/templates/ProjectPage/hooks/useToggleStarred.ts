@@ -24,8 +24,6 @@ export function useToggleStarred() {
         isStarred: !isStarred,
       }),
     }).then(async (res) => {
-      console.log("Res: ", res);
-
       const body = await res.json();
 
       if (res.status === 200) {
