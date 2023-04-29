@@ -26,6 +26,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
         throw new Error("session is not defined");
       }
 
+      // await prisma.project.updateMany({
+      //   data: { isStarred: false },
+      // }); // Add this trick to Anki in order to remember
+
       const user = session.user as { id: string };
       const userId = user.id;
       const userProjectNames = await getUserProjectNames(userId);
@@ -61,8 +65,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
       store.dispatch(setUserProjectNames(userProjectNames));
       store.dispatch(setupWeekTasks(weekTasks));
       // console.log("State on server", store.getState());
-      // await prisma.task.updateMany({
-      //   data: { repeats: "Once" },
+      // await prisma.project.updateMany({
+      //   data: { isStarred: false },
       // }); // Add this trick to Anki in order to remember
 
       return { props: {} };

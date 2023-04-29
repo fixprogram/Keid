@@ -2,14 +2,16 @@ import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Icon from "../../../../shared/ui/Icon";
+import { useToggleStarred } from "../../hooks/useToggleStarred";
 import { openSettings } from "../../store/projectSlice";
 import ScreenList from "./ScreenList";
 
 export default function ProjectHeader() {
   const dispatch = useAppDispatch();
   const project = useAppSelector((state) => state.project);
+  const handleToggleStarred = useToggleStarred();
 
-  const { title, style, tasks } = project;
+  const { title, style, tasks, isStarred } = project;
 
   const projectStyle = projectStyles[style as keyof ProjectStyleType];
   const screens = ["Overview"];
@@ -34,6 +36,14 @@ export default function ProjectHeader() {
 
         <ScreenList screens={screens} />
       </div>
+
+      <button type="button" onClick={handleToggleStarred}>
+        {isStarred ? (
+          <Icon name="starred" width={32} height={32} />
+        ) : (
+          <Icon name="star" width={24} height={24} />
+        )}
+      </button>
 
       <button
         type="button"

@@ -370,7 +370,7 @@ export default function Sprite() {
           />
         </symbol>
 
-        <symbol id="icon-letter" width="16" height="16" viewBox="0 0 16 16">
+        <symbol id="iconLetter" width="16" height="16" viewBox="0 0 16 16">
           <path
             d="M15 1H1C0.4 1 0 1.4 0 2V3.4L8 7.9L16 3.5V2C16 1.4 15.6 1 15 1Z"
             fill="white"
@@ -462,6 +462,53 @@ export default function Sprite() {
               <stop offset="1" stopColor="#6EA95C" />
             </linearGradient>
           </defs>
+        </symbol>
+
+        <symbol
+          id="icon-starred"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+        >
+          <circle cx="16" cy="16" r="16" fill="#246BFD" />
+          <path
+            d="M23.144 13.4389L18.827 12.8109L16.9 8.89993C16.7136 8.57934 16.3708 8.38208 16 8.38208C15.6292 8.38208 15.2864 8.57934 15.1 8.89993L13.173 12.8119L8.856 13.4389C8.47887 13.493 8.16524 13.7567 8.04719 14.1189C7.92913 14.4812 8.02716 14.879 8.3 15.1449L11.423 18.1899L10.686 22.4899C10.6217 22.8651 10.776 23.2442 11.0839 23.4679C11.3919 23.6916 11.8001 23.7211 12.137 23.5439L16 21.5129L19.861 23.5419C20.1979 23.7191 20.6061 23.6896 20.9141 23.4659C21.222 23.2422 21.3763 22.8631 21.312 22.4879L20.575 18.1879L23.7 15.1449C23.9721 14.8792 24.07 14.4821 23.9525 14.1204C23.8349 13.7587 23.5223 13.4949 23.146 13.4399L23.144 13.4389Z"
+            fill="white"
+          />
+        </symbol>
+
+        <symbol
+          id="icon-star"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M10 19.3132L5.82 21.5102L7 14.6282L2 9.75423L8.91 8.75023L12 2.49023L15.09 8.75023L22 9.75423L19 12.6782"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M23 22H14"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M23 17H14"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </symbol>
       </defs>
     </svg>

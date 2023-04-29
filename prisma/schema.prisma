@@ -28,6 +28,7 @@ model Project {
   title           String
   style           String
   taskIds         String[]
+  isStarred       Boolean
 }
 
 model Task {

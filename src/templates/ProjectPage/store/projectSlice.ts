@@ -11,6 +11,7 @@ type SetupDataType = {
   title: string;
   style: string;
   tasks: Task[];
+  isStarred: boolean;
 };
 
 export interface ProjectState {
@@ -19,6 +20,7 @@ export interface ProjectState {
   tasks: Record<FilterType, TaskType[]>;
   settingsOpened: boolean;
   activeFilter: FilterType;
+  isStarred: boolean;
 }
 
 const initialState: ProjectState = {
@@ -27,6 +29,7 @@ const initialState: ProjectState = {
   tasks: { "To do": [], Completed: [], All: [] },
   settingsOpened: false,
   activeFilter: FILTERS[0],
+  isStarred: false,
 };
 
 const ProjectSlice = createSlice({
@@ -34,10 +37,11 @@ const ProjectSlice = createSlice({
   initialState,
   reducers: {
     setupProjectData: (state, action: PayloadAction<SetupDataType>) => {
-      const { title, style, tasks } = action.payload;
+      const { title, style, tasks, isStarred } = action.payload;
 
       state.title = title;
       state.style = style;
+      state.isStarred = isStarred;
 
       const allTasks = tasks;
       state.tasks.All = allTasks;

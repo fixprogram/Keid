@@ -6,6 +6,7 @@ export const links = {
   project: {
     add: `${apiLnk}project/add`,
     delete: `${apiLnk}project/delete`,
+    toggleStarred: `${apiLnk}/project/toggleStarred`,
   },
   task: {
     add: `${apiLnk}task/add`,

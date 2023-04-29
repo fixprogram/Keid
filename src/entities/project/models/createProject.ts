@@ -11,6 +11,7 @@ export const createProject = async (
       title: projectName,
       style: projectStyle,
       taskIds: [],
+      isStarred: false,
     },
   });
 

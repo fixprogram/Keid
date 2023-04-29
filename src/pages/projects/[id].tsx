@@ -33,7 +33,12 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const tasks = await getTasksByIds(project.taskIds);
 
     store.dispatch(
-      setupProjectData({ title: project.title, style: project.style, tasks })
+      setupProjectData({
+        title: project.title,
+        style: project.style,
+        tasks,
+        isStarred: project.isStarred,
+      })
     );
     store.dispatch(setUserProjectNames(userProjectNames));
     store.dispatch(setUserId(userId));
