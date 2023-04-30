@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/application/store/store";
-import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
+import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import { setupTasks } from "@/templates/TasksPage/store/tasksSlice";
 import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
 import TasksPage from "@/templates/TasksPage";

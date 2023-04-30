@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import { wrapper } from "@/application/store/store";
-import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
+import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import { prisma } from "@/db.server";
 import { OverdueTasksPage } from "@/templates/OverdueTaskPage";
 import { Task } from "@prisma/client";

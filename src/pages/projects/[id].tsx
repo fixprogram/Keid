@@ -3,7 +3,7 @@ import { getProjectById } from "@/entities/project/models/getProjectById";
 import { setupProjectData } from "@/templates/ProjectPage/store/projectSlice";
 import { getTasksByIds } from "@/entities/task/models/getTasksByIds";
 import ProjectPage from "@/templates/ProjectPage";
-import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
+import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import { getSession } from "next-auth/react";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { setUserId } from "@/widgets/Overview/store/overviewSlice";

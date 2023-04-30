@@ -7,9 +7,9 @@ import taskSlice from "@/templates/TaskPage/store/taskSlice";
 import addSubtaskSlice from "@/templates/TaskPage/ui/AddSubtaskPopup/store/addSubtaskSlice";
 import subtaskSlice from "@/templates/SubtaskPage/store/subtaskSlice";
 import overviewSlice from "@/widgets/Overview/store/overviewSlice";
-import navigationSlice from "@/widgets/Navigation/store/navigationSlice";
-import addProjectSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupProject/store/addProjectSlice";
-import addTaskSlice from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import navigationSlice from "@/widgets/Navigation/model/navigationSlice";
+import addProjectSlice from "@/widgets/Navigation/ui/PopupProject/store/addProjectSlice";
+import addTaskSlice from "@/widgets/Navigation/ui/PopupTask/store/addTaskSlice";
 import progressSlice from "@/features/Progress/store/progressSlice";
 import WeekTasksSlice from "@/features/WeekTasks/store/weekTasksSlice";
 

@@ -3,10 +3,10 @@ import Popup from "@/shared/ui/Popup";
 import PopupLine from "@/shared/ui/PopupLine";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { Fragment } from "react";
-import { closePopupAdd } from "../../store/navigationSlice";
-import PopupIdle from "./components/PopupIdle";
-import PopupProject from "./components/PopupProject";
-import PopupTask from "./components/PopupTask";
+import { closePopupAdd } from "../../model/navigationSlice";
+import PopupIdle from "../PopupIdle";
+import PopupProject from "../PopupProject";
+import PopupTask from "../PopupTask";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 
 const POPUP_CONTENT = {

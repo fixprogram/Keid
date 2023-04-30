@@ -1,9 +1,9 @@
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { SyntheticEvent, useEffect } from "react";
-import { setTaskProject } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/store/addTaskSlice";
+import { setTaskProject } from "@/widgets/Navigation/ui/PopupTask/store/addTaskSlice";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { Project } from "@/widgets/Navigation/models";
 import Icon from "@/shared/ui/Icon";
+import { Project } from "@/widgets/Navigation/model/types";
 
 export default function SelectProject() {
   const dispatch = useAppDispatch();

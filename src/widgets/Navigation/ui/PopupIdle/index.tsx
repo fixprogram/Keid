@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { setPopupAddState } from "../../../../store/navigationSlice";
+import { setPopupAddState } from "../../model/navigationSlice";
 
 type PopupAddState = "task" | "project";
 

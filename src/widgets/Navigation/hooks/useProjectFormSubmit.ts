@@ -3,8 +3,8 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
-import { setProjectName } from "../components/PopupAdd/components/PopupProject/store/addProjectSlice";
-import { closePopupAdd } from "../store/navigationSlice";
+import { setProjectName } from "../ui/PopupProject/store/addProjectSlice";
+import { closePopupAdd } from "../model/navigationSlice";
 
 export function useProjectFormSubmit() {
   const router = useRouter();

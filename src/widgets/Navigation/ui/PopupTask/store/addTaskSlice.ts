@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Project } from "@/widgets/Navigation/models";
 import { RepeatsOptionType } from "../ui/PopupBody/ui/TaskRepeats";
+import { Project } from "@/widgets/Navigation/model/types";
 
 export interface AddTaskState {
   taskName: string;
@@ -22,7 +22,7 @@ const initialState: AddTaskState = {
   isCalendarOpen: false,
   isStyleListOpened: false,
   isWithDeadline: true,
-  deadline: Date.now(),
+  deadline: new Date().setHours(23, 59, 59, 999),
   error: "",
   activeRepeatsOption: "Once",
 };
@@ -55,7 +55,7 @@ const AddTaskSlice = createSlice({
       }
 
       if (state.isWithDeadline === true) {
-        state.deadline = Date.now();
+        state.deadline = new Date().setHours(23, 59, 59, 999);
       }
     },
     resetTask: (state) => {

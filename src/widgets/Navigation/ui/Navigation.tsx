@@ -2,11 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Icon from "@/shared/ui/Icon";
 import { Fragment } from "react";
-import { openPopupAdd } from "./store/navigationSlice";
-import PopupAdd from "./components/PopupAdd";
+import { openPopupAdd } from "../model/navigationSlice";
+import PopupAdd from "./PopupAdd";
 import AddButton from "@/shared/ui/AddButton";
 import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { NAV_LINKS } from "./config/links";
+import { NAV_LINKS } from "../config/links";
 
 export default function Navigation() {
   const router = useRouter();

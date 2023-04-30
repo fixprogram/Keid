@@ -6,7 +6,7 @@ import {
   setUserTaskAmount,
 } from "@/widgets/Overview/store/overviewSlice";
 import { getSession } from "next-auth/react";
-import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
+import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { prisma } from "@/db.server";
 import { getWeekTasks } from "@/features/WeekTasks/api";

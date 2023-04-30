@@ -2,7 +2,7 @@ import { getSession } from "next-auth/react";
 import { getUserProjects } from "@/entities/user/models/getUserProjects";
 import { setupProjects } from "@/templates/ProjectsPage/store/projectsSlice";
 import { wrapper } from "@/application/store/store";
-import { setUserProjectNames } from "@/widgets/Navigation/store/navigationSlice";
+import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import ProjectsPage from "@/templates/ProjectsPage";
 
 export default function Projects() {

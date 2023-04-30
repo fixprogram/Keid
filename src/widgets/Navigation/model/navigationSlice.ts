@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-import { Project } from "../models";
+import { Project } from "./types";
 export interface NavigationState {
   popupAddState: "idle" | "task" | "project";
   popupAddOpened: boolean;

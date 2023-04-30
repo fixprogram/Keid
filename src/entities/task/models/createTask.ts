@@ -1,6 +1,6 @@
 import { prisma } from "@/db.server";
 import { serviceComments } from "@/shared/config/serviceComments";
-import { RepeatsOptionType } from "@/widgets/Navigation/components/PopupAdd/components/PopupTask/ui/PopupBody/ui/TaskRepeats";
+import { RepeatsOptionType } from "@/widgets/Navigation/ui/PopupTask/ui/PopupBody/ui/TaskRepeats";
 import { Project } from "@prisma/client";
 
 type Props = {

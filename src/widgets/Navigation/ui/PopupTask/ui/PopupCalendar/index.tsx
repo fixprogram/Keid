@@ -15,6 +15,8 @@ export default function PopupCalendar() {
 
   const date = new Date(deadline);
 
+  console.log("Date: ", date);
+
   function setDeadline(deadline: number) {
     dispatch(setTaskDeadline(deadline));
   }

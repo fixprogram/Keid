@@ -3,8 +3,8 @@ import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useCallback } from "react";
-import { resetTask } from "../components/PopupAdd/components/PopupTask/store/addTaskSlice";
-import { closePopupAdd } from "../store/navigationSlice";
+import { resetTask } from "../ui/PopupTask/store/addTaskSlice";
+import { closePopupAdd } from "../model/navigationSlice";
 
 export function useTaskFormSubmit() {
   const router = useRouter();
