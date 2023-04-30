@@ -41,7 +41,6 @@ export const ProjectTitle: FC<ProjectTitlePropsType> = ({ initialTitle }) => {
             onChange={(e) => setTitle(e.target.value)}
             style={{ backgroundColor: "inherit" }}
             className="text-white"
-            autoFocus
           />
           <button
             type="button"

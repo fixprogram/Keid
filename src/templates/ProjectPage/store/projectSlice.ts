@@ -4,13 +4,13 @@ import { HYDRATE } from "next-redux-wrapper";
 import { Task } from "@prisma/client";
 import { FILTERS } from "../config/consts";
 import { FilterType } from "../config/types";
-import { TaskType } from "@/entities/task/types";
 import { convertTaskDatesIntoString } from "@/entities/task/lib/convertTaskDatesIntoString";
+import { sortTasks, TaskType } from "@/shared/lib/utils/sortTasks";
 
 type SetupDataType = {
   title: string;
   style: string;
-  tasks: Task[];
+  tasks: TaskType[];
   isStarred: boolean;
 };
 
@@ -43,7 +43,7 @@ const ProjectSlice = createSlice({
       state.style = style;
       state.isStarred = isStarred;
 
-      const allTasks = tasks;
+      const allTasks = sortTasks(tasks);
       state.tasks.All = allTasks;
       state.tasks.Completed = allTasks.filter((task) =>
         Boolean(task.completed)

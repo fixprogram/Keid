@@ -2,11 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { FILTERS } from "../config/consts";
-import { Task } from "@prisma/client";
-import { TaskType } from "@/entities/task/types";
-import { convertTaskDatesIntoString } from "@/entities/task/lib/convertTaskDatesIntoString";
 import { FilterType } from "../config/types";
-import { sortTask } from "@/entities/task/lib/sortTask";
+import { sortTasks, TaskType } from "@/shared/lib/utils/sortTasks";
 
 export interface TasksState {
   filters: string[];
@@ -24,15 +21,14 @@ const TasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    setupTasks: (state, action: PayloadAction<Task[]>) => {
-      const allTasks = action.payload;
+    setupTasks: (state, action: PayloadAction<TaskType[]>) => {
+      const tasks = action.payload;
+      const allTasks = sortTasks(tasks);
       state.tasks["All"] = allTasks;
       state.tasks["Completed"] = allTasks.filter((task) =>
         Boolean(task.completed)
       );
-      state.tasks["To do"] = allTasks
-        .filter((task) => task.completed === 0)
-        .sort(sortTask);
+      state.tasks["To do"] = allTasks.filter((task) => task.completed === 0);
     },
     setActiveFilter: (state, action: PayloadAction<string>) => {
       state.activeFilter = action.payload;

@@ -8,7 +8,8 @@ export default function AllTaskAccordions() {
 
   return (
     <Fragment>
-      {FILTERS.map((filter) => {
+      <Accordion topic="All tasks" items={tasks["All"]} />
+      {/* {FILTERS.map((filter) => {
         if (filter === "All") {
           return (
             <Accordion key={filter} topic="All tasks" items={tasks["All"]} />
@@ -16,7 +17,7 @@ export default function AllTaskAccordions() {
         }
 
         return <Accordion key={filter} topic={filter} items={tasks[filter]} />;
-      })}
+      })} */}
     </Fragment>
   );
 }

@@ -1,5 +1,5 @@
-import { TaskType } from "@/entities/task/types";
 import { TaskCard } from "@/features/TaskCard";
+import { TaskType } from "@/shared/lib/utils/sortTasks";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 
@@ -10,6 +10,8 @@ interface Props {
 
 export default function Accordion({ topic, items = [] }: Props) {
   const [isOpened, setOpened] = useState(true);
+
+  // console.log("items: ", items);
 
   return (
     <section className="mt-8">
@@ -35,11 +37,7 @@ export default function Accordion({ topic, items = [] }: Props) {
         <ul className="mt-6 flex flex-col gap-4">
           {items.map((item) => (
             <li key={item.id}>
-              <TaskCard
-                link={`/tasks/${item.id}`}
-                // deadline={item.completed ? item.completed : item.deadline}
-                {...item}
-              />
+              <TaskCard link={`/tasks/${item.id}`} {...item} />
             </li>
           ))}
         </ul>

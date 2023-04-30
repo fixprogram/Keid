@@ -1,5 +1,6 @@
 import ProjectInfo from "@/features/ProjectInfo";
 import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -10,6 +11,7 @@ type RepeatedTaskPropsType = {
   style: string;
   progress: number;
   daysToRepeat: number;
+  isStarred?: boolean;
 };
 
 export const RepeatedTask: FC<RepeatedTaskPropsType> = ({
@@ -19,6 +21,7 @@ export const RepeatedTask: FC<RepeatedTaskPropsType> = ({
   style,
   progress,
   daysToRepeat,
+  isStarred = false,
 }) => {
   const taskStyle = projectStyles[style as keyof ProjectStyleType];
 
@@ -27,7 +30,13 @@ export const RepeatedTask: FC<RepeatedTaskPropsType> = ({
       href={link}
       className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2"
     >
-      <div className="grid grid-cols-task gap-x-5 gap-y-4 ">
+      <div className="grid grid-cols-task gap-x-5 gap-y-4 relative">
+        {isStarred ? (
+          <div className="absolute top-3 left-3">
+            <Icon name="star-sm" width={8} height={8} />
+          </div>
+        ) : null}
+
         <div>
           <h3 className="text-white text-lg font-semibold">{title}</h3>
         </div>

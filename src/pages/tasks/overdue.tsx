@@ -3,10 +3,10 @@ import { wrapper } from "@/application/store/store";
 import { setUserProjectNames } from "@/widgets/Navigation/model/navigationSlice";
 import { prisma } from "@/db.server";
 import { OverdueTasksPage } from "@/templates/OverdueTaskPage";
-import { Task } from "@prisma/client";
+import { TaskType } from "@/shared/lib/utils/sortTasks";
 
 interface OverdueTasksPropsType {
-  tasks: Task[];
+  tasks: TaskType[];
 }
 
 export default function OverdueTasks({ tasks }: OverdueTasksPropsType) {
@@ -26,7 +26,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const projects = await prisma.project.findMany({
       where: { userId },
-      select: { title: true, style: true, taskIds: true },
+      select: { title: true, style: true, taskIds: true, isStarred: true },
     });
     const userProjectNames = projects.map((project) => ({
       title: project.title,
@@ -34,6 +34,13 @@ export const getServerSideProps = wrapper.getServerSideProps(
     }));
 
     const tasksIds: string[] = [];
+    const taskWithoutProjectIds = await prisma.task.findMany({
+      where: { projectId: userId },
+      select: { id: true },
+    });
+    taskWithoutProjectIds.forEach((task) => {
+      tasksIds.push(task.id);
+    });
     projects.forEach((project) => {
       tasksIds.push(...project.taskIds);
     });
@@ -41,7 +48,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const overdueTasks = await prisma.task.findMany({
       where: {
         id: { in: tasksIds },
-        deadline: { lt: Date.now() },
+        deadline: { lt: new Date().setHours(23, 59, 59, 999) },
         AND: { completed: 0 },
         NOT: { deadline: 0 },
       },
@@ -50,7 +57,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
     store.dispatch(setUserProjectNames(userProjectNames));
 
     return {
-      props: { tasks: overdueTasks },
+      props: {
+        tasks: overdueTasks.map((task) => {
+          const isFavourite = Boolean(
+            projects.find((project) =>
+              project.taskIds.some((taskId) => taskId === task.id)
+            )?.isStarred
+          );
+
+          return { ...task, isFavourite };
+        }),
+      },
     };
   }
 );

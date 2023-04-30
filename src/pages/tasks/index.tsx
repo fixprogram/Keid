@@ -23,7 +23,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
     const projects = await prisma.project.findMany({
       where: { userId },
-      select: { title: true, style: true, taskIds: true },
+      select: { title: true, style: true, taskIds: true, isStarred: true },
     });
     const userProjectNames = projects.map((project) => ({
       title: project.title,
@@ -43,7 +43,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
       tasksIds.push(...project.taskIds);
     });
 
-    const tasks = await getTasksByIds(tasksIds);
+    const tasks = await (
+      await getTasksByIds(tasksIds)
+    ).map((task) => {
+      const isFavourite = Boolean(
+        projects.find((project) =>
+          project.taskIds.some((taskId) => taskId === task.id)
+        )?.isStarred
+      );
+      return { ...task, isFavourite };
+    });
 
     store.dispatch(setupTasks(tasks));
     store.dispatch(setUserProjectNames(userProjectNames));

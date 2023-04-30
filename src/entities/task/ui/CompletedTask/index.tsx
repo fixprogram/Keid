@@ -7,6 +7,7 @@ type CompletedTaskPropsType = {
   title: string;
   isExpired: boolean;
   completed: string;
+  isStarred?: boolean;
 };
 
 export const CompletedTask: FC<CompletedTaskPropsType> = ({
@@ -14,10 +15,17 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
   title,
   isExpired,
   completed,
+  isStarred = false,
 }) => {
   return (
     <Link href={link}>
-      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl">
+      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl relative">
+        {isStarred ? (
+          <div className="absolute top-3 left-3">
+            <Icon name="star-sm" width={8} height={8} />
+          </div>
+        ) : null}
+
         <div className="min-w-[40px]">
           <Icon name="completed" width={40} height={40} />
         </div>

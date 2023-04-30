@@ -17,6 +17,7 @@ type TaskCardProps = Pick<
   deadline: number;
   completed: number;
   daysToRepeat?: number;
+  isFavourite: boolean;
 };
 
 export const TaskCard: FC<TaskCardProps> = ({
@@ -28,6 +29,7 @@ export const TaskCard: FC<TaskCardProps> = ({
   completed,
   repeats,
   comments,
+  isFavourite,
 }) => {
   const isCompleted = Boolean(completed);
   const isOverdue = deadline === 0 ? false : Date.now() > deadline;
@@ -37,6 +39,8 @@ export const TaskCard: FC<TaskCardProps> = ({
     deadline === 0 ? null : getDateString(new Date(deadline), false);
   const formattedCompleted = getDateString(new Date(completed), false);
 
+  console.log("is favourite: ", isFavourite);
+
   if (isCompleted) {
     return (
       <CompletedTask
@@ -44,6 +48,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         title={title}
         isExpired={completed > deadline}
         completed={formattedCompleted}
+        isStarred={isFavourite}
       />
     );
   }
@@ -58,6 +63,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         style={style}
         progress={progress}
         daysToRepeat={daysToRepeat}
+        isStarred={isFavourite}
       />
     );
   }
@@ -70,6 +76,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         deadline={formattedDeadline}
         style={style}
         progress={progress}
+        isStarred={isFavourite}
       />
     );
   }
@@ -81,6 +88,7 @@ export const TaskCard: FC<TaskCardProps> = ({
       deadline={formattedDeadline}
       style={style}
       progress={progress}
+      isStarred={isFavourite}
     />
   );
 };

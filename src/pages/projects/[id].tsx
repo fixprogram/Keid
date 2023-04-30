@@ -30,7 +30,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       throw new Error(`project with id: ${id} wasn't found`);
     }
 
-    const tasks = await getTasksByIds(project.taskIds);
+    const tasks = await (
+      await getTasksByIds(project.taskIds)
+    ).map((task) => ({ ...task, isFavourite: project.isStarred }));
 
     store.dispatch(
       setupProjectData({

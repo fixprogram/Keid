@@ -1,9 +1,10 @@
 import { TaskCard } from "@/features/TaskCard";
+import { TaskType } from "@/shared/lib/utils/sortTasks";
 import { Task } from "@prisma/client";
 import { FC } from "react";
 
 interface TaskListPropsType {
-  tasks: Task[];
+  tasks: TaskType[];
 }
 
 export const TaskList: FC<TaskListPropsType> = ({ tasks }) => {

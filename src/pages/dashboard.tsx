@@ -31,13 +31,23 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const userProjectNames = await getUserProjectNames(userId);
       const projects = await prisma.project.findMany({
         where: { userId },
-        select: { id: true, taskIds: true },
+        select: { id: true, taskIds: true, isStarred: true },
       });
 
       const projectIDs = projects.map((projectId) => projectId.id);
       projectIDs.push(userId);
 
-      const weekTasks = await getWeekTasks(projectIDs);
+      const weekTasks = await (
+        await getWeekTasks(projectIDs)
+      ).map((task) => {
+        const isFavourite = Boolean(
+          projects.find((project) =>
+            project.taskIds.some((taskId) => taskId === task.id)
+          )?.isStarred
+        );
+
+        return { ...task, isFavourite };
+      });
 
       const projectAmount = userProjectNames.length;
       const totalTasksIds: string[] = [];
@@ -56,7 +66,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       const overdueTasks = await prisma.task.findMany({
         where: {
           id: { in: totalTasksIds },
-          deadline: { lt: Date.now() },
+          deadline: { lt: new Date().setHours(23, 59, 59, 999) },
           AND: { completed: 0 },
           NOT: { deadline: 0 },
         },
