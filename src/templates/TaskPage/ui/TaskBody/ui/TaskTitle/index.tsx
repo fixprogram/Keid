@@ -1,4 +1,5 @@
 import { useTextareaHeight } from "@/shared/lib/hooks/useTextareaHeight";
+import { AutoSizedTextarea } from "@/shared/ui/AutoSizedTextarea";
 import { useUpdateTaskTitle } from "@/templates/TaskPage/hooks/useUpdateTaskTitle";
 import { FC, useEffect, useRef, useState } from "react";
 
@@ -7,24 +8,17 @@ interface TaskTitlePropsType {
 }
 
 export const TaskTitle: FC<TaskTitlePropsType> = ({ initialTitle }) => {
-  const { title, textareaHeight, handleTextareaChange } =
-    useTextareaHeight(initialTitle);
-
   const handleUpdateTaskTitle = useUpdateTaskTitle();
-  const handleTextareaBlur = () => {
+  const handleTextareaBlur = (title: string) => {
     if (title.trim() !== initialTitle) {
       handleUpdateTaskTitle(title.trim());
     }
   };
 
   return (
-    <div className="relative">
-      <textarea
-        value={title}
-        onChange={handleTextareaChange}
-        className="text-xxl text-poppins text-white mt-8 font-semibold w-full"
-        style={{ backgroundColor: "inherit", overflowY: "hidden" }}
-        rows={textareaHeight}
+    <div className="mt-8">
+      <AutoSizedTextarea
+        initialTitle={initialTitle}
         onBlur={handleTextareaBlur}
       />
     </div>

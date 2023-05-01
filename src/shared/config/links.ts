@@ -29,5 +29,6 @@ export const links = {
     addComment: `${apiSubtask}/addComment`,
     deleteComment: `${apiSubtask}/deleteComment`,
     updateDeadline: `${apiSubtask}/updateDeadline`,
+    updateTitle: `${apiSubtask}/updateTitle`,
   },
 };

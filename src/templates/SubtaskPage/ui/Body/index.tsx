@@ -4,6 +4,7 @@ import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useAddComment } from "../../hooks/useAddComment";
 import { useDeleteComment } from "../../hooks/useDeleteComment";
 import { SubtaskDeadline } from "./ui/SubtaskDeadline";
+import { SubtaskTitle } from "./ui/SubtaskTitle";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.subtask.title);
@@ -31,9 +32,11 @@ export default function TaskBody() {
         {parentTaskName}
       </b>
 
-      <h2 className="text-xxl text-poppins text-white mt-2 font-semibold">
+      {/* <h2 className="text-xxl text-poppins text-white mt-2 font-semibold">
         {title}
-      </h2>
+      </h2> */}
+
+      <SubtaskTitle initialTitle={title} />
 
       <SubtaskDeadline />
 

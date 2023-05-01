@@ -1,37 +1,34 @@
 import { links } from "@/shared/config/links";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { closeCalendar } from "../store/taskSlice";
 
-export function useUpdateTaskTitle() {
+export function useUpdateSubtaskTitle() {
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
-  const taskId = router.query.id;
+  const subtaskId = router.query.id;
 
-  const handleUpdateTaskTitle = useCallback(
+  const handleUpdateSubtaskTitle = useCallback(
     (title: string) => {
       if (title.length < 1) {
         return;
       }
 
-      fetch(links.task.updateTitle, {
+      fetch(links.subtask.updateTitle, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          taskId,
+          subtaskId,
           title,
         }),
       }).then(async (res) => {
         console.log("Res: ", res);
       });
     },
-    [taskId]
+    [subtaskId]
   );
 
-  return handleUpdateTaskTitle;
+  return handleUpdateSubtaskTitle;
 }
