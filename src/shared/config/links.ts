@@ -1,29 +1,33 @@
 const apiLnk = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/`;
+const apiProject = apiLnk + "project";
+const apiTask = apiLnk + "task";
+const apiSubtask = apiLnk + "subtask";
 
 export const links = {
   login: `${apiLnk}login`,
   signup: `${apiLnk}signup`,
   project: {
-    add: `${apiLnk}project/add`,
-    delete: `${apiLnk}project/delete`,
-    toggleStarred: `${apiLnk}/project/toggleStarred`,
-    changeProjectName: `${apiLnk}/project/changeProjectName`,
+    add: `${apiProject}/add`,
+    delete: `${apiProject}/delete`,
+    toggleStarred: `${apiProject}//toggleStarred`,
+    changeProjectName: `${apiProject}//changeProjectName`,
   },
   task: {
-    add: `${apiLnk}task/add`,
-    delete: `${apiLnk}task/delete`,
-    updateProgress: `${apiLnk}task/updateProgress`,
-    complete: `${apiLnk}task/complete`,
-    addComment: `${apiLnk}task/addComment`,
-    deleteComment: `${apiLnk}task/deleteComment`,
-    updateDeadline: `${apiLnk}task/updateDeadline`,
+    add: `${apiTask}/add`,
+    delete: `${apiTask}/delete`,
+    updateProgress: `${apiTask}/updateProgress`,
+    complete: `${apiTask}/complete`,
+    addComment: `${apiTask}/addComment`,
+    deleteComment: `${apiTask}/deleteComment`,
+    updateDeadline: `${apiTask}/updateDeadline`,
+    updateTitle: `${apiTask}/updateTitle`,
   },
   subtask: {
-    add: `${apiLnk}subtask/add`,
-    delete: `${apiLnk}subtask/delete`,
-    complete: `${apiLnk}subtask/complete`,
-    addComment: `${apiLnk}subtask/addComment`,
-    deleteComment: `${apiLnk}subtask/deleteComment`,
-    updateDeadline: `${apiLnk}subtask/updateDeadline`,
+    add: `${apiSubtask}/add`,
+    delete: `${apiSubtask}/delete`,
+    complete: `${apiSubtask}/complete`,
+    addComment: `${apiSubtask}/addComment`,
+    deleteComment: `${apiSubtask}/deleteComment`,
+    updateDeadline: `${apiSubtask}/updateDeadline`,
   },
 };

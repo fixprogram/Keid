@@ -6,6 +6,7 @@ import { useAddComment } from "../../hooks/useAddComment";
 import { useDeleteComment } from "../../hooks/useDeleteComment";
 import SubtaskList from "./ui/SubtaskList";
 import { TaskDeadline } from "./ui/TaskDeadline";
+import { TaskTitle } from "./ui/TaskTitle";
 
 export default function TaskBody() {
   const title = useAppSelector((state) => state.task.title);
@@ -24,9 +25,11 @@ export default function TaskBody() {
 
   return (
     <section className="flex flex-col grow">
-      <h2 className="text-xxl text-poppins text-white mt-8 font-semibold">
+      {/* <h2 className="text-xxl text-poppins text-white mt-8 font-semibold">
         {title}
-      </h2>
+      </h2> */}
+
+      <TaskTitle initialTitle={title} />
 
       <div className="flex flex-wrap items-end gap-6 mt-6">
         <div className="flex gap-4">
