@@ -1,18 +1,19 @@
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import AddButton from "@/shared/ui/AddButton";
 import { useTaskFormSubmit } from "@/widgets/Navigation/hooks/useTaskFormSubmit";
-import { toggleTaskWithDeadline } from "../../store/addTaskSlice";
-import InputTaskName from "./ui/InputTaskName";
-import SelectProject from "./ui/SelectProject";
-import TaskDeadline from "./ui/TaskDeadline";
-import { TaskRepeats } from "./ui/TaskRepeats";
+import { FC } from "react";
+import { shallow } from "zustand/shallow";
+import { usePopupTaskStore } from "../../popupTaskStore";
+import { InputTaskName } from "../InputTaskName";
+import { SelectProject } from "../SelectProject";
+import { TaskDeadline } from "../TaskDeadline";
+import { TaskRepeats } from "../TaskRepeats";
 
-export default function PopupBody() {
+export const PopupBody: FC = () => {
   const handleFormSubmit = useTaskFormSubmit();
-  const dispatch = useAppDispatch();
-  const isWithDeadline = useAppSelector(
-    (state) => state.addTask.isWithDeadline
+
+  const [isWithDeadline, toggleTaskWithDeadline] = usePopupTaskStore(
+    (state) => [state.isWithDeadline, state.toggleTaskWithDeadline],
+    shallow
   );
 
   return (
@@ -30,9 +31,7 @@ export default function PopupBody() {
                 type="checkbox"
                 id="no_deadline"
                 className="hidden peer"
-                onChange={() => {
-                  dispatch(toggleTaskWithDeadline());
-                }}
+                onChange={toggleTaskWithDeadline}
                 checked={isWithDeadline}
               />
               <label
@@ -54,4 +53,4 @@ export default function PopupBody() {
       </form>
     </section>
   );
-}
+};

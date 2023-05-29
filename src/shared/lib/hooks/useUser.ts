@@ -1,25 +1,30 @@
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+// import { getSession } from "@/app/lib/session";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/navigation";
 
-export interface User {
-  name: string;
-  email: string;
-  id: string;
-}
+// export interface User {
+//   name: string;
+//   email: string;
+//   id: string;
+// }
 
-export function useUser() {
-  const { data, status } = useSession();
-  const router = useRouter();
+// export function useUser() {
+//   // const { data, status } = useSession();
+//   const session = getSession();
 
-  if (status === "loading") {
-    return null;
-  }
+//   console.log("session: ", session);
 
-  if (status === "unauthenticated") {
-    router.replace("/welcome");
-  }
+//   // const router = useRouter();
 
-  const user = data?.user as User;
+//   // if (status === "loading") {
+//   //   return null;
+//   // }
 
-  return user;
-}
+//   // if (status === "unauthenticated") {
+//   //   router.replace("/welcome");
+//   // }
+
+//   // const user = data?.user as User;
+
+//   // return user;
+// }

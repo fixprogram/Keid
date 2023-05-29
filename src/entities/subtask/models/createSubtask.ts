@@ -28,6 +28,7 @@ export const createSubtask = async ({
       progress: 0,
       completed: 0,
       comments: [],
+      description: "",
     },
   });
 

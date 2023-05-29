@@ -4,7 +4,7 @@ import InputLabel from "@/shared/ui/InputLabel";
 import PageTitle from "@/shared/ui/PageTitle";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FormEvent, useRef } from "react";
 import { links } from "@/shared/config/links";
 

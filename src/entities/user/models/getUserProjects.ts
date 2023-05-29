@@ -1,7 +1,7 @@
 import { prisma } from "@/db.server";
-import { getProjectProgress } from "@/entities/project/models/getProjectProgress";
-import { getProjectTaskAmount } from "@/entities/project/models/getProjectTaskAmount";
-import { getCompletedTaskAmount } from "@/entities/task/models/getCompletedTaskAmount";
+import { getProjectProgress } from "@/entities/project/api/getProjectProgress";
+import { getProjectTaskAmount } from "@/entities/project/api/getProjectTaskAmount";
+import { getCompletedTaskAmount } from "@/entities/task/api/getCompletedTaskAmount";
 
 export async function getUserProjects(userId: string) {
   const userProjects = await prisma.project.findMany({

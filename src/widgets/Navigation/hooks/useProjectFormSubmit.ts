@@ -1,48 +1,50 @@
 import { links } from "@/shared/config/links";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
-import { setProjectName } from "../ui/PopupProject/store/addProjectSlice";
-import { closePopupAdd } from "../model/navigationSlice";
+import { shallow } from "zustand/shallow";
+import { useNavigationStore } from "../model/navigationStore";
+import { usePopupProjectStore } from "../ui/PopupProject/popupProjectStore";
+
+type MutationProjectType = {
+  userId: string;
+  projectName: string;
+  projectStyle: string;
+};
 
 export function useProjectFormSubmit() {
   const router = useRouter();
 
-  const dispatch = useAppDispatch();
+  const [userId, closePopupAdd] = useNavigationStore(
+    (state) => [state.userId, state.closePopupAdd],
+    shallow
+  );
 
-  const userId = useAppSelector((state) => state.overview.userId);
-  const projectName = useAppSelector((state) => state.addProject.projectName);
-  const projectStyle = useAppSelector((state) => state.addProject.projectStyle);
+  const [projectName, projectStyle, resetProject] = usePopupProjectStore(
+    (state) => [state.projectName, state.projectStyle, state.resetProject],
+    shallow
+  );
+
+  const mutation = useMutation({
+    mutationKey: ["projects"],
+    mutationFn: (newProject: MutationProjectType) =>
+      axios.post(links.project.add, newProject),
+    onSuccess: (data) => {
+      resetProject();
+      closePopupAdd();
+
+      router.push(`/projects/${data.data.id}`);
+    },
+  });
 
   const handleFormSubmit = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch(links.project.add, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          projectName,
-          projectStyle,
-        }),
-      }).then(async (res) => {
-        console.log("Res: ", res);
-
-        const body = await res.json();
-
-        dispatch(setProjectName(""));
-        dispatch(closePopupAdd());
-
-        console.log("body: ", body);
-        if (body.id) router.push(`/projects/${body.id}`);
-      });
+      mutation.mutate({ userId, projectName, projectStyle });
     },
-    [userId, projectName, projectStyle, dispatch, router]
+    [userId, projectName, projectStyle, mutation]
   );
 
   return handleFormSubmit;

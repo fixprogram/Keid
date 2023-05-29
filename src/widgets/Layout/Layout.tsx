@@ -1,7 +1,7 @@
+import Sprite from "@/shared/components/Sprite";
 import { FC } from "react";
 import Navigation from "../Navigation";
 import Container from "./components/Container";
-import Sprite from "../../shared/components/Sprite";
 
 interface LaoutPropsType {
   withNav?: boolean;

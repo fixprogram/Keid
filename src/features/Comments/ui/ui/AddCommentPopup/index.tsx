@@ -1,8 +1,18 @@
+import { useCommentsStore } from "@/features/Comments/models/commentsStore";
+import { useAddComment } from "@/features/Comments/models/useAddComment";
 import AddButton from "@/shared/ui/AddButton";
 import Overlay from "@/shared/ui/Overlay";
 import Popup from "@/shared/ui/Popup";
 import PopupLine from "@/shared/ui/PopupLine";
-import { FC, Fragment, useEffect, useRef, useState } from "react";
+import {
+  FC,
+  Fragment,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { shallow } from "zustand/shallow";
 
 interface AddCommentPopupPropsType {
   onSubmit: (comment: string) => void;
@@ -15,7 +25,11 @@ export const AddCommentPopup: FC<AddCommentPopupPropsType> = ({
   isPopupOpened,
   onPopupClose,
 }) => {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useCommentsStore(
+    (state) => [state.comment, state.setComment],
+    shallow
+  );
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const popupShowedStyles =
@@ -23,7 +37,10 @@ export const AddCommentPopup: FC<AddCommentPopupPropsType> = ({
       ? { bottom: 32 }
       : { bottom: 0, left: 0, right: 0, borderRadius: "24px 24px 0 0" };
 
-  const handleFormSubmit = () => onSubmit(comment);
+  const handleFormSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    onSubmit(comment);
+  };
 
   useEffect(() => {
     if (isPopupOpened && textareaRef.current) {

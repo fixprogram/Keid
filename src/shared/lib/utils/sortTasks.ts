@@ -1,8 +1,4 @@
-import { Task } from "@prisma/client";
-
-export type TaskType = Task & {
-  isFavourite: boolean;
-};
+import { TaskType } from "@/shared/config/types";
 
 const sortTaskByProgress = (a: TaskType, b: TaskType) => {
   if (a.progress > b.progress) {

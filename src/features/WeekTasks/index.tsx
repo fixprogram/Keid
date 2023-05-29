@@ -1,16 +1,30 @@
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { toggleWeekTasks } from "./store/weekTasksSlice";
-import TaskList from "./ui/TaskList";
+import { TaskType } from "@/shared/config/types";
+import { useDashboardStore } from "@/templates/DashboardPage/dashboardStore";
+import { FC } from "react";
+import { shallow } from "zustand/shallow";
+import { EmptyWeekTasks } from "./ui/EmptyWeekTasks";
+import { TaskList } from "./ui/TaskList";
 
-export default function WeekTasks() {
-  const dispatch = useAppDispatch();
-  const isOpened = useAppSelector((state) => state.weekTasks.isOpened);
-  const taskAmount = useAppSelector((state) => state.weekTasks.taskAmount);
-  const completedTaskAmount = useAppSelector(
-    (state) => state.weekTasks.completedTaskAmount
+interface WeekTasksPropsType {
+  tasks: TaskType[];
+}
+
+export const WeekTasks: FC<WeekTasksPropsType> = ({ tasks }) => {
+  const [isWeekTasksShowed, toggleWeekTasksShowed] = useDashboardStore(
+    (state) => [state.isWeekTasksShowed, state.toggleWeekTasksShowed],
+    shallow
   );
-  const progress = useAppSelector((state) => state.weekTasks.progress);
+  const taskAmount = tasks.length;
+
+  if (taskAmount === 0) {
+    return <EmptyWeekTasks />;
+  }
+
+  const completedTaskAmount = tasks.filter((task) => task.completed).length;
+  const progress = Math.floor((completedTaskAmount / taskAmount) * 100);
+
+  const handleToggle = () => toggleWeekTasksShowed();
+
   return (
     <section
       className="mt-8 p-1 rounded-[20px] relative"
@@ -20,9 +34,11 @@ export default function WeekTasks() {
       }}
     >
       <section
-        className={`${isOpened ? "bg-background1" : ""} p-5 rounded-[18px]`}
+        className={`${
+          isWeekTasksShowed ? "bg-background1" : ""
+        } p-5 rounded-[18px]`}
       >
-        <div className={`${isOpened ? "text-white" : "text-active"}`}>
+        <div className={`${isWeekTasksShowed ? "text-white" : "text-active"}`}>
           <div className="flex items-start justify-between">
             <div>
               <h3 className="font-poppins font-semibold text-xl">Week Tasks</h3>
@@ -31,14 +47,14 @@ export default function WeekTasks() {
               </p>
             </div>
 
-            <button onClick={() => dispatch(toggleWeekTasks())}>
-              {isOpened ? "Close" : "Open"}
+            <button onClick={handleToggle}>
+              {isWeekTasksShowed ? "Close" : "Open"}
             </button>
           </div>
 
-          {isOpened ? <TaskList /> : null}
+          {isWeekTasksShowed ? <TaskList tasks={tasks} /> : null}
 
-          {isOpened ? null : (
+          {isWeekTasksShowed ? null : (
             <div className="flex gap-[25px] items-center mt-[17px]">
               <div className="h-[12px] w-[200px] bg-white rounded-[5px]">
                 <div
@@ -60,4 +76,4 @@ export default function WeekTasks() {
       </section>
     </section>
   );
-}
+};

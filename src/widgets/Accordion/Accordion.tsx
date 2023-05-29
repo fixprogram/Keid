@@ -1,5 +1,5 @@
-import { TaskCard } from "@/features/TaskCard";
-import { TaskType } from "@/shared/lib/utils/sortTasks";
+import { TaskCard } from "@/entities/task/ui/TaskCard";
+import { TaskType } from "@/shared/config/types";
 import { useState } from "react";
 import Icon from "../../shared/ui/Icon";
 

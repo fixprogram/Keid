@@ -5,15 +5,21 @@ interface RoundProgressBarProps {
     firstStopColor: string;
     secondStopColor: string;
   };
+  isOnPage?: boolean;
 }
 
 export default function RoundProgressBar({
   id,
   progress = 0,
   stopColors,
+  isOnPage = false,
 }: RoundProgressBarProps) {
   return (
-    <div className="min-w-[40px] h-[40px] rounded-full bg-background1 grid place-items-center relative">
+    <div
+      className={`min-w-[40px] h-[40px] rounded-full ${
+        isOnPage ? "bg-background2" : "bg-background1"
+      } grid place-items-center relative`}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"

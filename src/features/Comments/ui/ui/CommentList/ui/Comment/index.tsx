@@ -1,4 +1,4 @@
-import { CommentType } from "@/features/Comments/models/types";
+import { CommentType } from "@/features/Comments/config/types";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import Icon from "@/shared/ui/Icon";
 // import { useDeleteComment } from "@/templates/TaskPage/hooks/useDeleteComment";

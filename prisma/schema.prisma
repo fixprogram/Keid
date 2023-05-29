@@ -9,6 +9,7 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt       DateTime @default(now())
@@ -29,6 +30,7 @@ model Project {
   style           String
   taskIds         String[]
   isStarred       Boolean
+  completed       Int
 }
 
 model Task {
@@ -42,6 +44,7 @@ model Task {
   subtaskIds     String[]
   comments       Comment[]
   repeats        String
+  description    String
 }
 
 model Subtask {
@@ -50,6 +53,17 @@ model Subtask {
   taskId         String
   deadline       Int
   progress       Int
+  completed      Int
+  comments       Comment[]
+  description    String
+}
+
+model Habit {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String  
+  userId         String
+  style          String
+  streak         Int
   completed      Int
   comments       Comment[]
 }

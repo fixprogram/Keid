@@ -1,16 +1,25 @@
-import { TaskCard } from "@/features/TaskCard";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
+import { TaskCard } from "@/entities/task/ui/TaskCard";
+import { Task } from "@prisma/client";
+import { FC } from "react";
 
-export default function TaskList() {
-  const tasks = useAppSelector((state) => state.weekTasks.tasks);
+type TaskType = Task & { type?: string; isFavourite: boolean };
 
+interface TaskListPropsType {
+  tasks: TaskType[];
+}
+
+export const TaskList: FC<TaskListPropsType> = ({ tasks }) => {
   return (
     <ul className="mt-4 flex flex-col gap-4">
       {tasks.map((task) => (
         <li key={task.id}>
-          <TaskCard key={task.id} link={`/tasks/${task.id}`} {...task} />
+          <TaskCard
+            key={task.id}
+            link={task.type ? `/subtasks/${task.id}` : `/tasks/${task.id}`}
+            {...task}
+          />
         </li>
       ))}
     </ul>
   );
-}
+};

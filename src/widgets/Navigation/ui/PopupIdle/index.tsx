@@ -1,5 +1,4 @@
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { setPopupAddState } from "../../model/navigationSlice";
+import { useNavigationStore } from "../../model/navigationStore";
 
 type PopupAddState = "task" | "project";
 
@@ -12,10 +11,16 @@ const popupButtons = [
     type: "project" as PopupAddState,
     name: "Create Project",
   },
+  {
+    type: "habit" as PopupAddState,
+    name: "Create Habit",
+  },
 ];
 
 export default function PopupIdle() {
-  const dispatch = useAppDispatch();
+  const setPopupAddState = useNavigationStore(
+    (state) => state.setPopupAddState
+  );
 
   return (
     <ul className="mt-2">
@@ -23,7 +28,7 @@ export default function PopupIdle() {
         <li
           key={btn.name}
           className="border-b-[1px] border-white/5 p-5 flex items-start justify-between"
-          onClick={() => dispatch(setPopupAddState(btn.type))}
+          onClick={() => setPopupAddState(btn.type)}
         >
           <b className="text-lg text-white font-bold ml-9">{btn.name}</b>
         </li>

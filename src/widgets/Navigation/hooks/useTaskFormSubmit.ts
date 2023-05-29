@@ -1,64 +1,67 @@
 import { links } from "@/shared/config/links";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
-import { resetTask } from "../ui/PopupTask/store/addTaskSlice";
-import { closePopupAdd } from "../model/navigationSlice";
+import { shallow } from "zustand/shallow";
+import { useNavigationStore } from "../model/navigationStore";
+import { usePopupTaskStore } from "../ui/PopupTask/popupTaskStore";
+
+type MutationTaskType = {
+  userId: string;
+  taskName: string;
+  taskStyle: string;
+  deadline: number;
+  projectName: string;
+  repeats: string;
+};
 
 export function useTaskFormSubmit() {
   const router = useRouter();
 
-  const dispatch = useAppDispatch();
+  const [userId, closePopupAdd] = useNavigationStore(
+    (state) => [state.userId, state.closePopupAdd],
+    shallow
+  );
 
-  const userId = useAppSelector((state) => state.overview.userId);
-  const taskName = useAppSelector((state) => state.addTask.taskName);
-  const taskStyle = useAppSelector((state) => state.addTask.taskStyle);
-  const deadline = useAppSelector((state) => state.addTask.deadline);
-  const repeats = useAppSelector((state) => state.addTask.activeRepeatsOption);
-  const projectName = useAppSelector((state) => state.addTask.taskProject);
+  const taskData = usePopupTaskStore(
+    (state) => ({
+      taskName: state.taskName,
+      taskStyle: state.taskStyle,
+      deadline: state.deadline,
+      projectName:
+        state.activeProject.title === "No project"
+          ? ""
+          : state.activeProject.title,
+      repeats: state.activeRepeatsOption,
+    }),
+    shallow
+  );
+
+  const resetTask = usePopupTaskStore((state) => state.resetTask);
+
+  const mutation = useMutation({
+    mutationKey: ["tasks"],
+    mutationFn: (newTask: MutationTaskType) =>
+      axios.post(links.task.add, newTask),
+    onSuccess: (data) => {
+      resetTask();
+      closePopupAdd();
+
+      router.push(`/tasks/${data.data.id}`);
+    },
+  });
 
   const handleFormSubmit = useCallback(
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      fetch(links.task.add, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          taskName,
-          taskStyle,
-          deadline,
-          projectName:
-            projectName.title === "No project" ? "" : projectName.title,
-          repeats,
-        }),
-      }).then(async (res) => {
-        console.log("Res: ", res);
-
-        const body = await res.json();
-
-        dispatch(resetTask());
-        dispatch(closePopupAdd());
-
-        console.log("body: ", body);
-        if (body.id) router.push(`/tasks/${body.id}`);
+      mutation.mutate({
+        userId,
+        ...taskData,
       });
     },
-    [
-      userId,
-      taskName,
-      taskStyle,
-      deadline,
-      projectName,
-      repeats,
-      dispatch,
-      router,
-    ]
+    [userId, taskData, mutation]
   );
 
   return handleFormSubmit;

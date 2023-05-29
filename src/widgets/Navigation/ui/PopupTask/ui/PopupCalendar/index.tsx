@@ -1,38 +1,32 @@
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import Calendar from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import useInitialDeadline from "@/widgets/Navigation/hooks/useInitialDeadline";
-import { setCalendarClose, setTaskDeadline } from "../../store/addTaskSlice";
+import { shallow } from "zustand/shallow";
+import { usePopupTaskStore } from "../../popupTaskStore";
 
-export default function PopupCalendar() {
-  const dispatch = useAppDispatch();
-  const deadline = useAppSelector((state) => state.addTask.deadline);
-  const isCalendarOpen = useAppSelector(
-    (state) => state.addTask.isCalendarOpen
-  );
+export const PopupCalendar = () => {
+  const [deadline, isCalendarOpen, setTaskDeadline, closeCalendar] =
+    usePopupTaskStore(
+      (state) => [
+        state.deadline,
+        state.isCalendarOpened,
+        state.setTaskDeadline,
+        state.closeCalendar,
+      ],
+      shallow
+    );
   const initialDeadline = useInitialDeadline(deadline, isCalendarOpen);
 
   const date = new Date(deadline);
 
-  console.log("Date: ", date);
-
-  function setDeadline(deadline: number) {
-    dispatch(setTaskDeadline(deadline));
-  }
-
   function cancelCalendar() {
-    setDeadline(initialDeadline);
-    dispatch(setCalendarClose());
-  }
-
-  function saveDeadline() {
-    dispatch(setCalendarClose());
+    setTaskDeadline(initialDeadline);
+    closeCalendar();
   }
 
   return (
     <section className="px-5 pb-6">
-      <Calendar date={date} setDate={setDeadline} />
+      <Calendar date={date} setDate={setTaskDeadline} />
       <div className="flex justify-between items-end mt-[20px]">
         <button
           type="button"
@@ -42,9 +36,9 @@ export default function PopupCalendar() {
           Cancel
         </button>
         <div className="w-[100px]">
-          <PrimaryButton text="Done" onClick={saveDeadline} />
+          <PrimaryButton text="Done" onClick={closeCalendar} />
         </div>
       </div>
     </section>
   );
-}
+};

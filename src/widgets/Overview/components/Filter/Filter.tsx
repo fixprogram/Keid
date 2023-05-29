@@ -1,43 +1,41 @@
 import FilterBar from "@/features/FilterBar";
+import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import Icon from "@/shared/ui/Icon";
 import PopupLine from "@/shared/ui/PopupLine";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
 import {
-  closeSettings,
-  openSettings,
-  setActiveFilter,
-} from "@/widgets/Overview/store/overviewSlice";
+  FILTERS,
+  FilterType,
+  useDashboardStore,
+} from "@/templates/DashboardPage/dashboardStore";
+import { useState } from "react";
+import { shallow } from "zustand/shallow";
 import { CARDS_CONFIG } from "../../lib/config";
 import { CardType } from "../../lib/types";
-import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 
 const TYPES: CardType[] = ["Task", "Project", "Habit"];
+// const FILTERS = ["Overview", "Productivity"];
 
 export default function Filter() {
-  const dispatch = useAppDispatch();
-  const overview = useAppSelector((state) => state.overview);
+  // const [activeFilter, setActiveFilter] = useState(FILTERS[0]);
 
-  const filterClickHandler = (filter: string) =>
-    dispatch(setActiveFilter(filter));
-  const { settingsOpened, filters, activeFilter } = overview;
+  const [activeFilter, setActiveFilter] = useDashboardStore(
+    (state) => [state.activeFilter, state.setActiveFilter],
+    shallow
+  );
 
-  const handlePopupClose = () => dispatch(closeSettings());
+  const handleFilterClick = (filter: FilterType) => {
+    setActiveFilter(filter);
+  };
 
   return (
     <FilterBar
-      filterClickHandler={filterClickHandler}
-      filters={filters}
+      filterClickHandler={handleFilterClick}
+      filters={FILTERS}
       activeFilter={activeFilter}
     >
-      <button type="button" onClick={() => dispatch(openSettings())}>
-        <Icon name="filter" width={25} height={25} />
-      </button>
-
       <PopupWithOverlay
-        isShowed={settingsOpened}
-        onClose={handlePopupClose}
         positioned="Bottom"
+        btn={<Icon name="filter" width={25} height={25} />}
       >
         <PopupLine />
 

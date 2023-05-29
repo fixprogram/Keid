@@ -1,4 +1,4 @@
-import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 
 interface StyleListProps {
@@ -37,7 +37,7 @@ export default function StyleList({
                 className="w-4 h-4 rounded-full"
                 style={{
                   background:
-                    projectStyles[styleItem as keyof ProjectStyleType].gradient,
+                    projectStyles[styleItem as ProjectStyleKey].gradient,
                 }}
                 onClick={() => setStyle(styleItem)}
               ></button>

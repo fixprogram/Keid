@@ -1,4 +1,4 @@
-import { projectStyles, ProjectStyleType } from "@/shared/config/projectStyles";
+import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Link from "next/link";
 
 type Props = {

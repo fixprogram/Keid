@@ -1,22 +1,39 @@
 import { prisma } from "@/db.server";
+import { serviceComments } from "@/shared/config/serviceComments";
+import { Comment } from "@prisma/client";
 
-export const updateSubtaskDeadline = async (
+export const updateSubtaskProgress = async (
   subtaskId: string,
-  newDeadline: number
+  newProgress: number,
+  comment: Comment
 ) => {
   const subtask = await prisma.subtask.findUnique({
     where: { id: subtaskId },
+    select: { comments: true, progress: true },
   });
 
   if (!subtask) {
-    throw new Error(`Task with id ${subtask} wasn't found`);
+    throw new Error(`Subtask with id ${subtaskId} wasn't found`);
   }
 
-  const data = {
-    deadline: newDeadline,
+  const progressDifference = newProgress - subtask.progress;
+
+  const newComment = {
+    ...comment,
+    serviceContent:
+      serviceComments.subtask.updatedProgress +
+      `${progressDifference > 0 ? " +" : " "}${progressDifference}%`,
   };
 
-  await prisma.subtask.update({ where: { id: subtask.id }, data });
+  const data = {
+    progress: newProgress,
+    comments: [...subtask.comments, newComment],
+  };
 
-  return subtask;
+  const updatedSubtask = await prisma.subtask.update({
+    where: { id: subtaskId },
+    data,
+  });
+
+  return updatedSubtask;
 };

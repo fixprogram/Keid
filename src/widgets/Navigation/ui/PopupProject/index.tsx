@@ -1,24 +1,19 @@
-import { useAppDispatch } from "@/shared/lib/hooks/useAppDispatch";
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
 import { useEffect } from "react";
-import PopupBody from "./components/PopupBody";
-import PopupStyleList from "./components/PopupStyleList";
-import { setProjectStyle } from "./store/addProjectSlice";
+import { useNavigationStore } from "../../model/navigationStore";
+import PopupBody from "./ui/PopupBody";
+import { PopupStyleList } from "./ui/PopupStyleList";
+import { usePopupProjectStore } from "./popupProjectStore";
 
 export default function PopupProject() {
-  const dispatch = useAppDispatch();
-
-  const isStyleListOpened = useAppSelector(
-    (state) => state.addProject.isStyleListOpened
-  );
-
-  const projectAmount = useAppSelector((state) => state.overview.projectAmount);
+  const [isStyleListOpened, setProjectStyle] = usePopupProjectStore((state) => [
+    state.isStyleListOpened,
+    state.setProjectStyle,
+  ]);
+  const projectAmount = useNavigationStore((state) => state.projectAmount);
 
   useEffect(() => {
-    dispatch(
-      setProjectStyle(projectAmount <= 6 ? `0${projectAmount + 1}` : "01")
-    );
-  }, [dispatch, projectAmount]);
+    setProjectStyle(projectAmount <= 6 ? `0${projectAmount + 1}` : "01");
+  }, [setProjectStyle, projectAmount]);
 
   if (isStyleListOpened) {
     return <PopupStyleList />;

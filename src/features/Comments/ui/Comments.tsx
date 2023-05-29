@@ -1,24 +1,30 @@
-// import { CommentType } from "@/application/types/comment";
-import { FC, useState } from "react";
-import { CommentType } from "../models/types";
+import { FC } from "react";
+import { shallow } from "zustand/shallow";
+import { useCommentsStore } from "../models/commentsStore";
+import { CommentType } from "../config/types";
+import { useAddComment } from "../models/useAddComment";
+import { useDeleteComment } from "../models/useDeleteComment";
 import { AddCommentPopup } from "./ui/AddCommentPopup";
 import { CommentList } from "./ui/CommentList";
+import { ItemType } from "@/shared/config/types";
 
 interface CommentsPropsType {
   comments: CommentType[];
-  onSubmit: (comment: string) => null | undefined;
-  onDelete: (time: string) => void;
+  itemType: ItemType;
 }
 
-export const Comments: FC<CommentsPropsType> = ({
-  comments,
-  onSubmit,
-  onDelete,
-}) => {
-  const [isPopupOpened, setPopupOpened] = useState(false);
+export const Comments: FC<CommentsPropsType> = ({ comments, itemType }) => {
+  const [isPopupOpened, setPopupOpened, reset] = useCommentsStore(
+    (state) => [state.isPopupOpened, state.setPopupOpened, state.reset],
+    shallow
+  );
+
+  const handleAddComment = useAddComment(itemType);
+  const handleDeleteComment = useDeleteComment(itemType);
+
   return (
     <>
-      <CommentList comments={comments} onDelete={onDelete} />
+      <CommentList comments={comments} onDelete={handleDeleteComment} />
 
       <div className="flex mt-auto p-9 pb-3 placeholder:text-white">
         <input
@@ -27,7 +33,7 @@ export const Comments: FC<CommentsPropsType> = ({
           onClick={(e) => {
             const target = e.target as HTMLTextAreaElement;
             target.blur();
-            setPopupOpened(true);
+            setPopupOpened();
           }}
           className="ml-8 placeholder:text-white font-sans font-medium text-sm"
           style={{ background: "inherit" }}
@@ -36,9 +42,9 @@ export const Comments: FC<CommentsPropsType> = ({
       </div>
 
       <AddCommentPopup
-        onSubmit={onSubmit}
+        onSubmit={handleAddComment}
         isPopupOpened={isPopupOpened}
-        onPopupClose={() => setPopupOpened(false)}
+        onPopupClose={reset}
       />
     </>
   );

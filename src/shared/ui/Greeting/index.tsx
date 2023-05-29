@@ -1,17 +1,13 @@
-import { User, useUser } from "@/shared/lib/hooks/useUser";
+import { FC } from "react";
 
-export default function Greeting() {
-  const user = useUser() as User;
+interface GreetingPropsType {
+  name: string;
+}
 
-  if (!user) {
-    return null;
-  }
-
-  const { name } = user;
-
+export const Greeting: FC<GreetingPropsType> = ({ name }) => {
   return (
     <h2 className="text-white font-poppins font-semibold text-xxl mt-[22px]">
       {`Hello, ${name}`}
     </h2>
   );
-}
+};

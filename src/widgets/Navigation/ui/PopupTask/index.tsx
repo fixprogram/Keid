@@ -1,14 +1,13 @@
-import { useAppSelector } from "@/shared/lib/hooks/useAppSelector";
-import PopupBody from "./ui/PopupBody";
-import PopupStyleList from "./ui/PopupBody/ui/PopupStyleList";
-import PopupCalendar from "./ui/PopupCalendar";
+import { shallow } from "zustand/shallow";
+import { usePopupTaskStore } from "./popupTaskStore";
+import { PopupBody } from "./ui/PopupBody";
+import { PopupCalendar } from "./ui/PopupCalendar";
+import { PopupStyleList } from "./ui/PopupStyleList";
 
 export default function PopupTask() {
-  const isCalendarOpen = useAppSelector(
-    (state) => state.addTask.isCalendarOpen
-  );
-  const isStyleListOpened = useAppSelector(
-    (state) => state.addTask.isStyleListOpened
+  const [isCalendarOpen, isStyleListOpened] = usePopupTaskStore(
+    (state) => [state.isCalendarOpened, state.isStyleListOpened],
+    shallow
   );
 
   if (isCalendarOpen) return <PopupCalendar />;

@@ -1,4 +1,4 @@
-import { CommentType } from "@/features/Comments/models/types";
+import { CommentType } from "@/features/Comments/config/types";
 import { FC } from "react";
 import { Comment } from "./ui/Comment";
 

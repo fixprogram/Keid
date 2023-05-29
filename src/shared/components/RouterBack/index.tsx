@@ -1,5 +1,5 @@
 import Icon from "@/shared/ui/Icon";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 type Props = {
   goBack?: () => void;

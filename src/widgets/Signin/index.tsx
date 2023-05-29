@@ -5,7 +5,7 @@ import RouterBack from "@/shared/components/RouterBack";
 import { signIn, SignInResponse } from "next-auth/react";
 import InputLabel from "@/shared/ui/InputLabel";
 import { useCallback, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface Props {
   email: string;

@@ -8,45 +8,43 @@ import {
 
 export const useTextareaHeight = (
   initialTitle: string,
-  textareaRef: MutableRefObject<HTMLTextAreaElement | null>
+  textareaRef: MutableRefObject<HTMLTextAreaElement>,
+  rowHeight = 40
 ) => {
   const [title, setTitle] = useState(initialTitle);
-  const [textareaHeight, setTextareaHeight] = useState(1);
+  // const [textareaHeight, setTextareaHeight] = useState(1);
 
-  const handleTextareaChange = useCallback(
-    (event: SyntheticEvent) => {
-      const target = event.target as HTMLTextAreaElement;
-      const height = target.scrollHeight;
-      const rowHeight = 40;
-      const trows = Math.ceil(height / rowHeight) - 1;
+  const handleTextareaChange = useCallback((event: SyntheticEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setTitle(target.value);
+  }, []);
 
-      const diff = trows - textareaHeight;
-
-      if (diff) {
-        console.log(trows - textareaHeight + " more rows");
-
-        setTextareaHeight((prevValue) => prevValue + diff);
-      }
-
-      setTitle(target.value);
-    },
-    [textareaHeight]
-  );
+  const resizeTextArea = useCallback(() => {
+    textareaRef.current.style.height = "auto";
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+  }, [textareaRef]);
 
   useEffect(() => {
-    if (textareaRef.current) {
-      const target = textareaRef.current as HTMLTextAreaElement;
-      const height = target.scrollHeight;
-      const rowHeight = 40;
-      const trows = Math.ceil(height / rowHeight) - 1;
+    resizeTextArea();
+  }, [resizeTextArea]);
 
-      const diff = trows - textareaHeight;
+  // useEffect(() => {
+  //   if (textareaRef.current) {
+  //     const target = textareaRef.current as HTMLTextAreaElement;
+  //     const height = target.scrollHeight;
+  //     const trows = Math.round(height / rowHeight) - 1;
 
-      if (diff) {
-        setTextareaHeight(1 + diff);
-      }
-    }
-  }, [textareaHeight]);
+  //     const diff = trows - textareaHeight;
 
-  return { textareaHeight, title, handleTextareaChange };
+  //     console.log("textareaHeight: ", textareaHeight);
+
+  //     if (diff > 0) {
+  //       console.log("diff: ", diff);
+  //       setTextareaHeight(diff);
+  //       // setTextareaHeight(1 + diff);
+  //     }
+  //   }
+  // }, [textareaHeight, rowHeight, textareaRef]);
+
+  return { textareaHeight: 1, title, handleTextareaChange };
 };
