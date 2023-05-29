@@ -15,45 +15,47 @@ export type ProjectType = {
 export type FilterType = "Overview" | "Productivity";
 export const FILTERS: FilterType[] = ["Overview", "Productivity"];
 
-// type DataType = {
-//   activityFeed: [];
-//   overdueTaskAmount: number;
-//   projectAmount: number;
-//   totalTaskAmount: number;
-//   projects: [];
-//   userName: string;
-//   weekTasks: [];
-// };
+type DataType = {
+  activityFeed: [];
+  overdueTaskAmount: number;
+  projectAmount: number;
+  totalTaskAmount: number;
+  projects: [];
+  userName: string;
+  weekTasks: [];
+  habits: [];
+};
 
 export interface ProjectsState {
-  // data: DataType;
+  data: DataType;
   activeFilter: FilterType;
-  // setData: (newData: DataType) => void;
+  setData: (newData: DataType) => void;
   isWeekTasksShowed: boolean;
   setActiveFilter: (newFilter: FilterType) => void;
   toggleWeekTasksShowed: () => void;
 }
 
 export const useDashboardStore = create<ProjectsState>((set, get) => ({
-  // data: {
-  //   activityFeed: [],
-  //   overdueTaskAmount: 0,
-  //   projectAmount: 0,
-  //   totalTaskAmount: 0,
-  //   projects: [],
-  //   userName: "",
-  //   weekTasks: [],
-  // },
+  data: {
+    activityFeed: [],
+    overdueTaskAmount: 0,
+    projectAmount: 0,
+    totalTaskAmount: 0,
+    projects: [],
+    userName: "",
+    weekTasks: [],
+    habits: [],
+  },
   isWeekTasksShowed: false,
   activeFilter: FILTERS[0],
   toggleWeekTasksShowed: () =>
     set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
-  // setData: (newData: DataType) =>
-  //   set(() => {
-  //     return {
-  //       data: newData,
-  //     };
-  //   }),
+  setData: (newData: DataType) =>
+    set(() => {
+      return {
+        data: newData,
+      };
+    }),
 
   setActiveFilter: (newActiveFilter: FilterType) =>
     set(() => ({

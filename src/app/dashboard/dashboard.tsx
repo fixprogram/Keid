@@ -14,7 +14,8 @@ import Cards from "@/widgets/Overview/components/Cards";
 import Filter from "@/widgets/Overview/components/Filter";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { shallow } from "zustand/shallow";
 
 const defaultDashboardData = {
   overdueTaskAmount: 0,
@@ -36,6 +37,11 @@ export default function Dashboard() {
   const { data } = useQuery({ queryKey: ["dashboard"], queryFn: getData });
   const activeFilter = useDashboardStore((state) => state.activeFilter);
 
+  const [dashboardData, setData] = useDashboardStore(
+    (state) => [state.data, state.setData],
+    shallow
+  );
+
   const {
     overdueTaskAmount,
     projectAmount,
@@ -45,7 +51,13 @@ export default function Dashboard() {
     projects,
     activityFeed,
     habits,
-  } = data ? data : defaultDashboardData;
+  } = dashboardData;
+
+  useEffect(() => {
+    if (data) {
+      setData(data);
+    }
+  }, [data]);
 
   return (
     <Layout>
