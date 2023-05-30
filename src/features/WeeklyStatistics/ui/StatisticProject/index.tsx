@@ -1,6 +1,7 @@
 import { CompletedTask } from "@/entities/task";
 import { links } from "@/shared/config/links";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
+import { getDateString } from "@/shared/lib/utils/getDateString";
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC, useState } from "react";
@@ -91,7 +92,12 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
       {isOpened ? (
         <div className="flex flex-col gap-4 mt-6">
           {tasks.map((task) => (
-            <CompletedTask key={task.id} {...task} link={`tasks/${task.id}`} />
+            <CompletedTask
+              key={task.id}
+              {...task}
+              link={`tasks/${task.id}`}
+              completed={getDateString(new Date(task.completed), false)}
+            />
           ))}
         </div>
       ) : null}
