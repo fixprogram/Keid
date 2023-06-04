@@ -11,6 +11,7 @@ import DueDate from "@/features/DueDate";
 import { Comments } from "@/features/Comments";
 import { Description } from "@/features/Description";
 import { TodoTitle } from "@/features/TodoTitle";
+import { TodoDeadline } from "@/features/TodoDeadline";
 
 async function getData(id: string) {
   const res = await fetch(`/api/subtasks/${id}`);
@@ -64,25 +65,9 @@ export default function Subtask({ id }: SubtaskPropsType) {
           {parentTitle}
         </b>
 
-        {/* <h2 className="text-xxl text-poppins text-white mt-2 font-semibold">
-          {title}
-        </h2> */}
-
         <TodoTitle initialTitle={title} todoType="subtask" />
 
-        {/* <SubtaskTitle initialTitle={title} /> */}
-
-        {deadline ? (
-          <div className="flex flex-wrap items-end gap-6 mt-6">
-            <DueDate
-              date={formattedDeadline}
-              dateColor={subtaskStyle.background}
-              circleColor={"#246BFD"}
-              //   onClick={handleOpenCalendar}
-            />
-          </div>
-        ) : null}
-        {/* <SubtaskDeadline /> */}
+        <TodoDeadline style={style} deadline={deadline} todoType="subtask" />
 
         <Description itemType="subtask" initialValue={description} />
 

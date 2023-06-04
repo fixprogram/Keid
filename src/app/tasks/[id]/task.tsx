@@ -13,6 +13,7 @@ import { TodoTitle } from "@/features/TodoTitle";
 import Link from "next/link";
 import { Description } from "@/features/Description";
 import { SubtaskList } from "@/features/SubtaskList/ui/SubtaskList";
+import { TodoDeadline } from "@/features/TodoDeadline";
 
 async function getData(id: string) {
   const res = await fetch(`/api/tasks/${id}`);
@@ -69,7 +70,7 @@ export default function Task({ id }: TaskPropType) {
             />
           </Link>
 
-          <TaskDeadline style={style} deadline={deadline} />
+          <TodoDeadline style={style} deadline={deadline} todoType="task" />
         </div>
 
         <Description itemType="task" initialValue={description} />
