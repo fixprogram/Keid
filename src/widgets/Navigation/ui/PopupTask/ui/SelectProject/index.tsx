@@ -34,6 +34,8 @@ export const SelectProject: FC = () => {
     return null;
   }
 
+  // console.log("projects: ", projects);
+
   return (
     <div className="flex items-center gap-4 mt-5">
       <Icon name="project" width={16} height={16} />

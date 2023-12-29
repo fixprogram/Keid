@@ -14,6 +14,8 @@ export default function CheckEmail({ email, setEmail, setType }: Props) {
     async (event: SyntheticEvent) => {
       event.preventDefault();
 
+      console.log(`links: `, links);
+
       await fetch(links.login, {
         method: "POST",
         headers: {

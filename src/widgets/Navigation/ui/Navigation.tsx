@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useNavigationStore } from "../model/navigationStore";
 import { useQuery } from "@tanstack/react-query";
 import Add from "./Add";
+import { useUserStore } from "@/entities/user";
 
 async function getData() {
   const res = await fetch(`/api/navigation`);
@@ -17,9 +18,13 @@ async function getData() {
 export default function Navigation() {
   const pathname = usePathname();
 
-  const { data } = useQuery({ queryKey: ["navigation"], queryFn: getData });
-
   const setData = useNavigationStore((state) => state.setData);
+  const userEmail = useUserStore((state) => state.email);
+
+  const { data } = useQuery({
+    queryKey: ["navigation", userEmail],
+    queryFn: getData,
+  });
 
   useEffect(() => {
     // Because it's not a next.js layout but just a component, then every time we change a page,

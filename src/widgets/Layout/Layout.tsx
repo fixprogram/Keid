@@ -3,13 +3,13 @@ import { FC } from "react";
 import Navigation from "../Navigation";
 import Container from "./components/Container";
 
-interface LaoutPropsType {
+interface LayoutPropsType {
   withNav?: boolean;
   children: React.ReactNode;
   isBottomGradientShowed?: boolean;
 }
 
-const Layout: FC<LaoutPropsType> = ({
+const Layout: FC<LayoutPropsType> = ({
   withNav = true,
   children,
   isBottomGradientShowed = true,

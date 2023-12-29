@@ -17,16 +17,16 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { shallow } from "zustand/shallow";
 
-const defaultDashboardData = {
-  overdueTaskAmount: 0,
-  projectAmount: 0,
-  totalTaskAmount: 0,
-  userName: "",
-  weekTasks: [],
-  projects: [],
-  activityFeed: [],
-  habits: [],
-};
+// const defaultDashboardData = {
+//   overdueTaskAmount: 0,
+//   projectAmount: 0,
+//   totalTaskAmount: 0,
+//   userName: "",
+//   weekTasks: [],
+//   projects: [],
+//   activityFeed: [],
+//   habits: [],
+// };
 
 async function getData() {
   const res = await fetch(`/api/dashboard`);
