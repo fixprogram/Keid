@@ -1,5 +1,6 @@
 "use client";
 
+import Activity from "@/features/Activity";
 import { DailyProgress } from "@/features/DailyProgress";
 import { DailyTasks } from "@/features/DailyTasks";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
@@ -28,6 +29,15 @@ import { shallow } from "zustand/shallow";
 //   habits: [],
 // };
 
+const defaultData = {
+  activityData: {
+    days: [],
+    allTasks: 0,
+    allProjects: 0,
+    maxActivity: 0,
+  },
+};
+
 async function getData() {
   const res = await fetch(`/api/dashboard`);
   return await res.json();
@@ -35,6 +45,8 @@ async function getData() {
 
 export default function Dashboard() {
   const { data } = useQuery({ queryKey: ["dashboard"], queryFn: getData });
+  const { activityData } = defaultData;
+
   const activeFilter = useDashboardStore((state) => state.activeFilter);
 
   const [dashboardData, setData] = useDashboardStore(
@@ -66,12 +78,12 @@ export default function Dashboard() {
           Dashboard
         </h2>
 
-        <Link href="/profile" className="w-[48px] h-[48px] rounded-full">
-          <Icon name="avatar" width={48} height={48} />
+        <Link href="/profile" className="w-[40px] h-[40px] rounded-full">
+          <Icon name="avatar" width={40} height={40} />
         </Link>
       </div>
 
-      <Greeting name={userName} />
+      {/* <Greeting name={userName} /> */}
 
       <Filter />
 
@@ -91,10 +103,14 @@ export default function Dashboard() {
         </>
       ) : (
         <>
-          <DailyProgress tasks={habits} />
-          <WeeklyProgress tasks={weekTasks} />
+          <h2 style={{ color: "white", marginTop: 20 }}>
+            Statistics for Today
+          </h2>
+          {/* <DailyProgress tasks={habits} /> */}
+          {/* <WeeklyProgress tasks={weekTasks} /> */}
           <WeeklyStatistics projects={projects} />
-          <WeeklyActivity data={activityFeed} />
+          {/* <WeeklyActivity data={activityFeed} /> */}
+          <Activity {...activityData} />
         </>
       )}
     </Layout>

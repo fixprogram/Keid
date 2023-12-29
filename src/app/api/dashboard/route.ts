@@ -23,13 +23,13 @@ export async function GET(request: Request) {
   const weekTasks = await (
     await getWeekTasks(projectIDs)
   ).map((task) => {
-    const isFavourite = Boolean(
+    const isFavorite = Boolean(
       projects.find((project) =>
         project.taskIds.some((taskId) => taskId === task.id)
       )?.isStarred
     );
 
-    return { ...task, isFavourite };
+    return { ...task, isFavorite };
   });
 
   const projectAmount = userProjectNames.length;

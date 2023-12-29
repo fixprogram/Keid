@@ -7,9 +7,12 @@ import { usePathname } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
 import { useSubtaskListStore } from "./subtaskListStore";
+import { useUserStore } from "@/entities/user";
 // import { useCommentsStore } from "./commentsStore";
 
 export const useAddSubtask = () => {
+  const userEmail = useUserStore((state) => state.email);
+
   const queryClient = useQueryClient();
 
   // if we come to this task by a link, the userId will be undefined
@@ -34,6 +37,8 @@ export const useAddSubtask = () => {
       console.log("data: ", data);
 
       queryClient.invalidateQueries(["task", taskId]);
+      queryClient.invalidateQueries(["tasks", userEmail]);
+      queryClient.invalidateQueries(["dashboard"]);
 
       reset();
     },

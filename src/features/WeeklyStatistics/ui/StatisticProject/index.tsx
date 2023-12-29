@@ -1,4 +1,5 @@
 import { CompletedTask } from "@/entities/task";
+import { CompletedStatisticsTask } from "@/entities/task/ui/CompletedStatisticsTask";
 import { links } from "@/shared/config/links";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import { getDateString } from "@/shared/lib/utils/getDateString";
@@ -33,9 +34,11 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
   const [isOpened, setOpened] = useState(false);
   const projectStyle = projectStyles[style as ProjectStyleKey];
 
+  console.log({ progressChange, currentProgress });
+
   return (
     <div
-      className="border-[1px] border-deactive p-5  rounded-xl relative"
+      className="border-[1px] border-deactive p-5 rounded-xl relative"
       key={id}
     >
       <div className="flex gap-5">
@@ -72,7 +75,8 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
               style={{
                 width: `${currentProgress}%`,
                 background: projectStyle.progressChangeGradient(
-                  currentProgress - progressChange
+                  100 - (currentProgress - progressChange),
+                  progressChange
                 ),
               }}
             />
@@ -85,14 +89,16 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
             setOpened(isOpened ? false : true);
           }}
         >
-          <Icon name="arrow-down" width={16} height={16} />
+          <div style={{ transform: isOpened ? "rotate(180deg)" : "" }}>
+            <Icon name="arrow-down" width={16} height={16} />
+          </div>
         </button>
       </div>
 
       {isOpened ? (
         <div className="flex flex-col gap-4 mt-6">
           {tasks.map((task) => (
-            <CompletedTask
+            <CompletedStatisticsTask
               key={task.id}
               {...task}
               link={`tasks/${task.id}`}

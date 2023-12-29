@@ -23,7 +23,7 @@ export async function GET(
 
   //   const tasks = await (
   //     await getTasksByIds(habit.taskIds)
-  //   ).map((task) => ({ ...task, isFavourite: habit.isStarred }));
+  //   ).map((task) => ({ ...task, isFavorite: habit.isStarred }));
 
   const data = {
     ...habit,

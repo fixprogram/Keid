@@ -31,8 +31,6 @@ export default function RoundProgressBar({
           <linearGradient id={id}>
             <stop offset="0%" stopColor={stopColors.firstStopColor} />
             <stop offset="70%" stopColor={stopColors.secondStopColor} />
-            {/* <stop offset="0%" stopColor="#E42A6C" />
-            <stop offset="70%" stopColor="#C393FF" /> */}
           </linearGradient>
         </defs>
         <circle

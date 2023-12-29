@@ -43,12 +43,12 @@ export async function GET(request: Request) {
   // const tasks = await (
   //   await getTasksByIds(tasksIds)
   // ).map((task) => {
-  //   const isFavourite = Boolean(
+  //   const isFavorite = Boolean(
   //     projects.find((project) =>
   //       project.taskIds.some((taskId) => taskId === task.id)
   //     )?.isStarred
   //   );
-  //   return { ...task, isFavourite };
+  //   return { ...task, isFavorite };
   // });
 
   const tasks = await (
@@ -57,11 +57,11 @@ export async function GET(request: Request) {
     const parentProject = projects.find(
       (project) => project.id === task.projectId
     );
-    const isFavourite = parentProject ? parentProject.isStarred : false;
+    const isFavorite = parentProject ? parentProject.isStarred : false;
 
     return {
       ...task,
-      isFavourite,
+      isFavorite,
       projectTitle: parentProject ? parentProject.title : "",
     };
   });

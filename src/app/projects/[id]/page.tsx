@@ -21,7 +21,7 @@ async function getData(projectId: string) {
 
   const tasks = await (
     await getTasksByIds(project.taskIds)
-  ).map((task) => ({ ...task, isFavourite: project.isStarred }));
+  ).map((task) => ({ ...task, isFavorite: project.isStarred }));
 
   return {
     ...project,

@@ -27,13 +27,13 @@ async function getData() {
   const weekTasks = await (
     await getWeekTasks(projectIDs)
   ).map((task) => {
-    const isFavourite = Boolean(
+    const isFavorite = Boolean(
       projects.find((project) =>
         project.taskIds.some((taskId) => taskId === task.id)
       )?.isStarred
     );
 
-    return { ...task, isFavourite };
+    return { ...task, isFavorite };
   });
 
   const projectAmount = userProjectNames.length;
@@ -81,7 +81,7 @@ async function getData() {
   };
 }
 
-export default async function Hydation() {
+export default async function Hydration() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(["dashboard"], getData);
   const dehydratedState = dehydrate(queryClient);

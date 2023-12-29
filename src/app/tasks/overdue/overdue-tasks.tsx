@@ -17,7 +17,7 @@ const defaultData = {
   userProjectNames: [],
 };
 
-type TaskType = Task & { isFavourite: boolean; projectTitle: string };
+type TaskType = Task & { isFavorite: boolean; projectTitle: string };
 
 export type OverdueTasksDataType = {
   tasks: TaskType[];

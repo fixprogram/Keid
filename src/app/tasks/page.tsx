@@ -45,11 +45,11 @@ async function getData() {
     const parentProject = projects.find(
       (project) => project.id === task.projectId
     );
-    const isFavourite = parentProject ? parentProject.isStarred : false;
+    const isFavorite = parentProject ? parentProject.isStarred : false;
 
     return {
       ...task,
-      isFavourite,
+      isFavorite,
       projectTitle: parentProject ? parentProject.title : "",
     };
   });

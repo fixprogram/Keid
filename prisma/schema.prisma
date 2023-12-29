@@ -73,4 +73,11 @@ type Comment {
   content         String
   time            String
   serviceContent  String?
+  type            CommentType  @default(SERVICE)
+}
+
+enum CommentType {
+  PROGRESS_UPDATE
+  COMPLETED
+  SERVICE
 }

@@ -41,11 +41,11 @@ export async function GET(request: Request) {
     const parentProject = projects.find((project) => {
       if (project.taskIds.some((taskId) => taskId === task.id)) return project;
     });
-    const isFavourite = parentProject ? parentProject.isStarred : false;
+    const isFavorite = parentProject ? parentProject.isStarred : false;
 
     return {
       ...task,
-      isFavourite,
+      isFavorite,
       projectTitle: parentProject ? parentProject.title : "",
     };
   });

@@ -13,7 +13,7 @@ type CompletedTaskPropsType = {
   projectTitle?: string;
 };
 
-export const CompletedTask: FC<CompletedTaskPropsType> = ({
+export const CompletedStatisticsTask: FC<CompletedTaskPropsType> = ({
   link,
   title,
   isExpired,
@@ -22,8 +22,8 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
   projectTitle,
 }) => {
   return (
-    <Link href={link}>
-      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl relative">
+    <Link href={link} className={styles.CompletedStatisticsLink}>
+      <div className={styles.CompletedStatisticsTask}>
         {isStarred ? (
           <div className="absolute top-3 left-3">
             <Icon name="star-sm" width={8} height={8} />

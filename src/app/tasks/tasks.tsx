@@ -13,6 +13,7 @@ import { useState } from "react";
 import { shallow } from "zustand/shallow";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { useTasksStore } from "@/entities/task/models/tasksStore";
+import { useUserStore } from "@/entities/user";
 
 const defaultData = {
   tasks: [],
@@ -27,7 +28,11 @@ async function getData() {
 }
 
 export default function Tasks() {
-  const { status, data } = useQuery({ queryKey: ["tasks"], queryFn: getData });
+  const userEmail = useUserStore((state) => state.email);
+  const { status, data } = useQuery({
+    queryKey: ["tasks", userEmail],
+    queryFn: getData,
+  });
 
   // const [activeFilter, setActiveFilter] = useState<FilterType>(FILTERS[0]);
   const [activeFilter, setActiveFilter, setTasksData] = useTasksStore(
@@ -47,8 +52,6 @@ export default function Tasks() {
   useEffect(() => {
     setTasksData(data);
   }, [data]);
-
-  console.log("tasks: ", tasks);
 
   return (
     <Layout>

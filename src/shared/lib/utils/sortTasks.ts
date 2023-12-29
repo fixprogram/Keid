@@ -31,7 +31,7 @@ const sortTaskByCompleted = (a: TaskType, b: TaskType) => {
 };
 
 export const sortTasks = (tasks: TaskType[]) => {
-  const favouriteTasks = tasks.filter((task) => task.isFavourite);
+  const favouriteTasks = tasks.filter((task) => task.isFavorite);
 
   const favouriteToDoTasks = favouriteTasks
     .filter((task) => task.completed === 0 && task.deadline)
@@ -45,16 +45,16 @@ export const sortTasks = (tasks: TaskType[]) => {
   );
 
   const completedTasks = tasks
-    .filter((task) => task.completed && !task.isFavourite)
+    .filter((task) => task.completed && !task.isFavorite)
     .sort(sortTaskByCompleted);
 
   const toDoTasks = tasks
-    .filter((task) => !task.completed && !task.isFavourite && task.deadline)
+    .filter((task) => !task.completed && !task.isFavorite && task.deadline)
     .sort(sortTaskByDeadline)
     .sort(sortTaskByProgress);
 
   const toDoTasksWithoutDeadline = tasks
-    .filter((task) => !task.completed && !task.isFavourite && !task.deadline)
+    .filter((task) => !task.completed && !task.isFavorite && !task.deadline)
     .sort(sortTaskByProgress);
 
   return [

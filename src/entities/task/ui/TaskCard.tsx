@@ -17,7 +17,7 @@ type TaskCardProps = Pick<
   deadline: number;
   completed: number;
   daysToRepeat?: number;
-  isFavourite: boolean;
+  isFavorite: boolean;
   projectTitle?: string;
 };
 
@@ -30,7 +30,7 @@ export const TaskCard: FC<TaskCardProps> = ({
   completed,
   repeats,
   comments,
-  isFavourite,
+  isFavorite,
   projectTitle,
   subtaskIds,
 }) => {
@@ -49,7 +49,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         title={title}
         isExpired={completed > deadline}
         completed={formattedCompleted}
-        isStarred={isFavourite}
+        isStarred={isFavorite}
       />
     );
   }
@@ -64,7 +64,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         style={style}
         progress={progress}
         daysToRepeat={daysToRepeat}
-        isStarred={isFavourite}
+        isStarred={isFavorite}
       />
     );
   }
@@ -77,7 +77,7 @@ export const TaskCard: FC<TaskCardProps> = ({
         deadline={formattedDeadline}
         style={style}
         progress={progress}
-        isStarred={isFavourite}
+        isStarred={isFavorite}
         projectTitle={projectTitle}
         subtasksTotal={subtaskIds.length}
       />
@@ -91,7 +91,7 @@ export const TaskCard: FC<TaskCardProps> = ({
       deadline={formattedDeadline}
       style={style}
       progress={progress}
-      isStarred={isFavourite}
+      isStarred={isFavorite}
       projectTitle={projectTitle}
       subtasksTotal={subtaskIds.length}
     />

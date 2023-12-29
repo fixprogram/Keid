@@ -1,0 +1,104 @@
+Common styles for all tasks .taskBase {
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+/* Styles for CompletedTask */
+.completedTask {
+  border: 1px solid rgb(94 98 114); /* border-inactive */
+}
+
+/* Styles for InProgressTask and OverdueTask */
+.progressTask {
+  background-color: rgb(38 42 52); /* 'bg-background2' */
+}
+
+/* Styles for RepeatedTask */
+.repeatedTask {
+  min-height: 100px;
+  padding: 4px 5px;
+  background-color: rgb(38 42 52); /* Example for 'bg-background2' */
+}
+
+/* Specific element styles */
+.iconStarred {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.projectTitle {
+  position: relative;
+  display: flex;
+}
+
+.projectTitleBold {
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: bold;
+  margin-left: 18px;
+}
+
+.titleText {
+  font-size: 16px;
+  line-height: 24px;
+  color: white; /* Example for 'text-white' */
+  font-weight: 600; /* Example for 'font-semibold' */
+  overflow-x: hidden;
+}
+
+.completedDate {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500; /* Example for 'font-medium' */
+  margin-left: auto;
+}
+
+.deadlineText {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.progressPercent {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: bold;
+  color: white;
+  text-align: right;
+}
+
+.taskTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.CompletedStatisticsTask {
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.CompletedStatisticsLink {
+  position: relative;
+}
+
+.CompletedStatisticsLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  border-bottom: 1px solid rgb(94 98 114);
+  width: 100%;
+}
+
+.CompletedStatisticsLink:last-child::after {
+  content: none;
+}

@@ -1,13 +1,12 @@
 import { prisma } from "@/db.server";
 import { getMonday } from "@/shared/lib/utils/getMonday";
-import { Comment } from "@prisma/client";
+import { Comment, CommentType } from "@prisma/client";
 
 type ActivityItem = {
   taskTitle: string;
   comment: Comment;
 };
 
-// Now we're getting activity only by comments left inside tasks
 export async function getWeeklyActivityData(userId: string) {
   const projects = await prisma.project.findMany({
     where: { userId },
@@ -28,9 +27,17 @@ export async function getWeeklyActivityData(userId: string) {
 
   const firstWeekdayTimestamp = getMonday(new Date()).setHours(3, 0, 0, 0);
 
-  // Getting an array of tasks updated this week
+  // Getting an array of tasks completed this week
   const lastWeekActiveTasks = tasks.filter((task) =>
-    task.comments.find((comment) => +comment.time >= firstWeekdayTimestamp)
+    task.comments.find((comment) => {
+      // Check if there was activity
+      if (
+        comment.type === CommentType.PROGRESS_UPDATE ||
+        comment.type === CommentType.COMPLETED
+      ) {
+        return +comment.time >= firstWeekdayTimestamp;
+      }
+    })
   );
 
   // Getting an array of projects which tasks were updated this week
@@ -47,14 +54,21 @@ export async function getWeeklyActivityData(userId: string) {
         (completedTasks.length / projectTasks.length) * 100
       );
 
+      const previouslyCompletedTasks = completedTasks.filter((task) => {
+        return task.completed < firstWeekdayTimestamp;
+      });
+
       const lastWeekCompletedTasks = completedTasks.filter((task) => {
         return task.completed >= firstWeekdayTimestamp;
       });
+
       const prevProgress = Math.floor(
-        (lastWeekCompletedTasks.length / projectTasks.length) * 100
+        (previouslyCompletedTasks.length / projectTasks.length) * 100
       );
 
       const progressChange = currentProgress - prevProgress;
+
+      console.log("completedTasks: ", completedTasks);
 
       return {
         ...project,

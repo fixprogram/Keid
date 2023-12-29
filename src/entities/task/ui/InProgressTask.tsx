@@ -4,6 +4,8 @@ import RoundProgressBar from "@/shared/ui/RoundProgressBar";
 import Link from "next/link";
 import { FC } from "react";
 
+import styles from "./TaskCard.module.css";
+
 type InProgressTaskPropsType = {
   link: string;
   title: string;
@@ -13,7 +15,7 @@ type InProgressTaskPropsType = {
   isStarred?: boolean;
   projectTitle?: string;
   subtasksTotal?: number;
-  subtaskCompleted?: number;
+  subtasksCompleted?: number;
 };
 
 export const InProgressTask: FC<InProgressTaskPropsType> = ({
@@ -25,7 +27,7 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
   isStarred = false,
   projectTitle = "",
   subtasksTotal,
-  subtaskCompleted,
+  subtasksCompleted,
 }) => {
   const taskStyle = projectStyles[style as ProjectStyleKey];
 
@@ -61,10 +63,7 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
               </b>
             </div>
           ) : null}
-          <b
-            className="text-lg text-white font-semibold"
-            style={{ overflowX: "hidden" }}
-          >
+          <b className={`text-lg text-white font-semibold ${styles.taskTitle}`}>
             {title}
           </b>
         </div>
@@ -90,7 +89,7 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
                 lineHeight: "20px",
               }}
             >
-              {0}/{subtasksTotal}
+              {subtasksCompleted}/{subtasksTotal}
             </div>
           ) : null}
         </div>

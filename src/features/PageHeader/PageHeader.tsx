@@ -66,9 +66,10 @@ export default function PageHeader({ title }: Props) {
         </ul>
       </PopupWithOverlay>
 
-      <button type="button">
+      {/* <button type="button">
         <Icon name="add" height={50} width={50} />
-      </button>
+      </button> */}
+      <div style={{ width: 27, height: 27 }}></div>
     </div>
   );
 }

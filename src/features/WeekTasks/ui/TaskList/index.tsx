@@ -2,7 +2,7 @@ import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { Task } from "@prisma/client";
 import { FC } from "react";
 
-type TaskType = Task & { type?: string; isFavourite: boolean };
+type TaskType = Task & { type?: string; isFavorite: boolean };
 
 interface TaskListPropsType {
   tasks: TaskType[];

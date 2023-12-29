@@ -8,7 +8,10 @@ export type ProjectStyleType = {
     secondStopColor: string;
   };
   textColor: string;
-  progressChangeGradient: (prevProgress: number) => string;
+  progressChangeGradient: (
+    prevProgress: number,
+    progressChange: number
+  ) => string;
 };
 
 export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
@@ -20,8 +23,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#C393FF",
     },
     textColor: "#FFFFFF",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #C393FF 0, #E42A6C 33.85%, rgba(228, 42, 108, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #C393FF 0, #E42A6C ${progressChange}%, rgba(228, 42, 108, 0.3) ${prevProgress}%)`,
   },
   "02": {
     background: "#FBA3FF",
@@ -31,8 +34,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#FBA3FF",
     },
     textColor: "#FFFFFF",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #FBA3FF 0, #E42A6C 33.85%, rgba(228, 42, 108, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #FBA3FF 0, #E42A6C ${progressChange}%, rgba(228, 42, 108, 0.3) ${prevProgress}%)`,
   },
   "03": {
     background: "#FFDD72",
@@ -42,8 +45,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#FFEBA2",
     },
     textColor: "#200745",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #FFEBA2 0, #FF8669 33.85%, rgba(255, 134, 105, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #FFEBA2 0, #FF8669 ${progressChange}%, rgba(255, 134, 105, 0.3) ${prevProgress}%)`,
   },
   "04": {
     background: "#8E96FF",
@@ -54,8 +57,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#BE9EFF",
     },
     textColor: "#FFFFFF",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #BE9EFF 0, #86FF99 33.85%, rgba(134, 255, 153, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #BE9EFF 0, #86FF99 ${progressChange}%, rgba(134, 255, 153, 0.3) ${prevProgress}%)`,
   },
   "05": {
     background: "#94F0F0",
@@ -65,8 +68,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#BBFFE7",
     },
     textColor: "#200745",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #BBFFE7 0, #86FFCA 33.85%, rgba(134, 255, 202, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #BBFFE7 0, #86FFCA ${progressChange}%, rgba(134, 255, 202, 0.3) ${prevProgress}%)`,
   },
   "06": {
     background: "#A5F59C",
@@ -76,8 +79,8 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#9ADB7F",
     },
     textColor: "#FFFFFF",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #9ADB7F 0, #6EA95C 33.85%, rgba(110, 169, 92, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #9ADB7F 0, #6EA95C ${progressChange}%, rgba(110, 169, 92, 0.3) ${prevProgress}%)`,
   },
   "07": {
     background: "#FF968E",
@@ -87,7 +90,7 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       secondStopColor: "#FF968E",
     },
     textColor: "#FFFFFF",
-    progressChangeGradient: (prevProgress: number) =>
-      `linear-gradient(270deg, #FF968E 0, #FF968E 33.85%, rgba(255, 150, 142, 0.3) ${prevProgress}%)`,
+    progressChangeGradient: (prevProgress: number, progressChange: number) =>
+      `linear-gradient(270deg, #FF968E 0, #FF968E ${progressChange}%, rgba(255, 150, 142, 0.3) ${prevProgress}%)`,
   },
 };
