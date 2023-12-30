@@ -9,20 +9,16 @@ import { getDifferenceBetweenDates } from "@/shared/lib/utils/getDifferenceBetwe
 import { Task } from "@prisma/client";
 import { FC } from "react";
 
-type TaskCardProps = Pick<
-  Task,
-  "title" | "style" | "progress" | "repeats" | "comments" | "subtaskIds"
-> & {
-  link: string;
-  deadline: number;
-  completed: number;
-  daysToRepeat?: number;
+export type TaskCardType = Omit<Task, "projectId"> & {
+  // link: string;
   isFavorite: boolean;
   projectTitle?: string;
+  withoutDeadline?: boolean;
 };
 
-export const TaskCard: FC<TaskCardProps> = ({
-  link,
+export const TaskCard: FC<TaskCardType> = ({
+  // link,
+  id,
   title,
   deadline,
   style,
@@ -33,13 +29,17 @@ export const TaskCard: FC<TaskCardProps> = ({
   isFavorite,
   projectTitle,
   subtaskIds,
+  withoutDeadline = false,
 }) => {
+  const link = `tasks/${id}`;
   const isCompleted = Boolean(completed);
   const isOverdue = deadline === 0 ? false : Date.now() > deadline;
   const isRepeated = repeats !== "Once";
 
   const formattedDeadline =
-    deadline === 0 ? null : getDateString(new Date(deadline), false);
+    withoutDeadline || deadline === 0
+      ? null
+      : getDateString(new Date(deadline), false);
   const formattedCompleted = getDateString(new Date(completed), false);
 
   if (isCompleted) {

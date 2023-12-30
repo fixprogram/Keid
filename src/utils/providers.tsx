@@ -4,8 +4,8 @@ import React from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
-import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+// import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+// import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 
 function Providers({ children }: React.PropsWithChildren) {
   const [client] = React.useState(
@@ -19,9 +19,9 @@ function Providers({ children }: React.PropsWithChildren) {
     })
   );
 
-  const persister = createSyncStoragePersister({
-    storage: typeof window !== "undefined" ? window.localStorage : undefined,
-  });
+  // const persister = createSyncStoragePersister({
+  //   storage: typeof window !== "undefined" ? window.localStorage : undefined,
+  // });
 
   return (
     <QueryClientProvider client={client}>

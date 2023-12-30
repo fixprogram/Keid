@@ -1,10 +1,13 @@
 import { HabitCard } from "@/entities/habit/ui/HabitCard";
+import { TaskCard, TaskCardType } from "@/entities/task/ui/TaskCard";
+import { TaskType } from "@/shared/config/types";
 import { List } from "@/shared/ui/List";
+// import { TaskType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { Habit, Task } from "@prisma/client";
 import { FC, useState } from "react";
 
 interface DailyTasksPropsType {
-  tasks: Habit[];
+  tasks: TaskType[];
 }
 
 export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
@@ -13,68 +16,40 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
   const tasksAmount = tasks.length;
   const completedTaskAmount = completedTasks.length;
 
-  const filteredTasks = tasks.filter((task) => !task.completed);
+  const uncompletedTasks = tasks.filter((task) => !task.completed);
 
   return (
     <section
-      className="p-5 mt-8"
+      className="mt-8 p-1 rounded-[20px] relative"
       style={{
-        backgroundColor: isOpened ? "inherit" : "#FF968E",
-        borderRadius: "20px",
-        border: isOpened ? "4px solid #FF968E" : "none",
+        background:
+          "radial-gradient(102.94% 100% at 72.83% 100%, #FFB8E0 0%, #BE9EFF 38.89%, #88C0FC 67.4%, #86FF99 100%)",
       }}
     >
-      <div
-        className={`flex justify-between ${
-          isOpened ? "items-center" : "items-start"
-        }`}
-      >
-        <div>
-          <b
-            className={`font-poppins text-xl ${
-              isOpened ? "text-white" : "text-active"
-            }`}
+      <section className={`bg-background1 p-5 rounded-[18px]`}>
+        <div className="flex justify-between items-center">
+          <h3 className="font-poppins font-semibold text-xl text-white">
+            Tasks
+          </h3>
+          <div
+            className={`text-sm py-1 px-3 ${"text-white"} font-bold`}
+            style={{
+              border: `1.5px solid  #fff`,
+              borderRadius: "20px",
+            }}
           >
-            Daily tasks
-          </b>
-
-          {!isOpened ? (
-            <p className="text-base text-active font-medium">
-              Start from this task
-            </p>
-          ) : null}
+            {completedTaskAmount}/{tasksAmount}
+          </div>
         </div>
 
-        <div
-          className={`text-sm py-1 px-3 ${
-            isOpened ? "text-white" : "text-active"
-          } font-bold`}
-          style={{
-            border: `1.5px solid ${isOpened ? "#fff" : "#200745"}`,
-            borderRadius: "20px",
-          }}
-          onClick={() => setOpened(!isOpened)}
-        >
-          {completedTaskAmount}/{tasksAmount}
-        </div>
-      </div>
-
-      {filteredTasks.length ? (
-        <div className="mt-4">
-          {isOpened ? (
-            <List>
-              {filteredTasks.map((task) => (
-                <HabitCard link={`habits/${task.id}`} key={task.id} {...task} />
-              ))}
-            </List>
-          ) : (
-            <HabitCard
-              {...filteredTasks[0]}
-              link={`habits/${filteredTasks[0].id}`}
-            />
-          )}
-        </div>
-      ) : null}
+        {tasks.length ? (
+          <section className="mt-4 flex flex-col gap-4">
+            {tasks.map((task) => (
+              <TaskCard key={task.id} {...task} withoutDeadline />
+            ))}
+          </section>
+        ) : null}
+      </section>
     </section>
   );
 };

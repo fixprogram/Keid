@@ -1,7 +1,7 @@
 import { Inter, Poppins } from "next/font/google";
 
 import "./globals.css";
-import Providers from "@/utils/provider";
+import Providers from "@/utils/providers";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],

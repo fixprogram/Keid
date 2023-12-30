@@ -2,7 +2,7 @@ import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC, Fragment } from "react";
-import { DATES, DateType, useDashboardStore } from "../model/dashboardStore";
+import { DATES, useDashboardStore } from "../model/useDashboardStore";
 
 export const DashboardHeader: FC = () => {
   const [dateType, setDateType] = useDashboardStore((state) => [

@@ -1,7 +1,6 @@
 "use client";
 
-import { DateType } from "@/templates/DashboardPage/model/dashboardStore";
-import { OverviewTab } from "@/templates/DashboardPage/ui/OverviewTab";
+import { DateType, OverviewTab } from "@/templates/DashboardPage";
 import React from "react";
 
 export async function getData(dateType: DateType) {

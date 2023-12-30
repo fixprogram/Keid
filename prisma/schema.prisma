@@ -66,6 +66,7 @@ model Habit {
   streak         Int
   completed      Int
   comments       Comment[]
+  repeats        Int       @default(28)
 }
 
 type Comment {

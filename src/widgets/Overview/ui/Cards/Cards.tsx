@@ -1,6 +1,6 @@
-import Card from "./components/Card";
-import type { Card as CardType } from "../../lib/types";
-import { CARDS_CONFIG } from "../../lib/config";
+import Card from "../Card";
+import type { Card as CardType } from "../../config/types";
+import { CARDS_CONFIG } from "../../config/config";
 
 interface Props {
   cards: CardType[];

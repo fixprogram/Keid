@@ -1,13 +1,17 @@
 import { getData } from "@/app/dashboard/overview/overview";
 import { DailyTasks } from "@/features/DailyTasks";
 import { WeekTasks } from "@/features/WeekTasks";
-import Cards from "@/widgets/Overview/components/Cards";
-import Filter from "@/widgets/Overview/components/Filter";
+import Cards from "@/widgets/Overview/ui/Cards";
+import Filter from "@/widgets/Overview/ui/Filter";
 import { useQuery } from "@tanstack/react-query";
 import { FC, useEffect } from "react";
-import { useDashboardStore, DateType } from "../model/dashboardStore";
+import { useDashboardStore, DateType } from "../model/useDashboardStore";
 import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
+import { CardType } from "@/widgets/Overview/config/types";
+import { HabitCard } from "@/entities/habit/ui/HabitCard";
+import { List } from "@/shared/ui/List";
+import { HabitCard2 } from "@/entities/habit/ui/HabitCard2";
 
 export const OverviewTab: FC = () => {
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
@@ -16,34 +20,19 @@ export const OverviewTab: FC = () => {
     state.setData,
   ]);
 
-  console.log("dateType: ", dateType);
-
   const { data } = useQuery({
     queryKey: ["dashboard", "overview", dateType],
     queryFn: () => getData(dateType),
   });
-  //   const { activityData } = defaultData;
 
-  const {
-    overdueTaskAmount,
-    projectAmount,
-    totalTaskAmount,
-    // userName,
-    tasks: weekTasks,
-    // projects,
-    // activityFeed,
-    habits,
-  } = dashboardData;
+  const { overdueTaskAmount, projectAmount, totalTaskAmount, tasks, habits } =
+    dashboardData;
 
   useEffect(() => {
     if (data) {
-      console.log("data: ", data);
-
       setData(data);
     }
   }, [data, setData]);
-
-  //   console.log("weekTasks: ", weekTasks);
 
   return (
     <Layout>
@@ -51,11 +40,22 @@ export const OverviewTab: FC = () => {
 
       <Filter />
 
-      {dateType === DateType.Today ? <DailyTasks tasks={habits} /> : null}
-
-      {dateType === DateType["This week"] ? (
-        <WeekTasks tasks={weekTasks} />
+      {dateType === DateType.Today ? (
+        <>
+          <DailyTasks tasks={tasks} />
+          <section className="flex align-center mt-8 gap-10">
+            {habits.map((habit) => (
+              <HabitCard2
+                link={`/habits/${habit.id}`}
+                {...habit}
+                key={habit.id}
+              />
+            ))}
+          </section>
+        </>
       ) : null}
+
+      {dateType === DateType["This week"] ? <WeekTasks tasks={tasks} /> : null}
 
       {dateType === DateType["This month"] ? (
         <div style={{ color: "wheat" }}>Empty for now</div>
@@ -63,9 +63,9 @@ export const OverviewTab: FC = () => {
 
       <Cards
         cards={[
-          { type: "Task", amount: totalTaskAmount },
-          { type: "Habit", amount: overdueTaskAmount },
-          { type: "Project", amount: projectAmount },
+          { type: CardType.Task, amount: totalTaskAmount },
+          { type: CardType.Habit, amount: overdueTaskAmount },
+          { type: CardType.Project, amount: projectAmount },
         ]}
       />
     </Layout>

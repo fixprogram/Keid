@@ -19,6 +19,6 @@ export const CARDS_CONFIG = {
     icon: TotalTask,
     color: "#FF968E",
     to: "/tasks/overdue",
-    title: "Total overdue",
+    title: "Total Overdue",
   },
 };

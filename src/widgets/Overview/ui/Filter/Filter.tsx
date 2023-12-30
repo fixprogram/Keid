@@ -6,13 +6,13 @@ import {
   FILTERS,
   FilterType,
   useDashboardStore,
-} from "@/templates/DashboardPage/model/dashboardStore";
+} from "@/templates/DashboardPage/model/useDashboardStore";
 import { useState } from "react";
 import { shallow } from "zustand/shallow";
-import { CARDS_CONFIG } from "../../lib/config";
-import { CardType } from "../../lib/types";
+import { CARDS_CONFIG } from "../../config/config";
+import { CardType } from "../../config/types";
 
-const TYPES: CardType[] = ["Task", "Project", "Habit"];
+const CARDS = Object.values(CardType);
 // const FILTERS = ["Overview", "Productivity"];
 
 export default function Filter() {
@@ -40,18 +40,18 @@ export default function Filter() {
         <PopupLine />
 
         <ul className="mt-2">
-          {TYPES.map((type) => (
+          {CARDS.map((card) => (
             <li
-              key={type}
+              key={card}
               className="border-b-[1px] border-white/5 p-5 flex items-start justify-between"
             >
               <b className="text-lg text-white font-bold ml-9">
-                {CARDS_CONFIG[type].title}
+                {CARDS_CONFIG[card].title}
               </b>
               <div>
-                <input type="checkbox" id={type} className="hidden peer" />
+                <input type="checkbox" id={card} className="hidden peer" />
                 <label
-                  htmlFor={type}
+                  htmlFor={card}
                   className="block w-[48px] h-[24px] bg-background2 rounded-full border-[1px] border-white/10 relative after:block after:w-5 after:h-5 after:rounded-full after:bg-deactiveCheck after:absolute after:top-[1px] after:left-[1px] after:shadow-switch peer-checked:bg-primary peer-checked:after:bg-white peer-checked:after:right-[2px] peer-checked:after:top-[2px] peer-checked:after:left-auto peer-checked:border-0"
                 />
               </div>

@@ -1,6 +1,7 @@
+import { TaskType } from "@/shared/config/types";
 import { sortProjects } from "@/shared/lib/utils/sortProjects";
 import { sortProjectsByActivity } from "@/shared/lib/utils/sortProjectsByActivity";
-import { Project } from "@prisma/client";
+import { Habit, Project, Task } from "@prisma/client";
 import { create } from "zustand";
 
 export type ProjectType = {
@@ -27,6 +28,8 @@ export const DATES: DateType[] = [
   DateType["This month"],
 ];
 
+// export type TaskType = Task & { isFavorite: boolean };
+
 type DataType = {
   activityFeed: [];
   overdueTaskAmount: number;
@@ -34,8 +37,8 @@ type DataType = {
   totalTaskAmount: number;
   projects: [];
   userName: string;
-  tasks: [];
-  habits: [];
+  tasks: TaskType[];
+  habits: Habit[];
 };
 
 export interface ProjectsState {
@@ -67,6 +70,10 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
     set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
   setData: (newData) =>
     set(() => {
+      newData.tasks = newData.tasks.map((task) => ({
+        ...task,
+        isFavorite: false,
+      }));
       return {
         data: newData,
       };

@@ -5,13 +5,14 @@ import { prisma } from "@/db.server";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import Overview from "./overview";
-import { getWeekTasks } from "@/app/model/task/api/getThisWeekTasks";
+import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";
 import { getUser } from "@/app/lib/session";
-import { DateType } from "@/templates/DashboardPage/model/dashboardStore";
-import { getTodayTasks } from "@/app/model/task/api/getTodayTasks";
-import { getThisMonthTasks } from "@/app/model/task/api/getThisMonthTasks";
+import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
+import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
+import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
+import { Task } from "@prisma/client";
 
-export async function getData(dateType = DateType.Today) {
+export async function getData(dateType: DateType) {
   const user = await getUser();
 
   const userId = user.id;
@@ -24,7 +25,7 @@ export async function getData(dateType = DateType.Today) {
   const projectIDs = projects.map((projectId) => projectId.id);
   projectIDs.push(userId);
 
-  let tasks: any[] = [];
+  let tasks: Task[] = [];
 
   switch (dateType) {
     case DateType.Today: {
@@ -33,7 +34,7 @@ export async function getData(dateType = DateType.Today) {
       break;
     }
     case DateType["This week"]: {
-      tasks = await getWeekTasks(projectIDs);
+      tasks = await getThisWeekTasks(projectIDs);
       break;
     }
     case DateType["This month"]: {

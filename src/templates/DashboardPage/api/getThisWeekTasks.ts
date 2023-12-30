@@ -4,7 +4,7 @@ import {
   getLastDayOfTheWeek,
 } from "@/features/WeekTasks/lib";
 
-export async function getWeekTasks(projectIDs: string[]) {
+export async function getThisWeekTasks(projectIDs: string[]) {
   const firstDayTimestamp = getFirstDayOfTheWeek();
   const lastDayTimestamp = getLastDayOfTheWeek();
 
@@ -44,6 +44,8 @@ export async function getWeekTasks(projectIDs: string[]) {
     subtaskIds: [],
     style: "01",
     type: "subtask",
+    projectId: tasks.find((task) => subtask.id in task.subtaskIds)
+      ?.projectId as string,
   }));
 
   return [...tasks, ...mappedSubtasks];

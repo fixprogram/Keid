@@ -1,16 +1,8 @@
 import { prisma } from "@/db.server";
+import { getTodayTimestamps } from "@/shared/lib/utils/getTodayTimestamps";
 
-export async function getThisMonthTasks(projectIDs: string[]) {
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  startOfMonth.setHours(0, 0, 0, 0); // Set to start of the day
-  const startTimestamp = startOfMonth.getTime();
-
-  // End of the current month
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  endOfMonth.setHours(0, 0, 0, 0); // Set to start of the next month
-  endOfMonth.setTime(endOfMonth.getTime() - 1); // Subtract 1 millisecond to get end of current month
-  const endTimestamp = endOfMonth.getTime();
+export async function getTodayTasks(projectIDs: string[]) {
+  const { startTimestamp, endTimestamp } = getTodayTimestamps();
 
   const allTasks = await prisma.task.findMany({
     where: { projectId: { in: projectIDs } },
@@ -48,6 +40,8 @@ export async function getThisMonthTasks(projectIDs: string[]) {
     subtaskIds: [],
     style: "01",
     type: "subtask",
+    projectId: tasks.find((task) => subtask.id in task.subtaskIds)
+      ?.projectId as string,
   }));
 
   return [...tasks, ...mappedSubtasks];
