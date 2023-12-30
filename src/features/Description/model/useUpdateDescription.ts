@@ -17,7 +17,6 @@ export function useUpdateDescription(itemType: ItemType) {
     mutationFn: (newDescription: string) =>
       axios.post(itemPost.updateDescription, { itemId, newDescription }),
     onSuccess: (data) => {
-      console.log("data: ", data);
       queryClient.invalidateQueries({ queryKey: [itemType, itemId] });
     },
   });

@@ -6,7 +6,7 @@ import {
   FILTERS,
   FilterType,
   useDashboardStore,
-} from "@/templates/DashboardPage/dashboardStore";
+} from "@/templates/DashboardPage/model/dashboardStore";
 import { useState } from "react";
 import { shallow } from "zustand/shallow";
 import { CARDS_CONFIG } from "../../lib/config";

@@ -15,8 +15,6 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
 
   const filteredTasks = tasks.filter((task) => !task.completed);
 
-  console.log("filtered tasks: ", filteredTasks);
-
   return (
     <section
       className="p-5 mt-8"

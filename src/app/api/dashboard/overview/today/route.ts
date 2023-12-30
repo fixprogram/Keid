@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/lib/auth";
 import { getUser } from "@/app/lib/session";
-import { getWeekTasks } from "@/app/model/task/api/getThisWeekTasks";
+import { getTodayTasks } from "@/app/model/task/api/getTodayTasks";
 import { prisma } from "@/db.server";
 import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
@@ -20,8 +20,8 @@ export async function GET(request: Request) {
   const projectIDs = projects.map((projectId) => projectId.id);
   projectIDs.push(userId);
 
-  const weekTasks = await (
-    await getWeekTasks(projectIDs)
+  const todayTasks = await (
+    await getTodayTasks(projectIDs)
   ).map((task) => {
     const isFavorite = Boolean(
       projects.find((project) =>
@@ -68,12 +68,14 @@ export async function GET(request: Request) {
     projectAmount,
     overdueTaskAmount,
     totalTaskAmount,
-    weekTasks,
+    tasks: todayTasks,
     userName: user.name,
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,
     habits,
   };
+
+  console.log("data: ", data);
 
   return NextResponse.json(data);
 }

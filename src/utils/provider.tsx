@@ -24,12 +24,12 @@ function Providers({ children }: React.PropsWithChildren) {
   });
 
   return (
-    // <QueryClientProvider client={client}>
-    <PersistQueryClientProvider client={client} persistOptions={{ persister }}>
+    <QueryClientProvider client={client}>
+      {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
-    </PersistQueryClientProvider>
-    // </QueryClientProvider>
+      {/* </PersistQueryClientProvider> */}
+    </QueryClientProvider>
   );
 }
 

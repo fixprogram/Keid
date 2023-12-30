@@ -33,9 +33,7 @@ export const useAddSubtask = () => {
         taskId,
         deadline,
       }),
-    onSuccess: (data) => {
-      console.log("data: ", data);
-
+    onSuccess: () => {
       queryClient.invalidateQueries(["task", taskId]);
       queryClient.invalidateQueries(["tasks", userEmail]);
       queryClient.invalidateQueries(["dashboard"]);

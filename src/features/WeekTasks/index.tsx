@@ -1,5 +1,5 @@
 import { TaskType } from "@/shared/config/types";
-import { useDashboardStore } from "@/templates/DashboardPage/dashboardStore";
+import { useDashboardStore } from "@/templates/DashboardPage/model/dashboardStore";
 import { FC } from "react";
 import { shallow } from "zustand/shallow";
 import { EmptyWeekTasks } from "./ui/EmptyWeekTasks";

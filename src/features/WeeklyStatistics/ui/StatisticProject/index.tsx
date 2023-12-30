@@ -34,8 +34,6 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
   const [isOpened, setOpened] = useState(false);
   const projectStyle = projectStyles[style as ProjectStyleKey];
 
-  console.log({ progressChange, currentProgress });
-
   return (
     <div
       className="border-[1px] border-deactive p-5 rounded-xl relative"

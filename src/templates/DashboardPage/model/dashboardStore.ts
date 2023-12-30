@@ -15,6 +15,18 @@ export type ProjectType = {
 export type FilterType = "Overview" | "Productivity";
 export const FILTERS: FilterType[] = ["Overview", "Productivity"];
 
+export enum DateType {
+  "Today" = "Today",
+  "This week" = "This week",
+  "This month" = "This month",
+}
+
+export const DATES: DateType[] = [
+  DateType.Today,
+  DateType["This week"],
+  DateType["This month"],
+];
+
 type DataType = {
   activityFeed: [];
   overdueTaskAmount: number;
@@ -22,17 +34,19 @@ type DataType = {
   totalTaskAmount: number;
   projects: [];
   userName: string;
-  weekTasks: [];
+  tasks: [];
   habits: [];
 };
 
 export interface ProjectsState {
   data: DataType;
   activeFilter: FilterType;
+  dateType: DateType;
   setData: (newData: DataType) => void;
   isWeekTasksShowed: boolean;
   setActiveFilter: (newFilter: FilterType) => void;
   toggleWeekTasksShowed: () => void;
+  setDateType: (newDateType: DateType) => void;
 }
 
 export const useDashboardStore = create<ProjectsState>((set, get) => ({
@@ -43,22 +57,27 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
     totalTaskAmount: 0,
     projects: [],
     userName: "",
-    weekTasks: [],
+    tasks: [],
     habits: [],
   },
+  dateType: DATES[0],
   isWeekTasksShowed: false,
   activeFilter: FILTERS[0],
   toggleWeekTasksShowed: () =>
     set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
-  setData: (newData: DataType) =>
+  setData: (newData) =>
     set(() => {
       return {
         data: newData,
       };
     }),
 
-  setActiveFilter: (newActiveFilter: FilterType) =>
+  setActiveFilter: (newActiveFilter) =>
     set(() => ({
       activeFilter: newActiveFilter,
     })),
+
+  setDateType(newDateType) {
+    set(() => ({ dateType: newDateType }));
+  },
 }));

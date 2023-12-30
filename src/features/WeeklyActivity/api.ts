@@ -68,8 +68,6 @@ export async function getWeeklyActivityData(userId: string) {
 
       const progressChange = currentProgress - prevProgress;
 
-      console.log("completedTasks: ", completedTasks);
-
       return {
         ...project,
         progressChange,

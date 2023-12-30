@@ -18,7 +18,6 @@ export const ProjectTitle: FC<ProjectTitlePropsType> = ({ initialTitle }) => {
     if (title === initialTitle) {
       return handleClosePopup();
     }
-    console.log("handle");
     handleChangeProjectName(title);
   };
 
