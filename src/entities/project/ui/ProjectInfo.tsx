@@ -40,7 +40,7 @@ export const ProjectInfo: FC<ProjectInfoPropsType> = ({
           ) : null}{" "}
           {title}
         </h3>
-        <p className="font-medium text-deactive text-sm">{category}</p>
+        {/* <p className="font-medium text-deactive text-sm">{category}</p> */}
       </div>
     </Fragment>
   );

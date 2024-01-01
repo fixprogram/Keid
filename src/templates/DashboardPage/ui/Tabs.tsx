@@ -1,38 +1,48 @@
-import FilterBar from "@/features/FilterBar";
 import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import Icon from "@/shared/ui/Icon";
 import PopupLine from "@/shared/ui/PopupLine";
-import {
-  FILTERS,
-  FilterType,
-  useDashboardStore,
-} from "@/templates/DashboardPage/model/useDashboardStore";
-import { useState } from "react";
-import { shallow } from "zustand/shallow";
-import { CARDS_CONFIG } from "../../config/config";
-import { CardType } from "../../config/types";
+import { CARDS_CONFIG } from "../../../widgets/Overview/config/config";
+import { CardType } from "../../../widgets/Overview/config/types";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const tabs = [
+  {
+    title: "Overview",
+    link: "/dashboard/overview",
+  },
+  {
+    title: "Productivity",
+    link: "/dashboard/productivity",
+  },
+];
 
 const CARDS = Object.values(CardType);
-// const FILTERS = ["Overview", "Productivity"];
 
 export default function Filter() {
-  // const [activeFilter, setActiveFilter] = useState(FILTERS[0]);
-
-  const [activeFilter, setActiveFilter] = useDashboardStore(
-    (state) => [state.activeFilter, state.setActiveFilter],
-    shallow
-  );
-
-  const handleFilterClick = (filter: FilterType) => {
-    setActiveFilter(filter);
-  };
+  const pathname = usePathname();
 
   return (
-    <FilterBar
-      filterClickHandler={handleFilterClick}
-      filters={FILTERS}
-      activeFilter={activeFilter}
-    >
+    <div className="flex items-center justify-between mt-8">
+      <ul className="flex">
+        {tabs.map((tab) => {
+          const isActive = pathname === tab.link;
+
+          return (
+            <li key={tab.link}>
+              <Link
+                className={`font-semibold text-base py-1 px-4 rounded-2xl	 ${
+                  isActive ? "text-white bg-primary" : "text-deactive"
+                }`}
+                href={tab.link}
+              >
+                {tab.title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+
       <PopupWithOverlay
         positioned="Bottom"
         btn={<Icon name="filter" width={25} height={25} />}
@@ -74,6 +84,6 @@ export default function Filter() {
           </button>
         </div>
       </PopupWithOverlay>
-    </FilterBar>
+    </div>
   );
 }

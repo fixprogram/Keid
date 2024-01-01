@@ -43,7 +43,10 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
         </div>
 
         {tasks.length ? (
-          <section className="mt-4 flex flex-col gap-4">
+          <section
+            className="mt-4 flex flex-col gap-4"
+            style={{ maxHeight: 272, overflowY: "scroll" }}
+          >
             {tasks.map((task) => (
               <TaskCard key={task.id} {...task} withoutDeadline />
             ))}

@@ -2,7 +2,6 @@ import { getData } from "@/app/dashboard/overview/overview";
 import { DailyTasks } from "@/features/DailyTasks";
 import { WeekTasks } from "@/features/WeekTasks";
 import Cards from "@/widgets/Overview/ui/Cards";
-import Filter from "@/widgets/Overview/ui/Filter";
 import { useQuery } from "@tanstack/react-query";
 import { FC, useEffect } from "react";
 import { useDashboardStore, DateType } from "../model/useDashboardStore";
@@ -12,6 +11,7 @@ import { CardType } from "@/widgets/Overview/config/types";
 import { HabitCard } from "@/entities/habit/ui/HabitCard";
 import { List } from "@/shared/ui/List";
 import { HabitCard2 } from "@/entities/habit/ui/HabitCard2";
+import Tabs from "./Tabs";
 
 export const OverviewTab: FC = () => {
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
@@ -38,12 +38,15 @@ export const OverviewTab: FC = () => {
     <Layout>
       <DashboardHeader />
 
-      <Filter />
+      <Tabs />
 
       {dateType === DateType.Today ? (
         <>
           <DailyTasks tasks={tasks} />
-          <section className="flex align-center mt-8 gap-10">
+          <section
+            className="flex align-center mt-8 gap-10"
+            style={{ overflowX: "scroll" }}
+          >
             {habits.map((habit) => (
               <HabitCard2
                 link={`/habits/${habit.id}`}

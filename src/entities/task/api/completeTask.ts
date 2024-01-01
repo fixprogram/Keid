@@ -4,20 +4,19 @@ import { Comment } from "@prisma/client";
 export const completeTask = async (taskId: string, comment: Comment) => {
   const task = await prisma.task.findUnique({
     where: { id: taskId },
-    select: { comments: true, progress: true },
+    select: { comments: true, progress: true, subtaskIds: true },
   });
 
   if (!task) {
     throw new Error(`Task with id ${taskId} wasn't found`);
   }
 
-  const progressDifference = 100 - task.progress;
-
-  // const newComment = {
-  //   serviceContent:
-  //     serviceComments.task.updatedProgress +
-  //     `${progressDifference > 0 ? " +" : " "}${progressDifference}%`,
-  // };
+  if (task.subtaskIds.length) {
+    await prisma.subtask.updateMany({
+      where: { id: { in: task.subtaskIds } },
+      data: { completed: Date.now(), progress: 100 },
+    });
+  }
 
   const data = {
     completed: Date.now(),

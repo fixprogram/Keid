@@ -10,7 +10,7 @@ export async function getProjectTasks(taskIds: string[]) {
   const taskWithoutSubtaskIds: string[] = [];
   tasks.forEach((task) => {
     if (task.subtaskIds.length) {
-      subtaskIds.push(...task.subtaskIds);
+      subtaskIds.push(...task.subtaskIds, task.id);
     } else {
       taskWithoutSubtaskIds.push(task.id);
     }
