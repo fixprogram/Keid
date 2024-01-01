@@ -37,7 +37,7 @@ export default function Accordion({ topic, items = [] }: Props) {
         <ul className="mt-6 flex flex-col gap-4">
           {items.map((item) => (
             <li key={item.id}>
-              <TaskCard link={`/tasks/${item.id}`} {...item} />
+              <TaskCard {...item} />
             </li>
           ))}
         </ul>

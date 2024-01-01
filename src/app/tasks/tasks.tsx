@@ -65,7 +65,7 @@ export default function Tasks() {
 
       <List>
         {tasks[activeFilter].map((task) => (
-          <TaskCard key={task.id} link={`/tasks/${task.id}`} {...task} />
+          <TaskCard key={task.id} {...task} />
         ))}
       </List>
 

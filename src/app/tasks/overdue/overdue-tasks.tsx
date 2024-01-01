@@ -60,7 +60,7 @@ export default function OverdueTasks() {
 
       <List>
         {tasks.map((task) => (
-          <TaskCard key={task.id} link={`/tasks/${task.id}`} {...task} />
+          <TaskCard key={task.id} {...task} />
         ))}
       </List>
     </Layout>

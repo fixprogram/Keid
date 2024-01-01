@@ -29,7 +29,7 @@ export const AllTasks: FC<AllTasksPropsType> = ({ tasks }) => {
       <ul className="mt-6 flex flex-col gap-4">
         {tasks["All"].map((item) => (
           <li key={item.id}>
-            <TaskCard link={`/tasks/${item.id}`} {...item} />
+            <TaskCard {...item} />
           </li>
         ))}
       </ul>

@@ -15,7 +15,9 @@ export const TaskList: FC<TaskListPropsType> = ({ tasks }) => {
         <li key={task.id}>
           <TaskCard
             key={task.id}
-            link={task.type ? `/subtasks/${task.id}` : `/tasks/${task.id}`}
+            defaultLink={
+              task.type ? `/subtasks/${task.id}` : `/tasks/${task.id}`
+            }
             {...task}
           />
         </li>

@@ -10,14 +10,14 @@ import { Task } from "@prisma/client";
 import { FC } from "react";
 
 export type TaskCardType = Omit<Task, "projectId"> & {
-  // link: string;
   isFavorite: boolean;
   projectTitle?: string;
+  defaultLink?: string;
   withoutDeadline?: boolean;
 };
 
 export const TaskCard: FC<TaskCardType> = ({
-  // link,
+  defaultLink,
   id,
   title,
   deadline,
@@ -31,7 +31,7 @@ export const TaskCard: FC<TaskCardType> = ({
   subtaskIds,
   withoutDeadline = false,
 }) => {
-  const link = `tasks/${id}`;
+  const link = defaultLink ?? `tasks/${id}`;
   const isCompleted = Boolean(completed);
   const isOverdue = deadline === 0 ? false : Date.now() > deadline;
   const isRepeated = repeats !== "Once";
