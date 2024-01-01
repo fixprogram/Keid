@@ -57,7 +57,7 @@ export const useProjectsStore = create<ProjectsState>((set, get) => ({
 
       const filteredProjects: Record<FilterType, ProjectType[]> = {
         Active: sortedProjects.filter(
-          (project) => project.taskIds.length > 0 && project.completed === 0
+          (project) => !project.isArchived && !project.completed
         ),
 
         Completed: sortedProjects.filter((project) => project.completed), // For test purposes. In the future we add a field 'Completed' to projects

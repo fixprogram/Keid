@@ -13,7 +13,7 @@ export interface ProjectState {
   setActiveScreen: (newActiveScreen: ProjectScreenType) => void;
   setData: (newData: DataType) => void;
 }
-//
+
 export const useProjectStore = create<ProjectState>((set, get) => ({
   data: {
     id: "",
