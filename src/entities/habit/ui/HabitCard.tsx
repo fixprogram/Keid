@@ -1,6 +1,4 @@
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
-import Icon from "@/shared/ui/Icon";
-import RoundProgressBar from "@/shared/ui/RoundProgressBar";
 import Link from "next/link";
 import { FC } from "react";
 

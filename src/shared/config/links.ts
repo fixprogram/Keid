@@ -40,6 +40,7 @@ export const links = {
   },
   habit: {
     add: `${apiHabit}/add`,
+    archive: `${apiHabit}/archive`,
     delete: `${apiHabit}/delete`,
     updateProgress: `${apiHabit}/updateProgress`,
     complete: `${apiHabit}/complete`,

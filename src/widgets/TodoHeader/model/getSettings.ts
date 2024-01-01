@@ -1,8 +1,9 @@
 import { ItemType } from "@/shared/config/types";
 import { useDeleteItem } from "@/shared/model/useDeleteItem";
+import { useArchiveHabit } from "./useArchiveHabit";
 
 export const getSettings = (todoType: ItemType) => {
-  return [
+  const settings = [
     {
       iconName: "delete",
       title: `Delete ${todoType}`,
@@ -10,4 +11,15 @@ export const getSettings = (todoType: ItemType) => {
       hook: useDeleteItem,
     },
   ];
+
+  if (todoType === "habit") {
+    settings.unshift({
+      iconName: "archive",
+      title: `Archive ${todoType}`,
+      colorClass: "text-white",
+      hook: useArchiveHabit,
+    });
+  }
+
+  return settings;
 };

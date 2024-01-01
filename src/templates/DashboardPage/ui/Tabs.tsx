@@ -31,7 +31,7 @@ export default function Filter() {
           return (
             <li key={tab.link}>
               <Link
-                className={`font-semibold text-base py-1 px-4 rounded-2xl	 ${
+                className={`font-semibold text-base py-1 px-4 rounded-2xl	block  ${
                   isActive ? "text-white bg-primary" : "text-deactive"
                 }`}
                 href={tab.link}

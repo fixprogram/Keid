@@ -21,38 +21,18 @@ interface TaskPropType {
 
 export default function Habit({ id }: TaskPropType) {
   const { data } = useQuery({
-    queryKey: ["habit"],
+    queryKey: ["habit", id],
     queryFn: () => getData(id),
   });
 
-  //   const { tasks, userProjectNames } = data;
-  //   const [activeFilter, setActiveFilter] = useState(FILTERS[0]);
-
-  //   const handleFilterClick = (filter) => {
-  //     setActiveFilter(filter);
-  //   };
-
-  const { title, style, description, comments, streak } = data;
+  const { title, style, comments, streak } = data;
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
-      {/* <TaskHeader style={style} progress={50} /> */}
       <TodoHeader style={style} progress={streak} todoType="habit" />
 
       <section className="flex flex-col grow">
         <TodoTitle initialTitle={title} todoType={"habit"} />
-
-        {/* <div className="flex flex-wrap items-end gap-6 mt-6">
-          <div className="flex gap-4">
-            <ProjectInfo
-              backgroundColor={parentProjectStyle.background}
-              title={projectTitle}
-              category={"Category"}
-            />
-          </div>
-
-          <TaskDeadline style={style} deadline={deadline} />
-        </div> */}
 
         <Description itemType="habit" initialValue="description" />
 

@@ -39,7 +39,9 @@ export default async function Hydration({
   params: { id: string };
 }) {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(["habit"], () => getData(params.id));
+  await queryClient.prefetchQuery(["habit", params.id], () =>
+    getData(params.id)
+  );
   const dehydratedState = dehydrate(queryClient);
 
   return (

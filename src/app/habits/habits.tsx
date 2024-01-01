@@ -1,7 +1,5 @@
 "use client";
 
-import { HabitCard } from "@/entities/habit/ui/HabitCard";
-import { mapTasks } from "@/entities/task/lib/mapTasks";
 import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
@@ -9,10 +7,14 @@ import { sortTasks } from "@/shared/lib/utils/sortTasks";
 import { List } from "@/shared/ui/List";
 import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useMemo } from "react";
 import { useState } from "react";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { Habit } from "@prisma/client";
+import { HabitCard } from "@/entities/habit";
+
+type FilterType = "Active" | "Completed" | "Archived";
+const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
 
 type HabitsDataType = {
   habits: Habit[];
@@ -36,15 +38,28 @@ export default function Habits() {
     data: HabitsDataType;
   };
 
-  const [activeFilter, setActiveFilter] = useState<TaskFilterType>(
-    TASK_FILTERS[0]
-  );
+  const [activeFilter, setActiveFilter] = useState<FilterType>(FILTERS[0]);
+  // const [activeHabits, setActiveHabits] = useState<Habit[]>([])
   const { habits, userProjectNames } = data ? data : defaultData;
 
-  // const allTasks = sortTasks(initialTasks);
-  // const tasks = mapTasks(allTasks);
+  const filteredHabits: Record<FilterType, Habit[]> = useMemo(() => {
+    if (habits.length)
+      return {
+        Active: habits.filter((habit) => !habit.isArchived && !habit.completed),
 
-  const handleFilterClick = (filter: TaskFilterType) => {
+        Completed: habits.filter((habit) => habit.completed), // For test purposes. In the future we add a field 'Completed' to projects
+
+        Archived: habits.filter((habit) => habit.isArchived),
+      };
+
+    return {
+      Active: [],
+      Completed: [],
+      Archived: [],
+    };
+  }, [habits]);
+
+  const handleFilterClick = (filter: FilterType) => {
     setActiveFilter(filter);
   };
 
@@ -53,13 +68,13 @@ export default function Habits() {
       <PageHeader title="Habits" />
 
       <FilterBar
-        filters={TASK_FILTERS}
+        filters={FILTERS}
         activeFilter={activeFilter}
         filterClickHandler={handleFilterClick}
       />
 
       <List>
-        {habits.map((habit) => (
+        {filteredHabits[activeFilter as FilterType].map((habit) => (
           <HabitCard key={habit.id} link={`/habits/${habit.id}`} {...habit} />
         ))}
       </List>

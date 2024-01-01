@@ -76,7 +76,9 @@ export async function getData(dateType: DateType) {
 
   const weeklyActivityData = await getWeeklyActivityData(userId);
 
-  const habits = await prisma.habit.findMany({ where: { userId } });
+  const habits = await prisma.habit.findMany({
+    where: { userId, isArchived: false },
+  });
 
   const mappedTasks = tasks.map((task) => {
     const isFavorite = Boolean(
