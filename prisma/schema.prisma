@@ -30,6 +30,7 @@ model Project {
   style           String
   taskIds         String[]
   isStarred       Boolean
+  isArchived      Boolean
   completed       Int
 }
 
@@ -67,6 +68,7 @@ model Habit {
   completed      Int
   comments       Comment[]
   repeats        Int       @default(28)
+  isArchived      Boolean
 }
 
 type Comment {

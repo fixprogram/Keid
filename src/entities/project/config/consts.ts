@@ -1,13 +1,14 @@
+import { useArchiveProject } from "../models/hooks/useArchiveProject";
 import { useCompleteProject } from "../models/hooks/useCompleteProject";
 import { useDeleteProject } from "../models/hooks/useDeleteProject";
 
-export type ProjectFilterType = "Active" | "Dreams" | "Completed";
+export type ProjectFilterType = "Active" | "Completed" | "Archived";
 export type ProjectScreenType = "Overview" | "Task List";
 
 export const PROJECT_FILTERS: ProjectFilterType[] = [
   "Active",
-  "Dreams",
   "Completed",
+  "Archived",
 ];
 
 export const PROJECT_SCREENS: ProjectScreenType[] = ["Overview", "Task List"];
@@ -25,6 +26,12 @@ export const SETTINGS: SETTING_TYPE[] = [
     title: "Complete Project",
     colorClass: "text-green",
     hook: useCompleteProject,
+  },
+  {
+    iconName: "archive",
+    title: "Archive Project",
+    colorClass: "text-white",
+    hook: useArchiveProject,
   },
   {
     iconName: "delete",

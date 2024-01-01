@@ -8,14 +8,15 @@ export type ProjectType = {
   completedTaskAmount: number;
   projectProgress: number;
   isStarred: boolean;
+  isArchived: boolean;
   taskIds: [];
   completed: number;
 };
 
 type ListStyleType = "column" | "grid";
 
-export type FilterType = "Active" | "Dreams" | "Completed";
-const FILTERS: FilterType[] = ["Active", "Dreams", "Completed"];
+export type FilterType = "Active" | "Completed" | "Archived";
+const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
 
 type DataType = {
   projects: ProjectType[];
@@ -37,7 +38,7 @@ export interface ProjectsState {
 
 export const useProjectsStore = create<ProjectsState>((set, get) => ({
   data: { projects: [], userId: "", userProjectNames: [] },
-  filteredProjects: { Active: [], Dreams: [], Completed: [] },
+  filteredProjects: { Active: [], Completed: [], Archived: [] },
   activeProjects: [],
   activeFilter: FILTERS[0],
   listStyle: "column",
@@ -59,11 +60,9 @@ export const useProjectsStore = create<ProjectsState>((set, get) => ({
           (project) => project.taskIds.length > 0 && project.completed === 0
         ),
 
-        Dreams: sortedProjects.filter(
-          (project) => project.taskIds.length === 0 && project.completed === 0
-        ),
-
         Completed: sortedProjects.filter((project) => project.completed), // For test purposes. In the future we add a field 'Completed' to projects
+
+        Archived: sortedProjects.filter((project) => project.isArchived),
       };
 
       return {

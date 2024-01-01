@@ -12,6 +12,7 @@ export const createHabit = async (
       style: habitStyle,
       streak: 0,
       completed: 0,
+      isArchived: false,
     },
   });
 

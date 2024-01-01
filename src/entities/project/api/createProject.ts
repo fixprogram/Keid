@@ -13,6 +13,7 @@ export const createProject = async (
       taskIds: [],
       isStarred: false,
       completed: 0,
+      isArchived: false,
     },
   });
 

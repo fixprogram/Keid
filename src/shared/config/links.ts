@@ -10,6 +10,8 @@ export const links = {
   project: {
     add: `${apiProject}/add`,
     complete: `${apiProject}/complete`,
+    archive: `${apiProject}/archive`,
+    unarchive: `${apiProject}/unarchive`,
     delete: `${apiProject}/delete`,
     toggleStarred: `${apiProject}/toggleStarred`,
     changeProjectName: `${apiProject}/changeProjectName`,

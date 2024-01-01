@@ -25,6 +25,7 @@ export const useProjectStore = create<ProjectState>((set, get) => ({
     tasks: [],
     userProjectNames: [],
     completed: 0,
+    isArchived: false,
   },
   activeScreen: PROJECT_SCREENS[1],
   setActiveScreen: (newActiveScreen: ProjectScreenType) =>

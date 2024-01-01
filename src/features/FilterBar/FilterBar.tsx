@@ -13,8 +13,8 @@ const FilterBar: FC<Props> = ({
   children,
 }: Props) => {
   return (
-    <div className="flex items-center justify-between mt-8">
-      <ul className="flex">
+    <div className="flex items-center justify-between mt-8 gap-4">
+      <ul className="flex overflow-x-scroll">
         {filters.map((filter) => {
           const isActive = activeFilter === filter;
           return (
