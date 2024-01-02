@@ -59,5 +59,8 @@ export const links = {
     complete: `${apiChallenge}/complete`,
     archive: `${apiChallenge}/archive`,
     delete: `${apiChallenge}/delete`,
+    updateDeadline: `${apiChallenge}/updateDeadline`,
+    updateTitle: `${apiChallenge}/updateTitle`,
+    updateDescription: `${apiChallenge}/updateDescription`,
   },
 };

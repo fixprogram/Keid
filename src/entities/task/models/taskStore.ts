@@ -19,6 +19,7 @@ export const useTaskStore = create<TaskState>((set) => ({
     comments: [],
     repeats: "Once",
     description: "",
+    points: 0,
   },
   setTaskData: (data: Task) => set(() => ({ data })),
 }));
