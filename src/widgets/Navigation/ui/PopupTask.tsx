@@ -1,7 +1,7 @@
 import { shallow } from "zustand/shallow";
 import { PopupCalendar } from "./PopupCalendar";
 import { usePopupStore } from "../model/usePopupStore";
-import { useTaskFormSubmit } from "../hooks/useTaskFormSubmit";
+import { useTaskFormSubmit } from "../model/useTaskFormSubmit";
 import { PopupSelectProject } from "./PopupSelectProject";
 import { PopupInputTitle } from "./PopupInputTitle";
 import { PopupDeadline } from "./PopupDeadline";
@@ -15,13 +15,17 @@ export default function PopupTask() {
     isCalendarOpen,
     isStyleListOpened,
     isWithDeadline,
+    points,
     toggleTaskWithDeadline,
+    setPoints,
   ] = usePopupStore(
     (state) => [
       state.isCalendarOpened,
       state.isStyleListOpened,
       state.isWithDeadline,
+      state.points,
       state.toggleWithDeadline,
+      state.setPoints,
     ],
     shallow
   );
@@ -61,6 +65,15 @@ export default function PopupTask() {
 
         <div className="flex justify-between mt-6">
           <PopupRepeatsOption />
+        </div>
+
+        <div className="flex justify-between mt-6">
+          <b className="text-lg text-white font-bold">Points</b>
+          <input
+            type="number"
+            value={points}
+            onChange={(e) => setPoints(Number(e.target.value))}
+          />
         </div>
 
         <div className="absolute right-[20px] bottom-[26px]">

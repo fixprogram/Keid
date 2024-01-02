@@ -6,8 +6,8 @@ import AddButton from "@/shared/ui/AddButton";
 import { PopupDeadline } from "./PopupDeadline";
 import { PopupInputTitle } from "./PopupInputTitle";
 import { PopupSelectProject } from "./PopupSelectProject";
-import { useTaskFormSubmit } from "../hooks/useTaskFormSubmit";
-import { useChallengeFormSubmit } from "../hooks/useChallengeFormSubmit";
+import { useTaskFormSubmit } from "../model/useTaskFormSubmit";
+import { useChallengeFormSubmit } from "../model/useChallengeFormSubmit";
 
 export default function PopupChallenge() {
   const handleFormSubmit = useChallengeFormSubmit();

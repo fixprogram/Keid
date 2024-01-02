@@ -1,6 +1,6 @@
+import { useArchiveHabit } from "@/entities/habit";
 import { ItemType } from "@/shared/config/types";
 import { useDeleteItem } from "@/shared/model/useDeleteItem";
-import { useArchiveHabit } from "./useArchiveHabit";
 
 export const getSettings = (todoType: ItemType) => {
   const settings = [
@@ -18,6 +18,15 @@ export const getSettings = (todoType: ItemType) => {
       title: `Archive ${todoType}`,
       colorClass: "text-white",
       hook: useArchiveHabit,
+    });
+  }
+
+  if (todoType === "challenge") {
+    settings.unshift({
+      iconName: "archive",
+      title: `Archive ${todoType}`,
+      colorClass: "text-white",
+      hook: useArchiveHabit, // TODO
     });
   }
 

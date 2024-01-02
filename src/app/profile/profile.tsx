@@ -1,6 +1,5 @@
 "use client";
 
-import Activity from "@/features/Activity";
 import PageHeader from "@/features/PageHeader";
 import DangerButton from "@/shared/ui/DangerButton";
 import { ProfileBody } from "@/templates/ProfilePage/ui/ProfileBody";

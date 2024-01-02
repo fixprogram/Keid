@@ -8,8 +8,6 @@ import { useDashboardStore, DateType } from "../model/useDashboardStore";
 import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
 import { CardType } from "@/widgets/Overview/config/types";
-import { HabitCard } from "@/entities/habit/ui/HabitCard";
-import { List } from "@/shared/ui/List";
 import { HabitCard2 } from "@/entities/habit/ui/HabitCard2";
 import Tabs from "./Tabs";
 import { ChallengeCard } from "@/entities/challenge";
@@ -17,8 +15,8 @@ import { ChallengeCard } from "@/entities/challenge";
 export const OverviewTab: FC = () => {
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
     state.dateType,
-    state.data,
-    state.setData,
+    state.overviewData,
+    state.setOverviewData,
   ]);
 
   const { data } = useQuery({

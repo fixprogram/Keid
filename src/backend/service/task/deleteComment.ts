@@ -12,10 +12,6 @@ export async function deleteComment(taskId: string, commentTime: string) {
     (comment) => comment.time !== commentTime
   );
 
-  if (!task) {
-    throw new Error(`Task with id ${taskId} wasn't found`);
-  }
-
   return await prisma.task.update({
     where: { id: task.id },
     data: {

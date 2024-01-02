@@ -19,7 +19,7 @@ async function getData() {
   };
 }
 
-export default async function Hydation() {
+export default async function Hydration() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery(["profile"], getData);
   const dehydratedState = dehydrate(queryClient);

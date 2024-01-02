@@ -1,6 +1,7 @@
 import { prisma } from "@/db.server";
 import { getMonday } from "@/shared/lib/utils/getMonday";
 import { Comment, CommentType } from "@prisma/client";
+import { getActivityDays } from "../Activity/lib";
 
 type ActivityItem = {
   taskTitle: string;
@@ -22,6 +23,7 @@ export async function getWeeklyActivityData(userId: string) {
       title: true,
       completed: true,
       id: true,
+      points: true,
     },
   });
 
@@ -94,8 +96,16 @@ export async function getWeeklyActivityData(userId: string) {
     });
   });
 
+  const days = getActivityDays(lastWeekActiveTasks);
+
+  // Getting max task amount among the days
+  const maxActivity = Math.max(...days.map((day) => day.taskAmount));
+
   return {
+    days,
     projects: lastWeekActiveProjects,
     activityFeed,
+    maxActivity,
+    allTasksAmount: lastWeekActiveTasks.length,
   };
 }

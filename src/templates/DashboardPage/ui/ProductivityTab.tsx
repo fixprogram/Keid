@@ -6,24 +6,24 @@ import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
 import { WeeklyStatistics } from "@/features/WeeklyStatistics";
 import Tabs from "./Tabs";
+import { WeeklyActivity } from "@/features/WeeklyActivity";
 
 export const ProductivityTab: FC = () => {
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
     state.dateType,
-    state.data,
-    state.setData,
+    state.productivityData,
+    state.setProductivityData,
   ]);
 
   const { data } = useQuery({
-    queryKey: ["dashboard", "overview", dateType],
+    queryKey: ["dashboard", "productivity", dateType],
     queryFn: () => getData(dateType),
   });
 
-  const { projects } = dashboardData;
+  const { projects, activity } = dashboardData;
 
   useEffect(() => {
     if (data) {
-      console.log("data: ", data);
       setData(data);
     }
   }, [data, setData]);
@@ -35,7 +35,10 @@ export const ProductivityTab: FC = () => {
       <Tabs />
 
       {dateType === DateType.Today ? (
-        <WeeklyStatistics projects={projects} />
+        <>
+          <WeeklyStatistics projects={projects} />
+          <WeeklyActivity {...activity} />
+        </>
       ) : null}
 
       {dateType === DateType["This week"] ? (

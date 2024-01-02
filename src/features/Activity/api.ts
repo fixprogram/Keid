@@ -12,7 +12,7 @@ export async function getWeeklyActivityData(userId: string) {
     where: {
       projectId: { in: [...projects.map((project) => project.id), userId] },
     },
-    select: { comments: true, projectId: true },
+    select: { comments: true, projectId: true, points: true },
   });
 
   const firstWeekdayTimestamp = getMonday(new Date()).setHours(3, 0, 0, 0);

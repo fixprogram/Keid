@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigationStore } from "../model/useNavigationStore";
 import { PopupStyleList } from "./PopupStyleList";
 import { usePopupStore } from "../model/usePopupStore";
-import { useProjectFormSubmit } from "../hooks/useProjectFormSubmit";
+import { useProjectFormSubmit } from "../model/useProjectFormSubmit";
 import { PopupInputTitle } from "./PopupInputTitle";
 import AddButton from "@/shared/ui/AddButton";
 

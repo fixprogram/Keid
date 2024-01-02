@@ -16,6 +16,7 @@ interface PopupStateType {
   };
   activeRepeatsOption: RepeatsOptionType;
   repeats: number;
+  points: number;
   setTitle: (newTitle: string) => void;
   setStyle: (newStyle: string) => void;
   openStyleList: () => void;
@@ -27,6 +28,7 @@ interface PopupStateType {
   setProject: (newProject: { title: string; style: string }) => void;
   setRepeatsOption: (newRepeatsOption: RepeatsOptionType) => void;
   setRepeats: (newRepeats: number) => void;
+  setPoints: (newPoints: number) => void;
   reset: () => void;
 }
 
@@ -44,6 +46,7 @@ const INITIAL_STATE = {
   },
   activeRepeatsOption: REPEATS_OPTIONS[0],
   repeats: 0,
+  points: 0,
 };
 
 export const usePopupStore = create<PopupStateType>((set, get) => ({
@@ -69,5 +72,6 @@ export const usePopupStore = create<PopupStateType>((set, get) => ({
   setRepeatsOption: (newRepeatsOption: RepeatsOptionType) =>
     set(() => ({ activeRepeatsOption: newRepeatsOption })),
   setRepeats: (newRepeats: number) => set(() => ({ repeats: newRepeats })),
+  setPoints: (newPoints: number) => set(() => ({ points: newPoints })),
   reset: () => set(() => ({ ...INITIAL_STATE })),
 }));

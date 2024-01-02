@@ -1,5 +1,6 @@
 import { links } from "@/shared/config/links";
 import { ItemType } from "@/shared/config/types";
+import { useDashboardStore } from "@/templates/DashboardPage";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { Comment, CommentType } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -15,6 +16,7 @@ type MutationDataType = {
 
 export const useUpdateProgress = (itemType: ItemType) => {
   const pathname = usePathname() as string;
+  const dateType = useDashboardStore((state) => state.dateType);
   const queryClient = useQueryClient();
 
   const itemId = pathname.split("/").at(-1) as string;
@@ -29,7 +31,8 @@ export const useUpdateProgress = (itemType: ItemType) => {
       axios.post(itemPost.updateProgress, data),
     onSuccess: () => {
       queryClient.invalidateQueries([itemType, itemId]);
-      queryClient.invalidateQueries(["dashboard"]);
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
+      queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
     },
   });
 

@@ -46,6 +46,7 @@ model Task {
   comments       Comment[]
   repeats        String
   description    String
+  points         Int        @default(0)
 }
 
 model Subtask {
@@ -57,6 +58,7 @@ model Subtask {
   completed      Int
   comments       Comment[]
   description    String
+  points         Int        @default(0)
 }
 
 model Habit {

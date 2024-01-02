@@ -30,8 +30,8 @@ export const DATES: DateType[] = [
 
 // export type TaskType = Task & { isFavorite: boolean };
 
-type DataType = {
-  activityFeed: [];
+type OverviewDataType = {
+  // activityFeed: [];
   overdueTaskAmount: number;
   projectAmount: number;
   totalTaskAmount: number;
@@ -42,11 +42,26 @@ type DataType = {
   challenges: Challenge[];
 };
 
+type ProductivityDataType = {
+  activity: {
+    maxActivity: number;
+    allProjects: number;
+    allTasks: number;
+    days: {
+      taskAmount: number;
+      title: string;
+    }[];
+  };
+  projects: any[];
+};
+
 export interface ProjectsState {
-  data: DataType;
+  overviewData: OverviewDataType;
+  productivityData: ProductivityDataType;
   activeFilter: FilterType;
   dateType: DateType;
-  setData: (newData: DataType) => void;
+  setOverviewData: (newData: OverviewDataType) => void;
+  setProductivityData: (newData: ProductivityDataType) => void;
   isWeekTasksShowed: boolean;
   setActiveFilter: (newFilter: FilterType) => void;
   toggleWeekTasksShowed: () => void;
@@ -54,8 +69,8 @@ export interface ProjectsState {
 }
 
 export const useDashboardStore = create<ProjectsState>((set, get) => ({
-  data: {
-    activityFeed: [],
+  overviewData: {
+    // activityFeed: [],
     overdueTaskAmount: 0,
     projectAmount: 0,
     totalTaskAmount: 0,
@@ -65,21 +80,34 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
     habits: [],
     challenges: [],
   },
+  productivityData: {
+    activity: {
+      maxActivity: 0,
+      allProjects: 0,
+      allTasks: 0,
+      days: [],
+    },
+    projects: [],
+  },
   dateType: DATES[0],
   isWeekTasksShowed: false,
   activeFilter: FILTERS[0],
   toggleWeekTasksShowed: () =>
     set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
-  setData: (newData) =>
+  setOverviewData: (newData) =>
     set(() => {
       newData.tasks = newData.tasks.map((task) => ({
         ...task,
         isFavorite: false,
       }));
+
       return {
-        data: newData,
+        overviewData: { ...newData },
       };
     }),
+
+  setProductivityData: (newData) =>
+    set(() => ({ productivityData: { ...newData } })),
 
   setActiveFilter: (newActiveFilter) =>
     set(() => ({

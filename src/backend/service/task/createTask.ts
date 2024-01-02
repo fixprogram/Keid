@@ -10,6 +10,7 @@ type Props = {
   taskStyle: string;
   deadline: number;
   repeats: RepeatsOptionType;
+  points: number;
 };
 
 export const createTask = async ({
@@ -19,6 +20,7 @@ export const createTask = async ({
   taskStyle,
   deadline,
   repeats,
+  points,
 }: Props) => {
   const project = (await prisma.project.findFirst({
     where: { userId, title: projectName },
@@ -43,6 +45,7 @@ export const createTask = async ({
         serviceContent: serviceComments.task.created,
       },
     ],
+    points,
   };
 
   const task = await prisma.task.create({

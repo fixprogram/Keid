@@ -54,5 +54,10 @@ export const links = {
   challenge: {
     add: `${apiChallenge}/add`,
     updateProgress: `${apiChallenge}/updateProgress`,
+    addComment: `${apiChallenge}/addComment`,
+    deleteComment: `${apiChallenge}/deleteComment`,
+    complete: `${apiChallenge}/complete`,
+    archive: `${apiChallenge}/archive`,
+    delete: `${apiChallenge}/delete`,
   },
 };

@@ -46,59 +46,19 @@ export async function getData(dateType: DateType) {
     }
   }
 
-  //   const projectAmount = userProjectNames.length;
-  //   const totalTasksIds: string[] = [];
-
-  //   const taskWithoutProjectIds = await prisma.task.findMany({
-  //     where: { projectId: userId },
-  //     select: { id: true },
-  //   });
-  //   taskWithoutProjectIds.forEach((task) => {
-  //     totalTasksIds.push(task.id);
-  //   });
-  //   projects.forEach((project) => {
-  //     totalTasksIds.push(...project.taskIds);
-  //   });
-
-  //   const totalTaskAmount = totalTasksIds.length;
-
-  //   const overdueTasks = await prisma.task.findMany({
-  //     where: {
-  //       id: { in: totalTasksIds },
-  //       deadline: { lt: new Date().setHours(23, 59, 59, 999) },
-  //       AND: { completed: 0 },
-  //       NOT: { deadline: 0 },
-  //     },
-  //     select: { id: true },
-  //   });
-
-  //   const overdueTaskAmount = overdueTasks.length;
-
   const weeklyActivityData = await getWeeklyActivityData(userId);
 
-  //   const habits = await prisma.habit.findMany({ where: { userId } });
-
-  //   const mappedTasks = tasks.map((task) => {
-  //     const isFavorite = Boolean(
-  //       projects.find((project) =>
-  //         project.taskIds.some((taskId) => taskId === task.id)
-  //       )?.isStarred
-  //     );
-
-  //     return { ...task, isFavorite };
-  //   });
-
-  //   console.log("weeklyActivityData: ", weeklyActivityData);
-
   return {
-    // projectAmount,
-    // overdueTaskAmount,
-    // totalTaskAmount,
-    tasks: [],
-    userName: user.name,
+    activity: {
+      maxActivity: Math.max(
+        ...weeklyActivityData.days.map((day) => day.taskAmount)
+      ),
+      allProjects: weeklyActivityData.projects.length,
+      allTasks: weeklyActivityData.allTasksAmount,
+      days: weeklyActivityData.days,
+    },
     projects: weeklyActivityData.projects,
-    activityFeed: weeklyActivityData.activityFeed,
-    // habits,
+    // activityFeed: weeklyActivityData.activityFeed,
   };
 }
 

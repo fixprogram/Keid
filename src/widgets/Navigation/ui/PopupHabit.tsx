@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useNavigationStore } from "../model/useNavigationStore";
 import { usePopupStore } from "../model/usePopupStore";
 import AddButton from "@/shared/ui/AddButton";
-import { useHabitFormSubmit } from "../hooks/useHabitFormSubmit";
+import { useHabitFormSubmit } from "../model/useHabitFormSubmit";
 import { PopupStyleList } from "./PopupStyleList";
 import { PopupInputTitle } from "./PopupInputTitle";
 

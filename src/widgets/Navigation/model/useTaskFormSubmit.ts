@@ -1,11 +1,12 @@
 import { links } from "@/shared/config/links";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useNavigationStore } from "../model/useNavigationStore";
-import { usePopupStore } from "../model/usePopupStore";
+import { useNavigationStore } from "./useNavigationStore";
+import { usePopupStore } from "./usePopupStore";
+import { useDashboardStore } from "@/templates/DashboardPage";
 
 type MutationTaskType = {
   userId: string;
@@ -18,6 +19,8 @@ type MutationTaskType = {
 
 export function useTaskFormSubmit() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const dateType = useDashboardStore((state) => state.dateType);
 
   const [userId, closePopupAdd] = useNavigationStore(
     (state) => [state.userId, state.closePopupAdd],
@@ -34,6 +37,7 @@ export function useTaskFormSubmit() {
           ? ""
           : state.activeProject.title,
       repeats: state.activeRepeatsOption,
+      points: state.points,
     }),
     shallow
   );
@@ -47,6 +51,9 @@ export function useTaskFormSubmit() {
     onSuccess: (data) => {
       resetTask();
       closePopupAdd();
+
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
+      queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
 
       router.push(`/tasks/${data.data.id}`);
     },

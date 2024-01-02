@@ -1,11 +1,12 @@
 import { links } from "@/shared/config/links";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useNavigationStore } from "../model/useNavigationStore";
-import { usePopupStore } from "../model/usePopupStore";
+import { useNavigationStore } from "./useNavigationStore";
+import { usePopupStore } from "./usePopupStore";
+import { useDashboardStore } from "@/templates/DashboardPage";
 
 type MutationHabitType = {
   userId: string;
@@ -15,6 +16,8 @@ type MutationHabitType = {
 
 export function useHabitFormSubmit() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const dateType = useDashboardStore((state) => state.dateType);
 
   const [userId, closePopupAdd] = useNavigationStore(
     (state) => [state.userId, state.closePopupAdd],
@@ -32,6 +35,9 @@ export function useHabitFormSubmit() {
     onSuccess: (data) => {
       resetHabit();
       closePopupAdd();
+
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
+      queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
 
       router.push(`/habits/${data.data.id}`);
     },

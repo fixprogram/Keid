@@ -8,11 +8,12 @@ import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
 import { useSubtaskListStore } from "./subtaskListStore";
 import { useUserStore } from "@/entities/user";
+import { useDashboardStore } from "@/templates/DashboardPage";
 // import { useCommentsStore } from "./commentsStore";
 
 export const useAddSubtask = () => {
   const userEmail = useUserStore((state) => state.email);
-
+  const dateType = useDashboardStore((state) => state.dateType);
   const queryClient = useQueryClient();
 
   // if we come to this task by a link, the userId will be undefined
@@ -36,7 +37,8 @@ export const useAddSubtask = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["task", taskId]);
       queryClient.invalidateQueries(["tasks", userEmail]);
-      queryClient.invalidateQueries(["dashboard"]);
+
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
 
       reset();
     },

@@ -2,6 +2,7 @@ import { useTasksStore } from "@/entities/task/models/tasksStore";
 import { useTaskStore } from "@/entities/task/models/taskStore";
 import { links } from "@/shared/config/links";
 import { ItemType } from "@/shared/config/types";
+import { useDashboardStore } from "@/templates/DashboardPage";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { Comment, CommentType } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ export const useComplete = (
 ) => {
   const router = useRouter();
   const pathname = usePathname();
+  const dateType = useDashboardStore((state) => state.dateType);
   const queryClient = useQueryClient();
 
   const userId = useNavigationStore((state) => state.userId);
@@ -37,8 +39,8 @@ export const useComplete = (
     onSuccess: (data) => {
       queryClient.invalidateQueries([`${itemType}s`]);
 
-      //   setActiveFilter("Completed");
-      //   onSuccessCallback()
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
+      queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
 
       router.back();
     },

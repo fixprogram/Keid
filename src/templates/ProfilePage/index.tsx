@@ -1,4 +1,4 @@
-import Activity, { ActivityProps } from "@/features/Activity";
+import { ActivityProps } from "@/features/Activity";
 import PageHeader from "@/features/PageHeader";
 import DangerButton from "@/shared/ui/DangerButton";
 import Layout from "@/widgets/Layout";
@@ -22,7 +22,7 @@ export const ProfilePage: FC<ProfilePagePropsType> = ({ activityData }) => {
         onClick={() => signOut({ callbackUrl: "/" })}
       />
 
-      <Activity {...activityData} />
+      {/* <Activity {...activityData} /> */}
     </Layout>
   );
 };

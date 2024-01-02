@@ -1,11 +1,12 @@
 import { links } from "@/shared/config/links";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useNavigationStore } from "../model/useNavigationStore";
-import { usePopupStore } from "../model/usePopupStore";
+import { useNavigationStore } from "./useNavigationStore";
+import { usePopupStore } from "./usePopupStore";
+import { useDashboardStore } from "@/templates/DashboardPage";
 
 type MutationProjectType = {
   userId: string;
@@ -15,6 +16,8 @@ type MutationProjectType = {
 
 export function useProjectFormSubmit() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const dateType = useDashboardStore((state) => state.dateType);
 
   const [userId, closePopupAdd] = useNavigationStore(
     (state) => [state.userId, state.closePopupAdd],
@@ -33,6 +36,9 @@ export function useProjectFormSubmit() {
     onSuccess: (data) => {
       resetProject();
       closePopupAdd();
+
+      queryClient.invalidateQueries(["dashboard", "overview", dateType]);
+      queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
 
       router.push(`/projects/${data.data.id}`);
     },
