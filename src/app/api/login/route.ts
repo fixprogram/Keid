@@ -1,4 +1,4 @@
-import { findUserByEmail } from "@/entities/user/models/findUserByEmail";
+import { findUserByEmail } from "@/backend/service/user/findUserByEmail";
 import { NextApiRequest, NextApiResponse } from "next/types";
 
 // export default async function handler(

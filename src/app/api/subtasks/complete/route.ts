@@ -1,4 +1,4 @@
-import { completeSubtask } from "@/entities/subtask/models/completeSubtask";
+import { completeSubtask } from "@/backend/service/subtask/completeSubtask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

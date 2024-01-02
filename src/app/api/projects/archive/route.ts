@@ -1,4 +1,4 @@
-import { archiveProject } from "@/entities/project/api/archiveProject";
+import { archiveProject } from "@/backend/service/project/archiveProject";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

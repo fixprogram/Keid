@@ -13,10 +13,10 @@ const screens = [
     title: "Tasks",
     link: "/tasks",
   },
-  {
-    title: "Overdue tasks",
-    link: "/tasks/overdue",
-  },
+  // {
+  //   title: "Overdue tasks",
+  //   link: "/tasks/overdue",
+  // },
   {
     title: "Projects",
     link: "/projects",
@@ -24,6 +24,10 @@ const screens = [
   {
     title: "Habits",
     link: "/habits",
+  },
+  {
+    title: "Challenges",
+    link: "/challenges",
   },
 ];
 

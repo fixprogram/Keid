@@ -2,10 +2,10 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { getUser } from "@/app/lib/session";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import Project from "./project";
-import { getProjectById } from "@/entities/project/api/getProjectById";
-import { getTasksByIds } from "@/entities/task/api/getTasksByIds";
+import { getProjectById } from "@/backend/service/project/getProjectById";
+import { getTasksByIds } from "@/backend/service/task/getTasksByIds";
 
 async function getData(projectId: string) {
   const user = await getUser();

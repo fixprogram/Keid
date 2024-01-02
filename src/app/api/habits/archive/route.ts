@@ -1,4 +1,4 @@
-import { archiveHabit } from "@/entities/habit/api/archiveHabit";
+import { archiveHabit } from "@/backend/service/habit/archiveHabit";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

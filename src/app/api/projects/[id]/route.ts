@@ -1,7 +1,7 @@
 import { getUser } from "@/app/lib/session";
-import { getProjectById } from "@/entities/project/api/getProjectById";
-import { getTasksByIds } from "@/entities/task/api/getTasksByIds";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import { getProjectById } from "@/backend/service/project/getProjectById";
+import { getTasksByIds } from "@/backend/service/task/getTasksByIds";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

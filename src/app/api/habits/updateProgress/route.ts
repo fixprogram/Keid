@@ -1,4 +1,4 @@
-import { updateHabitProgress } from "@/entities/habit/api/updateHabitProgress";
+import { updateHabitProgress } from "@/backend/service/habit/updateHabitProgress";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

@@ -2,7 +2,7 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import Overview from "./overview";
 import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";

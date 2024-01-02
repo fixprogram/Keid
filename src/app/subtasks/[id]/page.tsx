@@ -3,8 +3,8 @@ import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { CommentType } from "@/features/Comments/config/types";
 import { getUser } from "@/app/lib/session";
-import { getTaskById } from "@/entities/task/api/getTaskById";
-import { getSubtaskById } from "@/entities/subtask/models/getSubtaskById";
+import { getTaskById } from "@/backend/service/task/getTaskById";
+import { getSubtaskById } from "@/backend/service/subtask/getSubtaskById";
 import Subtask from "./subtask";
 
 async function getData(subtaskId: string) {

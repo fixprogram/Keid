@@ -4,7 +4,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { getUser } from "../lib/session";
 import Tasks from "./tasks";
-import { getTasksByIds } from "@/entities/task/api/getTasksByIds";
+import { getTasksByIds } from "@/backend/service/task/getTasksByIds";
 
 async function getData() {
   const user = await getUser();

@@ -1,4 +1,4 @@
-import { updateDeadline } from "@/entities/task/api/updateDeadline";
+import { updateDeadline } from "@/backend/service/task/updateDeadline";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

@@ -1,4 +1,4 @@
-import { deleteSubtask } from "@/entities/subtask/models/deleteSubtask";
+import { deleteSubtask } from "@/backend/service/subtask/deleteSubtask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

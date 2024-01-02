@@ -1,5 +1,5 @@
 import { getUser } from "@/app/lib/session";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {

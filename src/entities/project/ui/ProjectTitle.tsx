@@ -1,6 +1,6 @@
 import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import { FC, useState } from "react";
-import { useChangeProjectName } from "../models/hooks/useChangeProjectName";
+import { useChangeProjectName } from "../models/useChangeProjectName";
 
 interface ProjectTitlePropsType {
   initialTitle: string;

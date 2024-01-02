@@ -2,12 +2,12 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { getSubtasksByIds } from "@/entities/subtask/models/getSubtasksByIds";
+import { getSubtasksByIds } from "@/backend/service/subtask/getSubtasksByIds";
 import { CommentType } from "@/features/Comments/config/types";
 import Task from "./habit";
 import { getUser } from "@/app/lib/session";
 import Habit from "./habit";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 
 async function getData(habitId: string) {
   const user = await getUser();

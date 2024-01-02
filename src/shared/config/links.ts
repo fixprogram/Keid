@@ -53,5 +53,6 @@ export const links = {
   },
   challenge: {
     add: `${apiChallenge}/add`,
+    updateProgress: `${apiChallenge}/updateProgress`,
   },
 };

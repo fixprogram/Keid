@@ -1,5 +1,5 @@
-import { createProject } from "@/entities/project/api/createProject";
-import { setProjectFavourite } from "@/entities/project/api/setProjectFavourite";
+import { createProject } from "@/backend/service/project/createProject";
+import { setProjectFavourite } from "@/backend/service/project/setProjectFavourite";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

@@ -1,4 +1,4 @@
-import { useToggleStarred } from "@/entities/project/models/hooks/useToggleStarred";
+import { useToggleStarred } from "@/entities/project/models/useToggleStarred";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import { useRouter } from "next/navigation";

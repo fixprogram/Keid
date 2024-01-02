@@ -51,7 +51,7 @@ export const UpdateProgress: FC<UpdateProgressPropsType> = ({
     >
       <div className="p-5">
         <b className="block text-white">Update progress</b>
-        {itemType === "habit" ? (
+        {itemType === "habit" || itemType === "challenge" ? (
           <div className="flex gap-3">
             <input
               type="number"

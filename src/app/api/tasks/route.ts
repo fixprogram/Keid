@@ -1,8 +1,8 @@
 import { authOptions } from "@/app/lib/auth";
 import { getUser } from "@/app/lib/session";
 import { prisma } from "@/db.server";
-import { getTasksByIds } from "@/entities/task/api/getTasksByIds";
-import { getUserProjects } from "@/entities/user/models/getUserProjects";
+import { getTasksByIds } from "@/backend/service/task/getTasksByIds";
+import { getUserProjects } from "@/backend/service/user/getUserProjects";
 import { Project } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";

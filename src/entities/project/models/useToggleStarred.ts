@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useProjectStore } from "../projectStore";
+import { useProjectStore } from "./projectStore";
 // import { closeSettings } from "../store/projectSlice";
 
 export function useToggleStarred() {

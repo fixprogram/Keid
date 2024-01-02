@@ -29,15 +29,15 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
-      <TodoHeader style={style} progress={streak} todoType="habit" />
+      <TodoHeader style={style} progress={streak} todoType="challenge" />
 
       <section className="flex flex-col grow">
-        <TodoTitle initialTitle={title} todoType={"habit"} />
+        <TodoTitle initialTitle={title} todoType={"challenge"} />
 
-        <Description itemType="habit" initialValue="description" />
+        <Description itemType="challenge" initialValue="description" />
 
         <div className="mt-auto">
-          <Comments comments={comments} itemType="habit" />
+          <Comments comments={comments} itemType="challenge" />
         </div>
       </section>
     </Layout>

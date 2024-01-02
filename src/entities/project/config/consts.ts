@@ -1,6 +1,6 @@
-import { useArchiveProject } from "../models/hooks/useArchiveProject";
-import { useCompleteProject } from "../models/hooks/useCompleteProject";
-import { useDeleteProject } from "../models/hooks/useDeleteProject";
+import { useArchiveProject } from "../models/useArchiveProject";
+import { useCompleteProject } from "../models/useCompleteProject";
+import { useDeleteProject } from "../models/useDeleteProject";
 
 export type ProjectFilterType = "Active" | "Completed" | "Archived";
 export type ProjectScreenType = "Overview" | "Task List";

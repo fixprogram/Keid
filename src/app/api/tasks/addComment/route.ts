@@ -1,4 +1,4 @@
-import { addComment } from "@/entities/task/api/addComment";
+import { addComment } from "@/backend/service/task/addComment";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

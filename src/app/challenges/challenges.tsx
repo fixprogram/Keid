@@ -9,6 +9,7 @@ import React, { FC, useMemo } from "react";
 import { useState } from "react";
 import { Challenge, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
+import { ChallengeCard } from "@/entities/challenge";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
@@ -73,11 +74,7 @@ export const Challenges: FC = () => {
 
       <List>
         {filteredChallenges[activeFilter as FilterType].map((challenge) => (
-          <HabitCard
-            key={challenge.id}
-            link={`/challenges/${challenge.id}`}
-            {...challenge}
-          />
+          <ChallengeCard key={challenge.id} {...challenge} />
         ))}
       </List>
     </Layout>

@@ -1,6 +1,6 @@
 import { getUser } from "@/app/lib/session";
 import { prisma } from "@/db.server";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

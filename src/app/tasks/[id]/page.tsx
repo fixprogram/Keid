@@ -2,12 +2,12 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { getSubtasksByIds } from "@/entities/subtask/models/getSubtasksByIds";
+import { getSubtasksByIds } from "@/backend/service/subtask/getSubtasksByIds";
 import { CommentType } from "@/features/Comments/config/types";
 import Task from "./task";
 import { getUser } from "@/app/lib/session";
-import { getProjectById } from "@/entities/project/api/getProjectById";
-import { getTaskById } from "@/entities/task/api/getTaskById";
+import { getProjectById } from "@/backend/service/project/getProjectById";
+import { getTaskById } from "@/backend/service/task/getTaskById";
 
 async function getData(taskId: string) {
   const user = await getUser();

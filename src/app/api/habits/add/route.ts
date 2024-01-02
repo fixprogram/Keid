@@ -1,4 +1,4 @@
-import { createHabit } from "@/entities/habit/models/createHabit";
+import { createHabit } from "@/backend/service/habit/createHabit";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

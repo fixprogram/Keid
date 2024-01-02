@@ -1,9 +1,9 @@
 export type { ProjectFilterType } from "./config/consts";
 export { PROJECT_FILTERS, SETTINGS } from "./config/consts";
 
-export { useChangeProjectName } from "./models/hooks/useChangeProjectName";
-export { useDeleteProject } from "./models/hooks/useDeleteProject";
-export { useToggleStarred } from "./models/hooks/useToggleStarred";
+export { useChangeProjectName } from "./models/useChangeProjectName";
+export { useDeleteProject } from "./models/useDeleteProject";
+export { useToggleStarred } from "./models/useToggleStarred";
 
 export { ColumnProjectItem } from "./ui/ColumnProjectItem";
 export { GridProjectItem } from "./ui/GridProjectItem";

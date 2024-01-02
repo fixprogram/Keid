@@ -1,8 +1,8 @@
 import { authOptions } from "@/app/lib/auth";
 import { getUser } from "@/app/lib/session";
 import { prisma } from "@/db.server";
-import getUserProjectNames from "@/entities/user/models/getUserProjectNames";
-import { getUserProjects } from "@/entities/user/models/getUserProjects";
+import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
+import { getUserProjects } from "@/backend/service/user/getUserProjects";
 import { getWeeklyActivityData } from "@/features/Activity/api";
 // import { getWeekTasks } from "@/features/WeekTasks/api";
 import { redirect } from "next/navigation";

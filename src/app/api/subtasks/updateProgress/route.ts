@@ -1,4 +1,4 @@
-import { updateSubtaskProgress } from "@/entities/subtask/models/updateSubtaskDeadline";
+import { updateSubtaskProgress } from "@/backend/service/subtask/updateSubtaskDeadline";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
