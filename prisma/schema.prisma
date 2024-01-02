@@ -68,7 +68,7 @@ model Habit {
   completed      Int
   comments       Comment[]
   repeats        Int       @default(28)
-  isArchived      Boolean
+  isArchived     Boolean
 }
 
 type Comment {
@@ -83,4 +83,19 @@ enum CommentType {
   PROGRESS_UPDATE
   COMPLETED
   SERVICE
+}
+
+model Challenge {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String
+  title          String    
+  style          String
+  deadline       Int
+  streak         Int
+  completed      Int
+  comments       Comment[]
+  repeats        Int       @default(28)
+  description    String
+  isPublic       Boolean
+  isArchived     Boolean
 }

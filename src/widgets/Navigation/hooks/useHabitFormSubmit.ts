@@ -4,8 +4,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useNavigationStore } from "../model/navigationStore";
-import { usePopupHabitStore } from "../ui/PopupHabit/popupHabitStore";
+import { useNavigationStore } from "../model/useNavigationStore";
+import { usePopupStore } from "../model/usePopupStore";
 
 type MutationHabitType = {
   userId: string;
@@ -20,8 +20,8 @@ export function useHabitFormSubmit() {
     (state) => [state.userId, state.closePopupAdd],
     shallow
   );
-  const [habitName, habitStyle, resetHabit] = usePopupHabitStore(
-    (state) => [state.habitName, state.habitStyle, state.resetHabit],
+  const [habitName, habitStyle, resetHabit] = usePopupStore(
+    (state) => [state.title, state.style, state.reset],
     shallow
   );
 

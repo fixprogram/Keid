@@ -2,7 +2,7 @@ import { useTasksStore } from "@/entities/task/models/tasksStore";
 import { useTaskStore } from "@/entities/task/models/taskStore";
 import { links } from "@/shared/config/links";
 import { ItemType } from "@/shared/config/types";
-import { useNavigationStore } from "@/widgets/Navigation/model/navigationStore";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { Comment, CommentType } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";

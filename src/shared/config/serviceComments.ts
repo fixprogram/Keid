@@ -15,4 +15,9 @@ export const serviceComments = {
     completed: "completed this habit",
     updatedProgress: "updated progress",
   },
+  challenge: {
+    created: "created this challenge",
+    completed: "completed this challenge",
+    updatedProgress: "updated progress",
+  },
 };

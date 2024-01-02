@@ -4,8 +4,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useCallback } from "react";
 import { shallow } from "zustand/shallow";
-import { useNavigationStore } from "../model/navigationStore";
-import { usePopupTaskStore } from "../ui/PopupTask/popupTaskStore";
+import { useNavigationStore } from "../model/useNavigationStore";
+import { usePopupStore } from "../model/usePopupStore";
 
 type MutationTaskType = {
   userId: string;
@@ -24,10 +24,10 @@ export function useTaskFormSubmit() {
     shallow
   );
 
-  const taskData = usePopupTaskStore(
+  const taskData = usePopupStore(
     (state) => ({
-      taskName: state.taskName,
-      taskStyle: state.taskStyle,
+      taskName: state.title,
+      taskStyle: state.style,
       deadline: state.deadline,
       projectName:
         state.activeProject.title === "No project"
@@ -38,7 +38,7 @@ export function useTaskFormSubmit() {
     shallow
   );
 
-  const resetTask = usePopupTaskStore((state) => state.resetTask);
+  const resetTask = usePopupStore((state) => state.reset);
 
   const mutation = useMutation({
     mutationKey: ["tasks"],

@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { NAV_LINKS } from "../config/links";
+import { NAV_LINKS } from "../config/consts";
 import Icon from "@/shared/ui/Icon";
 import { usePathname } from "next/navigation";
-import { useNavigationStore } from "../model/navigationStore";
+import { useNavigationStore } from "../model/useNavigationStore";
 import { useQuery } from "@tanstack/react-query";
-import Add from "./Add";
+import { AddPopup } from "./AddPopup";
 import { useUserStore } from "@/entities/user";
 
 async function getData() {
@@ -74,7 +74,7 @@ export default function Navigation() {
         })}
 
         <li className="order-1">
-          <Add />
+          <AddPopup />
         </li>
       </ul>
     </nav>

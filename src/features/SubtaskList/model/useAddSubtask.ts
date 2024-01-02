@@ -1,6 +1,6 @@
 import { links } from "@/shared/config/links";
 import { ItemType } from "@/shared/config/types";
-import { useNavigationStore } from "@/widgets/Navigation/model/navigationStore";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { usePathname } from "next/navigation";

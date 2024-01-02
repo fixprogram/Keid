@@ -3,6 +3,7 @@ const apiProject = apiLink + "projects";
 const apiTask = apiLink + "tasks";
 const apiSubtask = apiLink + "subtasks";
 const apiHabit = apiLink + "habits";
+const apiChallenge = apiLink + "challenges";
 
 export const links = {
   login: `${apiLink}login`,
@@ -49,5 +50,8 @@ export const links = {
     updateDeadline: `${apiHabit}/updateDeadline`,
     updateTitle: `${apiHabit}/updateTitle`,
     updateDescription: `${apiHabit}/updateDescription`,
+  },
+  challenge: {
+    add: `${apiChallenge}/add`,
   },
 };

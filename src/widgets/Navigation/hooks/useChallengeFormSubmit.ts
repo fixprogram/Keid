@@ -7,13 +7,14 @@ import { shallow } from "zustand/shallow";
 import { useNavigationStore } from "../model/useNavigationStore";
 import { usePopupStore } from "../model/usePopupStore";
 
-type MutationProjectType = {
+type MutationChallengeType = {
   userId: string;
-  projectName: string;
-  projectStyle: string;
+  title: string;
+  style: string;
+  deadline: number;
 };
 
-export function useProjectFormSubmit() {
+export function useChallengeFormSubmit() {
   const router = useRouter();
 
   const [userId, closePopupAdd] = useNavigationStore(
@@ -21,20 +22,29 @@ export function useProjectFormSubmit() {
     shallow
   );
 
-  const [projectName, projectStyle, resetProject] = usePopupStore(
-    (state) => [state.title, state.style, state.reset],
+  const data = usePopupStore(
+    (state) => ({
+      title: state.title,
+      style: state.style,
+      deadline: state.deadline,
+      repeats: state.repeats,
+    }),
     shallow
   );
 
+  console.log("data: ", data);
+
+  const resetTask = usePopupStore((state) => state.reset);
+
   const mutation = useMutation({
-    mutationKey: ["projects"],
-    mutationFn: (newProject: MutationProjectType) =>
-      axios.post(links.project.add, newProject),
+    mutationKey: ["challenges"],
+    mutationFn: (newChallenge: MutationChallengeType) =>
+      axios.post(links.challenge.add, newChallenge),
     onSuccess: (data) => {
-      resetProject();
+      resetTask();
       closePopupAdd();
 
-      router.push(`/projects/${data.data.id}`);
+      router.push(`/challenges/${data.data.id}`);
     },
   });
 
@@ -42,9 +52,12 @@ export function useProjectFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      mutation.mutate({ userId, projectName, projectStyle });
+      mutation.mutate({
+        userId,
+        ...data,
+      });
     },
-    [userId, projectName, projectStyle, mutation]
+    [userId, data, mutation]
   );
 
   return handleFormSubmit;
