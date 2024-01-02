@@ -12,6 +12,7 @@ import { HabitCard } from "@/entities/habit/ui/HabitCard";
 import { List } from "@/shared/ui/List";
 import { HabitCard2 } from "@/entities/habit/ui/HabitCard2";
 import Tabs from "./Tabs";
+import { ChallengeCard } from "@/entities/challenge";
 
 export const OverviewTab: FC = () => {
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
@@ -25,8 +26,14 @@ export const OverviewTab: FC = () => {
     queryFn: () => getData(dateType),
   });
 
-  const { overdueTaskAmount, projectAmount, totalTaskAmount, tasks, habits } =
-    dashboardData;
+  const {
+    overdueTaskAmount,
+    projectAmount,
+    totalTaskAmount,
+    tasks,
+    habits,
+    challenges,
+  } = dashboardData;
 
   useEffect(() => {
     if (data) {
@@ -53,6 +60,12 @@ export const OverviewTab: FC = () => {
                 {...habit}
                 key={habit.id}
               />
+            ))}
+          </section>
+
+          <section className="flex flex-col mt-8 gap-4">
+            {challenges.map((challenge) => (
+              <ChallengeCard {...challenge} key={challenge.id} />
             ))}
           </section>
         </>

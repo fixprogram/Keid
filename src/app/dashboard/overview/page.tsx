@@ -90,6 +90,10 @@ export async function getData(dateType: DateType) {
     return { ...task, isFavorite };
   });
 
+  const challenges = await prisma.challenge.findMany({
+    where: { userId, isArchived: false },
+  });
+
   return {
     projectAmount,
     overdueTaskAmount,
@@ -99,6 +103,7 @@ export async function getData(dateType: DateType) {
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,
     habits,
+    challenges,
   };
 }
 

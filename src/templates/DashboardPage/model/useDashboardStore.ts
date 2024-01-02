@@ -1,7 +1,7 @@
 import { TaskType } from "@/shared/config/types";
 import { sortProjects } from "@/shared/lib/utils/sortProjects";
 import { sortProjectsByActivity } from "@/shared/lib/utils/sortProjectsByActivity";
-import { Habit, Project, Task } from "@prisma/client";
+import { Challenge, Habit, Project, Task } from "@prisma/client";
 import { create } from "zustand";
 
 export type ProjectType = {
@@ -39,6 +39,7 @@ type DataType = {
   userName: string;
   tasks: TaskType[];
   habits: Habit[];
+  challenges: Challenge[];
 };
 
 export interface ProjectsState {
@@ -62,6 +63,7 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
     userName: "",
     tasks: [],
     habits: [],
+    challenges: [],
   },
   dateType: DATES[0],
   isWeekTasksShowed: false,
