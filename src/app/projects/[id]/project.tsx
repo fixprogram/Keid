@@ -18,7 +18,7 @@ async function getData(id: string) {
   return data;
 }
 
-interface ProjectPropType {
+interface ProjectPropsType {
   id: string;
 }
 
@@ -27,7 +27,7 @@ const ComponentMap = {
   "Task List": ProjectTasks,
 };
 
-export default function Project({ id }: ProjectPropType) {
+export default function Project({ id }: ProjectPropsType) {
   const { data } = useQuery({
     queryKey: ["project"],
     queryFn: () => getData(id),

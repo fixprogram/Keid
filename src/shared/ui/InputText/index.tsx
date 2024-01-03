@@ -1,5 +1,5 @@
 type Props = {
-  type: "text" | "email" | "password";
+  type: "text" | "email" | "password" | "search";
   name: string;
   placeholder: string;
   required?: boolean;

@@ -3,8 +3,12 @@ import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC, Fragment } from "react";
 import { DATES, useDashboardStore } from "../model/useDashboardStore";
+import { useUserStore } from "@/entities/user";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 
 export const DashboardHeader: FC = () => {
+  const userId = useNavigationStore((state) => state.userId);
+
   const [dateType, setDateType] = useDashboardStore((state) => [
     state.dateType,
     state.setDateType,
@@ -43,7 +47,10 @@ export const DashboardHeader: FC = () => {
         </PopupWithOverlay>
       </h2>
 
-      <Link href="/profile" className="w-[40px] h-[40px] rounded-full">
+      <Link
+        href={`/profile/${userId}`}
+        className="w-[40px] h-[40px] rounded-full"
+      >
         <Icon name="avatar" width={40} height={40} />
       </Link>
     </div>

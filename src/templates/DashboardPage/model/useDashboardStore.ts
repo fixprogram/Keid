@@ -35,7 +35,7 @@ type OverviewDataType = {
   overdueTaskAmount: number;
   projectAmount: number;
   totalTaskAmount: number;
-  projects: [];
+  projects: any[];
   userName: string;
   tasks: TaskType[];
   habits: Habit[];
