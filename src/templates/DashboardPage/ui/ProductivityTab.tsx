@@ -7,13 +7,18 @@ import Layout from "@/widgets/Layout";
 import { WeeklyStatistics } from "@/features/WeeklyStatistics";
 import Tabs from "./Tabs";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
+import { useShareProgress } from "../model/useShareProgress";
 
 export const ProductivityTab: FC = () => {
+  const userId = useNavigationStore((state) => state.userId);
   const [dateType, dashboardData, setData] = useDashboardStore((state) => [
     state.dateType,
     state.productivityData,
     state.setProductivityData,
   ]);
+
+  const handleShareProgress = useShareProgress(userId);
 
   const { data } = useQuery({
     queryKey: ["dashboard", "productivity", dateType],
@@ -36,6 +41,9 @@ export const ProductivityTab: FC = () => {
 
       {dateType === DateType.Today ? (
         <>
+          <button className="text-white" onClick={handleShareProgress}>
+            Share progress
+          </button>
           <WeeklyStatistics projects={projects} />
           <WeeklyActivity {...activity} />
         </>

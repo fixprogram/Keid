@@ -17,6 +17,9 @@ export async function createUser({ email, name, password }: CreateUserProps) {
       name,
       passwordHash,
       projectIds: [],
+      followers: [],
+      following: [],
+      notifications: [],
     },
   });
 

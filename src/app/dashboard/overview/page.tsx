@@ -94,6 +94,8 @@ export async function getData(dateType: DateType) {
     where: { userId, isArchived: false },
   });
 
+  console.log("tasks: ", mappedTasks);
+
   return {
     projectAmount,
     overdueTaskAmount,

@@ -58,8 +58,8 @@ export const NAV_LINKS = [
   {
     iconName: "notification",
     iconSize: { width: 20, height: 22 },
-    alt: "Profile page",
-    to: "/profile",
+    alt: "Notifications page",
+    to: "/notifications",
   },
   {
     iconName: "search",

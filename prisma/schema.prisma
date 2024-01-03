@@ -19,6 +19,9 @@ model User {
   projectIds      String[]   
   name            String
   emailVerified    DateTime? @map("email_verified")
+  followers       String[]
+  following       String[]
+  notifications    Notification[]
   image           String?
 
   @@map("users")
@@ -100,4 +103,16 @@ model Challenge {
   description    String
   isPublic       Boolean
   isArchived     Boolean
+}
+
+type Notification {
+  date           String
+  userId         String
+  type           NotificationType
+  content        String
+}
+
+enum NotificationType {
+  REPORT
+  OTHER
 }

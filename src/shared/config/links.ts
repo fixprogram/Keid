@@ -1,13 +1,16 @@
-const apiLink = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api/`;
-const apiProject = apiLink + "projects";
-const apiTask = apiLink + "tasks";
-const apiSubtask = apiLink + "subtasks";
-const apiHabit = apiLink + "habits";
-const apiChallenge = apiLink + "challenges";
+const apiLink = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api`;
+const apiProject = apiLink + "/projects";
+const apiTask = apiLink + "/tasks";
+const apiSubtask = apiLink + "/subtasks";
+const apiHabit = apiLink + "/habits";
+const apiChallenge = apiLink + "/challenges";
 
 export const links = {
-  login: `${apiLink}login`,
-  signup: `${apiLink}signup`,
+  login: `${apiLink}/login`,
+  signup: `${apiLink}/signup`,
+  follow: (id: string) => `${apiLink}/profile/${id}/follow`,
+  unfollow: (id: string) => `${apiLink}/profile/${id}/unfollow`,
+  shareProgress: (id: string) => `${apiLink}/profile/${id}/shareProgress`,
   project: {
     add: `${apiProject}/add`,
     complete: `${apiProject}/complete`,

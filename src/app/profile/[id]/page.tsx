@@ -4,8 +4,11 @@ import { dehydrate } from "@tanstack/query-core";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { prisma } from "@/db.server";
 import { Profile } from "./profile";
+import { getUser } from "@/app/lib/session";
 
 async function getData(id: string) {
+  const mainUser = await getUser();
+
   const user = await prisma.user.findUnique({ where: { id } });
 
   if (!user) {
@@ -18,6 +21,9 @@ async function getData(id: string) {
     activityData,
     userName: user.name,
     userEmail: user.email,
+    isFollowing: user.followers.includes(mainUser.id),
+    followersAmount: user.followers.length,
+    followingAmount: user.following.length,
   };
 }
 

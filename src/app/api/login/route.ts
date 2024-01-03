@@ -29,7 +29,7 @@ import { NextApiRequest, NextApiResponse } from "next/types";
 
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   if (request.method !== "POST") {
     return NextResponse.json(
       { message: "Only POST requests allowed" },
@@ -38,9 +38,13 @@ export async function POST(request: any) {
   }
   //   const res = await request.json()
 
-  const body = request.body;
+  const { email } = await request.json();
 
-  const { email } = body;
+  // const { email } = body;
+
+  if (!email) {
+    throw new Error("No email provided");
+  }
 
   const user = await findUserByEmail(email);
 
