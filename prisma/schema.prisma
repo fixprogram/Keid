@@ -88,6 +88,7 @@ enum CommentType {
   PROGRESS_UPDATE
   COMPLETED
   SERVICE
+  USER_COMMENT
 }
 
 model Challenge {

@@ -23,12 +23,7 @@ export const useAddComment = (itemType: ItemType) => {
     mutationKey: [itemType, itemId],
     mutationFn: (comment: string) =>
       axios.post(itemPost.addComment, { comment, userId, itemId }),
-    onSuccess: (data) => {
-      // queryClient.setQueryData([itemType, itemId], {
-      //   ...taskData,
-      //   comments: data.data.comments,
-      // });
-
+    onSuccess: () => {
       queryClient.invalidateQueries([itemType, itemId]);
 
       reset();

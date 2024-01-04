@@ -3,8 +3,9 @@ import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { Challenge } from "./challenge";
+import { CommentType } from "@prisma/client";
 
-async function getData(challengeId: string) {
+export async function getData(challengeId: string) {
   const challenge = await prisma.challenge.findUnique({
     where: { id: challengeId },
   });
@@ -13,8 +14,13 @@ async function getData(challengeId: string) {
     throw new Error(`challenge with id: ${challengeId} wasn't found`);
   }
 
+  const filteredComments = challenge.comments.filter(
+    (comment) => comment.type === CommentType.USER_COMMENT
+  );
+
   return {
     ...challenge,
+    comments: filteredComments,
   };
 }
 

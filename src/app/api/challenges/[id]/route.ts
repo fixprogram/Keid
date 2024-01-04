@@ -1,7 +1,5 @@
-import { getUser } from "@/app/lib/session";
-import { prisma } from "@/db.server";
-import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { NextRequest, NextResponse } from "next/server";
+import { getData } from "@/app/challenges/[id]/page";
 
 export async function GET(
   request: NextRequest,
@@ -9,21 +7,7 @@ export async function GET(
 ) {
   const id = params.id;
 
-  const user = await getUser();
-
-  const userId = user.id;
-  const userProjectNames = await getUserProjectNames(userId);
-
-  const challenge = await prisma.challenge.findUnique({ where: { id } });
-
-  if (!challenge) {
-    throw new Error(`challenge with id: ${id} wasn't found`);
-  }
-
-  const data = {
-    ...challenge,
-    userProjectNames,
-  };
+  const data = await getData(id);
 
   return NextResponse.json(data);
 }

@@ -1,5 +1,6 @@
 import { prisma } from "@/db.server";
 import { getTaskById } from "./getTaskById";
+import { CommentType } from "@prisma/client";
 
 export async function addComment(
   taskId: string,
@@ -15,10 +16,14 @@ export async function addComment(
   return await prisma.task.update({
     where: { id: task.id },
     data: {
-      comments: [
-        ...task.comments,
-        { userId, content, time: Date.now().toString() },
-      ],
+      comments: {
+        push: {
+          userId,
+          content,
+          time: Date.now().toString(),
+          type: CommentType.USER_COMMENT,
+        },
+      },
     },
   });
 }

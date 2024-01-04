@@ -13,7 +13,7 @@ export const useAutosizeTextarea = (
   const [value, setValue] = useState(initialValue);
 
   const resizeTextArea = useCallback(() => {
-    ref.current.style.height = "auto";
+    ref.current.style.height = "42px";
     ref.current.style.height = ref.current.scrollHeight + "px";
   }, [ref]);
 

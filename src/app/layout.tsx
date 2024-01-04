@@ -21,7 +21,9 @@ interface RootLayoutProps {
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        <title>Keid</title>
+      </head>
       <body className={`${inter.variable} ${poppins.variable} font-sans`}>
         <Providers>{children}</Providers>
       </body>

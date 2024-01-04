@@ -25,7 +25,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
     queryFn: () => getData(id),
   });
 
-  const { title, style, comments, streak } = data;
+  const { title, style, comments, streak, description } = data;
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
@@ -34,7 +34,10 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
       <section className="flex flex-col grow">
         <TodoTitle initialTitle={title} todoType={"challenge"} />
 
-        <Description itemType="challenge" initialValue="description" />
+        <Description
+          itemType="challenge"
+          initialValue={description ? description : ""}
+        />
 
         <div className="mt-auto">
           <Comments comments={comments} itemType="challenge" />

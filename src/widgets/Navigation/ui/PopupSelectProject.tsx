@@ -36,7 +36,7 @@ export const PopupSelectProject: FC = () => {
 
   return (
     <div className="flex items-center gap-4 mt-5">
-      <Icon name="project" width={16} height={16} />
+      <Icon name="project" width={16} height={16} color="white" />
 
       <select
         className="text-white font-bold"

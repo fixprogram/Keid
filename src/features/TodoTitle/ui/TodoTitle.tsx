@@ -21,11 +21,6 @@ export const TodoTitle: FC<TodoTitlePropsType> = ({
   };
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-  // const { title, textareaHeight, handleTextareaChange } = useTextareaHeight(
-  //   initialTitle,
-  //   textareaRef,
-  //   40
-  // );
 
   const { value, handleValueChange } = useAutosizeTextarea(
     initialTitle,
@@ -42,6 +37,7 @@ export const TodoTitle: FC<TodoTitlePropsType> = ({
           backgroundColor: "inherit",
           overflowY: "hidden",
           width: "100%",
+          height: 42,
         }}
         onBlur={() => handleTextareaBlur(value)}
         ref={textareaRef}
