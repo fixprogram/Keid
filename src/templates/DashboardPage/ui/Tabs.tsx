@@ -5,39 +5,46 @@ import { CARDS_CONFIG } from "../../../widgets/Overview/config/config";
 import { CardType } from "../../../widgets/Overview/config/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { DATES, useDashboardStore } from "../model/useDashboardStore";
+import { FC } from "react";
 
-const tabs = [
-  {
-    title: "Overview",
-    link: "/dashboard/overview",
-  },
-  {
-    title: "Productivity",
-    link: "/dashboard/productivity",
-  },
-];
+// const tabs = [
+//   {
+//     title: "Overview",
+//     link: "/dashboard/overview",
+//   },
+//   {
+//     title: "Productivity",
+//     link: "/dashboard/productivity",
+//   },
+// ];
 
 const CARDS = Object.values(CardType);
 
-export default function Filter() {
-  const pathname = usePathname();
+export const Tabs: FC = () => {
+  // const pathname = usePathname();
+
+  const [dateType, setDateType] = useDashboardStore((state) => [
+    state.dateType,
+    state.setDateType,
+  ]);
 
   return (
     <div className="flex items-center justify-between mt-8">
       <ul className="flex">
-        {tabs.map((tab) => {
-          const isActive = pathname === tab.link;
+        {DATES.map((tab) => {
+          const isActive = dateType === tab;
 
           return (
-            <li key={tab.link}>
-              <Link
+            <li key={tab}>
+              <button
                 className={`font-semibold text-base py-1 px-4 rounded-2xl	block  ${
                   isActive ? "text-white bg-primary" : "text-deactive"
                 }`}
-                href={tab.link}
+                onClick={() => setDateType(tab)}
               >
-                {tab.title}
-              </Link>
+                {tab}
+              </button>
             </li>
           );
         })}
@@ -86,4 +93,4 @@ export default function Filter() {
       </PopupWithOverlay>
     </div>
   );
-}
+};

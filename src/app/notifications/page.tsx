@@ -11,18 +11,28 @@ export async function getData() {
 
   const user = await prisma.user.findUnique({
     where: { id },
-    select: { notifications: true, name: true },
+    select: { notifications: true },
   });
 
   if (!user) {
     throw new Error(`User with id ${id} wasn't found`);
   }
 
-  const { notifications, name } = user;
+  const { notifications } = user;
+
+  const notificationUserIds = [
+    ...new Set(notifications.map((notification) => notification.userId)),
+  ];
+
+  const notificationUsers = await prisma.user.findMany({
+    where: { id: { in: notificationUserIds } },
+    select: { id: true, name: true },
+  });
 
   return notifications.map((notification) => ({
     ...notification,
-    userName: name,
+    userName: notificationUsers.find((user) => user.id === notification.userId)
+      ?.name,
   }));
 }
 

@@ -1,4 +1,6 @@
 import { ProjectStyleKey, projectStyles } from "@/shared/config/projectStyles";
+import Icon from "@/shared/ui/Icon";
+import { useDashboardStore } from "@/templates/DashboardPage";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -8,6 +10,7 @@ interface ChallengeCardPropsType {
   style: string;
   streak: number;
   repeats: number;
+  isCompletedForToday: boolean;
 }
 
 export const ChallengeCard: FC<ChallengeCardPropsType> = ({
@@ -16,7 +19,10 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
   style,
   streak,
   repeats,
+  isCompletedForToday,
 }) => {
+  const setScrollY = useDashboardStore((state) => state.setScrollY);
+
   const progress = Math.floor((streak / repeats) * 100);
 
   const gradient = projectStyles[style as ProjectStyleKey].gradient;
@@ -28,6 +34,7 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
       style={{
         background: gradient,
       }}
+      onClick={() => setScrollY(window.scrollY)}
     >
       <section className={` p-5 rounded-[18px]`}>
         <div className={`text-active`}>
@@ -41,7 +48,7 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
           </div>
 
           <div className="flex gap-[25px] items-center mt-[10px]">
-            <div className="h-[12px] w-[200px] bg-white rounded-[5px]">
+            <div className="h-[12px] w-auto flex-grow bg-white rounded-[5px]">
               <div
                 className="h-full"
                 style={{
@@ -52,7 +59,13 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
                 }}
               ></div>
             </div>
-            <span className="text-active text-base font-bold">{progress}%</span>
+            {isCompletedForToday ? (
+              <Icon name="completed" width={40} height={40} />
+            ) : (
+              <span className="text-active text-base font-bold">
+                {progress}%
+              </span>
+            )}
           </div>
         </div>
       </section>

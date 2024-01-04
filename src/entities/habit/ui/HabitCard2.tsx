@@ -2,6 +2,7 @@ import ProgressBar from "@/features/WeeklyProgress/ui/ProgressBar";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import RoundProgressBar from "@/shared/ui/RoundProgressBar";
+import { useDashboardStore } from "@/templates/DashboardPage";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -12,6 +13,7 @@ type HabitCardPropsType = {
   style: string;
   streak: number;
   repeats: number;
+  isCompletedForToday: boolean;
   //   isStarred?: boolean;
 };
 
@@ -21,22 +23,27 @@ export const HabitCard2: FC<HabitCardPropsType> = ({
   style,
   streak,
   repeats,
+  isCompletedForToday,
   //   isStarred = false,
 }) => {
   const taskStyle = projectStyles[style as ProjectStyleKey];
+  const setScrollY = useDashboardStore((state) => state.setScrollY);
 
-  //   console.log("taskStyle: ", taskStyle.progressGradient);
   const progress = Math.floor((streak / repeats) * 100);
   return (
-    <Link href={link}>
+    <Link href={link} onClick={() => setScrollY(window.scrollY)}>
       <div className="min-w-[80px] h-[70px] rounded-full grid place-items-center relative">
         <div className="absolute">
-          <b
-            className="text-lg text-white font-semibold mt-4"
-            style={{ fontSize: 14 }}
-          >
-            {progress}%
-          </b>
+          {isCompletedForToday ? (
+            <Icon name="completed" width={40} height={40} />
+          ) : (
+            <b
+              className="text-lg text-white font-semibold mt-4"
+              style={{ fontSize: 14 }}
+            >
+              {progress}%
+            </b>
+          )}
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

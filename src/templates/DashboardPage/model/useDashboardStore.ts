@@ -18,14 +18,14 @@ export const FILTERS: FilterType[] = ["Overview", "Productivity"];
 
 export enum DateType {
   "Today" = "Today",
-  "This week" = "This week",
-  "This month" = "This month",
+  "Week" = "Week",
+  "Month" = "Month",
 }
 
 export const DATES: DateType[] = [
   DateType.Today,
-  DateType["This week"],
-  DateType["This month"],
+  DateType.Week,
+  DateType.Month,
 ];
 
 // export type TaskType = Task & { isFavorite: boolean };
@@ -60,12 +60,14 @@ export interface ProjectsState {
   productivityData: ProductivityDataType;
   activeFilter: FilterType;
   dateType: DateType;
+  scrollY: number;
+  isWeekTasksShowed: boolean;
   setOverviewData: (newData: OverviewDataType) => void;
   setProductivityData: (newData: ProductivityDataType) => void;
-  isWeekTasksShowed: boolean;
   setActiveFilter: (newFilter: FilterType) => void;
   toggleWeekTasksShowed: () => void;
   setDateType: (newDateType: DateType) => void;
+  setScrollY: (newScrollY: number) => void;
 }
 
 export const useDashboardStore = create<ProjectsState>((set, get) => ({
@@ -92,6 +94,7 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
   dateType: DATES[0],
   isWeekTasksShowed: false,
   activeFilter: FILTERS[0],
+  scrollY: 0,
   toggleWeekTasksShowed: () =>
     set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
   setOverviewData: (newData) =>
@@ -116,5 +119,9 @@ export const useDashboardStore = create<ProjectsState>((set, get) => ({
 
   setDateType(newDateType) {
     set(() => ({ dateType: newDateType }));
+  },
+
+  setScrollY(newScrollY) {
+    set(() => ({ scrollY: newScrollY }));
   },
 }));

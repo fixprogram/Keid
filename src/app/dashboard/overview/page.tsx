@@ -33,11 +33,11 @@ export async function getData(dateType: DateType) {
 
       break;
     }
-    case DateType["This week"]: {
+    case DateType.Week: {
       tasks = await getThisWeekTasks(projectIDs);
       break;
     }
-    case DateType["This month"]: {
+    case DateType.Month: {
       tasks = await getThisMonthTasks(projectIDs);
       break;
     }

@@ -1,50 +1,37 @@
-import { getData } from "@/app/dashboard/productivity/productivity";
-import { prisma } from "@/db.server";
-import { getWeeklyActivityData } from "@/features/Activity/api";
-import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
-import { Notification, NotificationType } from "@prisma/client";
-import { NextResponse } from "next/server";
+// import { prisma } from "@/db.server";
+// import { getWeeklyActivityData } from "@/features/Activity/api";
+// import { Notification, NotificationType } from "@prisma/client";
+// import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  const { userId } = await request.json();
+// export async function GET() {
+//   const users = await prisma.user.findMany({
+//     select: { id: true, name: true, followers: true },
+//   });
 
-  if (!userId) {
-    throw new Error(`userId ${userId} wasn't found`);
-  }
+//   await Promise.all(
+//     users.map(async (user) => {
+//       if (user.followers.length) {
+//         const { allTasks, allProjects, maxActivity } =
+//           await getWeeklyActivityData(user.id);
 
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { followers: true, name: true },
-  });
+//         const notification: Notification = {
+//           date: new Date().getTime().toString(),
+//           userId: user.id,
+//           type: NotificationType.REPORT,
+//           content: `${user.name} finished the day with ${allTasks} tasks completed from ${allProjects} projects and total points are ${maxActivity}`,
+//         };
 
-  if (!user) {
-    throw new Error(`User with id ${userId} wasn't found`);
-  }
+//         await prisma.user.updateMany({
+//           where: { id: { in: user.followers } },
+//           data: {
+//             notifications: {
+//               push: notification,
+//             },
+//           },
+//         });
+//       }
+//     })
+//   );
 
-  const followerIds = user.followers;
-
-  const { allTasks, allProjects, maxActivity } = await getWeeklyActivityData(
-    userId
-  );
-
-  const notification: Notification = {
-    date: new Date().getTime().toString(),
-    userId,
-    type: NotificationType.REPORT,
-    content: `${user.name} finished the day with ${allTasks} tasks completed from ${allProjects} projects and total points are ${maxActivity}`,
-  };
-
-  //   const followers = await prisma
-  await prisma.user.updateMany({
-    where: { id: { in: followerIds } },
-    data: {
-      notifications: {
-        push: notification,
-      },
-    },
-  });
-
-  //   const data = await getData(DateType.Today);
-
-  return NextResponse.json(true);
-}
+//   return NextResponse.json(true);
+// }

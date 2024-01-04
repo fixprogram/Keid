@@ -5,7 +5,7 @@ import { getData } from "@/app/dashboard/productivity/productivity";
 import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
 import { WeeklyStatistics } from "@/features/WeeklyStatistics";
-import Tabs from "./Tabs";
+import { Tabs } from "./Tabs";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { useShareProgress } from "../model/useShareProgress";
@@ -41,19 +41,16 @@ export const ProductivityTab: FC = () => {
 
       {dateType === DateType.Today ? (
         <>
-          <button className="text-white" onClick={handleShareProgress}>
+          {/* <button className="text-white" onClick={handleShareProgress}>
             Share progress
-          </button>
+          </button> */}
           <WeeklyStatistics projects={projects} />
-          <WeeklyActivity {...activity} />
         </>
       ) : null}
 
-      {dateType === DateType["This week"] ? (
-        <div style={{ color: "wheat" }}>Empty for now</div>
-      ) : null}
+      {dateType === DateType.Week ? <WeeklyActivity {...activity} /> : null}
 
-      {dateType === DateType["This month"] ? (
+      {dateType === DateType.Month ? (
         <div style={{ color: "wheat" }}>Empty for now</div>
       ) : null}
     </Layout>
