@@ -8,7 +8,7 @@ import { WeeklyStatistics } from "@/features/WeeklyStatistics";
 import { Tabs } from "./Tabs";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
-import { useShareProgress } from "../model/useShareProgress";
+// import { useShareProgress } from "../model/useShareProgress";
 
 export const ProductivityTab: FC = () => {
   const userId = useNavigationStore((state) => state.userId);
@@ -18,7 +18,7 @@ export const ProductivityTab: FC = () => {
     state.setProductivityData,
   ]);
 
-  const handleShareProgress = useShareProgress(userId);
+  // const handleShareProgress = useShareProgress(userId);
 
   const { data } = useQuery({
     queryKey: ["dashboard", "productivity", dateType],

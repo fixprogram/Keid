@@ -1,30 +1,25 @@
-import ProgressBar from "@/features/WeeklyProgress/ui/ProgressBar";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
-import RoundProgressBar from "@/shared/ui/RoundProgressBar";
-import { useDashboardStore } from "@/templates/DashboardPage";
 import Link from "next/link";
 import { FC } from "react";
+import { useDashboardStore } from "../model/useDashboardStore";
 
 type HabitCardPropsType = {
   link: string;
   title: string;
-  //   deadline: string | null;
   style: string;
   streak: number;
   repeats: number;
   isCompletedForToday: boolean;
-  //   isStarred?: boolean;
 };
 
-export const HabitCard2: FC<HabitCardPropsType> = ({
+export const HabitCard: FC<HabitCardPropsType> = ({
   link,
   title,
   style,
   streak,
   repeats,
   isCompletedForToday,
-  //   isStarred = false,
 }) => {
   const taskStyle = projectStyles[style as ProjectStyleKey];
   const setScrollY = useDashboardStore((state) => state.setScrollY);

@@ -74,6 +74,7 @@ model Habit {
   comments       Comment[]
   repeats        Int       @default(28)
   isArchived     Boolean
+  points         Int        @default(0)
 }
 
 type Comment {
@@ -104,6 +105,7 @@ model Challenge {
   description    String
   isPublic       Boolean
   isArchived     Boolean
+  points         Int        @default(0)
 }
 
 type Notification {

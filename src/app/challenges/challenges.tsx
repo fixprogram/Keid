@@ -7,9 +7,10 @@ import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo } from "react";
 import { useState } from "react";
-import { Challenge, Habit } from "@prisma/client";
+import { Challenge, CommentType, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
 import { ChallengeCard } from "@/entities/challenge";
+import { isDateToday } from "@/shared/lib/utils/isDateToday";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
@@ -74,7 +75,17 @@ export const Challenges: FC = () => {
 
       <List>
         {filteredChallenges[activeFilter as FilterType].map((challenge) => (
-          <ChallengeCard key={challenge.id} {...challenge} />
+          <ChallengeCard
+            key={challenge.id}
+            {...challenge}
+            isCompletedForToday={Boolean(
+              challenge.comments.filter(
+                (challenge) =>
+                  challenge.type === CommentType.PROGRESS_UPDATE &&
+                  isDateToday(new Date(Number(challenge.time)))
+              ).length
+            )}
+          />
         ))}
       </List>
     </Layout>

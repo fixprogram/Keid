@@ -8,12 +8,12 @@ import { useDashboardStore, DateType } from "../model/useDashboardStore";
 import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
 import { CardType } from "@/widgets/Overview/config/types";
-import { HabitCard2 } from "@/entities/habit/ui/HabitCard2";
 import { Tabs } from "./Tabs";
 import { ChallengeCard } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { CommentType } from "@prisma/client";
 import { usePathname } from "next/navigation";
+import { HabitCard } from "./HabitCard";
 
 export const OverviewTab: FC = () => {
   const [dateType, dashboardData, scrollY, setData, setScrollY] =
@@ -71,7 +71,7 @@ export const OverviewTab: FC = () => {
               style={{ overflowX: "scroll" }}
             >
               {habits.map((habit) => (
-                <HabitCard2
+                <HabitCard
                   link={`/habits/${habit.id}`}
                   {...habit}
                   isCompletedForToday={Boolean(
