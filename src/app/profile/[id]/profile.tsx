@@ -3,7 +3,7 @@
 import { FollowUser } from "@/features/FollowUser";
 import PageHeader from "@/features/PageHeader";
 import DangerButton from "@/shared/ui/DangerButton";
-import { ProfileBody } from "@/templates/ProfilePage/ui/ProfileBody";
+import { ProfileBody } from "@/templates/ProfilePage";
 import Layout from "@/widgets/Layout";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { useQuery } from "@tanstack/react-query";

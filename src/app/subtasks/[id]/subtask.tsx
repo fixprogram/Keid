@@ -29,7 +29,6 @@ export default function Subtask({ id }: SubtaskPropsType) {
     queryKey: ["subtask", id],
     queryFn: () => getData(id),
   });
-  // const setTaskData = useTaskStore((state) => state.setTaskData);
 
   const {
     style,
@@ -42,14 +41,6 @@ export default function Subtask({ id }: SubtaskPropsType) {
   } = data;
 
   const subtaskStyle = projectStyles[style as ProjectStyleKey];
-
-  // useEffect(() => {
-  //   setTaskData(data);
-  // }, [data, setTaskData]);
-
-  //   if (deadline === 0) {
-  //       return null;
-  //     }
 
   const formattedDeadline = getDateString(new Date(deadline), false);
 

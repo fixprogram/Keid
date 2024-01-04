@@ -12,11 +12,8 @@ import { getTaskById } from "@/backend/service/task/getTaskById";
 async function getData(taskId: string) {
   const user = await getUser();
 
-  // console.log("user: ", user);
-
   const userName = user.name as string;
 
-  // const taskId = context.query.id as string;
   const data = await getTaskById(taskId);
 
   if (!data) {

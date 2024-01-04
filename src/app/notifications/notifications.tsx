@@ -35,7 +35,6 @@ export const Notifications: FC = () => {
 
       {data ? (
         data.map((notification: any) => {
-          console.log("notification: ", notification);
           return (
             <div key={notification.date} className="flex flex-col">
               <div

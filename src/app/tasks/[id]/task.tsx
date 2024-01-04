@@ -3,7 +3,6 @@
 import { Comments } from "@/features/Comments";
 import { ProjectInfo } from "@/entities/project";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
-import { TaskDeadline } from "@/templates/TaskPage/ui/TaskBody/ui/TaskDeadline";
 import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";

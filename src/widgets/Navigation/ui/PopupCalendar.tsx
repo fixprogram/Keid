@@ -1,4 +1,4 @@
-import Calendar from "@/shared/ui/Calendar";
+import { Calendar } from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import useInitialDeadline from "@/widgets/Navigation/model/useInitialDeadline";
 import { usePopupStore } from "@/widgets/Navigation/model/usePopupStore";

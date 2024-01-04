@@ -1,5 +1,4 @@
 import { prisma } from "@/db.server";
-import { getWeeklyActivityData } from "@/features/Activity/api";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -39,18 +38,6 @@ export async function POST(request: Request) {
     where: { id },
     data: { followers: [...userToFollow.followers, userId] },
   });
-
-  //   if (!user) {
-  //     throw new Error(`User with id ${id} wasn't found`);
-  //   }
-
-  //   const activityData = await getWeeklyActivityData(id);
-
-  //   const data = {
-  //     activityData,
-  //     userName: user.name,
-  //     userEmail: user.email,
-  //   };
 
   return NextResponse.json(true);
 }

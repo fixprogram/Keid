@@ -80,15 +80,17 @@ export async function getData(dateType: DateType) {
     where: { userId, isArchived: false },
   });
 
-  const mappedTasks = tasks.map((task) => {
-    const isFavorite = Boolean(
-      projects.find((project) =>
-        project.taskIds.some((taskId) => taskId === task.id)
-      )?.isStarred
-    );
+  const mappedTasks = tasks
+    .map((task) => {
+      const isFavorite = Boolean(
+        projects.find((project) =>
+          project.taskIds.some((taskId) => taskId === task.id)
+        )?.isStarred
+      );
 
-    return { ...task, isFavorite };
-  });
+      return { ...task, isFavorite };
+    })
+    .sort((a: Task, b: Task) => a.completed - b.completed);
 
   const challenges = await prisma.challenge.findMany({
     where: { userId, isArchived: false },

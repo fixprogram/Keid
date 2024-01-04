@@ -40,17 +40,6 @@ export async function GET(request: Request) {
     tasksIds.push(...project.taskIds);
   });
 
-  // const tasks = await (
-  //   await getTasksByIds(tasksIds)
-  // ).map((task) => {
-  //   const isFavorite = Boolean(
-  //     projects.find((project) =>
-  //       project.taskIds.some((taskId) => taskId === task.id)
-  //     )?.isStarred
-  //   );
-  //   return { ...task, isFavorite };
-  // });
-
   const tasks = await (
     await getTasksByIds(tasksIds)
   ).map((task) => {

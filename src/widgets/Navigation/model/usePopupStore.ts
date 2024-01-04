@@ -32,12 +32,15 @@ interface PopupStateType {
   reset: () => void;
 }
 
+const initialDeadline = new Date();
+initialDeadline.setHours(23, 59, 59, 999);
+
 const INITIAL_STATE = {
   title: "",
   style: "01",
   error: "",
   isStyleListOpened: false,
-  deadline: Date.now(),
+  deadline: initialDeadline.getTime(),
   isWithDeadline: true,
   isCalendarOpened: false,
   activeProject: {

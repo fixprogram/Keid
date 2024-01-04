@@ -4,7 +4,7 @@ import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import { ItemType } from "@/shared/config/types";
 import { getDateString } from "@/shared/lib/utils/getDateString";
-import Calendar from "@/shared/ui/Calendar";
+import { Calendar } from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { FC, useState } from "react";
 import { useUpdateTodoDeadline } from "../model/useUpdateTodoDeadline";

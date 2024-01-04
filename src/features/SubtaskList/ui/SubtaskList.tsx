@@ -7,10 +7,6 @@ import { FC } from "react";
 import { CompletedSubtask } from "./CompletedSubtask";
 import { NewSubtask } from "./NewSubtask";
 import { SubtaskInProgress } from "./SubtaskInProgress";
-// import { openPopup } from "../../../AddSubtaskPopup/store/addSubtaskSlice";
-// import CompletedSubtask from "../CompletedSubtask";
-// import NewSubtask from "../NewSubtask";
-// import SubtaskInProgress from "../SubtaskInProgress";
 
 interface SubtaskListPropsType {
   subtasks: Subtask[];

@@ -1,13 +1,14 @@
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import ReactCalendar from "react-calendar";
-import Icon from "../Icon";
+import Icon from "./Icon";
+import { FC } from "react";
 
-type Props = {
+interface CalendarPropsType {
   date: Date;
   setDate: (date: number) => void;
-};
+}
 
-export default function Calendar({ date, setDate }: Props) {
+export const Calendar: FC<CalendarPropsType> = ({ date, setDate }) => {
   return (
     <div>
       <ReactCalendar
@@ -36,4 +37,4 @@ export default function Calendar({ date, setDate }: Props) {
       />
     </div>
   );
-}
+};
