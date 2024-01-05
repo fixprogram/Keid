@@ -32,16 +32,22 @@ const POPUP_CONTENT = {
 };
 
 export const AddPopup: FC = () => {
-  const [popupAddOpened, popupAddState, openPopupAdd, closePopupAdd] =
-    useNavigationStore(
-      (state) => [
-        state.popupAddOpened,
-        state.popupAddState,
-        state.openPopupAdd,
-        state.closePopupAdd,
-      ],
-      shallow
-    );
+  const [
+    popupAddOpened,
+    popupStyle,
+    popupAddState,
+    openPopupAdd,
+    closePopupAdd,
+  ] = useNavigationStore(
+    (state) => [
+      state.popupAddOpened,
+      state.popupStyle,
+      state.popupAddState,
+      state.openPopupAdd,
+      state.closePopupAdd,
+    ],
+    shallow
+  );
 
   const resetPopupData = usePopupStore((state) => state.reset);
 
@@ -75,8 +81,9 @@ export const AddPopup: FC = () => {
                   hidden: { bottom: -1000 },
                   showed: popupShowedStyles,
                 }}
+                isBlack={popupStyle === "black"}
               >
-                <PopupLine />
+                {popupStyle === "gray" ? <PopupLine /> : null}
 
                 <Component />
               </Popup>

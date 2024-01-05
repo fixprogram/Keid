@@ -93,7 +93,12 @@ export async function getData(dateType: DateType) {
     .sort((a: Task, b: Task) => a.completed - b.completed);
 
   const challenges = await prisma.challenge.findMany({
-    where: { userId, isArchived: false },
+    where: {
+      OR: [
+        { userId, isArchived: false },
+        { members: { some: { id: userId } }, isArchived: false },
+      ],
+    },
   });
 
   return {

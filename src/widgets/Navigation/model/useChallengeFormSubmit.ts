@@ -13,6 +13,7 @@ type MutationChallengeType = {
   title: string;
   style: string;
   deadline: number;
+  members: string[];
 };
 
 export function useChallengeFormSubmit() {
@@ -31,6 +32,7 @@ export function useChallengeFormSubmit() {
       style: state.style,
       deadline: state.deadline,
       repeats: state.repeats,
+      members: state.members,
     }),
     shallow
   );

@@ -93,19 +93,21 @@ enum CommentType {
 }
 
 model Challenge {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
   userId         String
   title          String    
   style          String
   deadline       Int
   streak         Int
   completed      Int
+  failed         Int
   comments       Comment[]
-  repeats        Int       @default(28)
+  repeats        Int        @default(28)
   description    String
   isPublic       Boolean
   isArchived     Boolean
   points         Int        @default(0)
+  members        Member[]
 }
 
 type Notification {
@@ -117,5 +119,13 @@ type Notification {
 
 enum NotificationType {
   REPORT
+  CHALLENGE
   OTHER
+}
+
+type Member {
+  id             String
+  streak         Int
+  completed      Int 
+  failed         Int
 }

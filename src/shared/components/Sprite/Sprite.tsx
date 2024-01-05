@@ -580,6 +580,69 @@ export default function Sprite() {
             </clipPath>
           </defs>
         </symbol>
+
+        <symbol
+          id="icon-edit"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clipPath="url(#clip0_77_1676)">
+            <path
+              d="M8.1 3.5L0.3 11.3C0.1 11.5 0 11.7 0 12V15C0 15.6 0.4 16 1 16H4C4.3 16 4.5 15.9 4.7 15.7L12.5 7.9L8.1 3.5Z"
+              fill="white"
+            />
+            <path
+              d="M15.7 3.3L12.7 0.3C12.3 -0.1 11.7 -0.1 11.3 0.3L9.5 2.1L13.9 6.5L15.7 4.7C16.1 4.3 16.1 3.7 15.7 3.3Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_77_1676">
+              <rect width="16" height="16" fill="white" />
+            </clipPath>
+          </defs>
+        </symbol>
+
+        <symbol
+          id="icon-check"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="12" fill="url(#paint0_linear_782_3879)" />
+          <g clipPath="url(#clip0_782_3879)">
+            <path
+              d="M10.2001 17.4001L5.40015 12.6001L7.20015 10.8001L10.2001 13.8001L17.4001 6.6001L19.2001 8.4001L10.2001 17.4001Z"
+              fill="white"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_782_3879"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="24"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#9ADB7F" />
+              <stop offset="1" stopColor="#6EA95C" />
+            </linearGradient>
+            <clipPath id="clip0_782_3879">
+              <rect
+                width="14.4"
+                height="14.4"
+                fill="white"
+                transform="translate(4.80005 4.7998)"
+              />
+            </clipPath>
+          </defs>
+        </symbol>
       </defs>
     </svg>
   );

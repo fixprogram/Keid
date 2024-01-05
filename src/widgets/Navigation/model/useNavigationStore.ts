@@ -16,6 +16,7 @@ type NavigationDataType = {
 
 export interface NavigationState {
   userId: string;
+  popupStyle: "gray" | "black";
   popupAddState: "idle" | PopupAddState;
   popupAddOpened: boolean;
   userProjectNames: Project[];
@@ -24,10 +25,12 @@ export interface NavigationState {
   closePopupAdd: () => void;
   setPopupAddState: (popupState: PopupAddState) => void;
   setData: (data: NavigationDataType) => void;
+  setPopupStyle: (newStyle: "gray" | "black") => void;
 }
 
 export const useNavigationStore = create<NavigationState>((set) => ({
   userId: "",
+  popupStyle: "gray",
   popupAddState: "idle",
   popupAddOpened: false,
   userProjectNames: [
@@ -43,4 +46,5 @@ export const useNavigationStore = create<NavigationState>((set) => ({
   setPopupAddState: (popupState: PopupAddState) =>
     set(() => ({ popupAddState: popupState })),
   setData: (data) => set(() => ({ ...data })),
+  setPopupStyle: (newStyle) => set(() => ({ popupStyle: newStyle })),
 }));
