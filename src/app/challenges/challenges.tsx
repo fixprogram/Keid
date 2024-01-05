@@ -9,8 +9,9 @@ import React, { FC, useMemo } from "react";
 import { useState } from "react";
 import { Challenge, CommentType, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
-import { ChallengeCard } from "@/entities/challenge";
+import { ChallengeCard, getIsCompletedForToday } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
@@ -33,6 +34,7 @@ async function getData() {
 }
 
 export const Challenges: FC = () => {
+  // const userId = useNavigationStore((state) => state.userId);
   const { data } = useQuery({ queryKey: ["challenges"], queryFn: getData }) as {
     data: ChallengesDataType;
   };
@@ -40,7 +42,7 @@ export const Challenges: FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>(FILTERS[0]);
   const { challenges, userProjectNames } = data ? data : defaultData;
 
-  const filteredChallenges: Record<FilterType, Habit[]> = useMemo(() => {
+  const filteredChallenges: Record<FilterType, any[]> = useMemo(() => {
     if (challenges.length)
       return {
         Active: challenges.filter(
@@ -78,13 +80,7 @@ export const Challenges: FC = () => {
           <ChallengeCard
             key={challenge.id}
             {...challenge}
-            isCompletedForToday={Boolean(
-              challenge.comments.filter(
-                (challenge) =>
-                  challenge.type === CommentType.PROGRESS_UPDATE &&
-                  isDateToday(new Date(Number(challenge.time)))
-              ).length
-            )}
+            // isCompletedForToday={getIsCompletedForToday(challenge, userId)}
           />
         ))}
       </List>

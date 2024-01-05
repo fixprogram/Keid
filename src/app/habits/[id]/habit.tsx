@@ -7,7 +7,6 @@ import React from "react";
 import { TodoTitle } from "@/features/TodoTitle";
 import { Description } from "@/features/Description";
 import { TodoHeader } from "@/widgets/TodoHeader/ui/TodoHeader";
-import { useDashboardStore } from "@/templates/DashboardPage";
 
 async function getData(id: string) {
   const res = await fetch(`/api/habits/${id}`);

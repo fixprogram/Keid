@@ -9,13 +9,15 @@ import { DashboardHeader } from "./DashboardHeader";
 import Layout from "@/widgets/Layout";
 import { CardType } from "@/widgets/Overview/config/types";
 import { Tabs } from "./Tabs";
-import { ChallengeCard } from "@/entities/challenge";
+import { ChallengeCard, getIsCompletedForToday } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { CommentType } from "@prisma/client";
 import { usePathname } from "next/navigation";
 import { HabitCard } from "./HabitCard";
+import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 
 export const OverviewTab: FC = () => {
+  const userId = useNavigationStore((state) => state.userId);
   const [dateType, dashboardData, scrollY, setData, setScrollY] =
     useDashboardStore((state) => [
       state.dateType,
@@ -74,13 +76,7 @@ export const OverviewTab: FC = () => {
                 <HabitCard
                   link={`/habits/${habit.id}`}
                   {...habit}
-                  isCompletedForToday={Boolean(
-                    habit.comments.filter(
-                      (comment) =>
-                        comment.type === CommentType.PROGRESS_UPDATE &&
-                        isDateToday(new Date(Number(comment.time)))
-                    ).length
-                  )}
+                  isCompletedForToday={getIsCompletedForToday(habit)}
                   key={habit.id}
                 />
               ))}
@@ -97,13 +93,7 @@ export const OverviewTab: FC = () => {
               <ChallengeCard
                 {...challenge}
                 key={challenge.id}
-                isCompletedForToday={Boolean(
-                  challenge.comments.filter(
-                    (challenge) =>
-                      challenge.type === CommentType.PROGRESS_UPDATE &&
-                      isDateToday(new Date(Number(challenge.time)))
-                  ).length
-                )}
+                // isCompletedForToday={getIsCompletedForToday(challenge)}
               />
             ))}
           </section>

@@ -38,6 +38,7 @@ export const useComplete = (
     mutationFn: () => axios.post(itemPost.complete, { itemId, comment }),
     onSuccess: (data) => {
       queryClient.invalidateQueries([`${itemType}s`]);
+      queryClient.invalidateQueries([`${itemType}`, itemId]);
 
       queryClient.invalidateQueries(["dashboard", "overview", dateType]);
       queryClient.invalidateQueries(["dashboard", "productivity", dateType]);

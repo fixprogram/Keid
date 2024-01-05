@@ -128,4 +128,5 @@ type Member {
   streak         Int
   completed      Int 
   failed         Int
+  comments       Comment[]
 }

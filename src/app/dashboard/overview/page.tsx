@@ -10,7 +10,61 @@ import { getUser } from "@/app/lib/session";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
-import { Task } from "@prisma/client";
+import { Challenge, CommentType, Member, Task } from "@prisma/client";
+import { transformChallenge } from "@/templates/DashboardPage/lib/transformChallenge";
+import { isDateToday } from "@/shared/lib/utils/isDateToday";
+
+export async function transformChallenges(challenges: Challenge[]) {
+  const user = await getUser();
+  const userId = user.id;
+
+  const hostIds = challenges.map((challenge) => challenge.userId);
+
+  const hosts = await prisma.user.findMany({
+    where: { id: { in: [...new Set(hostIds)] } },
+    select: { id: true, name: true },
+  });
+
+  const mappedChallenges = challenges.map((challenge) => {
+    const host = hosts.find((host) => host.id === challenge.userId);
+
+    let isCompletedForToday = false;
+
+    if (userId && userId !== challenge.userId) {
+      const member = challenge.members.find(
+        (member) => member.id === userId
+      ) as Member;
+
+      isCompletedForToday = Boolean(
+        member.comments.filter(
+          (comment) =>
+            comment.type === CommentType.PROGRESS_UPDATE &&
+            isDateToday(new Date(Number(comment.time)))
+        ).length
+      );
+    } else {
+      isCompletedForToday = Boolean(
+        challenge.comments.filter(
+          (comment) =>
+            comment.type === CommentType.PROGRESS_UPDATE &&
+            isDateToday(new Date(Number(comment.time)))
+        ).length
+      );
+    }
+
+    return transformChallenge({
+      data: {
+        ...challenge,
+        hostId: host?.id,
+        userId,
+        hostName: host?.name,
+        isCompletedForToday,
+      },
+    });
+  });
+
+  return mappedChallenges;
+}
 
 export async function getData(dateType: DateType) {
   const user = await getUser();
@@ -101,6 +155,8 @@ export async function getData(dateType: DateType) {
     },
   });
 
+  const transformedChallenges = await transformChallenges(challenges);
+
   return {
     projectAmount,
     overdueTaskAmount,
@@ -110,19 +166,13 @@ export async function getData(dateType: DateType) {
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,
     habits,
-    challenges,
+    // challenges,
+    challenges: transformedChallenges,
   };
 }
 
 export default async function Page() {
   const user = await getUser();
-
-  const userId = user.id;
-  // TODO: Add dateType saving to user schema
-  //   const dateType = await prisma.user.findUnique({
-  //     where: { id: userId },
-  //     select: { dateType: true },
-  //   });
 
   const dateType = DateType.Today;
 

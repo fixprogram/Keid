@@ -27,13 +27,15 @@ export const TodoHeader: FC<TodoHeaderPropsType> = ({
       </button>
 
       <div className="flex gap-10">
-        {progress < 100 ? <Complete itemType="task" /> : null}
+        {progress < 100 ? <Complete itemType="challenge" /> : null}
 
-        <UpdateProgress
-          style={style}
-          initialProgress={progress}
-          itemType={todoType}
-        />
+        {todoType === "challenge" ? null : (
+          <UpdateProgress
+            style={style}
+            initialProgress={progress}
+            itemType={todoType}
+          />
+        )}
 
         <TodoSettings todoType={todoType} />
       </div>

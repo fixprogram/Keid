@@ -39,6 +39,7 @@ export const createChallenge = async ({
         content: "",
         time: Date.now().toString(),
         serviceContent: serviceComments.challenge.created,
+        comments: [],
       },
     ],
     members: memberIds.map((memberId) => ({

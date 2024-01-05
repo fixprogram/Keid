@@ -39,7 +39,8 @@ type OverviewDataType = {
   userName: string;
   tasks: TaskType[];
   habits: Habit[];
-  challenges: Challenge[];
+  challenges: any[];
+  // challenges: Challenge[];
 };
 
 type ProductivityDataType = {
