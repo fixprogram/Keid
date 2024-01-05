@@ -4,7 +4,7 @@ interface Props {
     hidden: {};
     showed: {};
   };
-  isBlack: boolean;
+  isBlack?: boolean;
   children: React.ReactNode;
 }
 
