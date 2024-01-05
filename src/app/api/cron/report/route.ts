@@ -3,6 +3,8 @@ import { getWeeklyActivityData } from "@/features/Activity/api";
 import { Notification, NotificationType } from "@prisma/client";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic"; // Force dynamic (server) route instead of static page
+
 export async function GET() {
   const users = await prisma.user.findMany({
     select: { id: true, name: true, followers: true },
