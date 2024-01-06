@@ -20,7 +20,5 @@ export const deleteProject = async (projectId: string) => {
 
   await prisma.task.deleteMany({ where: { projectId } });
 
-  await prisma.subtask.deleteMany({ where: { id: { in: subtaskIds } } });
-
   return project;
 };

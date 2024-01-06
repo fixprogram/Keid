@@ -38,6 +38,7 @@ export const AddPopup: FC = () => {
     popupAddState,
     openPopupAdd,
     closePopupAdd,
+    setPopupStyle,
   ] = useNavigationStore(
     (state) => [
       state.popupAddOpened,
@@ -45,6 +46,7 @@ export const AddPopup: FC = () => {
       state.popupAddState,
       state.openPopupAdd,
       state.closePopupAdd,
+      state.setPopupStyle,
     ],
     shallow
   );
@@ -54,7 +56,8 @@ export const AddPopup: FC = () => {
   const handleClosePopup = useCallback(() => {
     resetPopupData();
     closePopupAdd();
-  }, [resetPopupData, closePopupAdd]);
+    setPopupStyle("gray");
+  }, [resetPopupData, closePopupAdd, setPopupStyle]);
 
   const Component = POPUP_CONTENT[popupAddState].component;
   const popupShowedStyles =

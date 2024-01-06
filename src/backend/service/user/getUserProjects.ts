@@ -9,9 +9,9 @@ export async function getUserProjects(userId: string) {
   });
 
   const projects = userProjects.map(async (project, index, array) => {
-    const taskAmount = await getProjectTaskAmount(project.taskIds);
-    const completedTaskAmount = await getCompletedTaskAmount(project.taskIds);
-    const projectProgress = await getProjectProgress(project.taskIds);
+    const taskAmount = await getProjectTaskAmount(project.id);
+    const completedTaskAmount = await getCompletedTaskAmount(project.id);
+    const projectProgress = await getProjectProgress(project.id);
 
     return { ...project, taskAmount, completedTaskAmount, projectProgress };
   });

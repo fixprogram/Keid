@@ -1,7 +1,14 @@
+import { prisma } from "@/db.server";
 import { getProjectTasks } from "./getProjectTasks";
 
-export async function getProjectTaskAmount(taskIds: string[]) {
-  const { taskWithoutSubtaskIds, subtaskIds } = await getProjectTasks(taskIds);
+export async function getProjectTaskAmount(projectId: string) {
+  // const { taskWithoutSubtaskIds, subtaskIds } = await getProjectTasks(taskIds);
 
-  return taskWithoutSubtaskIds.length + subtaskIds.length;
+  const tasks = await prisma.task.findMany({
+    where: { projectId },
+    select: { id: true },
+  });
+
+  return tasks.length;
+  // return taskWithoutSubtaskIds.length + subtaskIds.length;
 }

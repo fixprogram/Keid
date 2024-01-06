@@ -2,7 +2,8 @@ import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import RoundProgressBar from "@/shared/ui/RoundProgressBar";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { TaskCard } from "./TaskCard";
 
 type OverdueTaskPropsType = {
   link: string;
@@ -12,8 +13,7 @@ type OverdueTaskPropsType = {
   progress: number;
   isStarred?: boolean;
   projectTitle?: string;
-  subtasksTotal?: number;
-  subtaskCompleted?: number;
+  subtasks: any[];
 };
 
 export const OverdueTask: FC<OverdueTaskPropsType> = ({
@@ -24,13 +24,16 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
   progress,
   isStarred = false,
   projectTitle = "",
-  subtasksTotal,
-  subtaskCompleted,
+  subtasks,
 }) => {
+  const [isOpened, setOpened] = useState(false);
+
   const taskStyle = projectStyles[style as ProjectStyleKey];
 
+  const subtasksTotal = subtasks.length;
+
   return (
-    <Link href={link}>
+    <div className="flex flex-col gap-5">
       <div className="bg-background2 p-5 flex gap-5 rounded-xl">
         <RoundProgressBar
           id={link}
@@ -49,7 +52,8 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
                   <Icon name="starred" width={12} height={12} />
                 </div>
               ) : null}
-              <b
+              <Link
+                href={link}
                 style={{
                   color: taskStyle.background,
                   fontSize: 10,
@@ -58,15 +62,16 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
                 }}
               >
                 {projectTitle}
-              </b>
+              </Link>
             </div>
           ) : null}
-          <b
+          <Link
+            href={link}
             className="text-lg text-white font-semibold"
             style={{ overflowX: "hidden" }}
           >
             {title}
-          </b>
+          </Link>
           {/* {deadline ? (
             <p
               className="text-smm font-medium"
@@ -86,19 +91,18 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
           ) : null}
 
           {subtasksTotal ? (
-            <p
-              className={`text-white font-bold`}
-              style={{
-                fontSize: "12px",
-                lineHeight: "20px",
-                textAlign: "right",
-              }}
+            <button
+              type="button"
+              onClick={() => setOpened((prevState) => !prevState)}
             >
-              {0}/{subtasksTotal}
-            </p>
+              <Icon name="arrow-down" width={20} height={20} />
+            </button>
           ) : null}
         </div>
       </div>
-    </Link>
+      {isOpened && subtasksTotal
+        ? subtasks.map((subtask) => <TaskCard key={subtask.id} {...subtask} />)
+        : null}
+    </div>
   );
 };

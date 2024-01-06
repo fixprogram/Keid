@@ -46,6 +46,7 @@ export const createTask = async ({
       },
     ],
     points,
+    parentId: projectId,
   };
 
   const task = await prisma.task.create({

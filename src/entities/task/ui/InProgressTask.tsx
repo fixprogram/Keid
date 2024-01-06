@@ -2,9 +2,10 @@ import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import RoundProgressBar from "@/shared/ui/RoundProgressBar";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import styles from "./TaskCard.module.css";
+import { TaskCard } from "./TaskCard";
 
 type InProgressTaskPropsType = {
   link: string;
@@ -14,8 +15,7 @@ type InProgressTaskPropsType = {
   progress: number;
   isStarred?: boolean;
   projectTitle?: string;
-  subtasksTotal?: number;
-  subtasksCompleted?: number;
+  subtasks: any[];
 };
 
 export const InProgressTask: FC<InProgressTaskPropsType> = ({
@@ -26,13 +26,15 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
   progress,
   isStarred = false,
   projectTitle = "",
-  subtasksTotal,
-  subtasksCompleted,
+  subtasks,
 }) => {
+  const [isOpened, setOpened] = useState(false);
   const taskStyle = projectStyles[style as ProjectStyleKey];
 
+  const subtasksTotal = subtasks.length;
+
   return (
-    <Link href={link}>
+    <div className="flex flex-col gap-5">
       <div className="bg-background2 p-5 flex gap-5 rounded-xl">
         <RoundProgressBar
           id={link}
@@ -51,21 +53,26 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
                   <Icon name="starred" width={12} height={12} />
                 </div>
               ) : null}
-              <b
+              <Link
+                href={link}
                 style={{
                   color: taskStyle.background,
                   fontSize: 10,
                   lineHeight: "14px",
                   marginLeft: isStarred ? "18px" : "0",
+                  display: "block",
                 }}
               >
                 {projectTitle}
-              </b>
+              </Link>
             </div>
           ) : null}
-          <b className={`text-lg text-white font-semibold ${styles.taskTitle}`}>
+          <Link
+            href={link}
+            className={`text-lg text-white font-semibold ${styles.taskTitle}`}
+          >
             {title}
-          </b>
+          </Link>
         </div>
 
         <div
@@ -73,27 +80,22 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
           style={{ marginLeft: "auto" }}
         >
           {deadline ? (
-            <p
-              className="text-smm font-medium text-white"
-              // style={{ color: taskStyle.background }}
-            >
-              {deadline}
-            </p>
+            <p className="text-smm font-medium text-white">{deadline}</p>
           ) : null}
 
           {subtasksTotal ? (
-            <div
-              className={`text-white font-bold h-[20px]`}
-              style={{
-                fontSize: "10px",
-                lineHeight: "20px",
-              }}
+            <button
+              type="button"
+              onClick={() => setOpened((prevState) => !prevState)}
             >
-              {subtasksCompleted}/{subtasksTotal}
-            </div>
+              <Icon name="arrow-down" width={20} height={20} />
+            </button>
           ) : null}
         </div>
       </div>
-    </Link>
+      {isOpened && subtasksTotal
+        ? subtasks.map((subtask) => <TaskCard key={subtask.id} {...subtask} />)
+        : null}
+    </div>
   );
 };

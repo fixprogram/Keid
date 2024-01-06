@@ -1,7 +1,8 @@
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { TaskType } from "@/shared/config/types";
 import { useState } from "react";
-import Icon from "../../shared/ui/Icon";
+import { mapTasksIntoHierarchy } from "@/entities/task";
+import Icon from "@/shared/ui/Icon";
 
 interface Props {
   topic: string;
@@ -12,6 +13,8 @@ export default function Accordion({ topic, items = [] }: Props) {
   const [isOpened, setOpened] = useState(true);
 
   // console.log("items: ", items);
+
+  const mappedItems = mapTasksIntoHierarchy(items);
 
   return (
     <section className="mt-8">
@@ -33,9 +36,9 @@ export default function Accordion({ topic, items = [] }: Props) {
         </button>
       </div>
 
-      {items.length > 0 && isOpened ? (
+      {mappedItems.length > 0 && isOpened ? (
         <ul className="mt-6 flex flex-col gap-4">
-          {items.map((item) => (
+          {mappedItems.map((item) => (
             <li key={item.id}>
               <TaskCard {...item} />
             </li>

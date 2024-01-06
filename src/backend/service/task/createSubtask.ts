@@ -15,20 +15,34 @@ export const createSubtask = async ({
   title,
   deadline,
 }: Props) => {
-  const task = (await prisma.task.findFirst({
+  const task = await prisma.task.findUnique({
     where: { id: taskId },
-    select: { id: true, subtaskIds: true, comments: true },
-  })) as Task;
+    select: {
+      id: true,
+      subtaskIds: true,
+      comments: true,
+      projectId: true,
+      style: true,
+    },
+  });
 
-  const subtask = await prisma.subtask.create({
+  if (!task) {
+    throw new Error(`Task with id ${taskId} wasn't found`);
+  }
+
+  const subtask = await prisma.task.create({
     data: {
-      taskId,
+      projectId: task.projectId,
+      parentId: taskId,
       title,
       deadline,
       progress: 0,
       completed: 0,
       comments: [],
       description: "",
+      subtaskIds: [],
+      style: task.style,
+      repeats: "Once",
     },
   });
 

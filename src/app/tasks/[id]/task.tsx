@@ -42,11 +42,16 @@ export default function Task({ id }: TaskPropType) {
     progress,
     subtasks,
     description,
+    parentTitle,
+    parentId,
   } = data;
 
   const parentProjectStyle = projectStyles[projectStyle as ProjectStyleKey];
 
   const setTaskData = useTaskStore((state) => state.setTaskData);
+
+  const parentLink =
+    parentId === projectId ? `/projects/${parentId}` : `/tasks/${parentId}`;
 
   useEffect(() => {
     setTaskData(data);
@@ -57,6 +62,14 @@ export default function Task({ id }: TaskPropType) {
       <TaskHeader style={style} progress={progress} />
 
       <section className="flex flex-col grow">
+        <Link
+          href={parentLink}
+          className="mt-8 font-semibold font-lg block"
+          style={{ color: parentProjectStyle.background }}
+        >
+          {parentTitle}
+        </Link>
+
         <TodoTitle initialTitle={title} todoType="task" />
 
         <div className="flex flex-wrap items-end gap-6 mt-6">

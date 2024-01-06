@@ -2,7 +2,7 @@
 
 import { Task } from "@prisma/client";
 
-export type ItemType = "task" | "subtask" | "habit" | "challenge";
+export type ItemType = "task" | "habit" | "challenge";
 
 export type TaskType = Task & {
   isFavorite: boolean;

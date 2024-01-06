@@ -21,10 +21,6 @@ export const useDeleteItem = (todoType: ItemType) => {
     onSuccess: () => {
       queryClient.invalidateQueries([`${todoType}s`]);
 
-      if (todoType === "subtask") {
-        queryClient.invalidateQueries(["task", taskId]);
-      }
-
       router.back();
     },
   });

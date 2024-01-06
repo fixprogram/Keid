@@ -9,6 +9,7 @@ import { Task } from "@prisma/client";
 import { useProjectStore } from "@/entities/project/models/projectStore";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { TaskType } from "@/shared/config/types";
+import { mapTasksIntoHierarchy } from "@/entities/task";
 
 interface ProjectTasksPropsType {
   initialTasks: TaskType[];

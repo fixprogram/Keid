@@ -1,3 +1,4 @@
+import { mapTasksIntoHierarchy } from "@/entities/task";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { TaskType } from "@/shared/config/types";
 import Accordion from "@/widgets/Accordion";
@@ -12,6 +13,7 @@ interface AllTasksPropsType {
 }
 
 export const AllTasks: FC<AllTasksPropsType> = ({ tasks }) => {
+  const allTasks = mapTasksIntoHierarchy(tasks["All"]);
   return (
     <Fragment>
       {/* <Accordion topic="All tasks" items={tasks["All"]} /> */}
@@ -27,7 +29,7 @@ export const AllTasks: FC<AllTasksPropsType> = ({ tasks }) => {
       })} */}
 
       <ul className="mt-6 flex flex-col gap-4">
-        {tasks["All"].map((item) => (
+        {allTasks.map((item) => (
           <li key={item.id}>
             <TaskCard {...item} />
           </li>

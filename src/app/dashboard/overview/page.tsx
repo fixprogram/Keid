@@ -69,6 +69,25 @@ export async function transformChallenges(challenges: Challenge[]) {
 export async function getData(dateType: DateType) {
   const user = await getUser();
 
+  // const subtasks1 = await prisma.subtask.findMany();
+
+  // console.log("subtasks1: ", subtasks1);
+
+  // for (const subtask1 of subtasks1) {
+  //   const { taskId, ...rest } = subtask1;
+  //   const data: Task = {
+  //     ...rest,
+  //     style: "01",
+  //     parentId: subtask1.taskId,
+  //     subtaskIds: [],
+  //     repeats: "Once",
+  //   };
+
+  //   // console.log("data: ", data);
+
+  //   await prisma.task.create({ data });
+  // }
+
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
   const projects = await prisma.project.findMany({

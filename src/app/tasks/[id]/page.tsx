@@ -2,7 +2,6 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { getSubtasksByIds } from "@/backend/service/subtask/getSubtasksByIds";
 import { CommentType } from "@/features/Comments/config/types";
 import Task from "./task";
 import { getUser } from "@/app/lib/session";
@@ -14,21 +13,24 @@ async function getData(taskId: string) {
 
   const userName = user.name as string;
 
-  const data = await getTaskById(taskId);
+  const task = await getTaskById(taskId);
 
-  if (!data) {
+  if (!task) {
     throw new Error(`Task with id: ${taskId} wasn't found`);
   }
 
-  const subtasks = await getSubtasksByIds(data.subtaskIds);
+  const subtasks = await prisma.task.findMany({
+    where: { id: { in: task.subtaskIds } },
+  });
+  // const subtasks = await getSubtasksByIds(data.subtaskIds);
 
   const comments: CommentType[] = [];
-  data.comments.forEach((comment) => {
+  task.comments.forEach((comment) => {
     comments.push({ ...comment, userName });
   });
 
   const taskData = {
-    ...data,
+    ...task,
     taskId,
     subtasks,
     comments,
@@ -36,10 +38,22 @@ async function getData(taskId: string) {
 
   const parentProject = await getProjectById(taskData.projectId);
 
+  let parentTitle = parentProject?.title;
+
+  if (task.parentId !== task.projectId) {
+    const parent = await prisma.task.findUnique({
+      where: { id: task.parentId },
+      select: { title: true },
+    });
+
+    parentTitle = parent?.title;
+  }
+
   return {
     ...taskData,
     projectTitle: parentProject ? parentProject.title : "No project",
     projectStyle: parentProject ? parentProject.style : "01",
+    parentTitle,
   };
 }
 

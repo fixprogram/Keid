@@ -1,6 +1,6 @@
-import { CompletedTask } from "./ui/CompletedTask";
-import { InProgressTask } from "./ui/InProgressTask";
-import { OverdueTask } from "./ui/OverdueTask";
-import { RepeatedTask } from "./ui/RepeatedTask";
+export { CompletedTask } from "./ui/CompletedTask";
+export { InProgressTask } from "./ui/InProgressTask";
+export { OverdueTask } from "./ui/OverdueTask";
+export { RepeatedTask } from "./ui/RepeatedTask";
 
-export { CompletedTask, InProgressTask, OverdueTask, RepeatedTask };
+export { mapTasksIntoHierarchy } from "./lib/mapTasksIntoHierarchy";

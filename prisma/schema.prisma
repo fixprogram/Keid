@@ -44,22 +44,11 @@ model Task {
   style          String
   deadline       Int
   progress       Int
-  completed      Int
+  completed      Int 
+  parentId       String
   subtaskIds     String[]
   comments       Comment[]
   repeats        String
-  description    String
-  points         Int        @default(0)
-}
-
-model Subtask {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  title          String  
-  taskId         String
-  deadline       Int
-  progress       Int
-  completed      Int
-  comments       Comment[]
   description    String
   points         Int        @default(0)
 }

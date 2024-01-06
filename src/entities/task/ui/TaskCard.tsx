@@ -14,6 +14,7 @@ export type TaskCardType = Omit<Task, "projectId"> & {
   projectTitle?: string;
   defaultLink?: string;
   withoutDeadline?: boolean;
+  subtasks: any[];
 };
 
 export const TaskCard: FC<TaskCardType> = ({
@@ -30,6 +31,7 @@ export const TaskCard: FC<TaskCardType> = ({
   projectTitle,
   subtaskIds,
   withoutDeadline = false,
+  subtasks,
 }) => {
   const link = defaultLink ?? `tasks/${id}`;
   const isCompleted = Boolean(completed);
@@ -79,7 +81,7 @@ export const TaskCard: FC<TaskCardType> = ({
         progress={progress}
         isStarred={isFavorite}
         projectTitle={projectTitle}
-        subtasksTotal={subtaskIds.length}
+        subtasks={subtasks}
       />
     );
   }
@@ -93,7 +95,7 @@ export const TaskCard: FC<TaskCardType> = ({
       progress={progress}
       isStarred={isFavorite}
       projectTitle={projectTitle}
-      subtasksTotal={subtaskIds.length}
+      subtasks={subtasks}
     />
   );
 };

@@ -2,14 +2,15 @@ import { useTaskStore } from "@/entities/task/models/taskStore";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
-import { Subtask } from "@prisma/client";
+// import { Subtask } from "@prisma/client";
 import { FC } from "react";
 import { CompletedSubtask } from "./CompletedSubtask";
 import { NewSubtask } from "./NewSubtask";
 import { SubtaskInProgress } from "./SubtaskInProgress";
+import { Task } from "@prisma/client";
 
 interface SubtaskListPropsType {
-  subtasks: Subtask[];
+  subtasks: Task[];
   taskStyle: string;
 }
 
@@ -26,13 +27,13 @@ export const SubtaskList: FC<SubtaskListPropsType> = ({
           <li key={subtask.id}>
             {subtask.completed ? (
               <CompletedSubtask
-                link={`/subtasks/${subtask.id}`}
+                link={`/tasks/${subtask.id}`}
                 title={subtask.title}
                 completed={getDateString(new Date(subtask.completed), false)}
               />
             ) : (
               <SubtaskInProgress
-                link={`/subtasks/${subtask.id}`}
+                link={`/tasks/${subtask.id}`}
                 deadline={getDateString(new Date(subtask.deadline), false)}
                 title={subtask.title}
                 style={style}

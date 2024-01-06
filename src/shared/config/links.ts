@@ -1,7 +1,6 @@
 const apiLink = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}api`;
 const apiProject = apiLink + "/projects";
 const apiTask = apiLink + "/tasks";
-const apiSubtask = apiLink + "/subtasks";
 const apiHabit = apiLink + "/habits";
 const apiChallenge = apiLink + "/challenges";
 
@@ -30,17 +29,6 @@ export const links = {
     updateDeadline: `${apiTask}/updateDeadline`,
     updateTitle: `${apiTask}/updateTitle`,
     updateDescription: `${apiTask}/updateDescription`,
-  },
-  subtask: {
-    add: `${apiSubtask}/add`,
-    delete: `${apiSubtask}/delete`,
-    updateProgress: `${apiSubtask}/updateProgress`,
-    complete: `${apiSubtask}/complete`,
-    addComment: `${apiSubtask}/addComment`,
-    deleteComment: `${apiSubtask}/deleteComment`,
-    updateDeadline: `${apiSubtask}/updateDeadline`,
-    updateTitle: `${apiSubtask}/updateTitle`,
-    updateDescription: `${apiSubtask}/updateDescription`,
   },
   habit: {
     add: `${apiHabit}/add`,

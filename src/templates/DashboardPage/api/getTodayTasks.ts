@@ -14,30 +14,30 @@ export async function getTodayTasks(projectIDs: string[]) {
     },
   });
 
-  const taskIds = tasks.map((task) => task.id);
+  // const subtaskIds: string[] = [];
+  // tasks.forEach((task) => subtaskIds.push(...task.subtaskIds));
 
-  const subtaskIds: string[] = [];
-  tasks.forEach((task) => subtaskIds.push(...task.subtaskIds));
+  // const subtasks = await prisma.subtask.findMany({
+  //   where: {
+  //     projectId: { in: projectIDs },
+  //     deadline: {
+  //       lte: endTimestamp,
+  //       gte: startTimestamp,
+  //     },
+  //   },
+  // });
 
-  const subtasks = await prisma.subtask.findMany({
-    where: {
-      taskId: { in: taskIds },
-      deadline: {
-        lte: endTimestamp,
-        gte: startTimestamp,
-      },
-    },
-  });
+  // const mappedSubtasks = subtasks.map((subtask) => ({
+  //   ...subtask,
+  //   repeats: "Once",
+  //   subtaskIds: [],
+  //   style: "01",
+  //   type: "subtask",
+  //   projectId: tasks.find((task) => subtask.id in task.subtaskIds)
+  //     ?.projectId as string,
+  //   parentId: subtask.taskId,
+  // }));
 
-  const mappedSubtasks = subtasks.map((subtask) => ({
-    ...subtask,
-    repeats: "Once",
-    subtaskIds: [],
-    style: "01",
-    type: "subtask",
-    projectId: tasks.find((task) => subtask.id in task.subtaskIds)
-      ?.projectId as string,
-  }));
-
-  return [...tasks, ...mappedSubtasks];
+  return tasks;
+  // return [...tasks, ...mappedSubtasks];
 }

@@ -90,11 +90,7 @@ export const OverviewTab: FC = () => {
           </section>
           <section className="flex flex-col mt-4 gap-4">
             {challenges.map((challenge) => (
-              <ChallengeCard
-                {...challenge}
-                key={challenge.id}
-                // isCompletedForToday={getIsCompletedForToday(challenge)}
-              />
+              <ChallengeCard {...challenge} key={challenge.id} />
             ))}
           </section>
         </>
@@ -102,9 +98,7 @@ export const OverviewTab: FC = () => {
 
       {dateType === DateType.Week ? <WeekTasks tasks={tasks} /> : null}
 
-      {dateType === DateType.Month ? (
-        <div style={{ color: "wheat" }}>Empty for now</div>
-      ) : null}
+      {dateType === DateType.Month ? <DailyTasks tasks={tasks} /> : null}
 
       <Cards
         cards={[

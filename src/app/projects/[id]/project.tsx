@@ -47,7 +47,7 @@ export default function Project({ id }: ProjectPropsType) {
   const Component = ComponentMap[activeScreen];
 
   return (
-    <Layout withNav={false} isBottomGradientShowed={false}>
+    <Layout isBottomGradientShowed={false}>
       <ProjectHeader title={title} style={style} isStarred={isStarred} />
 
       <Component initialTasks={tasks} />

@@ -1,4 +1,5 @@
 import { HabitCard } from "@/entities/habit/ui/HabitCard";
+import { mapTasksIntoHierarchy } from "@/entities/task";
 import { TaskCard, TaskCardType } from "@/entities/task/ui/TaskCard";
 import { TaskType } from "@/shared/config/types";
 import { List } from "@/shared/ui/List";
@@ -15,18 +16,20 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
   const tasksAmount = tasks.length;
   const completedTaskAmount = completedTasks.length;
 
-  const uncompletedTasks = tasks.filter((task) => !task.completed);
+  const taskTrees = mapTasksIntoHierarchy(tasks);
+
+  const uncompletedTasks = taskTrees.filter((task) => !task.completed);
 
   return (
     <section className="mt-8 relative">
       <h3 className="font-poppins font-semibold text-xl text-white">Tasks</h3>
 
-      {tasks.length ? (
+      {uncompletedTasks.length ? (
         <section
           className="mt-4 flex flex-col gap-4"
           style={{ maxHeight: 272, overflowY: "scroll" }}
         >
-          {tasks.map((task) => (
+          {uncompletedTasks.map((task) => (
             <TaskCard key={task.id} {...task} withoutDeadline />
           ))}
         </section>
