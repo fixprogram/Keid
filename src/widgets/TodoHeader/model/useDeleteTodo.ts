@@ -25,10 +25,6 @@ export const useDeleteTodo = (todoType: ItemType) => {
       queryClient.invalidateQueries(["dashboard", "overview", dateType]);
       queryClient.invalidateQueries(["dashboard", "productivity", dateType]);
 
-      if (todoType === "subtask") {
-        queryClient.invalidateQueries(["task", taskId]);
-      }
-
       router.back();
     },
   });

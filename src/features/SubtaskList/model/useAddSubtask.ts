@@ -28,7 +28,7 @@ export const useAddSubtask = () => {
   const mutation = useMutation({
     mutationKey: ["task", taskId],
     mutationFn: () =>
-      axios.post(links.subtask.add, {
+      axios.post(links.task.addSubtask, {
         title: newSubtaskTitle,
         userId,
         taskId,

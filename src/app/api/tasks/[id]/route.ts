@@ -2,7 +2,6 @@ import { authOptions } from "@/app/lib/auth";
 import { getUser } from "@/app/lib/session";
 import { prisma } from "@/db.server";
 import { getProjectById } from "@/backend/service/project/getProjectById";
-import { getSubtasksByIds } from "@/backend/service/subtask/getSubtasksByIds";
 import { getTaskById } from "@/backend/service/task/getTaskById";
 import { getUserProjects } from "@/backend/service/user/getUserProjects";
 import { CommentType } from "@/features/Comments/config/types";
@@ -26,7 +25,9 @@ export async function GET(
     throw new Error(`Task with id: ${taskId} wasn't found`);
   }
 
-  const subtasks = await getSubtasksByIds(task.subtaskIds);
+  const subtasks = await prisma.task.findMany({
+    where: { id: { in: task.subtaskIds } },
+  });
 
   const comments: CommentType[] = [];
   task.comments.forEach((comment) => {

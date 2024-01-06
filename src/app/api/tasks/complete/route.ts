@@ -1,4 +1,4 @@
-import { completeTask } from "@/backend/service/task/completeTask";
+import { completeTaskAndSubtasks } from "@/backend/service/task/completeTask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ data: "Task id can't be empty" });
   }
 
-  const task = await completeTask(taskId, comment);
+  const task = await completeTaskAndSubtasks(taskId, comment);
 
   return NextResponse.json(task);
 }

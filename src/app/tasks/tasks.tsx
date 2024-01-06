@@ -14,6 +14,7 @@ import { shallow } from "zustand/shallow";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { useTasksStore } from "@/entities/task/models/tasksStore";
 import { useUserStore } from "@/entities/user";
+import { mapTasksIntoHierarchy } from "@/entities/task";
 
 const defaultData = {
   tasks: [],
@@ -53,6 +54,8 @@ export default function Tasks() {
     setTasksData(data);
   }, [data]);
 
+  const activeTasks = mapTasksIntoHierarchy(tasks[activeFilter]);
+
   return (
     <Layout>
       <PageHeader title="Tasks" />
@@ -64,7 +67,7 @@ export default function Tasks() {
       />
 
       <List>
-        {tasks[activeFilter].map((task) => (
+        {activeTasks.map((task) => (
           <TaskCard key={task.id} {...task} />
         ))}
       </List>

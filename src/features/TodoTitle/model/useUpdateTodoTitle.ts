@@ -20,9 +20,6 @@ export function useUpdateTodoTitle(todoType: ItemType) {
       axios.post(todoPost.updateTitle, { todoId, title: newTitle }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [todoType, todoId] });
-      if (todoType === "subtask") {
-        queryClient.invalidateQueries(["task", taskId]);
-      }
     },
   });
 

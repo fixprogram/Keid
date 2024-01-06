@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useTasksStore } from "@/entities/task/models/tasksStore";
 import { TASK_FILTERS, TaskFilterType } from "@/entities/task/config/consts";
 import { Task } from "@prisma/client";
+import { mapTasksIntoHierarchy } from "@/entities/task";
 
 const defaultData = {
   tasks: [],
@@ -48,6 +49,8 @@ export default function OverdueTasks() {
     setTasksData(data);
   }, [data, setTasksData]);
 
+  const activeTasks = mapTasksIntoHierarchy(tasks);
+
   return (
     <Layout>
       <PageHeader title="Overdue tasks" />
@@ -59,7 +62,7 @@ export default function OverdueTasks() {
       />
 
       <List>
-        {tasks.map((task) => (
+        {activeTasks.map((task) => (
           <TaskCard key={task.id} {...task} />
         ))}
       </List>

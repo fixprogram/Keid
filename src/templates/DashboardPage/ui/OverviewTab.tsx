@@ -1,6 +1,5 @@
 import { getData } from "@/app/dashboard/overview/overview";
 import { DailyTasks } from "@/features/DailyTasks";
-import { WeekTasks } from "@/features/WeekTasks";
 import Cards from "@/widgets/Overview/ui/Cards";
 import { useQuery } from "@tanstack/react-query";
 import { FC, useEffect } from "react";
@@ -17,7 +16,7 @@ import { HabitCard } from "./HabitCard";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 
 export const OverviewTab: FC = () => {
-  const userId = useNavigationStore((state) => state.userId);
+  // const userId = useNavigationStore((state) => state.userId);
   const [dateType, dashboardData, scrollY, setData, setScrollY] =
     useDashboardStore((state) => [
       state.dateType,
@@ -96,7 +95,7 @@ export const OverviewTab: FC = () => {
         </>
       ) : null}
 
-      {dateType === DateType.Week ? <WeekTasks tasks={tasks} /> : null}
+      {dateType === DateType.Week ? <DailyTasks tasks={tasks} /> : null}
 
       {dateType === DateType.Month ? <DailyTasks tasks={tasks} /> : null}
 

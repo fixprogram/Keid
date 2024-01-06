@@ -10,6 +10,7 @@ export const useTaskStore = create<TaskState>((set) => ({
   data: {
     id: "",
     title: "",
+    parentId: "",
     projectId: "",
     style: "",
     deadline: 0,

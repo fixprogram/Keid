@@ -10,7 +10,11 @@ const buildTree = (allTasks: TaskType[], parentId: string): TaskType[] => {
 };
 
 export const mapTasksIntoHierarchy = (tasks: TaskType[]) => {
-  const rootTasks = tasks.filter((task) => task.parentId === task.projectId);
+  const rootTasks = tasks.filter(
+    (task) =>
+      task.parentId === task.projectId ||
+      !tasks.find((taskItem) => taskItem.subtaskIds.includes(task.id))
+  );
 
   // Build the tree for each root-level task
   const taskTrees = rootTasks.map((rootTask) => ({

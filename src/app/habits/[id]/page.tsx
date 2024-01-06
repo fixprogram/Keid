@@ -2,7 +2,6 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { getSubtasksByIds } from "@/backend/service/subtask/getSubtasksByIds";
 import { CommentType } from "@/features/Comments/config/types";
 import Task from "./habit";
 import { getUser } from "@/app/lib/session";

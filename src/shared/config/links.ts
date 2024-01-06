@@ -21,6 +21,7 @@ export const links = {
   },
   task: {
     add: `${apiTask}/add`,
+    addSubtask: `${apiTask}/addSubtask`,
     delete: `${apiTask}/delete`,
     updateProgress: `${apiTask}/updateProgress`,
     complete: `${apiTask}/complete`,

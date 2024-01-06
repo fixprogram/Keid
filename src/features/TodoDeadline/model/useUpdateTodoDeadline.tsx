@@ -20,9 +20,6 @@ export function useUpdateTodoDeadline(todoType: ItemType) {
       axios.post(todoPost.updateDeadline, { todoId, deadline: newDeadline }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [todoType, todoId] });
-      if (todoType === "subtask") {
-        queryClient.invalidateQueries(["task", taskId]);
-      }
     },
   });
 
