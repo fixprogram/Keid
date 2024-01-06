@@ -18,18 +18,18 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
 
   const taskTrees = mapTasksIntoHierarchy(tasks);
 
-  const uncompletedTasks = taskTrees.filter((task) => !task.completed);
+  // const uncompletedTasks = taskTrees.filter((task) => !task.completed);
 
   return (
     <section className="mt-8 relative">
       <h3 className="font-poppins font-semibold text-xl text-white">Tasks</h3>
 
-      {uncompletedTasks.length ? (
+      {taskTrees.length ? (
         <section
           className="mt-4 flex flex-col gap-4"
           style={{ maxHeight: 272, overflowY: "scroll" }}
         >
-          {uncompletedTasks.map((task) => (
+          {taskTrees.map((task) => (
             <TaskCard key={task.id} {...task} withoutDeadline />
           ))}
         </section>

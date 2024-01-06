@@ -26,7 +26,15 @@ export const HabitCard: FC<HabitCardPropsType> = ({
 
   const progress = Math.floor((streak / repeats) * 100);
   return (
-    <Link href={link} onClick={() => setScrollY(window.scrollY)}>
+    <Link
+      href={link}
+      onClick={() => setScrollY(window.scrollY)}
+      style={{
+        padding: "20px",
+        backgroundColor: "#262a34",
+        borderRadius: "0.75rem",
+      }}
+    >
       <div className="min-w-[80px] h-[70px] rounded-full grid place-items-center relative">
         <div className="absolute">
           {isCompletedForToday ? (

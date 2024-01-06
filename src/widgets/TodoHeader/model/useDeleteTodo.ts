@@ -1,4 +1,3 @@
-import { useTaskStore } from "@/entities/task/models/taskStore";
 import { links } from "@/shared/config/links";
 import { ItemType } from "@/shared/config/types";
 import { useDashboardStore } from "@/templates/DashboardPage";
@@ -14,7 +13,6 @@ export const useDeleteTodo = (todoType: ItemType) => {
   const dateType = useDashboardStore((state) => state.dateType);
 
   const itemId = pathname?.split("/").at(-1);
-  const taskId = useTaskStore((state) => state.data.id);
   const itemPost = links[todoType];
 
   const mutation = useMutation({

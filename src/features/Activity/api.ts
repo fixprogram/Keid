@@ -28,7 +28,7 @@ export async function getWeeklyActivityData(userId: string) {
   );
 
   // Getting an array of weekdays where we have a title and task amount from that day
-  const days = getActivityDays(lastWeekActiveTasks);
+  const days = getActivityDays(lastWeekActiveTasks, [], []);
 
   // Getting max task amount among the days
   const maxActivity = Math.max(...days.map((day) => day.taskAmount));

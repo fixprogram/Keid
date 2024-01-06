@@ -49,7 +49,9 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
       <TodoHeader style={style} progress={streak} todoType="challenge" />
 
       <section className="flex flex-col grow">
-        <TodoTitle initialTitle={title} todoType={"challenge"} />
+        <div className="mt-8">
+          <TodoTitle initialTitle={title} todoType={"challenge"} />
+        </div>
 
         <Description
           itemType="challenge"

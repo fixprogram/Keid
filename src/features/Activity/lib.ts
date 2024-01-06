@@ -2,11 +2,24 @@ import { Comment } from "@prisma/client";
 
 type LastWeekActiveTasks = {
   comments: Comment[];
-  projectId: string;
   points: number;
 }[];
 
-export function getActivityDays(lastWeekActiveTasks: LastWeekActiveTasks) {
+type LastWeekActiveHabits = {
+  comments: Comment[];
+  points: number;
+}[];
+
+type LastWeekActiveChallenges = {
+  comments: Comment[];
+  points: number;
+}[];
+
+export function getActivityDays(
+  lastWeekActiveTasks: LastWeekActiveTasks,
+  lastWeekActiveHabits: LastWeekActiveHabits,
+  lastWeekActiveChallenges: LastWeekActiveChallenges
+) {
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0); // Start of today
 
@@ -41,7 +54,29 @@ export function getActivityDays(lastWeekActiveTasks: LastWeekActiveTasks) {
       )
       .reduce((sum, task) => sum + task.points, 0);
 
-    return { ...day, taskAmount };
+    const habitPoints = lastWeekActiveHabits
+      .filter((habit) =>
+        habit.comments.some((comment) => {
+          return (
+            Number(comment.time) > dayStart.getTime() &&
+            Number(comment.time) <= nextDayStart.getTime()
+          );
+        })
+      )
+      .reduce((sum, task) => sum + task.points, 0);
+
+    const challengePoints = lastWeekActiveChallenges
+      .filter((challenge) =>
+        challenge.comments.some((comment) => {
+          return (
+            Number(comment.time) > dayStart.getTime() &&
+            Number(comment.time) <= nextDayStart.getTime()
+          );
+        })
+      )
+      .reduce((sum, task) => sum + task.points, 0);
+
+    return { ...day, taskAmount: taskAmount + habitPoints + challengePoints };
   });
 
   return days;

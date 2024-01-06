@@ -29,11 +29,14 @@ export async function getData() {
     select: { id: true, name: true },
   });
 
-  return notifications.map((notification) => ({
-    ...notification,
-    userName: notificationUsers.find((user) => user.id === notification.userId)
-      ?.name,
-  }));
+  return notifications
+    .map((notification) => ({
+      ...notification,
+      userName: notificationUsers.find(
+        (user) => user.id === notification.userId
+      )?.name,
+    }))
+    .reverse();
 }
 
 export default async function Hydration() {

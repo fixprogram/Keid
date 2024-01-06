@@ -27,7 +27,7 @@ export const TodoHeader: FC<TodoHeaderPropsType> = ({
       </button>
 
       <div className="flex gap-10">
-        {progress < 100 ? <Complete itemType="challenge" /> : null}
+        {progress < 100 ? <Complete itemType={todoType} /> : null}
 
         {todoType === "challenge" ? null : (
           <UpdateProgress

@@ -16,7 +16,6 @@ export async function getData(dateType: DateType) {
   const user = await getUser();
 
   const userId = user.id;
-  const userProjectNames = await getUserProjectNames(userId);
   const projects = await prisma.project.findMany({
     where: { userId },
     select: { id: true, taskIds: true, isStarred: true },
@@ -47,6 +46,8 @@ export async function getData(dateType: DateType) {
   }
 
   const weeklyActivityData = await getWeeklyActivityData(userId);
+
+  console.log("weeklyActivityData: ", weeklyActivityData);
 
   return {
     activity: {

@@ -30,4 +30,6 @@ export const deleteTaskAndSubtasks = async (taskId: string) => {
       data: { taskIds: [...newTaskIds] },
     });
   }
+
+  return task;
 };

@@ -32,7 +32,9 @@ export default function Habit({ id }: TaskPropType) {
       <TodoHeader style={style} progress={streak} todoType="habit" />
 
       <section className="flex flex-col grow">
-        <TodoTitle initialTitle={title} todoType={"habit"} />
+        <div className="mt-8">
+          <TodoTitle initialTitle={title} todoType={"habit"} />
+        </div>
 
         <Description itemType="habit" initialValue="description" />
 

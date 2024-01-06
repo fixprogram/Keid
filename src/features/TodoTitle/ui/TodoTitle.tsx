@@ -28,33 +28,18 @@ export const TodoTitle: FC<TodoTitlePropsType> = ({
   );
 
   return (
-    <div className="mt-8">
-      <textarea
-        value={value}
-        onChange={handleValueChange}
-        className="text-xxl text-poppins text-white font-semibold w-full"
-        style={{
-          backgroundColor: "inherit",
-          overflowY: "hidden",
-          width: "100%",
-          height: 42,
-        }}
-        onBlur={() => handleTextareaBlur(value)}
-        ref={textareaRef}
-        // name={name}
-        // id={name}
-        // placeholder={placeholder}
-      />
-    </div>
+    <textarea
+      value={value}
+      onChange={handleValueChange}
+      className="text-xxl text-poppins text-white font-semibold w-full"
+      style={{
+        backgroundColor: "inherit",
+        overflowY: "hidden",
+        width: "100%",
+        height: 42,
+      }}
+      onBlur={() => handleTextareaBlur(value)}
+      ref={textareaRef}
+    />
   );
-
-  // return (
-  //   <div className="mt-8">
-  //     <AutoSizedTextarea
-  //       initialTitle={initialTitle}
-  //       onBlur={handleTextareaBlur}
-  //       styleType='title'
-  //     />
-  //   </div>
-  // );
 };

@@ -14,7 +14,7 @@ export const completeTaskAndSubtasks = async (
     throw new Error(`Task with id ${taskId} wasn't found`);
   }
 
-  await prisma.task.update({
+  const completedTask = await prisma.task.update({
     where: { id: taskId },
     data: {
       completed: Date.now(),
@@ -29,4 +29,6 @@ export const completeTaskAndSubtasks = async (
       await completeTaskAndSubtasks(subtaskId, comment);
     }
   }
+
+  return completedTask;
 };

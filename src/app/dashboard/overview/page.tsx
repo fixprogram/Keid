@@ -13,80 +13,12 @@ import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTas
 import { Challenge, CommentType, Member, Task } from "@prisma/client";
 import { transformChallenge } from "@/templates/DashboardPage/lib/transformChallenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
-
-export async function transformChallenges(challenges: Challenge[]) {
-  const user = await getUser();
-  const userId = user.id;
-
-  const hostIds = challenges.map((challenge) => challenge.userId);
-
-  const hosts = await prisma.user.findMany({
-    where: { id: { in: [...new Set(hostIds)] } },
-    select: { id: true, name: true },
-  });
-
-  const mappedChallenges = challenges.map((challenge) => {
-    const host = hosts.find((host) => host.id === challenge.userId);
-
-    let isCompletedForToday = false;
-
-    if (userId && userId !== challenge.userId) {
-      const member = challenge.members.find(
-        (member) => member.id === userId
-      ) as Member;
-
-      isCompletedForToday = Boolean(
-        member.comments.filter(
-          (comment) =>
-            comment.type === CommentType.PROGRESS_UPDATE &&
-            isDateToday(new Date(Number(comment.time)))
-        ).length
-      );
-    } else {
-      isCompletedForToday = Boolean(
-        challenge.comments.filter(
-          (comment) =>
-            comment.type === CommentType.PROGRESS_UPDATE &&
-            isDateToday(new Date(Number(comment.time)))
-        ).length
-      );
-    }
-
-    return transformChallenge({
-      data: {
-        ...challenge,
-        hostId: host?.id,
-        userId,
-        hostName: host?.name,
-        isCompletedForToday,
-      },
-    });
-  });
-
-  return mappedChallenges;
-}
+import { getTodayHabits } from "@/templates/DashboardPage/api/getTodayHabits";
+import { mapAndSortTasks } from "@/templates/DashboardPage/lib/mapAndSortTasks";
+import { getTodayChallenges } from "@/templates/DashboardPage/api/getTodayChallenges";
 
 export async function getData(dateType: DateType) {
   const user = await getUser();
-
-  // const subtasks1 = await prisma.subtask.findMany();
-
-  // console.log("subtasks1: ", subtasks1);
-
-  // for (const subtask1 of subtasks1) {
-  //   const { taskId, ...rest } = subtask1;
-  //   const data: Task = {
-  //     ...rest,
-  //     style: "01",
-  //     parentId: subtask1.taskId,
-  //     subtaskIds: [],
-  //     repeats: "Once",
-  //   };
-
-  //   // console.log("data: ", data);
-
-  //   await prisma.task.create({ data });
-  // }
 
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
@@ -149,50 +81,24 @@ export async function getData(dateType: DateType) {
 
   const weeklyActivityData = await getWeeklyActivityData(userId);
 
-  const habits = await prisma.habit.findMany({
-    where: { userId, isArchived: false },
-  });
+  const habits = await getTodayHabits(userId);
 
-  const mappedTasks = tasks
-    .map((task) => {
-      const isFavorite = Boolean(
-        projects.find((project) =>
-          project.taskIds.some((taskId) => taskId === task.id)
-        )?.isStarred
-      );
-
-      return { ...task, isFavorite };
-    })
-    .sort((a: Task, b: Task) => a.completed - b.completed);
-
-  const challenges = await prisma.challenge.findMany({
-    where: {
-      OR: [
-        { userId, isArchived: false },
-        { members: { some: { id: userId } }, isArchived: false },
-      ],
-    },
-  });
-
-  const transformedChallenges = await transformChallenges(challenges);
+  const challenges = await getTodayChallenges(userId);
 
   return {
     projectAmount,
     overdueTaskAmount,
     totalTaskAmount,
-    tasks: mappedTasks,
+    tasks: mapAndSortTasks(tasks, projects),
     userName: user.name,
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,
     habits,
-    // challenges,
-    challenges: transformedChallenges,
+    challenges,
   };
 }
 
 export default async function Page() {
-  const user = await getUser();
-
   const dateType = DateType.Today;
 
   const queryClient = getQueryClient();

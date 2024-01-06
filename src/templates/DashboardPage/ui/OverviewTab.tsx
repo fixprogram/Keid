@@ -68,7 +68,7 @@ export const OverviewTab: FC = () => {
               Habits
             </h3>
             <section
-              className="flex align-center mt-4 gap-10"
+              className="flex align-center mt-4 gap-4"
               style={{ overflowX: "scroll" }}
             >
               {habits.map((habit) => (

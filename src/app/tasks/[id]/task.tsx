@@ -70,7 +70,9 @@ export default function Task({ id }: TaskPropType) {
           {parentTitle}
         </Link>
 
-        <TodoTitle initialTitle={title} todoType="task" />
+        <div className="mt-2">
+          <TodoTitle initialTitle={title} todoType="task" />
+        </div>
 
         <div className="flex flex-wrap items-end gap-6 mt-6">
           <Link href={`/projects/${projectId}`} className="flex gap-4">

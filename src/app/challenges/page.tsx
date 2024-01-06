@@ -4,7 +4,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { getUser } from "../lib/session";
 import { Challenges } from "./challenges";
-import { transformChallenges } from "../dashboard/overview/page";
+import { transformChallenges } from "@/templates/DashboardPage/api/getTodayChallenges";
 
 async function getData() {
   const user = await getUser();
