@@ -15,10 +15,10 @@ async function getData(id: string) {
     throw new Error(`User with id ${id} wasn't found`);
   }
 
-  const activityData = await getWeeklyActivityData(user.id);
+  // const activityData = await getWeeklyActivityData(user.id);
 
   return {
-    activityData,
+    // activityData,
     userName: user.name,
     userEmail: user.email,
     isFollowing: user.followers.includes(mainUser.id),
