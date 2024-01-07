@@ -14,6 +14,10 @@ export const DailyProgress: FC<DailyProgressPropsType> = ({
   habits,
   challenges,
 }) => {
+  if (!tasks || !habits || !challenges) {
+    return null;
+  }
+
   const totalTaskAmount = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed);
   const completedTaskAmount = completedTasks.length;
