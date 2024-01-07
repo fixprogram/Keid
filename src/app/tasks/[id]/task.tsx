@@ -5,14 +5,24 @@ import { ProjectInfo } from "@/entities/project";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
-import { useTaskStore } from "@/entities/task/models/taskStore";
 import { TaskHeader } from "@/widgets/TaskHeader";
 import { TodoTitle } from "@/features/TodoTitle";
 import Link from "next/link";
 import { Description } from "@/features/Description";
 import { SubtaskList } from "@/features/SubtaskList/ui/SubtaskList";
 import { TodoDeadline } from "@/features/TodoDeadline";
+import Loading from "@/app/loading";
+import { Task as TaskType } from "@prisma/client";
+import { CommentType } from "@/features/Comments/config/types";
+import { TodoPoints } from "@/features/TodoPoints";
+
+type DataType = Omit<TaskType, "comments"> & {
+  subtasks: TaskType[];
+  projectStyle: string;
+  projectTitle: string;
+  parentTitle: string;
+  comments: CommentType[];
+};
 
 async function getData(id: string) {
   const res = await fetch(`/api/tasks/${id}`);
@@ -26,10 +36,14 @@ interface TaskPropType {
 }
 
 export default function Task({ id }: TaskPropType) {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery<DataType>({
     queryKey: ["task", id],
     queryFn: () => getData(id),
   });
+
+  if (isLoading || !data) {
+    return <Loading />;
+  }
 
   const {
     title,
@@ -44,18 +58,13 @@ export default function Task({ id }: TaskPropType) {
     description,
     parentTitle,
     parentId,
+    points,
   } = data;
 
   const parentProjectStyle = projectStyles[projectStyle as ProjectStyleKey];
 
-  const setTaskData = useTaskStore((state) => state.setTaskData);
-
   const parentLink =
     parentId === projectId ? `/projects/${parentId}` : `/tasks/${parentId}`;
-
-  useEffect(() => {
-    setTaskData(data);
-  }, [data, setTaskData]);
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
@@ -75,14 +84,7 @@ export default function Task({ id }: TaskPropType) {
         </div>
 
         <div className="flex flex-wrap items-end gap-6 mt-6">
-          <Link href={`/projects/${projectId}`} className="flex gap-4">
-            <ProjectInfo
-              projectStyle={parentProjectStyle}
-              title={projectTitle}
-              category={"Category"}
-              isStarred={false}
-            />
-          </Link>
+          <TodoPoints initialPoints={points} todoType="task" />
 
           <TodoDeadline style={style} deadline={deadline} todoType="task" />
         </div>

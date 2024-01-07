@@ -30,6 +30,7 @@ export const links = {
     updateDeadline: `${apiTask}/updateDeadline`,
     updateTitle: `${apiTask}/updateTitle`,
     updateDescription: `${apiTask}/updateDescription`,
+    updatePoints: `${apiTask}/updatePoints`,
   },
   habit: {
     add: `${apiHabit}/add`,
@@ -42,6 +43,7 @@ export const links = {
     updateDeadline: `${apiHabit}/updateDeadline`,
     updateTitle: `${apiHabit}/updateTitle`,
     updateDescription: `${apiHabit}/updateDescription`,
+    updatePoints: `${apiHabit}/updatePoints`,
   },
   challenge: {
     add: `${apiChallenge}/add`,
@@ -54,5 +56,6 @@ export const links = {
     updateDeadline: `${apiChallenge}/updateDeadline`,
     updateTitle: `${apiChallenge}/updateTitle`,
     updateDescription: `${apiChallenge}/updateDescription`,
+    updatePoints: `${apiChallenge}/updatePoints`,
   },
 };

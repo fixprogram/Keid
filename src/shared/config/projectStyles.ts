@@ -78,7 +78,7 @@ export const projectStyles: Record<ProjectStyleKey, ProjectStyleType> = {
       firstStopColor: "#6EA95C",
       secondStopColor: "#9ADB7F",
     },
-    textColor: "#FFFFFF",
+    textColor: "#200745",
     progressChangeGradient: (prevProgress: number, progressChange: number) =>
       `linear-gradient(270deg, #9ADB7F 0, #6EA95C ${progressChange}%, rgba(110, 169, 92, 0.3) ${prevProgress}%)`,
   },

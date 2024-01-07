@@ -643,6 +643,44 @@ export default function Sprite() {
             </clipPath>
           </defs>
         </symbol>
+
+        <symbol
+          id="icon-points"
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clipPath="url(#clip0_133_155)">
+            <path
+              d="M6.00024 12.5098L10.0002 16.5098L18.0002 8.50977"
+              stroke="white"
+              strokeWidth="2"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12.0002 23.5098C18.0754 23.5098 23.0002 18.5849 23.0002 12.5098C23.0002 6.43463 18.0754 1.50977 12.0002 1.50977C5.92511 1.50977 1.00024 6.43463 1.00024 12.5098C1.00024 18.5849 5.92511 23.5098 12.0002 23.5098Z"
+              stroke="white"
+              strokeWidth="2"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_133_155">
+              <rect
+                width="24"
+                height="24"
+                fill="white"
+                transform="translate(0.000244141 0.509766)"
+              />
+            </clipPath>
+          </defs>
+        </symbol>
       </defs>
     </svg>
   );

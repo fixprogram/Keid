@@ -7,6 +7,7 @@ import React from "react";
 import { TodoTitle } from "@/features/TodoTitle";
 import { Description } from "@/features/Description";
 import { TodoHeader } from "@/widgets/TodoHeader/ui/TodoHeader";
+import { TodoPoints } from "@/features/TodoPoints";
 
 async function getData(id: string) {
   const res = await fetch(`/api/habits/${id}`);
@@ -25,7 +26,7 @@ export default function Habit({ id }: TaskPropType) {
     queryFn: () => getData(id),
   });
 
-  const { title, style, comments, streak } = data;
+  const { title, style, comments, streak, points } = data;
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
@@ -34,6 +35,10 @@ export default function Habit({ id }: TaskPropType) {
       <section className="flex flex-col grow">
         <div className="mt-8">
           <TodoTitle initialTitle={title} todoType={"habit"} />
+        </div>
+
+        <div className="flex flex-wrap items-end gap-6 mt-6">
+          <TodoPoints initialPoints={points} todoType="habit" />
         </div>
 
         <Description itemType="habit" initialValue="description" />

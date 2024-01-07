@@ -21,8 +21,8 @@ export default function DueDate({
       >
         <Icon name="calendar" width={24} height={24} />
       </div>
-      <div>
-        <p className="text-deactive font-medium text-sm"> Due Date</p>
+      <div className="text-left">
+        <p className="text-deactive font-medium text-sm">Due Date</p>
         <b
           className={`font-semibold`}
           style={{ color: dateColor ? dateColor : "#A5F59C" }}

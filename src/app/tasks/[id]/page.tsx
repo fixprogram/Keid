@@ -22,7 +22,6 @@ async function getData(taskId: string) {
   const subtasks = await prisma.task.findMany({
     where: { id: { in: task.subtaskIds } },
   });
-  // const subtasks = await getSubtasksByIds(data.subtaskIds);
 
   const comments: CommentType[] = [];
   task.comments.forEach((comment) => {

@@ -34,7 +34,11 @@ export const ProjectTitle: FC<ProjectTitlePropsType> = ({ initialTitle }) => {
         // isShowed={isProjectEditShowed}
         // onClose={handleClosePopup}
         positioned="Top"
-        btn={<h2 className="text-xl text-white font-semibold">{title}</h2>}
+        btn={
+          <h2 className="text-xl text-white font-semibold text-left">
+            {title}
+          </h2>
+        }
       >
         <div className="flex gap-3 py-5 px-10">
           <input

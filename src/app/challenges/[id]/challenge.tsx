@@ -12,6 +12,7 @@ import {
   MappedMember,
   transformChallenge,
 } from "@/templates/DashboardPage/lib/transformChallenge";
+import { TodoPoints } from "@/features/TodoPoints";
 
 // type MappedMember = Member & { name: string };
 
@@ -38,8 +39,16 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
     return transformChallenge({ data });
   }, [data]);
 
-  const { title, style, comments, streak, repeats, description, members } =
-    transformedData;
+  const {
+    title,
+    style,
+    comments,
+    streak,
+    repeats,
+    description,
+    members,
+    points,
+  } = transformedData;
   const progress = Math.floor((streak / repeats) * 100);
 
   // const isCompletedForToday = getIsCompletedForToday(data)
@@ -51,6 +60,10 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
       <section className="flex flex-col grow">
         <div className="mt-8">
           <TodoTitle initialTitle={title} todoType={"challenge"} />
+        </div>
+
+        <div className="flex flex-wrap items-end gap-6 mt-6">
+          <TodoPoints initialPoints={points} todoType="challenge" />
         </div>
 
         <Description
