@@ -6,15 +6,13 @@ import Icon from "@/shared/ui/Icon";
 
 interface Props {
   topic: string;
-  items: TaskType[];
+  tasks: TaskType[];
 }
 
-export default function Accordion({ topic, items = [] }: Props) {
+export const TaskAccordion = ({ topic, tasks = [] }: Props) => {
   const [isOpened, setOpened] = useState(true);
 
-  // console.log("items: ", items);
-
-  const mappedItems = mapTasksIntoHierarchy(items);
+  const mappedTasks = mapTasksIntoHierarchy(tasks);
 
   return (
     <section className="mt-8">
@@ -27,7 +25,7 @@ export default function Accordion({ topic, items = [] }: Props) {
           <Icon name="arrow-down" width={16} height={16} />
 
           <span className="text-xxs text-deactive font-bold tracking-wide">
-            {topic.toUpperCase()} ({items.length})
+            {topic.toUpperCase()} ({tasks.length})
           </span>
         </button>
 
@@ -36,9 +34,9 @@ export default function Accordion({ topic, items = [] }: Props) {
         </button>
       </div>
 
-      {mappedItems.length > 0 && isOpened ? (
+      {mappedTasks.length > 0 && isOpened ? (
         <ul className="mt-6 flex flex-col gap-4">
-          {mappedItems.map((item) => (
+          {mappedTasks.map((item) => (
             <li key={item.id}>
               <TaskCard {...item} />
             </li>
@@ -47,4 +45,4 @@ export default function Accordion({ topic, items = [] }: Props) {
       ) : null}
     </section>
   );
-}
+};

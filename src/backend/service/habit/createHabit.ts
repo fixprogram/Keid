@@ -3,7 +3,8 @@ import { prisma } from "@/db.server";
 export const createHabit = async (
   userId: string,
   habitName: string,
-  habitStyle: string
+  habitStyle: string,
+  points: number
 ) => {
   const habit = await prisma.habit.create({
     data: {
@@ -13,6 +14,7 @@ export const createHabit = async (
       streak: 0,
       completed: 0,
       isArchived: false,
+      points,
     },
   });
 

@@ -1,4 +1,3 @@
-import Accordion from "@/widgets/Accordion";
 import FilterBar from "@/features/FilterBar";
 // import AllTaskAccordions from "./AllTaskAccordions";
 import { FC, useState } from "react";
@@ -10,6 +9,7 @@ import { useProjectStore } from "@/entities/project/models/projectStore";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { TaskType } from "@/shared/config/types";
 import { mapTasksIntoHierarchy } from "@/entities/task";
+import { TaskAccordion } from "@/shared/ui/TaskAccordion";
 
 interface ProjectTasksPropsType {
   initialTasks: TaskType[];
@@ -40,7 +40,7 @@ export const ProjectTasks: FC<ProjectTasksPropsType> = ({ initialTasks }) => {
         {activeFilter === "All" ? (
           <AllTasks tasks={tasks} />
         ) : (
-          <Accordion topic={activeFilter} items={tasks[activeFilter]} />
+          <TaskAccordion topic={activeFilter} tasks={tasks[activeFilter]} />
         )}
       </section>
     </>

@@ -12,6 +12,7 @@ type MutationHabitType = {
   userId: string;
   habitName: string;
   habitStyle: string;
+  points: number;
 };
 
 export function useHabitFormSubmit() {
@@ -23,8 +24,8 @@ export function useHabitFormSubmit() {
     (state) => [state.userId, state.closePopupAdd],
     shallow
   );
-  const [habitName, habitStyle, resetHabit] = usePopupStore(
-    (state) => [state.title, state.style, state.reset],
+  const [habitName, habitStyle, points, resetHabit] = usePopupStore(
+    (state) => [state.title, state.style, state.points, state.reset],
     shallow
   );
 
@@ -47,9 +48,9 @@ export function useHabitFormSubmit() {
     (event: SyntheticEvent) => {
       event.preventDefault();
 
-      mutation.mutate({ userId, habitName, habitStyle });
+      mutation.mutate({ userId, habitName, habitStyle, points });
     },
-    [userId, habitName, habitStyle, mutation]
+    [userId, habitName, habitStyle, mutation, points]
   );
 
   return handleFormSubmit;

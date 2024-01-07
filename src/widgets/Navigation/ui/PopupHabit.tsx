@@ -5,6 +5,7 @@ import AddButton from "@/shared/ui/AddButton";
 import { useHabitFormSubmit } from "../model/useHabitFormSubmit";
 import { PopupStyleList } from "./PopupStyleList";
 import { PopupInputTitle } from "./PopupInputTitle";
+import { PopupPoints } from "./PopupPoints";
 
 export const PopupHabit: FC = () => {
   const handleFormSubmit = useHabitFormSubmit();
@@ -27,6 +28,10 @@ export const PopupHabit: FC = () => {
     <section className="px-5 my-5">
       <form method="post" onSubmit={handleFormSubmit}>
         <PopupInputTitle placeholder="Habit title..." />
+
+        <div className="mt-6 flex justify-between">
+          <PopupPoints />
+        </div>
 
         <div className="mt-6">
           <span className="font-bold text-deactive uppercase text-xxs">

@@ -1,7 +1,6 @@
 import { mapTasksIntoHierarchy } from "@/entities/task";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { TaskType } from "@/shared/config/types";
-import Accordion from "@/widgets/Accordion";
 import { FC, Fragment } from "react";
 
 interface AllTasksPropsType {

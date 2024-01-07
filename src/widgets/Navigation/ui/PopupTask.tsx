@@ -1,4 +1,3 @@
-import { shallow } from "zustand/shallow";
 import { PopupCalendar } from "./PopupCalendar";
 import { usePopupStore } from "../model/usePopupStore";
 import { useTaskFormSubmit } from "../model/useTaskFormSubmit";
@@ -8,6 +7,7 @@ import { PopupDeadline } from "./PopupDeadline";
 import AddButton from "@/shared/ui/AddButton";
 import { PopupRepeatsOption } from "./PopupRepeatsOption";
 import { PopupStyleList } from "./PopupStyleList";
+import { PopupPoints } from "./PopupPoints";
 
 export default function PopupTask() {
   const handleFormSubmit = useTaskFormSubmit();
@@ -15,20 +15,13 @@ export default function PopupTask() {
     isCalendarOpen,
     isStyleListOpened,
     isWithDeadline,
-    points,
     toggleTaskWithDeadline,
-    setPoints,
-  ] = usePopupStore(
-    (state) => [
-      state.isCalendarOpened,
-      state.isStyleListOpened,
-      state.isWithDeadline,
-      state.points,
-      state.toggleWithDeadline,
-      state.setPoints,
-    ],
-    shallow
-  );
+  ] = usePopupStore((state) => [
+    state.isCalendarOpened,
+    state.isStyleListOpened,
+    state.isWithDeadline,
+    state.toggleWithDeadline,
+  ]);
 
   if (isCalendarOpen) return <PopupCalendar />;
 
@@ -68,15 +61,7 @@ export default function PopupTask() {
         </div>
 
         <div className="flex justify-between mt-6">
-          <b className="text-lg text-white font-bold">Points: {points}</b>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step={1}
-            value={points}
-            onChange={(e) => setPoints(Number(e.target.value))}
-          />
+          <PopupPoints />
         </div>
 
         <div className="absolute right-[20px] bottom-[26px]">

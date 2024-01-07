@@ -12,6 +12,7 @@ import { PopupMembersButton } from "./PopupMembersButton";
 import Icon from "@/shared/ui/Icon";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { PopupMembers } from "./PopupMembers";
+import { PopupPoints } from "./PopupPoints";
 
 export default function PopupChallenge() {
   const handleFormSubmit = useChallengeFormSubmit();
@@ -45,6 +46,10 @@ export default function PopupChallenge() {
           <PopupDeadline />
 
           <PopupMembersButton />
+        </div>
+
+        <div className="mt-6 flex justify-between">
+          <PopupPoints />
         </div>
 
         <div className="absolute right-[20px] bottom-[26px]">

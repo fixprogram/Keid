@@ -14,6 +14,7 @@ type MutationChallengeType = {
   style: string;
   deadline: number;
   members: string[];
+  points: number;
 };
 
 export function useChallengeFormSubmit() {
@@ -33,6 +34,7 @@ export function useChallengeFormSubmit() {
       deadline: state.deadline,
       repeats: state.repeats,
       members: state.members,
+      points: state.points,
     }),
     shallow
   );

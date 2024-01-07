@@ -9,6 +9,7 @@ type Props = {
   deadline: number;
   repeats: number;
   memberIds: string[];
+  points: number;
   isPublic?: boolean;
 };
 
@@ -20,6 +21,7 @@ export const createChallenge = async ({
   repeats,
   memberIds,
   isPublic = false,
+  points,
 }: Props) => {
   const data = {
     userId,
@@ -39,7 +41,6 @@ export const createChallenge = async ({
         content: "",
         time: Date.now().toString(),
         serviceContent: serviceComments.challenge.created,
-        comments: [],
       },
     ],
     members: memberIds.map((memberId) => ({
@@ -47,7 +48,9 @@ export const createChallenge = async ({
       streak: 0,
       failed: 0,
       completed: 0,
+      comments: [],
     })),
+    points,
   };
 
   const challenge = await prisma.challenge.create({
