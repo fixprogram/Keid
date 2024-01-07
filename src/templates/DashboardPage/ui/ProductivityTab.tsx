@@ -8,6 +8,7 @@ import { WeeklyStatistics } from "@/features/WeeklyStatistics";
 import { Tabs } from "./Tabs";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
+import { DailyProgress } from "@/features/DailyProgress";
 // import { useShareProgress } from "../model/useShareProgress";
 
 export const ProductivityTab: FC = () => {
@@ -20,18 +21,20 @@ export const ProductivityTab: FC = () => {
 
   // const handleShareProgress = useShareProgress(userId);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["dashboard", "productivity", dateType],
     queryFn: () => getData(dateType),
   });
 
-  const { projects, activity } = dashboardData;
+  // const { projects, activity } = dashboardData;
 
-  useEffect(() => {
-    if (data) {
-      setData(data);
-    }
-  }, [data, setData]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setData(data);
+  //   }
+  // }, [data, setData]);
+
+  // const {tasks, habits} = data
 
   return (
     <Layout>
@@ -44,11 +47,22 @@ export const ProductivityTab: FC = () => {
           {/* <button className="text-white" onClick={handleShareProgress}>
             Share progress
           </button> */}
-          <WeeklyStatistics projects={projects} />
+          <DailyProgress {...data} />
         </>
       ) : null}
 
-      {dateType === DateType.Week ? <WeeklyActivity {...activity} /> : null}
+      {dateType === DateType.Week ? (
+        <>
+          {isLoading ? (
+            <div className="text-white">Loading...</div>
+          ) : (
+            <>
+              <WeeklyActivity {...data.activity} />
+              <WeeklyStatistics {...data} />
+            </>
+          )}
+        </>
+      ) : null}
 
       {dateType === DateType.Month ? (
         <div style={{ color: "wheat" }}>Empty for now</div>

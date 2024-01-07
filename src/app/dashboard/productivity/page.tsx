@@ -2,15 +2,14 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";
 import { getUser } from "@/app/lib/session";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
-import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
-import { Task } from "@prisma/client";
+import { Habit, Task } from "@prisma/client";
 import Productivity from "./productivity";
+import { getTodayProductivity } from "@/templates/DashboardPage/api/getTodayProductivity";
 
 export async function getData(dateType: DateType) {
   const user = await getUser();
@@ -25,12 +24,11 @@ export async function getData(dateType: DateType) {
   projectIDs.push(userId);
 
   let tasks: Task[] = [];
+  let habits: Habit[] = [];
 
   switch (dateType) {
     case DateType.Today: {
-      tasks = await getTodayTasks(projectIDs);
-
-      break;
+      return await getTodayProductivity(userId);
     }
     case DateType.Week: {
       tasks = await getThisWeekTasks(projectIDs);
@@ -47,8 +45,6 @@ export async function getData(dateType: DateType) {
 
   const weeklyActivityData = await getWeeklyActivityData(userId);
 
-  console.log("weeklyActivityData: ", weeklyActivityData);
-
   return {
     activity: {
       maxActivity: Math.max(
@@ -59,20 +55,10 @@ export async function getData(dateType: DateType) {
       days: weeklyActivityData.days,
     },
     projects: weeklyActivityData.projects,
-    // activityFeed: weeklyActivityData.activityFeed,
   };
 }
 
 export default async function Page() {
-  const user = await getUser();
-
-  const userId = user.id;
-  // TODO: Add dateType saving to user schema
-  //   const dateType = await prisma.user.findUnique({
-  //     where: { id: userId },
-  //     select: { dateType: true },
-  //   });
-
   const dateType = DateType.Today;
 
   const queryClient = getQueryClient();

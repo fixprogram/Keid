@@ -1,3 +1,4 @@
+import { getStartOfWeek } from "@/shared/lib/utils/getStartOfWeek";
 import { Comment } from "@prisma/client";
 
 type LastWeekActiveTasks = {
@@ -20,11 +21,7 @@ export function getActivityDays(
   lastWeekActiveHabits: LastWeekActiveHabits,
   lastWeekActiveChallenges: LastWeekActiveChallenges
 ) {
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0); // Start of today
-
-  const startOfWeek = new Date(today);
-  startOfWeek.setDate(today.getDate() - (today.getUTCDay() || 7) + 1);
+  const startOfWeek = getStartOfWeek();
 
   const days = [
     { title: "M" },

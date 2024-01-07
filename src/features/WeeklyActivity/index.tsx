@@ -18,6 +18,10 @@ export const WeeklyActivity: FC<WeeklyActivityPropsType> = ({
   allProjects,
   maxActivity,
 }) => {
+  if (!days) {
+    return null;
+  }
+
   return (
     <section className="rounded-[20px] bg-background2 p-5 relative mt-4">
       <p className="text-deactive">Activity in the last 7 Days</p>

@@ -34,7 +34,7 @@ export async function getData(dateType: DateType) {
 
   switch (dateType) {
     case DateType.Today: {
-      tasks = await getTodayTasks(projectIDs);
+      tasks = await getTodayTasks(userId);
 
       break;
     }

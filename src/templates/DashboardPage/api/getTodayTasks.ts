@@ -1,7 +1,15 @@
 import { prisma } from "@/db.server";
 import { getTodayTimestamps } from "@/shared/lib/utils/getTodayTimestamps";
 
-export async function getTodayTasks(projectIDs: string[]) {
+export async function getTodayTasks(userId: string) {
+  const projects = await prisma.project.findMany({
+    where: { userId },
+    select: { id: true, taskIds: true, isStarred: true },
+  });
+
+  const projectIDs = projects.map((projectId) => projectId.id);
+  projectIDs.push(userId);
+
   const { startTimestamp, endTimestamp } = getTodayTimestamps();
 
   const tasks = await prisma.task.findMany({
@@ -14,30 +22,5 @@ export async function getTodayTasks(projectIDs: string[]) {
     },
   });
 
-  // const subtaskIds: string[] = [];
-  // tasks.forEach((task) => subtaskIds.push(...task.subtaskIds));
-
-  // const subtasks = await prisma.subtask.findMany({
-  //   where: {
-  //     projectId: { in: projectIDs },
-  //     deadline: {
-  //       lte: endTimestamp,
-  //       gte: startTimestamp,
-  //     },
-  //   },
-  // });
-
-  // const mappedSubtasks = subtasks.map((subtask) => ({
-  //   ...subtask,
-  //   repeats: "Once",
-  //   subtaskIds: [],
-  //   style: "01",
-  //   type: "subtask",
-  //   projectId: tasks.find((task) => subtask.id in task.subtaskIds)
-  //     ?.projectId as string,
-  //   parentId: subtask.taskId,
-  // }));
-
   return tasks;
-  // return [...tasks, ...mappedSubtasks];
 }
