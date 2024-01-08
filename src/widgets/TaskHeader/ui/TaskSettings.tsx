@@ -17,10 +17,12 @@ export const TaskSettings: FC = () => {
       </b>
 
       <ul className="mt-6">
-        {SETTINGS.map((setting, index) => (
+        {SETTINGS.map((setting, index, array) => (
           <li
             key={setting.title}
-            className={`border-b-[1px] border-white/5 flex items-center gap-5 ${
+            className={`${
+              index < array.length - 1 ? "border-b" : ""
+            } border-white/5 flex items-center gap-5 ${
               index === 0 ? "pb-5" : "py-5"
             }`}
             onClick={setting.hook("task")}

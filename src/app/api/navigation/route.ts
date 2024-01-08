@@ -1,5 +1,6 @@
 import { getUser } from "@/app/lib/session";
 import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
+import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -13,6 +14,7 @@ export async function GET(request: Request) {
     projectAmount,
     userProjectNames,
     userId,
+    userName: user.name,
   };
 
   return NextResponse.json(data);

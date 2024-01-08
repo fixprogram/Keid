@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 import { useNavigationStore } from "../model/useNavigationStore";
 import { useQuery } from "@tanstack/react-query";
 import { AddPopup } from "./AddPopup";
-import { useUserStore } from "@/entities/user";
 import { MAX_WIDTH } from "@/shared/config/consts";
+import { useUser } from "@/entities/user/models/userContext";
 
 async function getData() {
   const res = await fetch(`/api/navigation`);
@@ -20,13 +20,15 @@ export default function Navigation() {
   const pathname = usePathname();
 
   const setData = useNavigationStore((state) => state.setData);
-  const userEmail = useUserStore((state) => state.email);
+
+  const user = useUser();
 
   const { data } = useQuery({
-    queryKey: ["navigation", userEmail],
+    queryKey: ["navigation", user?.userId],
     queryFn: getData,
   });
 
+  // TODO: get rid of it and download user info only in userProvider
   useEffect(() => {
     // Because it's not a next.js layout but just a component, then every time we change a page,
     // this component renders again. But maybe it's not a big deal, especially for now,

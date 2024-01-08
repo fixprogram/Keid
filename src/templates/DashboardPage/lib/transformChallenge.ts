@@ -1,4 +1,4 @@
-import { getIsCompletedForToday } from "@/entities/challenge";
+import { CommentType } from "@/features/Comments/config/types";
 import { Member } from "@prisma/client";
 
 export type MappedMember = Member & { name: string };
@@ -18,6 +18,7 @@ export const transformChallenge = ({ data }: TransformChallengePropsType) => {
     failed: hostFailed,
 
     members: challengeMembers,
+    comments,
     hostName,
   } = result;
 
@@ -48,9 +49,19 @@ export const transformChallenge = ({ data }: TransformChallengePropsType) => {
     result.streak = userData.streak;
     result.completed = userData.completed;
     result.failed = userData.failed;
-
-    // result.isCompletedForToday = getIsCompletedForToday(data, userId);
   }
+
+  result.comments = comments.map((comment: any) => {
+    if (!comment.userName) {
+      const userName =
+        challengeMembers.find(
+          (member: MappedMember) => member.id === comment.userId
+        )?.name || hostName;
+      return { ...comment, userName };
+    }
+
+    return comment;
+  });
 
   return result;
 };

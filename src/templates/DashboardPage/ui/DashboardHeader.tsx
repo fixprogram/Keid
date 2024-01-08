@@ -3,10 +3,12 @@ import Link from "next/link";
 import { FC } from "react";
 import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { usePathname } from "next/navigation";
+import { useUser } from "@/entities/user/models/userContext";
 
 export const DashboardHeader: FC = () => {
   const pathname = usePathname();
-  const userId = useNavigationStore((state) => state.userId);
+  // const userId = useNavigationStore((state) => state.userId);
+  const user = useUser();
 
   const page = pathname?.split("/").at(-1);
 
@@ -34,7 +36,7 @@ export const DashboardHeader: FC = () => {
       </div>
 
       <Link
-        href={`/profile/${userId}`}
+        href={`/profile/${user?.userId}`}
         className="w-[40px] h-[40px] rounded-full"
       >
         <Icon name="avatar" width={40} height={40} />

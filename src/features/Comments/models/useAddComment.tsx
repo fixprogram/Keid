@@ -6,12 +6,16 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 import { useCommentsStore } from "./commentsStore";
+import { useUser } from "@/entities/user/models/userContext";
 
 export const useAddComment = (itemType: ItemType) => {
   const queryClient = useQueryClient();
 
   // if we come to this task by a link, the userId will be undefined
-  const userId = useNavigationStore((state) => state.userId);
+  // const userId = useNavigationStore((state) => state.userId);
+
+  const user = useUser();
+
   const reset = useCommentsStore((state) => state.reset);
   // const taskId = taskData.taskId;
   const pathname = usePathname();
@@ -22,7 +26,11 @@ export const useAddComment = (itemType: ItemType) => {
   const mutation = useMutation({
     mutationKey: [itemType, itemId],
     mutationFn: (comment: string) =>
-      axios.post(itemPost.addComment, { comment, userId, itemId }),
+      axios.post(itemPost.addComment, {
+        comment,
+        userId: user?.userId,
+        itemId,
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries([itemType, itemId]);
 

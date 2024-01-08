@@ -8,7 +8,12 @@ export async function GET(request: Request) {
   const user = await prisma.user.findUnique({ where: { id } });
 
   if (!user) {
-    throw new Error(`User with id ${id} wasn't found`);
+    // throw new Error(`User with id ${id} wasn't found`);
+
+    return NextResponse.json(
+      { message: `User with id ${id} wasn't found` },
+      { status: 404 }
+    );
   }
 
   const activityData = await getWeeklyActivityData(id);

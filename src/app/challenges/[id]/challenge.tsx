@@ -13,8 +13,7 @@ import {
   transformChallenge,
 } from "@/templates/DashboardPage/lib/transformChallenge";
 import { TodoPoints } from "@/features/TodoPoints";
-
-// type MappedMember = Member & { name: string };
+import { ProjectStyleKey, projectStyles } from "@/shared/config/projectStyles";
 
 async function getData(id: string) {
   const res = await fetch(`/api/challenges/${id}`);
@@ -25,11 +24,9 @@ async function getData(id: string) {
 
 interface ChallengePropsType {
   id: string;
-  // userId: string;
 }
 
 export const Challenge: FC<ChallengePropsType> = ({ id }) => {
-  // const userId = useNavigationStore((state) => state.userId);
   const { data } = useQuery({
     queryKey: ["challenge", id],
     queryFn: () => getData(id),
@@ -51,6 +48,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
   } = transformedData;
   const progress = Math.floor((streak / repeats) * 100);
 
+  const challengeStyle = projectStyles[style as ProjectStyleKey];
   // const isCompletedForToday = getIsCompletedForToday(data)
 
   return (
@@ -84,7 +82,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
             <div
               className="h-full"
               style={{
-                background: "linear-gradient(90deg, #353843 0%, #181A20 100%)",
+                background: challengeStyle.gradient,
                 borderRadius: "5px 2px 2px 5px",
                 width: `${progress}%`,
               }}
@@ -96,7 +94,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
           Members progress
         </h3>
         {members.length ? (
-          <div className="flex flex-col gap-4 mt-4">
+          <div className="flex flex-col gap-4 mt-4 mb-8">
             {members.map((member: MappedMember) => {
               const memberProgress = Math.floor(
                 (member.streak / repeats) * 100
@@ -117,8 +115,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
                     <div
                       className="h-full"
                       style={{
-                        background:
-                          "linear-gradient(90deg, #353843 0%, #181A20 100%)",
+                        background: challengeStyle.gradient,
                         borderRadius: "5px 2px 2px 5px",
                         width: `${memberProgress}%`,
                       }}
@@ -131,6 +128,9 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
         ) : null}
 
         <div className="mt-auto">
+          <h3 className="font-poppins font-semibold text-xl text-white">
+            Comments
+          </h3>
           <Comments comments={comments} itemType="challenge" />
         </div>
       </section>

@@ -1,6 +1,5 @@
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
-import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
-import { Challenge, CommentType, Habit, Member } from "@prisma/client";
+import { Challenge, CommentType, Habit } from "@prisma/client";
 
 // TODO: Move lower in architecture
 export const getIsCompletedForToday = (

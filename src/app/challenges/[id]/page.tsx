@@ -38,10 +38,19 @@ export async function getData(challengeId: string) {
       select: { name: true, id: true },
     });
 
-    challenge.members = challenge.members.map((member) => ({
-      ...member,
-      name: users.find((name) => name.id === member.id)?.name,
-    }));
+    challenge.members = challenge.members.map((member) => {
+      const userName = users.find((name) => name.id === member.id)?.name;
+      return {
+        ...member,
+        name: userName,
+      };
+    });
+
+    challenge.comments = challenge.comments.map((comment) => {
+      const userName = users.find((user) => user.id === comment.userId)?.name;
+
+      return { ...comment, userName };
+    });
   }
 
   return {

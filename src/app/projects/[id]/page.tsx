@@ -7,7 +7,7 @@ import Project from "./project";
 import { getProjectById } from "@/backend/service/project/getProjectById";
 import { getTasksByIds } from "@/backend/service/task/getTasksByIds";
 
-async function getData(projectId: string) {
+export async function getData(projectId: string) {
   const user = await getUser();
 
   const userId = user.id;

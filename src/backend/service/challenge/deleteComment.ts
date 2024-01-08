@@ -11,7 +11,7 @@ export async function deleteComment(id: string, commentTime: string) {
     (comment) => comment.time !== commentTime
   );
 
-  return await prisma.task.update({
+  return await prisma.challenge.update({
     where: { id },
     data: {
       comments: [...updatedComments],

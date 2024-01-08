@@ -2,13 +2,13 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { CommentType } from "@/features/Comments/config/types";
 import Task from "./task";
 import { getUser } from "@/app/lib/session";
 import { getProjectById } from "@/backend/service/project/getProjectById";
 import { getTaskById } from "@/backend/service/task/getTaskById";
+import { CommentType } from "@prisma/client";
 
-async function getData(taskId: string) {
+export async function getData(taskId: string) {
   const user = await getUser();
 
   const userName = user.name as string;
@@ -23,7 +23,7 @@ async function getData(taskId: string) {
     where: { id: { in: task.subtaskIds } },
   });
 
-  const comments: CommentType[] = [];
+  const comments: any[] = [];
   task.comments.forEach((comment) => {
     comments.push({ ...comment, userName });
   });
@@ -32,7 +32,9 @@ async function getData(taskId: string) {
     ...task,
     taskId,
     subtasks,
-    comments,
+    comments: comments.filter(
+      (comment) => comment.type === CommentType.USER_COMMENT
+    ),
   };
 
   const parentProject = await getProjectById(taskData.projectId);

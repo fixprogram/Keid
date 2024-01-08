@@ -1,3 +1,5 @@
+"use client";
+
 import { getProviders, getSession } from "next-auth/react";
 import WelcomeImage from "~/public/graphic.png";
 import Link from "next/link";

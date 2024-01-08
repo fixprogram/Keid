@@ -2,32 +2,32 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { CommentType } from "@/features/Comments/config/types";
-import Task from "./habit";
 import { getUser } from "@/app/lib/session";
 import Habit from "./habit";
 import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
+import { CommentType } from "@prisma/client";
 
-async function getData(habitId: string) {
+export async function getData(habitId: string) {
   const user = await getUser();
 
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
 
   const habit = await prisma.habit.findUnique({ where: { id: habitId } });
-  //   const habit = await getHabitById(projectId);
 
   if (!habit) {
     throw new Error(`project with id: ${habitId} wasn't found`);
   }
 
-  //   const tasks = await (
-  //     await getTasksByIds(habit.taskIds)
-  //   ).map((task) => ({ ...task, isFavorite: habit.isStarred }));
+  habit.comments = habit.comments
+    .filter((comment) => comment.type === CommentType.USER_COMMENT)
+    .map((comment) => ({
+      ...comment,
+      userName: user.name,
+    }));
 
   return {
     ...habit,
-    // tasks,
     userProjectNames,
   };
 }

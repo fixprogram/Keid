@@ -5,7 +5,6 @@ import PageHeader from "@/features/PageHeader";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import Icon from "@/shared/ui/Icon";
 import Layout from "@/widgets/Layout";
-import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 
@@ -17,7 +16,6 @@ async function getData() {
 }
 
 export const Notifications: FC = () => {
-  const userId = useNavigationStore((state) => state.userId);
   const { data } = useQuery({
     queryKey: ["notifications"],
     queryFn: getData,

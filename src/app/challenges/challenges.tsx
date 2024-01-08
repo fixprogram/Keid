@@ -11,7 +11,6 @@ import { Challenge, CommentType, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
 import { ChallengeCard, getIsCompletedForToday } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
-import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];

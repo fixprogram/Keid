@@ -5,6 +5,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { UserProvider } from "@/entities/user/models/userContext";
 
 // import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 // import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
@@ -27,10 +28,12 @@ function Providers({ children }: React.PropsWithChildren) {
 
   return (
     <QueryClientProvider client={client}>
-      {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-      {/* </PersistQueryClientProvider> */}
+      <UserProvider>
+        {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
+        {/* </PersistQueryClientProvider> */}
+      </UserProvider>
     </QueryClientProvider>
   );
 }

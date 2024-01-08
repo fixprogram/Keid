@@ -11,7 +11,7 @@ import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
 import { Challenge, CommentType, Member, Task } from "@prisma/client";
-import { transformChallenge } from "@/templates/DashboardPage/lib/transformChallenge";
+// import { transformChallenge } from "@/templates/DashboardPage/lib/transformChallenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { getTodayHabits } from "@/templates/DashboardPage/api/getTodayHabits";
 import { mapAndSortTasks } from "@/templates/DashboardPage/lib/mapAndSortTasks";

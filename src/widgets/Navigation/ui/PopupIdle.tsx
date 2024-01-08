@@ -26,10 +26,12 @@ export default function PopupIdle() {
 
   return (
     <ul className="mt-2">
-      {popupButtons.map((btn) => (
+      {popupButtons.map((btn, index, array) => (
         <li
           key={btn.name}
-          className="border-b-[1px] border-white/5 p-5 flex items-start justify-between"
+          className={`${
+            index < array.length - 1 ? "border-b" : ""
+          } border-white/5 p-5 flex items-start justify-between`}
           onClick={() => setPopupAddState(btn.type)}
         >
           <b className="text-lg text-white font-bold ml-9">{btn.name}</b>

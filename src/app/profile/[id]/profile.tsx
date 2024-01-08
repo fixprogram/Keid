@@ -1,5 +1,6 @@
 "use client";
 
+import { useUser } from "@/entities/user/models/userContext";
 import { FollowUser } from "@/features/FollowUser";
 import PageHeader from "@/features/PageHeader";
 import DangerButton from "@/shared/ui/DangerButton";
@@ -34,7 +35,9 @@ interface ProfilePropsType {
 }
 
 export const Profile: FC<ProfilePropsType> = ({ id }) => {
-  const userId = useNavigationStore((state) => state.userId);
+  const user = useUser();
+  const userId = user?.userId as string;
+
   const { data } = useQuery({
     queryKey: ["profile", id],
     queryFn: () => getData(id),

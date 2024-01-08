@@ -57,10 +57,12 @@ export const Tabs: FC = () => {
         <PopupLine />
 
         <ul className="mt-2">
-          {CARDS.map((card) => (
+          {CARDS.map((card, index, array) => (
             <li
               key={card}
-              className="border-b-[1px] border-white/5 p-5 flex items-start justify-between"
+              className={`${
+                index < array.length - 1 ? "border-b" : ""
+              }  border-white/5 p-5 flex items-start justify-between`}
             >
               <b className="text-lg text-white font-bold ml-9">
                 {CARDS_CONFIG[card].title}
