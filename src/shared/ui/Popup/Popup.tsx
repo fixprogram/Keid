@@ -1,3 +1,5 @@
+import { MAX_WIDTH } from "@/shared/config/consts";
+
 interface Props {
   isHidden: boolean;
   popupStyle: {
@@ -14,11 +16,16 @@ const Popup = ({
   children,
   isBlack = false,
 }: Props) => {
+  const isDesktop =
+    typeof window !== "undefined" && window.innerWidth > MAX_WIDTH;
+
   return (
     <section
       className={`${
         isBlack ? "" : "pt-1 pb-2 px-5"
-      } rounded-3xl bg-background2 drop-shadow-popup fixed left-3 right-3 `}
+      } rounded-3xl bg-background2 drop-shadow-popup fixed ${
+        isDesktop ? `w-[406px] ml-3` : "left-3 right-3"
+      } `}
       style={
         isHidden
           ? popupStyle.hidden

@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 :root {
+  /* TODO: Remove when there's desktop version */
+  background: #2b2b2e;
+
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -103,18 +106,23 @@ a {
   }
 }
 
+/* TODO: Remove when there's desktop version */
+body {
+  margin: 0 auto;
+}
+
 /* React Calendar styles */
 
 .react-calendar__navigation {
   display: flex;
-  padding: 24px;
+  padding: 24px 16px;
   justify-content: space-between;
 }
 
 .react-calendar__navigation__label__labelText {
-  font-family: "__Poppins_e48358", "__Poppins_Fallback_e48358";
+  font-family: var(--font-poppins);
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 24px;
   color: #a5f59c;
 }

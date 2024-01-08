@@ -9,6 +9,7 @@ import { useNavigationStore } from "../model/useNavigationStore";
 import { useQuery } from "@tanstack/react-query";
 import { AddPopup } from "./AddPopup";
 import { useUserStore } from "@/entities/user";
+import { MAX_WIDTH } from "@/shared/config/consts";
 
 async function getData() {
   const res = await fetch(`/api/navigation`);
@@ -36,7 +37,10 @@ export default function Navigation() {
   }, [data, setData]);
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-background1/[.85] backdrop-blur-[10.8731px] z-20">
+    <nav
+      className="fixed bottom-0 w-full bg-background1/[.85] backdrop-blur-[10.8731px] z-20"
+      style={{ maxWidth: MAX_WIDTH }}
+    >
       <ul className="flex pt-4 pb-10 px-[20px] mx-auto max-w-xs	 justify-between items-center">
         {NAV_LINKS.map((navItem, index, arr) => {
           const isActive =

@@ -1,7 +1,6 @@
 import Icon from "@/shared/ui/Icon";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { usePopupStore } from "../model/usePopupStore";
-import { useNavigationStore } from "../model/useNavigationStore";
 
 export const PopupMembersButton: FC = () => {
   const [members, open] = usePopupStore((state) => [

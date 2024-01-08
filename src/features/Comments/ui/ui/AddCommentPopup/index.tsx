@@ -1,5 +1,6 @@
 import { useCommentsStore } from "@/features/Comments/models/commentsStore";
 import { useAddComment } from "@/features/Comments/models/useAddComment";
+import { MAX_WIDTH } from "@/shared/config/consts";
 import AddButton from "@/shared/ui/AddButton";
 import Overlay from "@/shared/ui/Overlay";
 import Popup from "@/shared/ui/Popup";
@@ -32,11 +33,6 @@ export const AddCommentPopup: FC<AddCommentPopupPropsType> = ({
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const popupShowedStyles =
-    isPopupOpened === false
-      ? { bottom: 32 }
-      : { bottom: 0, left: 0, right: 0, borderRadius: "24px 24px 0 0" };
-
   const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     onSubmit(comment);
@@ -47,6 +43,27 @@ export const AddCommentPopup: FC<AddCommentPopupPropsType> = ({
       textareaRef.current.focus();
     }
   }, [isPopupOpened]);
+
+  // if (typeof window === "undefined") {
+  //   return null;
+  // }
+
+  const isDesktop =
+    typeof window !== "undefined" && window.innerWidth > MAX_WIDTH;
+
+  const popupShowedStyles =
+    isPopupOpened === false
+      ? { bottom: 32 }
+      : {
+          bottom: 0,
+          left: isDesktop ? "initial" : 0,
+          right: isDesktop ? "initial" : 0,
+          borderRadius: "24px 24px 0 0",
+          // TODO: Delete these styles when there's a desktop version
+          width: isDesktop ? MAX_WIDTH : "auto",
+          margin: isDesktop ? 0 : "auto",
+          marginLeft: isDesktop ? "-24px" : "auto",
+        };
 
   return (
     <Fragment>

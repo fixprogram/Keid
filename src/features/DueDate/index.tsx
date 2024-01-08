@@ -2,7 +2,7 @@ import Icon from "@/shared/ui/Icon";
 
 type Props = {
   date: string;
-  onClick?: Function;
+  onClick?: () => void;
   dateColor?: string;
   circleColor?: string;
 };
@@ -14,7 +14,7 @@ export default function DueDate({
   circleColor = "",
 }: Props) {
   return (
-    <div className="flex gap-3 cursor-pointer" onClick={() => onClick()}>
+    <div className="flex gap-3 cursor-pointer" onClick={onClick}>
       <div
         className={`rounded-full flex items-center justify-center w-12 h-12 `}
         style={{ backgroundColor: circleColor ? circleColor : "#A5F59C" }}

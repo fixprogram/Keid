@@ -6,7 +6,7 @@ import { ItemType } from "@/shared/config/types";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { Calendar } from "@/shared/ui/Calendar";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { useUpdateTodoDeadline } from "../model/useUpdateTodoDeadline";
 
 interface TodoDeadlinePropType {
@@ -20,40 +20,43 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
   deadline,
   todoType,
 }) => {
-  // const dispatch = useAppDispatch();
-  // const deadline = useAppSelector((state) => state.task.deadline);
-  // const style = useAppSelector((state) => state.task.style);
   const [newDeadline, setNewDeadline] = useState(deadline);
+  const [isClosed, setClosed] = useState(false);
 
   const taskStyle = projectStyles[style as ProjectStyleKey];
 
   const handleUpdateTodoDeadline = useUpdateTodoDeadline(todoType);
-  // const handleOpenCalendar = () => dispatch(openCalendar());
 
   const formattedDeadline = getDateString(new Date(deadline), false);
 
   const handleSaveNewDeadline = () => {
     if (deadline !== newDeadline) {
-      return handleUpdateTodoDeadline(newDeadline);
+      handleUpdateTodoDeadline(newDeadline);
+      handleClose();
     }
-    // return handlePopupClose();
   };
+
+  const handleClose = useCallback(() => {
+    setClosed(true);
+  }, []);
 
   if (deadline === 0) {
     return null;
   }
   return (
     <PopupWithOverlay
-      //   isShowed={isCalendarOpened}
-      //   onClose={handlePopupClose}
       btn={
-        <DueDate
-          date={formattedDeadline}
-          dateColor={taskStyle.background}
-          circleColor={"#246BFD"}
-        />
+        <div onClick={() => setClosed(false)}>
+          <DueDate
+            date={formattedDeadline}
+            dateColor={taskStyle.background}
+            circleColor={"#246BFD"}
+          />
+        </div>
       }
-      positioned="Bottom"
+      positioned="BottomFullWidth"
+      isBlack
+      isClosed={isClosed}
     >
       <Calendar
         date={new Date(newDeadline)}
@@ -87,7 +90,7 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
       <div className="flex justify-between items-end mt-5">
         <button
           type="button"
-          // onClick={handlePopupClose}
+          onClick={handleClose}
           className="text-red font-bold py-3 px-8"
         >
           Cancel

@@ -12,6 +12,7 @@ import { shallow } from "zustand/shallow";
 import { PopupHabit } from "./PopupHabit";
 import { usePopupStore } from "../model/usePopupStore";
 import PopupChallenge from "./PopupChallenge";
+import { MAX_WIDTH } from "@/shared/config/consts";
 
 const POPUP_CONTENT = {
   idle: {
@@ -59,16 +60,21 @@ export const AddPopup: FC = () => {
     setPopupStyle("gray");
   }, [resetPopupData, closePopupAdd, setPopupStyle]);
 
+  const isDesktop =
+    typeof window !== "undefined" && window.innerWidth > MAX_WIDTH;
   const Component = POPUP_CONTENT[popupAddState].component;
   const popupShowedStyles =
     popupAddState === "idle"
       ? { bottom: 32, zIndex: 30 }
       : {
           bottom: 0,
-          left: 0,
-          right: 0,
+          left: isDesktop ? "initial" : 0,
+          right: isDesktop ? "initial" : 0,
           borderRadius: "24px 24px 0 0",
           zIndex: 30,
+          // TODO: Delete these styles when there's a desktop version
+          width: isDesktop ? MAX_WIDTH : "auto",
+          margin: isDesktop ? 0 : "auto",
         };
 
   return (
