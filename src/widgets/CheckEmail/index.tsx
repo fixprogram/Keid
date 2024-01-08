@@ -1,7 +1,7 @@
 import EmailFieldset from "@/shared/components/EmailFieldset";
 import { links } from "@/shared/config/links";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
-import { SyntheticEvent, useCallback } from "react";
+import { SyntheticEvent, useCallback, useState } from "react";
 
 interface Props {
   email: string;
@@ -10,9 +10,20 @@ interface Props {
 }
 
 export default function CheckEmail({ email, setEmail, setType }: Props) {
+  const [error, setError] = useState("");
   const onSubmit = useCallback(
     async (event: SyntheticEvent) => {
       event.preventDefault();
+
+      if (
+        !String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          )
+      ) {
+        return setError("Invalid email address");
+      }
 
       await fetch(links.login, {
         method: "POST",
@@ -21,10 +32,21 @@ export default function CheckEmail({ email, setEmail, setType }: Props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
-      }).then(async (res) => {
-        const body = await res.json();
-        setType(body.type);
-      });
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            return res.json().then((data) => {
+              throw new Error(data.error);
+            });
+          }
+
+          const body = await res.json();
+          setType(body.type);
+        })
+        .catch((error: any) => {
+          console.log("Error: ", error.message);
+          setError(error.message);
+        });
     },
     [email, setType]
   );
@@ -35,8 +57,9 @@ export default function CheckEmail({ email, setEmail, setType }: Props) {
       action="/api/login"
       onSubmit={onSubmit}
       className="mt-6"
+      autoComplete="new-password"
     >
-      <EmailFieldset email={email} setEmail={setEmail} />
+      <EmailFieldset email={email} setEmail={setEmail} error={error} />
 
       <div className="mt-10">
         <PrimaryButton

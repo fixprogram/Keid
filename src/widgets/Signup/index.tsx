@@ -5,7 +5,7 @@ import PageTitle from "@/shared/ui/PageTitle";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { links } from "@/shared/config/links";
 
 interface Props {
@@ -17,6 +17,8 @@ export default function Signup({ email, goBack }: Props) {
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const [error, setError] = useState("");
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -32,15 +34,25 @@ export default function Signup({ email, goBack }: Props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, name, password }),
-      }).then(async (res) => {
-        await signIn("credentials", {
-          email,
-          password,
-          redirect: false,
-        });
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            return res.json().then((data) => {
+              throw new Error(data.error);
+            });
+          }
 
-        if (res.url) router.push("/");
-      });
+          await signIn("credentials", {
+            email,
+            password,
+            redirect: false,
+          });
+
+          if (res.url) router.push("/");
+        })
+        .catch((err) => {
+          setError(err.message);
+        });
     }
   }
 
@@ -90,6 +102,8 @@ export default function Signup({ email, goBack }: Props) {
             style={{ background: "inherit" }}
             ref={passwordRef}
           />
+
+          {error.length ? <p className="text-red mt-4">{error}</p> : null}
         </fieldset>
 
         <PrimaryButton type="submit" text="Sign up" />

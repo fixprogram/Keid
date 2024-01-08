@@ -1,10 +1,9 @@
-import { createUserSession } from "@/app/lib/session";
 import { createUser } from "@/backend/service/user/createUser";
 import { findUserByEmail } from "@/backend/service/user/findUserByEmail";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const { email, password, name, redirectTo } = await request.json();
+  const { email, password, name } = await request.json();
 
   if (!email) {
     return NextResponse.json(
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
 
   if (password.length < 8) {
     return NextResponse.json(
-      { errors: { email: null, password: "Password is too short" } },
+      { error: "Password is shorter than 8 symbols" },
       { status: 400 }
     );
   }
@@ -43,10 +42,5 @@ export async function POST(request: NextRequest) {
 
   const user = await createUser({ email, name, password });
 
-  return createUserSession({
-    request,
-    userId: user.id,
-    remember: false,
-    redirectTo,
-  });
+  return NextResponse.json({ user }, { status: 200 });
 }

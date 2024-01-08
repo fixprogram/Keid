@@ -1,9 +1,10 @@
 type Props = {
   email: string;
   setEmail: Function;
+  error: string;
 };
 
-export default function EmailFieldset({ email, setEmail }: Props) {
+export default function EmailFieldset({ email, setEmail, error }: Props) {
   return (
     <fieldset>
       <label
@@ -14,7 +15,7 @@ export default function EmailFieldset({ email, setEmail }: Props) {
       </label>
 
       <input
-        type="email"
+        type="search"
         name="email"
         placeholder="Email"
         className="w-full text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
@@ -22,7 +23,10 @@ export default function EmailFieldset({ email, setEmail }: Props) {
         style={{ background: "inherit" }}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        autoComplete="off"
       />
+
+      {error.length ? <p className="text-red mt-4">{error}</p> : null}
     </fieldset>
   );
 }
