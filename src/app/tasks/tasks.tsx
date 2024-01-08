@@ -13,7 +13,6 @@ import { useState } from "react";
 import { shallow } from "zustand/shallow";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { useTasksStore } from "@/entities/task/models/tasksStore";
-import { useUserStore } from "@/entities/user";
 import { mapTasksIntoHierarchy } from "@/entities/task";
 
 const defaultData = {
@@ -29,9 +28,8 @@ async function getData() {
 }
 
 export default function Tasks() {
-  const userEmail = useUserStore((state) => state.email);
   const { status, data } = useQuery({
-    queryKey: ["tasks", userEmail],
+    queryKey: ["tasks"],
     queryFn: getData,
   });
 

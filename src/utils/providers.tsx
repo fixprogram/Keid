@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { UserProvider } from "@/entities/user/models/userContext";
+import { SessionProvider } from "next-auth/react";
 
 // import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 // import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
@@ -28,12 +29,14 @@ function Providers({ children }: React.PropsWithChildren) {
 
   return (
     <QueryClientProvider client={client}>
-      <UserProvider>
-        {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
-        {children}
-        <ReactQueryDevtools initialIsOpen={false} />
-        {/* </PersistQueryClientProvider> */}
-      </UserProvider>
+      <SessionProvider>
+        <UserProvider>
+          {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+          {/* </PersistQueryClientProvider> */}
+        </UserProvider>
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

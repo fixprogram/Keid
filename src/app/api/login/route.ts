@@ -12,7 +12,8 @@ export async function POST(request: NextRequest) {
   const { email } = await request.json();
 
   if (!email) {
-    throw new Error("No email provided");
+    // throw new Error("No email provided");
+    return NextResponse.json({ error: "No email provided" }, { status: 400 });
   }
 
   const validatedEmail = String(email)

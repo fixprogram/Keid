@@ -21,6 +21,7 @@ export async function getData(dateType: DateType) {
   const user = await getUser();
 
   const userId = user.id;
+
   const userProjectNames = await getUserProjectNames(userId);
   const projects = await prisma.project.findMany({
     where: { userId, isArchived: false },

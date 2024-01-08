@@ -6,7 +6,6 @@ import { signIn, SignInResponse } from "next-auth/react";
 import InputLabel from "@/shared/ui/InputLabel";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@/entities/user";
 
 interface Props {
   email: string;
@@ -14,7 +13,6 @@ interface Props {
 }
 
 export default function Signin({ email, goBack }: Props) {
-  const setUserEmail = useUserStore((state) => state.setEmail);
   const [password, setPassword] = useState({ value: "", error: "" });
   const router = useRouter();
 
@@ -33,10 +31,9 @@ export default function Signin({ email, goBack }: Props) {
 
     // TODO: try to do golden path
     if (res.url) {
-      setUserEmail(email);
       router.push("/");
     }
-  }, [router, email, password.value, setUserEmail]);
+  }, [router, email, password.value]);
 
   const error = password.error ? (
     <span className="text-red mt-2">{password.error}</span>

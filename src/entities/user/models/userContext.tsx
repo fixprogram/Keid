@@ -1,13 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import React, {
-  FC,
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { FC, ReactNode, createContext, useContext } from "react";
 import Loading from "@/app/loading";
+import { useSession } from "next-auth/react";
 
 async function getData() {
   const res = await fetch(`/api/navigation`);
@@ -16,7 +9,7 @@ async function getData() {
 
 type User = {
   userId: string;
-  name: string;
+  name: string | null | undefined;
 } | null;
 
 export const UserContext = createContext<User>(null);
@@ -25,23 +18,18 @@ interface UserProviderPropsType {
   children: ReactNode;
 }
 export const UserProvider: FC<UserProviderPropsType> = ({ children }) => {
-  const [user, setUser] = useState<User>(null);
+  const { data, status } = useSession();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["navigation"],
-    queryFn: getData,
-  });
-
-  useEffect(() => {
-    console.log("data: ", data);
-    if (data && !isLoading) {
-      setUser({ userId: data.userId, name: data.userName });
-    }
-  }, [data, isLoading]);
-
-  if (isLoading) {
+  if (status === "loading") {
     return <Loading />;
   }
+
+  const user = data
+    ? {
+        userId: data.user.id,
+        name: data.user.name,
+      }
+    : null;
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
