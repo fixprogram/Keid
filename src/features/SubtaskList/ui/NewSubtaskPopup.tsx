@@ -6,6 +6,7 @@ import { FC } from "react";
 import { shallow } from "zustand/shallow";
 import { useSubtaskListStore } from "../model/subtaskListStore";
 import { useAddSubtask } from "../model/useAddSubtask";
+import { MAX_WIDTH } from "@/shared/config/consts";
 // import { useSubtaskFormSubmit } from "@/templates/TaskPage/hooks/useSubtaskFormSubmit";
 // import AddSubtaskPopupCalendar from "../AddSubtaskPopupCalendar";
 // import InputSubtaskTitle from "../InputSubtaskTitle";
@@ -23,15 +24,21 @@ export const NewSubtaskPopup: FC = () => {
 
   // if (isCalendarOpen) return <AddSubtaskPopupCalendar />;
 
+  const isDesktop =
+    typeof window !== "undefined" && window.innerWidth > MAX_WIDTH;
+
   return (
     <>
       <section
         style={{
           position: "fixed",
           bottom: isPopupOpened ? 12 : -1000,
-          left: 12,
-          right: 12,
+          left: isDesktop ? "initial" : 12,
+          right: isDesktop ? "initial" : 12,
           zIndex: 30,
+          // TODO: Delete these styles when there's a desktop version
+          width: isDesktop ? MAX_WIDTH : "auto",
+          marginLeft: isDesktop ? "-34px" : "auto",
         }}
         className="pt-1 pb-2 px-5 rounded-3xl bg-background2 drop-shadow-popup fixed left-3 right-3"
       >

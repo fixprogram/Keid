@@ -13,7 +13,7 @@ interface SubtaskListState {
 export const useSubtaskListStore = create<SubtaskListState>((set) => ({
   isPopupOpened: false,
   newSubtaskTitle: "",
-  deadline: Date.now(),
+  deadline: new Date().setHours(23, 59, 59, 999),
   openPopup: () => set(() => ({ isPopupOpened: true })),
   closePopup: () => set(() => ({ isPopupOpened: false })),
   setNewSubtaskTitle: (newTitle: string) =>

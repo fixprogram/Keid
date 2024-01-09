@@ -12,7 +12,7 @@ export const useDeleteItem = (todoType: ItemType) => {
   const queryClient = useQueryClient();
 
   const itemId = pathname?.split("/").at(-1);
-  const taskId = useTaskStore((state) => state.data.id);
+  // const task = useTaskStore((state) => state.data);
   const itemPost = links[todoType];
 
   const mutation = useMutation({
@@ -20,6 +20,10 @@ export const useDeleteItem = (todoType: ItemType) => {
     mutationFn: () => axios.post(itemPost.delete, { itemId }),
     onSuccess: () => {
       queryClient.invalidateQueries([`${todoType}s`]);
+
+      // if (todoType === "task" && task.parentId !== task.projectId) {
+      //   queryClient.invalidateQueries([`task`, task.parentId]);
+      // }
 
       router.back();
     },
