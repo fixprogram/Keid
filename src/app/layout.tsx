@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   viewport:
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
-    { rel: "apple-touch-icon", url: "/public/apple-touch-icon.png" },
-    { rel: "icon", url: "/public/icon-192.png" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
+    { rel: "icon", url: "/icon-192.png" },
   ],
 };
 
@@ -41,7 +41,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <head>
         <title>Keid</title>
-        <link rel="manifest" href="/public/manifest.json" />
       </head>
       <body
         className={`${inter.variable} ${poppins.variable} font-sans`}
