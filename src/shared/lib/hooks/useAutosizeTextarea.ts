@@ -13,8 +13,10 @@ export const useAutosizeTextarea = (
   const [value, setValue] = useState(initialValue);
 
   const resizeTextArea = useCallback(() => {
-    ref.current.style.height = "42px";
-    ref.current.style.height = ref.current.scrollHeight + "px";
+    if (ref.current) {
+      ref.current.style.height = "42px";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
   }, [ref]);
 
   const handleValueChange = useCallback((event: SyntheticEvent) => {

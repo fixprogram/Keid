@@ -33,7 +33,7 @@ function Providers({ children }: React.PropsWithChildren) {
         <UserProvider>
           {/* <PersistQueryClientProvider client={client} persistOptions={{ persister }}> */}
           {children}
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           {/* </PersistQueryClientProvider> */}
         </UserProvider>
       </SessionProvider>

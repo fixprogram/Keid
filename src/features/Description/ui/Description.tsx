@@ -25,13 +25,16 @@ export const Description: FC<DescriptionPropsType> = ({
     }
   };
 
+  if (!initialValue.length) {
+    return null;
+  }
+
   return (
     <div className="mt-6">
-      <p className="text-white text-sm font-medium">Description</p>
       <textarea
         value={value}
         onChange={handleValueChange}
-        className="text-deactive text-sm font-inter"
+        className="text-deactive text-base font-inter"
         style={{
           backgroundColor: "inherit",
           overflowY: "hidden",

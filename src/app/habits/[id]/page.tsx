@@ -19,6 +19,14 @@ export async function getData(habitId: string) {
     throw new Error(`project with id: ${habitId} wasn't found`);
   }
 
+  const completedDays: string[] = habit.comments
+    .filter((comment) => comment.type === CommentType.PROGRESS_UPDATE)
+    .map((comment) => {
+      const date = new Date(Number(comment.time));
+      const dateStr = date.toISOString().split("T")[0];
+      return dateStr;
+    });
+
   habit.comments = habit.comments
     .filter((comment) => comment.type === CommentType.USER_COMMENT)
     .map((comment) => ({
@@ -29,6 +37,7 @@ export async function getData(habitId: string) {
   return {
     ...habit,
     userProjectNames,
+    completedDays,
   };
 }
 

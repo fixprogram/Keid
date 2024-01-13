@@ -33,6 +33,10 @@ export const useComplete = (
     type: CommentType.COMPLETED,
   };
 
+  if (itemType !== "task") {
+    comment.type = CommentType.PROGRESS_UPDATE;
+  }
+
   const mutation = useMutation({
     mutationKey: [`${itemType}s`],
     mutationFn: () => axios.post(itemPost.complete, { itemId, comment }),

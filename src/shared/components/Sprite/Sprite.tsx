@@ -432,8 +432,8 @@ export default function Sprite() {
 
         <symbol
           id="icon-completed"
-          width="40"
-          height="40"
+          // width="40"
+          // height="40"
           viewBox="0 0 40 40"
           fill="none"
         >
@@ -608,8 +608,8 @@ export default function Sprite() {
 
         <symbol
           id="icon-check"
-          width="24"
-          height="24"
+          // width="24"
+          // height="24"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -680,6 +680,108 @@ export default function Sprite() {
               />
             </clipPath>
           </defs>
+        </symbol>
+        <symbol
+          id="icon-streak"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="24" cy="24" r="24" fill="url(#paint0_linear_46_1595)" />
+          <mask
+            id="mask0_46_1595"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="48"
+            height="48"
+          >
+            <circle cx="24" cy="24" r="24" fill="white" />
+          </mask>
+          <g mask="url(#mask0_46_1595)"></g>
+          <path
+            d="M27.4999 17.792L29.9759 25.41L33.5889 28.082C33.9224 28.2918 34.2112 28.5653 34.4389 28.8868C34.6667 29.2083 34.8289 29.5714 34.9162 29.9556C35.0036 30.3398 35.0145 30.7374 34.9482 31.1257C34.8819 31.5141 34.7398 31.8856 34.5299 32.219L33.9999 33.065C33.7173 33.5139 33.268 33.8321 32.7508 33.9497C32.2336 34.0673 31.6908 33.9746 31.2419 33.692L14.9329 23.031C14.4853 22.7473 14.1681 22.298 14.0507 21.7813C13.9332 21.2645 14.0249 20.7223 14.3059 20.273L18.1239 14.206C18.5299 13.561 19.6319 13.524 19.8439 14.256C20.071 14.987 20.4489 15.6622 20.953 16.2382C21.4572 16.8142 22.0765 17.2781 22.7709 17.6C24.2799 18.1984 25.9474 18.2661 27.4999 17.792V17.792Z"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M13 34H23"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M13 29H16"
+            stroke="white"
+            strokeWidth="2"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <defs>
+            <linearGradient
+              id="paint0_linear_46_1595"
+              x1="24"
+              y1="0"
+              x2="24"
+              y2="48"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FFA500" />
+              <stop offset="1" stopColor="#E38A05" />
+            </linearGradient>
+          </defs>
+        </symbol>
+
+        <symbol
+          id="icon-goal"
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="2" />
+          <mask
+            id="mask0_46_1601"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="48"
+            height="48"
+          >
+            <circle cx="24" cy="24" r="24" fill="white" />
+          </mask>
+          <g mask="url(#mask0_46_1601)"></g>
+          <path
+            d="M15 12C14.1 12 13.5 12.6 13.5 13.5V34.5C13.5 35.4 14.1 36 15 36C15.9 36 16.5 35.4 16.5 34.5V13.5C16.5 12.6 15.9 12 15 12Z"
+            fill="white"
+          />
+          <path d="M34.5 15H19.5V27H34.5V15Z" fill="white" />
+        </symbol>
+
+        <symbol
+          id="icon-blue-check"
+          width="18"
+          height="14"
+          viewBox="0 0 18 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1 8.2L5.57143 13L17 1"
+            stroke="#246BFD"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </symbol>
       </defs>
     </svg>
