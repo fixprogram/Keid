@@ -1,4 +1,4 @@
-import { updateTitle } from "@/backend/service/task/updateTitle";
+import { updateTitle } from "@/app/lib/data/task/updateTitle";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

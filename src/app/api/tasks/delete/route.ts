@@ -1,4 +1,4 @@
-import { deleteTaskAndSubtasks } from "@/backend/service/task/deleteTask";
+import { deleteTaskAndSubtasks } from "@/app/lib/data/task/deleteTask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

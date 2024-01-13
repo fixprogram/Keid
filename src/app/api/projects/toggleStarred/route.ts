@@ -1,5 +1,5 @@
-import { createProject } from "@/backend/service/project/createProject";
-import { setProjectFavourite } from "@/backend/service/project/setProjectFavourite";
+import { createProject } from "@/app/lib/data/project/createProject";
+import { setProjectFavourite } from "@/app/lib/data/project/setProjectFavourite";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

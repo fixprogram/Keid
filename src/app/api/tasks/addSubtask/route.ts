@@ -1,4 +1,4 @@
-import { createSubtask } from "@/backend/service/task/createSubtask";
+import { createSubtask } from "@/app/lib/data/task/createSubtask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

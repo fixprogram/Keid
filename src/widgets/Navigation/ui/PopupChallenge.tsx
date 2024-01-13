@@ -1,3 +1,5 @@
+"use client";
+
 import { shallow } from "zustand/shallow";
 import { PopupCalendar } from "./PopupCalendar";
 import { PopupStyleList } from "./PopupStyleList";

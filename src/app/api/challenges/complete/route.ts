@@ -1,4 +1,4 @@
-import { complete } from "@/backend/service/challenge/complete";
+import { complete } from "@/app/lib/data/challenge/complete";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

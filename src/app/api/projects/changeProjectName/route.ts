@@ -1,4 +1,4 @@
-import { setNewProjectName } from "@/backend/service/project/setNewProjectName";
+import { setNewProjectName } from "@/app/lib/data/project/setNewProjectName";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

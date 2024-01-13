@@ -1,4 +1,4 @@
-import { updateProgress } from "@/backend/service/challenge/updateProgress";
+import { updateProgress } from "@/app/lib/data/challenge/updateProgress";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

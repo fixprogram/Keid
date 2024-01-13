@@ -1,4 +1,4 @@
-import { updatePoints } from "@/backend/service/task/updatePoints";
+import { updatePoints } from "@/app/lib/data/task/updatePoints";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

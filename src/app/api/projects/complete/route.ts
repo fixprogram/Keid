@@ -1,4 +1,4 @@
-import { completeProject } from "@/backend/service/project/completeProject";
+import { completeProject } from "@/app/lib/data/project/completeProject";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

@@ -1,4 +1,4 @@
-import { deleteProject } from "@/backend/service/project/deleteProject";
+import { deleteProject } from "@/app/lib/data/project/deleteProject";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

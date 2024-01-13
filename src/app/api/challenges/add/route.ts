@@ -1,4 +1,4 @@
-import { createChallenge } from "@/backend/service/challenge/createChallenge";
+import { createChallenge } from "@/app/lib/data/challenge/createChallenge";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

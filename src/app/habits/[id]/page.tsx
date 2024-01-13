@@ -4,7 +4,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { getUser } from "@/app/lib/session";
 import Habit from "./habit";
-import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
+import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { CommentType } from "@prisma/client";
 
 export async function getData(habitId: string) {

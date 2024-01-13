@@ -2,7 +2,7 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import getUserProjectNames from "@/backend/service/user/getUserProjectNames";
+import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import Overview from "./overview";
 import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";
@@ -80,11 +80,18 @@ export async function getData(dateType: DateType) {
 
   const overdueTaskAmount = overdueTasks.length;
 
-  const weeklyActivityData = await getWeeklyActivityData(userId);
+  // TODO: Analyze which approach is more efficient
 
-  const habits = await getTodayHabits(userId);
+  // const weeklyActivityData = await getWeeklyActivityData(userId);
+  // const habits = await getTodayHabits(userId);
+  // const challenges = await getTodayChallenges(userId);
 
-  const challenges = await getTodayChallenges(userId);
+  const [weeklyActivityData, habits, challenges] = await Promise.all([
+    getWeeklyActivityData(userId),
+    getTodayHabits(userId),
+    getTodayChallenges(userId),
+  ]);
+  //
 
   return {
     projectAmount,

@@ -1,4 +1,4 @@
-import { deleteHabit } from "@/backend/service/habit/deleteHabit";
+import { deleteHabit } from "@/app/lib/data/habit/deleteHabit";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

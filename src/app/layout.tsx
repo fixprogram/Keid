@@ -1,9 +1,8 @@
-import { Inter, Poppins } from "next/font/google";
-
 import "./globals.css";
 import Providers from "@/utils/providers";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import { Metadata } from "next";
+import { inter, poppins } from "./ui/fonts";
 
 export const metadata: Metadata = {
   title: "Keid",
@@ -21,22 +20,11 @@ export const metadata: Metadata = {
   ],
 };
 
-const inter = Inter({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const poppins = Poppins({
-  weight: ["600", "400"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-});
-
-interface RootLayoutProps {
+interface RootLayoutPropsType {
   children: React.ReactNode;
 }
-export default async function RootLayout({ children }: RootLayoutProps) {
+
+export default async function RootLayout({ children }: RootLayoutPropsType) {
   return (
     <html lang="en">
       <head>

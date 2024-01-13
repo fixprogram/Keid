@@ -4,8 +4,8 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import Task from "./task";
 import { getUser } from "@/app/lib/session";
-import { getProjectById } from "@/backend/service/project/getProjectById";
-import { getTaskById } from "@/backend/service/task/getTaskById";
+import { getProjectById } from "@/app/lib/data/project/getProjectById";
+import { getTaskById } from "@/app/lib/data/task/getTaskById";
 import { CommentType } from "@prisma/client";
 
 export async function getData(taskId: string) {

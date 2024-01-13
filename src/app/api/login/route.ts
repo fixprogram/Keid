@@ -1,4 +1,4 @@
-import { findUserByEmail } from "@/backend/service/user/findUserByEmail";
+import { findUserByEmail } from "@/app/lib/data/user/findUserByEmail";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {

@@ -1,4 +1,4 @@
-import { addComment } from "@/backend/service/challenge/addComment";
+import { addComment } from "@/app/lib/data/challenge/addComment";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

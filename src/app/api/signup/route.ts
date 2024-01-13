@@ -1,5 +1,5 @@
-import { createUser } from "@/backend/service/user/createUser";
-import { findUserByEmail } from "@/backend/service/user/findUserByEmail";
+import { createUser } from "@/app/lib/data/user/createUser";
+import { findUserByEmail } from "@/app/lib/data/user/findUserByEmail";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {

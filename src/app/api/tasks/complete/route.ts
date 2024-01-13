@@ -1,4 +1,4 @@
-import { completeTaskAndSubtasks } from "@/backend/service/task/completeTask";
+import { completeTaskAndSubtasks } from "@/app/lib/data/task/completeTask";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

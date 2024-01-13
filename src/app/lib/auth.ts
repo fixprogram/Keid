@@ -3,7 +3,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcryptjs from "bcryptjs";
-import { findUserByEmail } from "@/backend/service/user/findUserByEmail";
+import { findUserByEmail } from "@/app/lib/data/user/findUserByEmail";
 import { links } from "@/shared/config/links";
 import { User } from "@prisma/client";
 

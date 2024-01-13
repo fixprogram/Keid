@@ -1,4 +1,4 @@
-import { addComment } from "@/backend/service/habit/addComment";
+import { addComment } from "@/app/lib/data/habit/addComment";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

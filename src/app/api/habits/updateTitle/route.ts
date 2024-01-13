@@ -1,4 +1,4 @@
-import { updateTitle } from "@/backend/service/habit/updateTitle";
+import { updateTitle } from "@/app/lib/data/habit/updateTitle";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

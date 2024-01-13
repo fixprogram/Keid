@@ -1,4 +1,4 @@
-import { updateTaskProgress } from "@/backend/service/task/updateTaskProgress";
+import { updateTaskProgress } from "@/app/lib/data/task/updateTaskProgress";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
