@@ -4,7 +4,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
 import { Habit, Task } from "@prisma/client";
@@ -12,7 +12,7 @@ import Productivity from "./productivity";
 import { getTodayProductivity } from "@/templates/DashboardPage/api/getTodayProductivity";
 
 export async function getData(dateType: DateType) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
   const projects = await prisma.project.findMany({

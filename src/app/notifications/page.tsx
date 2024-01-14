@@ -1,13 +1,13 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { getUser } from "../lib/session";
+import { getServerUser } from "../lib/getServerUser";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
 import { Notifications } from "./notifications";
 import { prisma } from "@/db.server";
 
 export async function getData() {
-  const { id } = await getUser();
+  const { id } = await getServerUser();
 
   const user = await prisma.user.findUnique({
     where: { id },

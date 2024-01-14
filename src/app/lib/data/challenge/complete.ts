@@ -1,9 +1,9 @@
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/db.server";
 import { Comment, CommentType, Member } from "@prisma/client";
 
 export const complete = async (id: string, comment: Comment) => {
-  const user = await getUser();
+  const user = await getServerUser();
   const challenge = await prisma.challenge.findUnique({
     where: { id },
     select: { comments: true, streak: true, userId: true, members: true },

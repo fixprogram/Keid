@@ -3,11 +3,11 @@ import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import OverdueTasks from "./overdue-tasks";
 
 async function getData() {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
 

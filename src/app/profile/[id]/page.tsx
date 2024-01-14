@@ -4,10 +4,10 @@ import { dehydrate } from "@tanstack/query-core";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { prisma } from "@/db.server";
 import { Profile } from "./profile";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 
 async function getData(id: string) {
-  const mainUser = await getUser();
+  const mainUser = await getServerUser();
 
   const user = await prisma.user.findUnique({ where: { id } });
 

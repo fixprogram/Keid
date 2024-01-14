@@ -1,14 +1,14 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import Project from "./project";
 import { getProjectById } from "@/app/lib/data/project/getProjectById";
 import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
 
 export async function getData(projectId: string) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);

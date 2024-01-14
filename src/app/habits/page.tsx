@@ -2,11 +2,11 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
-import { getUser } from "../lib/session";
+import { getServerUser } from "../lib/getServerUser";
 import Habits from "./habits";
 
 async function getData() {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
 

@@ -1,5 +1,5 @@
-import { authOptions } from "@/app/lib/auth";
-import { getUser } from "@/app/lib/session";
+// import { authOptions } from "@/app/lib/auth";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/db.server";
 import { getProjectById } from "@/app/lib/data/project/getProjectById";
 import { getTaskById } from "@/app/lib/data/task/getTaskById";

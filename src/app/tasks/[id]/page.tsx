@@ -3,13 +3,13 @@ import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import Task from "./task";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { getProjectById } from "@/app/lib/data/project/getProjectById";
 import { getTaskById } from "@/app/lib/data/task/getTaskById";
 import { CommentType } from "@prisma/client";
 
 export async function getData(taskId: string) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userName = user.name as string;
 

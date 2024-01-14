@@ -55,7 +55,13 @@ export default function Habit({ id }: TaskPropType) {
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
-      <TodoHeader style={style} progress={streak} todoType="habit" />
+      <TodoHeader
+        style={style}
+        progress={streak}
+        todoType="habit"
+        isHabit
+        points={points}
+      />
 
       <section className="flex flex-col grow" style={{ paddingBottom: 80 }}>
         <div className="mt-8">

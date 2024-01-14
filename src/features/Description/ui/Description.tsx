@@ -39,6 +39,7 @@ export const Description: FC<DescriptionPropsType> = ({
           backgroundColor: "inherit",
           overflowY: "hidden",
           width: "100%",
+          resize: "none",
         }}
         onBlur={handleTextareaBlur}
         ref={textareaRef}

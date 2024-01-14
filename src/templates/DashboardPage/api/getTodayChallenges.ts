@@ -2,10 +2,10 @@ import { prisma } from "@/db.server";
 import { transformChallenge } from "../lib/transformChallenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { Challenge, CommentType, Member } from "@prisma/client";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 
 export async function transformChallenges(challenges: Challenge[]) {
-  const user = await getUser();
+  const user = await getServerUser();
   const userId = user.id;
 
   const hostIds = challenges.map((challenge) => challenge.userId);

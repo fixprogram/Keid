@@ -3,6 +3,7 @@ import Providers from "@/utils/providers";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import { Metadata } from "next";
 import { inter, poppins } from "./ui/fonts";
+import { auth } from "./lib/auth";
 
 export const metadata: Metadata = {
   title: "Keid",
@@ -25,6 +26,10 @@ interface RootLayoutPropsType {
 }
 
 export default async function RootLayout({ children }: RootLayoutPropsType) {
+  const session = await auth();
+
+  console.log("session: ", session);
+
   return (
     <html lang="en">
       <head>
@@ -34,7 +39,7 @@ export default async function RootLayout({ children }: RootLayoutPropsType) {
         className={`${inter.variable} ${poppins.variable} font-sans`}
         style={{ maxWidth: MAX_WIDTH }}
       >
-        <Providers>{children}</Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

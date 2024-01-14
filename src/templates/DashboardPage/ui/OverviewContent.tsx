@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { getData } from "@/app/dashboard/overview/overview";
+// import { getData } from "@/app/dashboard/overview/overview";
 import { DateType, useDashboardStore } from "../model/useDashboardStore";
 import { useQuery } from "@tanstack/react-query";
 import { DailyTasks } from "@/features/DailyTasks";
@@ -9,6 +9,7 @@ import Cards from "@/widgets/Overview/ui/Cards";
 import { CardType } from "@/widgets/Overview/config/types";
 import { Challenge, Habit, Task } from "@prisma/client";
 import { TaskType } from "@/shared/config/types";
+import { getOverviewData } from "@/server/actions";
 
 type ChallengeType = Challenge & { isCompletedForToday: boolean };
 
@@ -28,9 +29,9 @@ export const OverviewContent: FC = () => {
     state.setScrollY,
   ]);
 
-  const { data, isLoading } = useQuery<DataType>({
+  const { data, isLoading } = useQuery({
     queryKey: ["dashboard", "overview", dateType],
-    queryFn: () => getData(dateType),
+    queryFn: () => getOverviewData(dateType),
   });
 
   useEffect(() => {

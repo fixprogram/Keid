@@ -1,9 +1,9 @@
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   if (!user) {
     return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });

@@ -24,27 +24,35 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
     }
   }, [initialPoints, points, updatePoints]);
 
+  let pointsColor = "#A5F59C";
+
+  if (points > 3) {
+    pointsColor = "#FFDD72";
+  }
+
+  if (points > 6) {
+    pointsColor = "#FF968E";
+  }
+
   return (
     <PopupWithOverlay
       btn={
-        <div className="flex gap-3 cursor-pointer">
-          <div
-            className={`rounded-full flex items-center justify-center w-12 h-12 `}
-            style={{
-              background: "linear-gradient(180deg, #9ADB7F 0%, #6EA95C 100%)",
-            }}
-          >
-            <Icon name="points" width={24} height={25} />
-          </div>
-          <div className="text-left">
-            <p className="text-deactive font-medium text-sm">Points</p>
-            <b className={`font-semibold`} style={{ color: "#A5F59C" }}>
-              {points}
-            </b>
-          </div>
+        <div
+          className="font-semibold"
+          style={{
+            lineHeight: "20px",
+            fontSize: "12px",
+            color: pointsColor,
+            border: `2px solid ${pointsColor}`,
+            borderRadius: 9999,
+            width: 24,
+            textAlign: "center",
+          }}
+        >
+          {points}
         </div>
       }
-      positioned="Bottom"
+      positioned="Top"
     >
       <div className="mt-6 flex justify-between">
         <b className="text-lg text-white font-bold">Points: {points}</b>

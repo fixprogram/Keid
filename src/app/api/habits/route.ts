@@ -1,10 +1,10 @@
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/db.server";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
 

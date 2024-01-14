@@ -37,6 +37,7 @@ export const TodoTitle: FC<TodoTitlePropsType> = ({
         overflowY: "hidden",
         width: "100%",
         height: 42,
+        resize: "none",
       }}
       onBlur={() => handleTextareaBlur(value)}
       ref={textareaRef}

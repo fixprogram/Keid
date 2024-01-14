@@ -1,5 +1,5 @@
-import { authOptions } from "@/app/lib/auth";
-import { getUser } from "@/app/lib/session";
+// import { authOptions } from "@/app/lib/auth";
+import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/db.server";
 import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const userId = user.id;
 

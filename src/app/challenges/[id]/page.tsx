@@ -4,10 +4,10 @@ import { dehydrate } from "@tanstack/query-core";
 import { prisma } from "@/db.server";
 import { Challenge } from "./challenge";
 import { CommentType } from "@prisma/client";
-import { getUser } from "@/app/lib/session";
+import { getServerUser } from "@/app/lib/getServerUser";
 
 export async function getData(challengeId: string) {
-  const user = await getUser();
+  const user = await getServerUser();
 
   const challenge = await prisma.challenge.findUnique({
     where: { id: challengeId },
