@@ -4,11 +4,13 @@ import { formatDate } from "../lib/utils/formatDate";
 
 interface StreakCalendarPropsType {
   habitData: Set<string>; // Array of dates in 'YYYY-MM-DD' format
+  startedFrom: Date;
   onDayClick: (date: string) => void;
 }
 
 export const StreakCalendar: FC<StreakCalendarPropsType> = ({
   habitData,
+  startedFrom,
   onDayClick,
 }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -48,12 +50,13 @@ export const StreakCalendar: FC<StreakCalendarPropsType> = ({
       days.push(<div key={`empty-${i}`} className="day empty-day"></div>);
     }
 
-    for (let day = 2; day <= totalDays; day++) {
+    for (let day = 2; day <= totalDays + 1; day++) {
       const date = new Date(year, month, day);
       const dateStr = formatDate(date);
       const isToday = dateStr === todayDateStr;
       const isHabitStreak = habitData.has(dateStr);
-      const isPast = date < today;
+      const isPast = date < today && date >= startedFrom;
+
       const isFailed = isPast && !isHabitStreak && !isToday;
 
       days.push(

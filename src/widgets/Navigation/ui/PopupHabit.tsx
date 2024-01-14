@@ -6,6 +6,7 @@ import { useHabitFormSubmit } from "../model/useHabitFormSubmit";
 import { PopupStyleList } from "./PopupStyleList";
 import { PopupInputTitle } from "./PopupInputTitle";
 import { PopupPoints } from "./PopupPoints";
+import { PopupRepeats } from "./PopupRepeats";
 
 export const PopupHabit: FC = () => {
   const handleFormSubmit = useHabitFormSubmit();
@@ -31,6 +32,10 @@ export const PopupHabit: FC = () => {
 
         <div className="mt-6 flex justify-between">
           <PopupPoints />
+        </div>
+
+        <div className="mt-6 flex justify-between">
+          <PopupRepeats />
         </div>
 
         <div className="mt-6">

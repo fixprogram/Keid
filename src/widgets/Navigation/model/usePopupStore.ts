@@ -53,7 +53,7 @@ const INITIAL_STATE = {
     style: "01",
   },
   activeRepeatsOption: REPEATS_OPTIONS[0],
-  repeats: 0,
+  repeats: 28,
   points: 0,
   members: [],
   isMembersOpened: false,

@@ -63,7 +63,7 @@ model Habit {
   comments       Comment[]
   repeats        Int       @default(28)
   isArchived     Boolean
-  points         Int        @default(0)
+  points         Int       @default(0)
 }
 
 type Comment {
@@ -75,6 +75,8 @@ type Comment {
 }
 
 enum CommentType {
+  STARTED
+  ARCHIVED
   PROGRESS_UPDATE
   COMPLETED
   SERVICE

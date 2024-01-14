@@ -88,13 +88,13 @@ export const OverviewContent: FC = () => {
 
       {dateType === DateType.Month ? <DailyTasks tasks={tasks} /> : null}
 
-      <Cards
+      {/* <Cards
         cards={[
           { type: CardType.Task, amount: totalTaskAmount },
           // { type: CardType.Habit, amount: overdueTaskAmount },
           { type: CardType.Project, amount: projectAmount },
         ]}
-      />
+      /> */}
     </>
   );
 };

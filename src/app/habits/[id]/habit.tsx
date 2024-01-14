@@ -14,6 +14,7 @@ import { TodoBody } from "@/shared/ui/TodoBody";
 import { StreakCalendar } from "@/shared/ui/StreakCalendar";
 import { useComplete } from "@/features/Complete/model/useComplete";
 import { formatDate } from "@/shared/lib/utils/formatDate";
+import { Comment, CommentType } from "@prisma/client";
 
 async function getData(id: string) {
   const res = await fetch(`/api/habits/${id}`);
@@ -34,10 +35,23 @@ export default function Habit({ id }: TaskPropType) {
 
   const completeHandler = useComplete("habit");
 
-  const { title, style, comments, streak, points, repeats, completedDays } =
-    data;
+  const {
+    title,
+    style,
+    comments,
+    streak,
+    points,
+    repeats,
+    completedDays,
+    startedFrom,
+  } = data;
 
   const isCompletedToday = completedDays.includes(formatDate(new Date()));
+  // const startedFrom = comments.find(
+  //   (comment: Comment) => comment.type === CommentType.STARTED
+  // )?.time;
+
+  console.log("startedFrom: ", startedFrom);
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
@@ -68,6 +82,7 @@ export default function Habit({ id }: TaskPropType) {
                 <Description itemType="habit" initialValue="description" />
                 <StreakCalendar
                   habitData={new Set(completedDays)}
+                  startedFrom={new Date(Number(startedFrom))}
                   onDayClick={() => {}}
                 />
               </>

@@ -5,7 +5,7 @@ import { prisma } from "@/db.server";
 import { getUser } from "@/app/lib/session";
 import Habit from "./habit";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
-import { CommentType } from "@prisma/client";
+import { Comment, CommentType } from "@prisma/client";
 
 export async function getData(habitId: string) {
   const user = await getUser();
@@ -27,6 +27,10 @@ export async function getData(habitId: string) {
       return dateStr;
     });
 
+  const startedFrom = habit.comments.find(
+    (comment) => comment.type === CommentType.STARTED
+  )?.time;
+
   habit.comments = habit.comments
     .filter((comment) => comment.type === CommentType.USER_COMMENT)
     .map((comment) => ({
@@ -37,6 +41,7 @@ export async function getData(habitId: string) {
   return {
     ...habit,
     userProjectNames,
+    startedFrom: startedFrom ?? 0,
     completedDays,
   };
 }

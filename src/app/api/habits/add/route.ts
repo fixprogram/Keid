@@ -2,7 +2,8 @@ import { createHabit } from "@/app/lib/data/habit/createHabit";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { userId, habitName, habitStyle, points } = await request.json();
+  const { userId, habitName, habitStyle, points, repeats } =
+    await request.json();
 
   if (!habitName || !userId) {
     return (
@@ -12,7 +13,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const habit = await createHabit(userId, habitName, habitStyle, points);
+  const habit = await createHabit(
+    userId,
+    habitName,
+    habitStyle,
+    points,
+    repeats
+  );
 
   return NextResponse.json({ id: habit.id });
 }
