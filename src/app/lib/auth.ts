@@ -7,7 +7,7 @@ import { findUserByEmail } from "@/app/lib/data/user/findUserByEmail";
 import { links } from "@/shared/config/links";
 import { User } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 declare module "next-auth" {

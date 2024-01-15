@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { Comment } from "@prisma/client";
 
 export const completeHabitForToday = async (id: string, comment: Comment) => {

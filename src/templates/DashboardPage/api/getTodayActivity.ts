@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getTodayTimestamps } from "@/shared/lib/utils/getTodayTimestamps";
 
 export async function getTodayTasks(projectIDs: string[]) {

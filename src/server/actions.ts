@@ -1,7 +1,7 @@
 "use server";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { getServerUser } from "@/app/lib/getServerUser";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
@@ -11,8 +11,9 @@ import { getTodayHabits } from "@/templates/DashboardPage/api/getTodayHabits";
 import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
 import { mapAndSortTasks } from "@/templates/DashboardPage/lib/mapAndSortTasks";
 import { Task } from "@prisma/client";
+import { cache } from "react";
 
-export async function getOverviewData(dateType: DateType) {
+export const getOverviewData = cache(async (dateType: DateType) => {
   const user = await getServerUser();
 
   const userId = user.id;
@@ -63,17 +64,17 @@ export async function getOverviewData(dateType: DateType) {
 
   const totalTaskAmount = totalTasksIds.length;
 
-  const overdueTasks = await prisma.task.findMany({
-    where: {
-      id: { in: totalTasksIds },
-      deadline: { lt: new Date().setHours(23, 59, 59, 999) },
-      AND: { completed: 0 },
-      NOT: { deadline: 0 },
-    },
-    select: { id: true },
-  });
+  // const overdueTasks = await prisma.task.findMany({
+  //   where: {
+  //     id: { in: totalTasksIds },
+  //     deadline: { lt: new Date().setHours(23, 59, 59, 999) },
+  //     AND: { completed: 0 },
+  //     NOT: { deadline: 0 },
+  //   },
+  //   select: { id: true },
+  // });
 
-  const overdueTaskAmount = overdueTasks.length;
+  // const overdueTaskAmount = overdueTasks.length;
 
   // TODO: Analyze which approach is more efficient
 
@@ -95,7 +96,7 @@ export async function getOverviewData(dateType: DateType) {
 
   return {
     projectAmount,
-    overdueTaskAmount,
+    // overdueTaskAmount,
     totalTaskAmount,
     tasks: mapAndSortTasks(tasks, projects),
     userName: user.name,
@@ -104,4 +105,4 @@ export async function getOverviewData(dateType: DateType) {
     habits,
     challenges,
   };
-}
+});

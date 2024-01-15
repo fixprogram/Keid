@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export const updatePoints = async (id: string, newPoints: number) => {
   const challenge = await prisma.challenge.update({

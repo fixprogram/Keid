@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getWeeklyActivityData } from "@/features/Activity/api";
 import { Notification, NotificationType } from "@prisma/client";
 import { NextResponse } from "next/server";

@@ -1,12 +1,12 @@
 import { Task } from "@prisma/client";
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export interface TaskState {
   data: Task;
   setTaskData: (data: Task) => void;
 }
 
-export const useTaskStore = create<TaskState>((set) => ({
+export const useTaskStore = createWithEqualityFn<TaskState>((set) => ({
   data: {
     id: "",
     title: "",

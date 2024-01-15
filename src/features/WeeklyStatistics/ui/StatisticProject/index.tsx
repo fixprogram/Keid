@@ -1,3 +1,5 @@
+"use client";
+
 import { CompletedTask } from "@/entities/task";
 import { CompletedStatisticsTask } from "@/entities/task/ui/CompletedStatisticsTask";
 import { links } from "@/shared/config/links";

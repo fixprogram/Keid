@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getMonday } from "@/shared/lib/utils/getMonday";
 import { getActivityDays } from "./lib";
 

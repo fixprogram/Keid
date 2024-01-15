@@ -4,7 +4,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { getServerUser } from "../lib/getServerUser";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
 import { Notifications } from "./notifications";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export async function getData() {
   const { id } = await getServerUser();

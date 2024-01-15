@@ -2,7 +2,7 @@ import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
 import { getServerUser } from "@/app/lib/getServerUser";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { Search } from "./search";
 
 export async function getData() {

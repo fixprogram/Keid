@@ -11,10 +11,10 @@ import { AddPopup } from "./AddPopup";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import { useUser } from "@/entities/user/models/userContext";
 
-async function getData() {
-  const res = await fetch(`/api/navigation`);
-  return await res.json();
-}
+// async function getData() {
+//   const res = await fetch(`/api/navigation`);
+//   return await res.json();
+// }
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -23,20 +23,20 @@ export default function Navigation() {
 
   const user = useUser();
 
-  const { data } = useQuery({
-    queryKey: ["navigation", user?.userId],
-    queryFn: getData,
-  });
+  // const { data } = useQuery({
+  //   queryKey: ["navigation", user?.userId],
+  //   queryFn: getData,
+  // });
 
   // TODO: get rid of it and download user info only in userProvider
-  useEffect(() => {
-    // Because it's not a next.js layout but just a component, then every time we change a page,
-    // this component renders again. But maybe it's not a big deal, especially for now,
-    // because we take data from cache instead of fetching it every time
-    if (data) {
-      setData(data);
-    }
-  }, [data, setData]);
+  // useEffect(() => {
+  // Because it's not a next.js layout but just a component, then every time we change a page,
+  // this component renders again. But maybe it's not a big deal, especially for now,
+  // because we take data from cache instead of fetching it every time
+  // if (data) {
+  //   setData(data);
+  // }
+  // }, [data, setData]);
 
   return (
     <nav

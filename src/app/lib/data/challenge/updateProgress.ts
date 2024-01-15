@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { serviceComments } from "@/shared/config/serviceComments";
 import { Comment, CommentType } from "@prisma/client";
 

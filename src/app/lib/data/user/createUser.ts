@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { MailService } from "@/shared/service/mail-service";
 import bcryptjs from "bcryptjs";
 

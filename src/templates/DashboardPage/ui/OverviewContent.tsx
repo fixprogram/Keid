@@ -1,3 +1,5 @@
+"use client";
+
 import { FC, useEffect } from "react";
 // import { getData } from "@/app/dashboard/overview/overview";
 import { DateType, useDashboardStore } from "../model/useDashboardStore";
@@ -22,17 +24,17 @@ type DataType = {
   overdueTaskAmount: number;
 };
 
-export const OverviewContent: FC = () => {
+export default function OverviewContent({ data }: { data: any }) {
   const [dateType, scrollY, setScrollY] = useDashboardStore((state) => [
     state.dateType,
     state.scrollY,
     state.setScrollY,
   ]);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["dashboard", "overview", dateType],
-    queryFn: () => getOverviewData(dateType),
-  });
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["dashboard", "overview", dateType],
+  //   queryFn: () => getOverviewData(dateType),
+  // });
 
   useEffect(() => {
     if (scrollY) {
@@ -41,10 +43,6 @@ export const OverviewContent: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (isLoading || !data) {
-    return <div className="text-white">Loading...</div>;
-  }
 
   const { projectAmount, totalTaskAmount, tasks, habits, challenges } = data;
 
@@ -61,7 +59,7 @@ export const OverviewContent: FC = () => {
               className="flex align-center mt-4 gap-4"
               style={{ overflowX: "scroll" }}
             >
-              {habits.map((habit) => (
+              {habits.map((habit: Habit) => (
                 <HabitCard
                   link={`/habits/${habit.id}`}
                   {...habit}
@@ -78,7 +76,7 @@ export const OverviewContent: FC = () => {
             </h3>
           </section>
           <section className="flex flex-col mt-4 gap-4">
-            {challenges.map((challenge) => (
+            {challenges.map((challenge: any) => (
               <ChallengeCard {...challenge} key={challenge.id} />
             ))}
           </section>
@@ -98,4 +96,4 @@ export const OverviewContent: FC = () => {
       /> */}
     </>
   );
-};
+}

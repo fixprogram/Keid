@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export const getUserProjectsAmount = async (email: string) => {
   const user = await prisma.user.findUnique({

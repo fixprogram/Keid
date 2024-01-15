@@ -20,6 +20,8 @@ export const DailyTasks: FC<DailyTasksPropsType> = ({ tasks }) => {
 
   // const uncompletedTasks = taskTrees.filter((task) => !task.completed);
 
+  console.log("task Trees: ", tasks);
+
   return (
     <section className="mt-8 relative">
       <h3 className="font-poppins font-semibold text-xl text-white">Tasks</h3>

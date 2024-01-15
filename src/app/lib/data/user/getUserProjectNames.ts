@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export default async function getUserProjectNames(userId: string) {
   const projects = await prisma.project.findMany({
