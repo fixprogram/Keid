@@ -16,12 +16,12 @@ import { useUser } from "@/entities/user/models/userContext";
 //   return await res.json();
 // }
 
-export default function Navigation() {
+export default function Navigation({ navData }: { navData: any }) {
   const pathname = usePathname();
 
   const setData = useNavigationStore((state) => state.setData);
 
-  const user = useUser();
+  // const user = useUser();
 
   // const { data } = useQuery({
   //   queryKey: ["navigation", user?.userId],
@@ -29,14 +29,17 @@ export default function Navigation() {
   // });
 
   // TODO: get rid of it and download user info only in userProvider
-  // useEffect(() => {
-  // Because it's not a next.js layout but just a component, then every time we change a page,
-  // this component renders again. But maybe it's not a big deal, especially for now,
-  // because we take data from cache instead of fetching it every time
-  // if (data) {
-  //   setData(data);
-  // }
-  // }, [data, setData]);
+  useEffect(() => {
+    // Because it's not a next.js layout but just a component, then every time we change a page,
+    // this component renders again. But maybe it's not a big deal, especially for now,
+    // because we take data from cache instead of fetching it every time
+
+    console.log("navData: ", navData);
+
+    if (navData) {
+      setData(navData);
+    }
+  }, [navData, setData]);
 
   return (
     <nav

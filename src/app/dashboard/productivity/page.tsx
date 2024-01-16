@@ -7,9 +7,15 @@ import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks
 import { getServerUser } from "@/app/lib/getServerUser";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
-import { Habit, Task } from "@prisma/client";
+import { Challenge, Habit, Task } from "@prisma/client";
 import Productivity from "./productivity";
 import { getTodayProductivity } from "@/templates/DashboardPage/api/getTodayProductivity";
+import { DailyProgress } from "@/features/DailyProgress";
+import { WeeklyActivity } from "@/features/WeeklyActivity";
+import { WeeklyStatistics } from "@/features/WeeklyStatistics";
+import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
+import { getTodayHabits } from "@/templates/DashboardPage/api/getTodayHabits";
+import { getTodayChallenges } from "@/templates/DashboardPage/api/getTodayChallenges";
 
 export async function getData(dateType: DateType) {
   const user = await getServerUser();
@@ -25,10 +31,13 @@ export async function getData(dateType: DateType) {
 
   let tasks: Task[] = [];
   let habits: Habit[] = [];
+  let challenges: Challenge[] = [];
 
   switch (dateType) {
     case DateType.Today: {
-      return await getTodayProductivity(userId);
+      tasks = await getTodayTasks(userId);
+      habits = await getTodayHabits(userId);
+      challenges = await getTodayChallenges(userId);
     }
     case DateType.Week: {
       tasks = await getThisWeekTasks(projectIDs);
@@ -55,21 +64,42 @@ export async function getData(dateType: DateType) {
       days: weeklyActivityData.days,
     },
     projects: weeklyActivityData.projects,
+    tasks,
+    habits,
+    challenges,
   };
 }
 
 export default async function Page() {
   const dateType = DateType.Today;
 
-  const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(["dashboard", "productivity", dateType], () =>
-    getData(dateType)
-  );
-  const dehydratedState = dehydrate(queryClient);
+  // const queryClient = getQueryClient();
+  // await queryClient.prefetchQuery(["dashboard", "productivity", dateType], () =>
+  //   getData(dateType)
+  // );
+  // const dehydratedState = dehydrate(queryClient);
 
-  return (
-    <Hydrate state={dehydratedState}>
-      <Productivity />
-    </Hydrate>
-  );
+  const data = await getData(dateType);
+
+  if (dateType === DateType.Today) {
+    return <DailyProgress {...data} />;
+  }
+
+  if (dateType === DateType.Week) {
+    return (
+      <>
+        <WeeklyActivity {...data.activity} />
+        <WeeklyStatistics {...data} />
+      </>
+    );
+  }
+  // return (
+  // <Hydrate state={dehydratedState}>
+  // <Productivity />
+
+  return <div className="text-deactive">Empty for now</div>;
+  {
+    /* </Hydrate> */
+  }
+  // );
 }

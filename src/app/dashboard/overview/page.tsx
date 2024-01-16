@@ -226,18 +226,31 @@ export default async function Page() {
   // );
   // const dehydratedState = dehydrate(queryClient);
 
+  // const user = await getServerUser();
+
+  // const userId = user.id;
+  // const userProjectNames = await getUserProjectNames(userId);
+  // const projectAmount = userProjectNames.length;
+
+  // const data = {
+  //   projectAmount,
+  //   userProjectNames,
+  //   userId,
+  //   userName: user.name,
+  // };
+
   return (
     // <Hydrate state={dehydratedState}>
-    <Layout>
-      <DashboardHeader />
+    // <Layout>
+    //   <DashboardHeader />
 
-      <Tabs />
+    //   <Tabs />
 
-      <Suspense fallback={null}>
-        {/* <OverviewContent data={data} /> */}
-        <OverviewContent />
-      </Suspense>
-    </Layout>
+    <Suspense fallback={null}>
+      {/* <OverviewContent data={data} /> */}
+      <OverviewContent />
+    </Suspense>
+    /* </Layout> */
     // </Hydrate>
   );
 }
