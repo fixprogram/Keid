@@ -1,6 +1,4 @@
-// import { User } from "@prisma/client";
 import NextAuth, { NextAuthConfig } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcryptjs from "bcryptjs";
 import { findUserByEmail } from "@/app/lib/data/user/findUserByEmail";
@@ -8,7 +6,8 @@ import { links } from "@/shared/config/links";
 import { User } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma/db.server";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
@@ -19,11 +18,6 @@ declare module "next-auth" {
 export const authOptions = {
   secret: process.env.NextAuth_SECRET,
   providers: [
-    // Use Facebook or Google instead
-    // GithubProvider({
-    //   clientId: process.env.GITHUB_ID as string,
-    //   clientSecret: process.env.GITHUB_SECRET as string,
-    // }),
     CredentialsProvider({
       credentials: {
         email: {},
@@ -58,9 +52,9 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
-    },
+    // async jwt({ token, user }) {
+    //   return { ...token, ...user };
+    // },
     // async session({ session, token }) {
     //   session.user = token;
     //   return session;
@@ -115,7 +109,9 @@ export const {
   },
   callbacks: {
     ...authOptions.callbacks,
-    session({ token, user, ...rest }) {
+    session({ session, ...rest }) {
+      // TODO
+      const data = rest as any;
       return {
         /**
          * We need to explicitly return the `id` here to make it available to the client
@@ -126,9 +122,9 @@ export const {
          * custom hook instead.
          */
         user: {
-          id: token.sub!,
+          id: data.token.sub!,
         },
-        expires: rest.session.expires,
+        expires: session.expires,
       };
     },
   },
