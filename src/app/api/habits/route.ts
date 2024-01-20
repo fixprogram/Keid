@@ -1,5 +1,5 @@
 import { getServerUser } from "@/app/lib/getServerUser";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
 import { NextResponse } from "next/server";
 

@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export async function deleteComment(id: string, commentTime: string) {
   const challenge = await prisma.challenge.findUnique({ where: { id } });

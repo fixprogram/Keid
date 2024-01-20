@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import { RepeatsOptionType } from "../config/types";
 import { REPEATS_OPTIONS } from "../config/consts";
 
@@ -59,32 +59,34 @@ const INITIAL_STATE = {
   isMembersOpened: false,
 };
 
-export const usePopupStore = create<PopupStateType>((set, get) => ({
-  ...INITIAL_STATE,
-  setTitle: (newTitle: string) => set(() => ({ title: newTitle })),
-  setStyle: (newStyle: string) => set(() => ({ style: newStyle })),
-  openStyleList: () => set(() => ({ isStyleListOpened: true })),
-  closeStyleList: () => set(() => ({ isStyleListOpened: false })),
-  toggleWithDeadline: () =>
-    set(() => ({ isWithDeadline: !get().isWithDeadline })),
-  setDeadline: (newDeadline: number) => {
-    const differenceInTime = Math.abs(
-      new Date(newDeadline).getTime() - new Date().getTime()
-    );
+export const usePopupStore = createWithEqualityFn<PopupStateType>(
+  (set, get) => ({
+    ...INITIAL_STATE,
+    setTitle: (newTitle: string) => set(() => ({ title: newTitle })),
+    setStyle: (newStyle: string) => set(() => ({ style: newStyle })),
+    openStyleList: () => set(() => ({ isStyleListOpened: true })),
+    closeStyleList: () => set(() => ({ isStyleListOpened: false })),
+    toggleWithDeadline: () =>
+      set(() => ({ isWithDeadline: !get().isWithDeadline })),
+    setDeadline: (newDeadline: number) => {
+      const differenceInTime = Math.abs(
+        new Date(newDeadline).getTime() - new Date().getTime()
+      );
 
-    const repeats = Math.floor(differenceInTime / (1000 * 3600 * 24));
-    return set(() => ({ deadline: newDeadline, repeats }));
-  },
-  openCalendar: () => set(() => ({ isCalendarOpened: true })),
-  closeCalendar: () => set(() => ({ isCalendarOpened: false })),
-  setProject: (newProject: { title: string; style: string }) =>
-    set(() => ({ activeProject: newProject })),
-  setRepeatsOption: (newRepeatsOption: RepeatsOptionType) =>
-    set(() => ({ activeRepeatsOption: newRepeatsOption })),
-  setRepeats: (newRepeats: number) => set(() => ({ repeats: newRepeats })),
-  setPoints: (newPoints: number) => set(() => ({ points: newPoints })),
-  openMembers: () => set(() => ({ isMembersOpened: true })),
-  closeMembers: () => set(() => ({ isMembersOpened: false })),
-  setMembers: (newMembers) => set({ members: newMembers }),
-  reset: () => set(() => ({ ...INITIAL_STATE })),
-}));
+      const repeats = Math.floor(differenceInTime / (1000 * 3600 * 24));
+      return set(() => ({ deadline: newDeadline, repeats }));
+    },
+    openCalendar: () => set(() => ({ isCalendarOpened: true })),
+    closeCalendar: () => set(() => ({ isCalendarOpened: false })),
+    setProject: (newProject: { title: string; style: string }) =>
+      set(() => ({ activeProject: newProject })),
+    setRepeatsOption: (newRepeatsOption: RepeatsOptionType) =>
+      set(() => ({ activeRepeatsOption: newRepeatsOption })),
+    setRepeats: (newRepeats: number) => set(() => ({ repeats: newRepeats })),
+    setPoints: (newPoints: number) => set(() => ({ points: newPoints })),
+    openMembers: () => set(() => ({ isMembersOpened: true })),
+    closeMembers: () => set(() => ({ isMembersOpened: false })),
+    setMembers: (newMembers) => set({ members: newMembers }),
+    reset: () => set(() => ({ ...INITIAL_STATE })),
+  })
+);

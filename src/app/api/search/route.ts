@@ -1,9 +1,8 @@
-import { getData } from "@/app/search/page";
-import { prisma } from "@/db.server";
+import { getSearchData } from "@/server/actions";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const data = await getData();
+  const data = await getSearchData();
 
   return NextResponse.json(data);
 }

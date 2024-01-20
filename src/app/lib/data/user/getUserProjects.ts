@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getProjectProgress } from "@/app/lib/data/project/getProjectProgress";
 import { getProjectTaskAmount } from "@/app/lib/data/project/getProjectTaskAmount";
 import { getCompletedTaskAmount } from "@/app/lib/data/task/getCompletedTaskAmount";

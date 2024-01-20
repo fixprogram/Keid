@@ -1,3 +1,5 @@
+"use client";
+
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import RoundProgressBar from "@/shared/ui/RoundProgressBar";

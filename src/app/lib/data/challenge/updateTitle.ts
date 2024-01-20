@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export const updateTitle = async (id: string, newTitle: string) => {
   const challenge = await prisma.challenge.findUnique({

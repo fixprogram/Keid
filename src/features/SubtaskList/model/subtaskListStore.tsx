@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 interface SubtaskListState {
   isPopupOpened: boolean;
@@ -10,13 +10,15 @@ interface SubtaskListState {
   reset: () => void;
 }
 
-export const useSubtaskListStore = create<SubtaskListState>((set) => ({
-  isPopupOpened: false,
-  newSubtaskTitle: "",
-  deadline: new Date().setHours(23, 59, 59, 999),
-  openPopup: () => set(() => ({ isPopupOpened: true })),
-  closePopup: () => set(() => ({ isPopupOpened: false })),
-  setNewSubtaskTitle: (newTitle: string) =>
-    set(() => ({ newSubtaskTitle: newTitle })),
-  reset: () => set(() => ({ isPopupOpened: false, newSubtaskTitle: "" })),
-}));
+export const useSubtaskListStore = createWithEqualityFn<SubtaskListState>(
+  (set) => ({
+    isPopupOpened: false,
+    newSubtaskTitle: "",
+    deadline: new Date().setHours(23, 59, 59, 999),
+    openPopup: () => set(() => ({ isPopupOpened: true })),
+    closePopup: () => set(() => ({ isPopupOpened: false })),
+    setNewSubtaskTitle: (newTitle: string) =>
+      set(() => ({ newSubtaskTitle: newTitle })),
+    reset: () => set(() => ({ isPopupOpened: false, newSubtaskTitle: "" })),
+  })
+);

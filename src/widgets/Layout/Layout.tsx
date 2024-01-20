@@ -20,7 +20,7 @@ const Layout: FC<LayoutPropsType> = ({
 
       <section className="relative z-20 min-h-screen flex flex-col">
         <Container withNav={withNav}>{children}</Container>
-        {withNav ? <Navigation /> : null}
+        {withNav ? <Navigation navData={{}} /> : null}
       </section>
 
       <div

@@ -1,3 +1,5 @@
+"use client";
+
 import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import Icon from "@/shared/ui/Icon";
 import PopupLine from "@/shared/ui/PopupLine";

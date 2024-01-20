@@ -1,5 +1,5 @@
 import { getServerUser } from "@/app/lib/getServerUser";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { Comment, CommentType, Member } from "@prisma/client";
 
 export const complete = async (id: string, comment: Comment) => {

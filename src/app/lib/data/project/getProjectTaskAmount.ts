@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getProjectTasks } from "./getProjectTasks";
 
 export async function getProjectTaskAmount(projectId: string) {

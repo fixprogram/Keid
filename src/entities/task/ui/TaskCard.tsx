@@ -35,7 +35,7 @@ export const TaskCard: FC<TaskCardType> = ({
   subtasks,
   parentOpened = false,
 }) => {
-  const link = defaultLink ?? `tasks/${id}`;
+  const link = defaultLink ?? `/tasks/${id}`;
   const isCompleted = Boolean(completed);
   const isOverdue = deadline === 0 ? false : Date.now() > deadline;
   const isRepeated = repeats !== "Once";

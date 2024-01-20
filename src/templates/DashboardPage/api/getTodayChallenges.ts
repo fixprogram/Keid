@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { transformChallenge } from "../lib/transformChallenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { Challenge, CommentType, Member } from "@prisma/client";

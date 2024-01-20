@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getTaskById } from "./getTaskById";
 
 export async function deleteComment(taskId: string, commentTime: string) {

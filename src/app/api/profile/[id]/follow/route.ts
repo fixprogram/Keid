@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

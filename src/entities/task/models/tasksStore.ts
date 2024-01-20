@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import { TaskFilterType, TASK_FILTERS } from "../config/consts";
 
 export interface TaskState {
@@ -8,7 +8,7 @@ export interface TaskState {
   setTasksData: (tasksData: {}) => void;
 }
 
-export const useTasksStore = create<TaskState>((set) => ({
+export const useTasksStore = createWithEqualityFn<TaskState>((set) => ({
   data: {},
   activeFilter: TASK_FILTERS[0],
   setTasksData: (tasksData) => set(() => ({ data: tasksData })),

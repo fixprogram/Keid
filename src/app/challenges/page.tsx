@@ -1,7 +1,7 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getServerUser } from "../lib/getServerUser";
 import { Challenges } from "./challenges";
 import { transformChallenges } from "@/templates/DashboardPage/api/getTodayChallenges";

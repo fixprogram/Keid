@@ -3,22 +3,18 @@ import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const user = await getServerUser();
+  //   const user = await getServerUser();
 
-  if (!user) {
-    return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });
-  }
+  //   const userId = user.id;
+  //   const userProjectNames = await getUserProjectNames(userId);
+  //   const projectAmount = userProjectNames.length;
 
-  const userId = user.id;
-  const userProjectNames = await getUserProjectNames(userId);
-  const projectAmount = userProjectNames.length;
+  //   const data = {
+  //     projectAmount,
+  //     userProjectNames,
+  //     userId,
+  //     userName: user.name,
+  //   };
 
-  const data = {
-    projectAmount,
-    userProjectNames,
-    userId,
-    userName: user.name,
-  };
-
-  return NextResponse.json(data);
+  return NextResponse.json({});
 }

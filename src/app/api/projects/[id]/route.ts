@@ -1,4 +1,4 @@
-import { getData } from "@/app/projects/[id]/page";
+import { getProjectData } from "@/server/actions";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -7,7 +7,7 @@ export async function GET(
 ) {
   const id = params.id;
 
-  const data = await getData(id);
+  const data = await getProjectData(id);
 
   return NextResponse.json(data);
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { Challenge, CommentType, Habit, Task } from "@prisma/client";
 import { FC } from "react";
 import ProgressBar from "../WeeklyProgress/ui/ProgressBar";

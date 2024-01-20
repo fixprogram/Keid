@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export type ProjectType = {
   id: string;
@@ -35,24 +35,26 @@ export interface ProjectsState {
   setScrollY: (newScrollY: number) => void;
 }
 
-export const useDashboardStore = create<ProjectsState>((set, get) => ({
-  dateType: DATES[0],
-  isWeekTasksShowed: false,
-  activeFilter: FILTERS[0],
-  scrollY: 0,
-  toggleWeekTasksShowed: () =>
-    set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
+export const useDashboardStore = createWithEqualityFn<ProjectsState>(
+  (set, get) => ({
+    dateType: DATES[0],
+    isWeekTasksShowed: false,
+    activeFilter: FILTERS[0],
+    scrollY: 0,
+    toggleWeekTasksShowed: () =>
+      set((state) => ({ isWeekTasksShowed: !state.isWeekTasksShowed })),
 
-  setActiveFilter: (newActiveFilter) =>
-    set(() => ({
-      activeFilter: newActiveFilter,
-    })),
+    setActiveFilter: (newActiveFilter) =>
+      set(() => ({
+        activeFilter: newActiveFilter,
+      })),
 
-  setDateType(newDateType) {
-    set(() => ({ dateType: newDateType }));
-  },
+    setDateType(newDateType) {
+      set(() => ({ dateType: newDateType }));
+    },
 
-  setScrollY(newScrollY) {
-    set(() => ({ scrollY: newScrollY }));
-  },
-}));
+    setScrollY(newScrollY) {
+      set(() => ({ scrollY: newScrollY }));
+    },
+  })
+);

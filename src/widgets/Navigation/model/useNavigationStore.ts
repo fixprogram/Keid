@@ -1,5 +1,5 @@
 import { Project } from "../config/types";
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export enum PopupAddState {
   "task" = "task",
@@ -28,23 +28,25 @@ export interface NavigationState {
   setPopupStyle: (newStyle: "gray" | "black") => void;
 }
 
-export const useNavigationStore = create<NavigationState>((set) => ({
-  userId: "",
-  popupStyle: "gray",
-  popupAddState: "idle",
-  popupAddOpened: false,
-  userProjectNames: [
-    {
-      title: "No project",
-      style: "01",
-    },
-  ],
-  projectAmount: 0,
-  openPopupAdd: () => set(() => ({ popupAddOpened: true })),
-  closePopupAdd: () =>
-    set(() => ({ popupAddOpened: false, popupAddState: "idle" })),
-  setPopupAddState: (popupState: PopupAddState) =>
-    set(() => ({ popupAddState: popupState })),
-  setData: (data) => set(() => ({ ...data })),
-  setPopupStyle: (newStyle) => set(() => ({ popupStyle: newStyle })),
-}));
+export const useNavigationStore = createWithEqualityFn<NavigationState>(
+  (set) => ({
+    userId: "",
+    popupStyle: "gray",
+    popupAddState: "idle",
+    popupAddOpened: false,
+    userProjectNames: [
+      {
+        title: "No project",
+        style: "01",
+      },
+    ],
+    projectAmount: 0,
+    openPopupAdd: () => set(() => ({ popupAddOpened: true })),
+    closePopupAdd: () =>
+      set(() => ({ popupAddOpened: false, popupAddState: "idle" })),
+    setPopupAddState: (popupState: PopupAddState) =>
+      set(() => ({ popupAddState: popupState })),
+    setData: (data) => set(() => ({ ...data })),
+    setPopupStyle: (newStyle) => set(() => ({ popupStyle: newStyle })),
+  })
+);

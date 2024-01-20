@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export interface CommentsState {
   isPopupOpened: boolean;
@@ -8,7 +8,7 @@ export interface CommentsState {
   reset: () => void;
 }
 
-export const useCommentsStore = create<CommentsState>((set) => ({
+export const useCommentsStore = createWithEqualityFn<CommentsState>((set) => ({
   isPopupOpened: false,
   comment: "",
   setPopupOpened: () => set(() => ({ isPopupOpened: true })),

@@ -1,5 +1,5 @@
+import { getChallengeData } from "@/server/actions";
 import { NextRequest, NextResponse } from "next/server";
-import { getData } from "@/app/challenges/[id]/page";
 
 export async function GET(
   request: NextRequest,
@@ -7,7 +7,7 @@ export async function GET(
 ) {
   const id = params.id;
 
-  const data = await getData(id);
+  const data = await getChallengeData(id);
 
   return NextResponse.json(data);
 }

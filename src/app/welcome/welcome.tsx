@@ -1,6 +1,3 @@
-"use client";
-
-import { getProviders, getSession } from "next-auth/react";
 import WelcomeImage from "~/public/graphic.png";
 import Link from "next/link";
 import PrimaryButton from "@/shared/ui/PrimaryButton";
@@ -12,6 +9,7 @@ export default function Welcome() {
     <Layout withNav={false}>
       <section
         className="h-[460px] mt-[-40px] ml-[-40px]"
+        // TODO: use next Image component
         style={{
           background: `url(${WelcomeImage.src})`,
           backgroundPosition: "-140px -260px",

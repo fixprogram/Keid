@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { getWeeklyActivityData } from "@/features/Activity/api";
 import { NextResponse } from "next/server";
 

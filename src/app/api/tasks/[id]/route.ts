@@ -1,13 +1,5 @@
-// import { authOptions } from "@/app/lib/auth";
-import { getServerUser } from "@/app/lib/getServerUser";
-import { prisma } from "@/db.server";
-import { getProjectById } from "@/app/lib/data/project/getProjectById";
-import { getTaskById } from "@/app/lib/data/task/getTaskById";
-import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
-import { CommentType } from "@/features/Comments/config/types";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
-import { getData } from "@/app/tasks/[id]/page";
+import { getTaskData } from "@/server/actions";
 
 export async function GET(
   request: NextRequest,
@@ -15,7 +7,7 @@ export async function GET(
 ) {
   const id = params.id;
 
-  const data = await getData(id);
+  const data = await getTaskData(id);
 
   return NextResponse.json(data);
 }

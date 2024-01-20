@@ -7,6 +7,8 @@ const apiChallenge = apiLink + "/challenges";
 export const links = {
   login: `${apiLink}/login`,
   signup: `${apiLink}/signup`,
+  dashboardOverview: `${apiLink}/dashboard/overview`,
+  productivityOverview: `${apiLink}/dashboard/productivity`,
   follow: (id: string) => `${apiLink}/profile/${id}/follow`,
   unfollow: (id: string) => `${apiLink}/profile/${id}/unfollow`,
   shareProgress: (id: string) => `${apiLink}/profile/${id}/shareProgress`,

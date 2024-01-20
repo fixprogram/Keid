@@ -1,3 +1,5 @@
+"use client";
+
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";

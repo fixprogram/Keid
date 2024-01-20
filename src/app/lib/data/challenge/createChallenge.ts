@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 import { serviceComments } from "@/shared/config/serviceComments";
 import { Notification, NotificationType } from "@prisma/client";
 

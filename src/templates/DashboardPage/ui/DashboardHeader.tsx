@@ -1,3 +1,5 @@
+"use client";
+
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC } from "react";

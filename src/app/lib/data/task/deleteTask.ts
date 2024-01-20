@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export const deleteTaskAndSubtasks = async (taskId: string) => {
   const task = await prisma.task.delete({

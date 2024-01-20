@@ -1,4 +1,4 @@
-import { prisma } from "@/db.server";
+import { prisma } from "@/app/lib/prisma/db.server";
 
 export const completeProject = async (projectId: string) => {
   const project = await prisma.project.update({

@@ -1,3 +1,5 @@
+"use client";
+
 import { ProjectStyleKey, projectStyles } from "@/shared/config/projectStyles";
 import Icon from "@/shared/ui/Icon";
 import { useDashboardStore } from "@/templates/DashboardPage";
