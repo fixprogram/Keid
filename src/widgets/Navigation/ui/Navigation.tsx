@@ -34,8 +34,6 @@ export default function Navigation({ navData }: { navData: any }) {
     // this component renders again. But maybe it's not a big deal, especially for now,
     // because we take data from cache instead of fetching it every time
 
-    console.log("navData: ", navData);
-
     if (navData) {
       setData(navData);
     }

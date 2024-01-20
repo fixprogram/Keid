@@ -51,8 +51,6 @@ export default function Habit({ id }: TaskPropType) {
   //   (comment: Comment) => comment.type === CommentType.STARTED
   // )?.time;
 
-  console.log("startedFrom: ", startedFrom);
-
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>
       <TodoHeader
