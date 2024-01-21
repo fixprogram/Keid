@@ -9,7 +9,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" });
   }
 
-  const userId = user?.id;
+  const userId = user.id;
 
   const projects = await getUserProjects(userId);
 

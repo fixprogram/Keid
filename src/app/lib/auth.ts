@@ -4,11 +4,11 @@ import { prisma } from "@/app/lib/prisma/db.server";
 // import { PrismaAdapter } from "@auth/prisma-adapter";
 // import authConfig from "./auth.config";
 
-// declare module "next-auth" {
-//   interface Session {
-//     user: DefaultSession["user"] & { id: string; name: string };
-//   }
-// }
+declare module "next-auth" {
+  interface Session {
+    user: DefaultSession["user"] & { id: string; name: string };
+  }
+}
 
 // // We are splitting the auth configuration into multiple files (`auth.config.ts` and `auth.ts`),
 // // as some adapters (Prisma) and Node APIs (`stream` module required for sending emails) are
@@ -113,7 +113,7 @@ export const {
       });
 
       // Prevent sign in without email verification
-      if (!existingUser?.emailVerified) return false;
+      if (!existingUser) return false;
 
       return true;
     },
@@ -123,7 +123,7 @@ export const {
       }
 
       if (session.user) {
-        session.user.name = token.name;
+        session.user.name = token.name as string;
         session.user.email = token.email;
       }
 
