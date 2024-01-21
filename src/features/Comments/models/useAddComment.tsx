@@ -28,7 +28,7 @@ export const useAddComment = (itemType: ItemType) => {
     mutationFn: (comment: string) =>
       axios.post(itemPost.addComment, {
         comment,
-        userId: user?.userId,
+        userId: user?.id,
         itemId,
       }),
     onSuccess: () => {

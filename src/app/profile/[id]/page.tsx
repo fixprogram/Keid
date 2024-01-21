@@ -9,6 +9,10 @@ import { getServerUser } from "@/app/lib/getServerUser";
 async function getData(id: string) {
   const mainUser = await getServerUser();
 
+  if (!mainUser) {
+    return { error: "Unauthorized" };
+  }
+
   const user = await prisma.user.findUnique({ where: { id } });
 
   if (!user) {

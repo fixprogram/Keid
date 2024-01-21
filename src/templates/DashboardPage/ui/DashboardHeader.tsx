@@ -38,7 +38,7 @@ export const DashboardHeader: FC = () => {
       </div>
 
       <Link
-        href={`/profile/${user?.userId}`}
+        href={`/profile/${user?.id}`}
         className="w-[40px] h-[40px] rounded-full"
       >
         <Icon name="avatar" width={40} height={40} />

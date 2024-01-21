@@ -1,4 +1,3 @@
-import { getServerUser } from "@/app/lib/getServerUser";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { NextResponse } from "next/server";
 

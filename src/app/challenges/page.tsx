@@ -9,6 +9,10 @@ import { transformChallenges } from "@/templates/DashboardPage/api/getTodayChall
 async function getData() {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
 
   // const challenges = await prisma.challenge.findMany({ where: { userId } });

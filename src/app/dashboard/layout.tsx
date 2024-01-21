@@ -10,6 +10,10 @@ import { cache } from "react";
 const getNavData = cache(async () => {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
   const projectAmount = userProjectNames.length;

@@ -1,7 +1,6 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { getServerUser } from "@/app/lib/getServerUser";
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import Project from "./project";
 import { getProjectById } from "@/app/lib/data/project/getProjectById";

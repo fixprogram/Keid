@@ -4,6 +4,11 @@ import { Comment, CommentType, Member } from "@prisma/client";
 
 export const complete = async (id: string, comment: Comment) => {
   const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const challenge = await prisma.challenge.findUnique({
     where: { id },
     select: { comments: true, streak: true, userId: true, members: true },

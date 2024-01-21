@@ -8,6 +8,10 @@ import Habits from "./habits";
 async function getData() {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
 
   const projects = await prisma.project.findMany({

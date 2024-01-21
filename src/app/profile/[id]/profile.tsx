@@ -36,7 +36,7 @@ interface ProfilePropsType {
 
 export const Profile: FC<ProfilePropsType> = ({ id }) => {
   const user = useUser();
-  const userId = user?.userId as string;
+  const userId = user?.id as string;
 
   const { data } = useQuery({
     queryKey: ["profile", id],

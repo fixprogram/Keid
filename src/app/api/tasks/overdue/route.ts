@@ -5,6 +5,10 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const user = await getServerUser();
 
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" });
+  }
+
   const userId = user.id;
 
   const projects = await prisma.project.findMany({

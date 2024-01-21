@@ -9,6 +9,10 @@ import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
 async function getData() {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
 
   const projects = await prisma.project.findMany({

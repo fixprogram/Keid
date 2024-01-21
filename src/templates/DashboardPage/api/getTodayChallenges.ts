@@ -6,7 +6,12 @@ import { getServerUser } from "@/app/lib/getServerUser";
 
 export async function transformChallenges(challenges: Challenge[]) {
   const user = await getServerUser();
-  const userId = user.id;
+
+  // if (!user) {
+  //   return { error: "Unauthorized" };
+  // }
+
+  const userId = user?.id;
 
   const hostIds = challenges.map((challenge) => challenge.userId);
 

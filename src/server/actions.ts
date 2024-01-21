@@ -19,6 +19,10 @@ import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
 export const getOverviewData = cache(async (dateType: DateType) => {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
 
   const userProjectNames = await getUserProjectNames(userId);
@@ -113,6 +117,10 @@ export const getOverviewData = cache(async (dateType: DateType) => {
 export async function getProductivityData(dateType: DateType) {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
   const projects = await prisma.project.findMany({
     where: { userId },
@@ -165,6 +173,10 @@ export async function getProductivityData(dateType: DateType) {
 
 export async function getChallengeData(challengeId: string) {
   const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
 
   const challenge = await prisma.challenge.findUnique({
     where: { id: challengeId },
@@ -221,6 +233,10 @@ export async function getChallengeData(challengeId: string) {
 export async function getHabitData(habitId: string) {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
 
@@ -259,6 +275,10 @@ export async function getHabitData(habitId: string) {
 
 export async function getTaskData(taskId: string) {
   const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
 
   const userName = user.name as string;
 
@@ -308,15 +328,19 @@ export async function getTaskData(taskId: string) {
 }
 
 export async function getNotificationsData() {
-  const { id } = await getServerUser();
+  const mainUser = await getServerUser();
+
+  if (!mainUser) {
+    return { error: "Unauthorized" };
+  }
 
   const user = await prisma.user.findUnique({
-    where: { id },
+    where: { id: mainUser.id },
     select: { notifications: true },
   });
 
   if (!user) {
-    throw new Error(`User with id ${id} wasn't found`);
+    throw new Error(`User with id ${mainUser.id} wasn't found`);
   }
 
   const { notifications } = user;
@@ -343,6 +367,10 @@ export async function getNotificationsData() {
 export async function getProjectData(projectId: string) {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
   const userProjectNames = await getUserProjectNames(userId);
 
@@ -365,6 +393,10 @@ export async function getProjectData(projectId: string) {
 
 export async function getSearchData() {
   const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
 
   const users = await prisma.user.findMany({
     where: { NOT: { id: user.id } },

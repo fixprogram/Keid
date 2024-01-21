@@ -4,6 +4,7 @@ import { MAX_WIDTH } from "@/shared/config/consts";
 import { Metadata, Viewport } from "next";
 import { inter, poppins } from "./ui/fonts";
 import { auth } from "./lib/auth";
+import { redirect } from "next/navigation";
 
 export const viewport: Viewport = {
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
@@ -32,6 +33,8 @@ interface RootLayoutPropsType {
 
 export default async function RootLayout({ children }: RootLayoutPropsType) {
   const session = await auth();
+
+  if (!session) return redirect("/welcome");
 
   return (
     <html lang="en">

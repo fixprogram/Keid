@@ -1,16 +1,12 @@
 import { redirect } from "next/navigation";
-import { getServerUser } from "./lib/getServerUser";
+import { auth } from "./lib/auth";
 
 export default async function Home() {
-  const user = await getServerUser();
+  const session = await auth();
 
-  if (user) {
+  if (!session) {
+    redirect("/welcome");
+  } else {
     redirect("/dashboard/overview");
   }
-
-  if (!user) {
-    redirect("/welcome");
-  }
-
-  return <></>;
 }

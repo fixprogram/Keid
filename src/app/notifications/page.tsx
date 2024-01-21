@@ -1,7 +1,6 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { getServerUser } from "../lib/getServerUser";
 import { getUserProjects } from "@/app/lib/data/user/getUserProjects";
 import { Notifications } from "./notifications";
 import { prisma } from "@/app/lib/prisma/db.server";

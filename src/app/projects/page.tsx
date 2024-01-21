@@ -8,6 +8,10 @@ import Projects from "./projects";
 async function getData() {
   const user = await getServerUser();
 
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
   const userId = user.id;
 
   const projects = await getUserProjects(userId);

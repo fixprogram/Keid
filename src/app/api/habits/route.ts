@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const user = await getServerUser();
 
-  const userId = user.id;
+  const userId = user?.id;
 
   const projects = await prisma.project.findMany({
     where: { userId },
