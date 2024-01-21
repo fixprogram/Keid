@@ -34,7 +34,7 @@ interface RootLayoutPropsType {
 export default async function RootLayout({ children }: RootLayoutPropsType) {
   const session = await auth();
 
-  if (!session) return redirect("/welcome");
+  // if (!session) return redirect("/welcome");
 
   return (
     <html lang="en">
