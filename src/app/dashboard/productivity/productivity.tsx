@@ -1,6 +1,7 @@
 "use client";
 
 import { DailyProgress } from "@/features/DailyProgress";
+import { Reflection } from "@/features/Reflection/ui/Reflection";
 import { WeeklyActivity } from "@/features/WeeklyActivity";
 import { WeeklyStatistics } from "@/features/WeeklyStatistics";
 import { links } from "@/shared/config/links";
@@ -20,11 +21,15 @@ function ProductivityContent() {
     return null;
   }
 
-  // const { projectAmount, totalTaskAmount, tasks, habits, challenges } = data;
-
   return (
     <>
-      {dateType === DateType.Today ? <DailyProgress {...data} /> : null}
+      {dateType === DateType.Today ? (
+        <>
+          <DailyProgress {...data} />
+
+          <Reflection data={data.reflection} />
+        </>
+      ) : null}
 
       {dateType === DateType.Week ? (
         <>

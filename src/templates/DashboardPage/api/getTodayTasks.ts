@@ -22,5 +22,5 @@ export async function getTodayTasks(userId: string) {
     },
   });
 
-  return tasks;
+  return [];
 }

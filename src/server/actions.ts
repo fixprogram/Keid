@@ -10,11 +10,19 @@ import { getTodayChallenges } from "@/templates/DashboardPage/api/getTodayChalle
 import { getTodayHabits } from "@/templates/DashboardPage/api/getTodayHabits";
 import { getTodayTasks } from "@/templates/DashboardPage/api/getTodayTasks";
 import { mapAndSortTasks } from "@/templates/DashboardPage/lib/mapAndSortTasks";
-import { Challenge, CommentType, Habit, Task } from "@prisma/client";
+import {
+  Challenge,
+  CommentType,
+  Habit,
+  Reflection,
+  Task,
+} from "@prisma/client";
 import { cache } from "react";
 import { getProjectById } from "@/app/lib/data/project/getProjectById";
 import { getTaskById } from "@/app/lib/data/task/getTaskById";
 import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
+import { getTodayReflection } from "@/templates/DashboardPage/api/getTodayReflection";
+import { revalidatePath } from "next/cache";
 
 export const getOverviewData = cache(async (dateType: DateType) => {
   const user = await getServerUser();
@@ -71,24 +79,6 @@ export const getOverviewData = cache(async (dateType: DateType) => {
 
   const totalTaskAmount = totalTasksIds.length;
 
-  // const overdueTasks = await prisma.task.findMany({
-  //   where: {
-  //     id: { in: totalTasksIds },
-  //     deadline: { lt: new Date().setHours(23, 59, 59, 999) },
-  //     AND: { completed: 0 },
-  //     NOT: { deadline: 0 },
-  //   },
-  //   select: { id: true },
-  // });
-
-  // const overdueTaskAmount = overdueTasks.length;
-
-  // TODO: Analyze which approach is more efficient
-
-  // const weeklyActivityData = await getWeeklyActivityData(userId);
-  // const habits = await getTodayHabits(userId);
-  // const challenges = await getTodayChallenges(userId);
-
   const [weeklyActivityData, habits, challenges] = await Promise.all([
     getWeeklyActivityData(userId),
     getTodayHabits(userId),
@@ -133,12 +123,15 @@ export async function getProductivityData(dateType: DateType) {
   let tasks: Task[] = [];
   let habits: Habit[] = [];
   let challenges: Challenge[] = [];
+  let reflection: Reflection | undefined = undefined;
 
   switch (dateType) {
     case DateType.Today: {
       tasks = await getTodayTasks(userId);
       habits = await getTodayHabits(userId);
       challenges = await getTodayChallenges(userId);
+      reflection = await getTodayReflection(userId);
+      break;
     }
     case DateType.Week: {
       tasks = await getThisWeekTasks(projectIDs);
@@ -168,6 +161,7 @@ export async function getProductivityData(dateType: DateType) {
     tasks,
     habits,
     challenges,
+    reflection,
   };
 }
 
@@ -406,4 +400,26 @@ export async function getSearchData() {
   return {
     users,
   };
+}
+
+export async function addReflection(formData: FormData) {
+  const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
+  const reflection: Reflection = {
+    date: Date.now().toString(),
+    userId: user.id,
+    mood: Number(formData.get("mood")) ?? 0,
+    note: formData.get("note")?.toString() ?? "",
+  };
+
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { reflections: { push: reflection } },
+  });
+
+  revalidatePath("/dashboard/productivity");
 }

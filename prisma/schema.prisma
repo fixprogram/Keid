@@ -22,6 +22,7 @@ model User {
   followers       String[]
   following       String[]
   notifications    Notification[]
+  reflections      Reflection[]
   image           String?
 
   @@map("users")
@@ -106,6 +107,13 @@ type Notification {
   userId         String
   type           NotificationType
   content        String
+}
+
+type Reflection {
+  date           String
+  userId         String
+  mood           Int
+  note           String
 }
 
 enum NotificationType {
