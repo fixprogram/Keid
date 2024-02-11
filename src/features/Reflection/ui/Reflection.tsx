@@ -1,38 +1,57 @@
-import { addReflection } from "@/server/actions";
-import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import { Button } from "@/shared/ui/Button";
-import { SubmitButton } from "@/shared/ui/SubmitButton";
 import { Reflection as ReflectionType } from "@prisma/client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { ReflectionSlider } from "./ReflectionSlider";
+import { createPortal } from "react-dom";
+import { useReflectionStore } from "../model/useReflectionStore";
 
 interface ReflectionPropsType {
   data?: ReflectionType;
 }
 
 export const Reflection: FC<ReflectionPropsType> = ({ data }) => {
-  if (!data) {
-    return (
-      <div className="mt-8 w-full">
-        <PopupWithOverlay
-          btn={<Button>{"Add reflection"}</Button>}
-          positioned="Bottom"
-        >
-          <form
-            action={addReflection}
-            onSubmit={() => console.log("submitted")}
-          >
-            <label className="text-white">Mood</label>
-            <input type="range" name="mood" min={0} max={100} />
+  const [isOpened, setOpened] = useState(false);
 
-            <label className="text-white">Note</label>
-            <textarea style={{ margin: "24px 0" }} name="note" />
+  const setReflection = useReflectionStore((state) => state.setReflection);
 
-            <SubmitButton>Save</SubmitButton>
-          </form>
-        </PopupWithOverlay>
-      </div>
-    );
-  }
+  const handleOpen = () => setOpened(true);
 
-  return data.note;
+  const handleClose = () => setOpened(false);
+
+  useEffect(() => {
+    if (data) {
+      setReflection(data);
+    }
+  }, [data, setReflection]);
+
+  // if (!data) {
+  //   return (
+  //     <div className="mt-8 w-full">
+  //       <Button onClick={handleOpen}></Button>
+
+  //     </div>
+  //   );
+  // }
+
+  return (
+    <section className="text-white flex flex-col gap-3 mt-8">
+      {data ? (
+        <>
+          <p>Mood: {data.mood}</p>
+          <p>Worryings: {data.worryings}</p>
+          <p>Summary: {data.summary}</p>
+          <Button onClick={handleOpen}>Edit</Button>
+        </>
+      ) : (
+        <Button onClick={handleOpen}>Add reflection</Button>
+      )}
+
+      {isOpened
+        ? createPortal(
+            <ReflectionSlider onClose={handleClose} />,
+            document.body
+          )
+        : null}
+    </section>
+  );
 };

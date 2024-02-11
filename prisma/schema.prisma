@@ -118,11 +118,30 @@ type Notification {
   content        String
 }
 
+enum MoodType {
+  HAPPY
+  ANGRY
+  SAD
+  CALM
+}
+
+enum WorryingType {
+  SLEEPINESS
+  SADNESS
+  ANXIETY
+  STRESS
+  LONELINESS
+  INSOMNIA
+  ANGER
+  APATHY
+  ENVY
+}
 type Reflection {
   date           String
   userId         String
-  mood           Int
-  note           String
+  mood           MoodType?
+  worryings      WorryingType[]
+  summary        String
 }
 
 enum NotificationType {

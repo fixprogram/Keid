@@ -398,28 +398,6 @@ export async function getSearchData() {
   };
 }
 
-export async function addReflection(formData: FormData) {
-  const user = await getServerUser();
-
-  if (!user) {
-    return { error: "Unauthorized" };
-  }
-
-  const reflection: Reflection = {
-    date: Date.now().toString(),
-    userId: user.id,
-    mood: Number(formData.get("mood")) ?? 0,
-    note: formData.get("note")?.toString() ?? "",
-  };
-
-  await prisma.user.update({
-    where: { id: user.id },
-    data: { reflections: { push: reflection } },
-  });
-
-  revalidatePath("/dashboard/productivity");
-}
-
 const schema = z.object({
   title: z.string({
     invalid_type_error: "Empty Title",

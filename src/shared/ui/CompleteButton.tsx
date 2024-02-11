@@ -2,18 +2,18 @@ import { FC } from "react";
 import Icon from "./Icon";
 
 interface CompleteButtonPropsType {
-  onClick: VoidFunction;
+  // onClick: VoidFunction;
   isLoading: boolean;
 }
 
 export const CompleteButton: FC<CompleteButtonPropsType> = ({
-  onClick,
+  // onClick,
   isLoading,
 }) => {
   return (
     <button
       type="submit"
-      onClick={onClick}
+      // onClick={onClick}
       disabled={isLoading}
       style={{ opacity: isLoading ? ".5" : "1" }}
     >

@@ -63,10 +63,9 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
             <Icon name="completed" width={40} height={40} />
           </div>
         ) : (
-          <CompleteButton
-            onClick={handleComplete}
-            isLoading={isLoadingComplete}
-          />
+          <form action={handleComplete}>
+            <CompleteButton isLoading={isLoadingComplete} />
+          </form>
         )}
       </div>
 

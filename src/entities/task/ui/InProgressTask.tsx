@@ -8,8 +8,12 @@ import { FC, useState } from "react";
 
 import styles from "./TaskCard.module.css";
 import { TaskCard } from "./TaskCard";
+import { CompleteButton } from "@/shared/ui/CompleteButton";
+import { useComplete } from "../models/useComplete";
+import { Task } from "@prisma/client";
 
 type InProgressTaskPropsType = {
+  id: string;
   link: string;
   title: string;
   deadline: string | null;
@@ -17,11 +21,12 @@ type InProgressTaskPropsType = {
   progress: number;
   isStarred?: boolean;
   projectTitle?: string;
-  subtasks: any[];
+  subtasks: Task[];
   parentOpened: boolean;
 };
 
 export const InProgressTask: FC<InProgressTaskPropsType> = ({
+  id,
   link,
   title,
   deadline,
@@ -37,8 +42,10 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
 
   const subtasksTotal = subtasks.length;
 
+  const { handleComplete, isLoadingComplete } = useComplete(id);
+
   return (
-    <div className="flex flex-col gap-5">
+    <div className={`flex flex-col gap-5`}>
       <div
         className={`${
           isOpened || parentOpened ? "bg-background1" : "bg-background2"
@@ -48,15 +55,20 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
           parentOpened
             ? "border-t border-deactive rounded-b-xl rounded-l-xl rounded-t-none"
             : " rounded-xl"
-        }`}
+        }
+        `}
       >
-        <div className="flex gap-5 p-5">
-          <RoundProgressBar
-            id={link}
-            progress={progress}
-            stopColors={taskStyle.progressGradient}
-            isOnPage={isOpened || parentOpened}
-          />
+        <div
+          className={`flex gap-5 p-5 ${
+            !projectTitle.length ? "items-center" : ""
+          }`}
+        >
+          <form action={handleComplete}>
+            <CompleteButton
+              // onClick={handleComplete}
+              isLoading={isLoadingComplete}
+            />
+          </form>
 
           <div
             className="flex flex-col justify-between align-center"

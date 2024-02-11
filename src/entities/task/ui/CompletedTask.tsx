@@ -8,7 +8,7 @@ type CompletedTaskPropsType = {
   link: string;
   title: string;
   isExpired: boolean;
-  completed: string;
+  completed: string | null;
   isStarred?: boolean;
   projectTitle?: string;
 };
@@ -57,18 +57,22 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
               </b>
             </div>
           ) : null}
-          <b className={`text-lg text-white font-semibold ${styles.taskTitle}`}>
+          <b
+            className={`text-lg text-white font-semibold line-through ${styles.taskTitle}`}
+          >
             {title}
           </b>
         </div>
 
-        <p
-          className={`text-smm font-medium ml-auto ${
-            isExpired ? "text-expired" : "text-green"
-          }`}
-        >
-          {completed}
-        </p>
+        {completed ?? (
+          <p
+            className={`text-smm font-medium ml-auto ${
+              isExpired ? "text-expired" : "text-green"
+            }`}
+          >
+            {completed}
+          </p>
+        )}
       </div>
     </Link>
   );
