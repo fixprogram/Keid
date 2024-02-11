@@ -6,14 +6,14 @@
 // import { useQuery } from "@tanstack/react-query";
 // import { DailyTasks } from "@/features/DailyTasks";
 // import { HabitCard } from "./HabitCard";
-// import { ChallengeCard, getIsCompletedForToday } from "@/entities/challenge";
+// import { ChallengeCard, gethasCompletedToday } from "@/entities/challenge";
 // import Cards from "@/widgets/Overview/ui/Cards";
 // import { CardType } from "@/widgets/Overview/config/types";
 // import { Challenge, Habit, Task } from "@prisma/client";
 // import { TaskType } from "@/shared/config/types";
 // import { getOverviewData } from "@/server/actions";
 
-// type ChallengeType = Challenge & { isCompletedForToday: boolean };
+// type ChallengeType = Challenge & { hasCompletedToday: boolean };
 
 // type DataType = {
 //   tasks: TaskType[];
@@ -63,7 +63,7 @@
 //                 <HabitCard
 //                   link={`/habits/${habit.id}`}
 //                   {...habit}
-//                   isCompletedForToday={getIsCompletedForToday(habit)}
+//                   hasCompletedToday={gethasCompletedToday(habit)}
 //                   key={habit.id}
 //                 />
 //               ))}

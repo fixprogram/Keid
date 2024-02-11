@@ -36,6 +36,14 @@ model Project {
   isStarred       Boolean
   isArchived      Boolean
   completed       Int
+  metrics         Metric[]
+}
+
+type Metric {
+  title           String
+  goalValue       String?
+  currentValue    String
+  comments        Comment[]
 }
 
 model Task {
@@ -52,6 +60,7 @@ model Task {
   repeats        String
   description    String
   points         Int        @default(0)
+  metrics        String[]
 }
 
 model Habit {

@@ -1,5 +1,5 @@
 import Overlay from "@/shared/ui/Overlay";
-import Popup from "@/shared/ui/Popup";
+import { Popup } from "@/shared/ui/Popup";
 import PopupLine from "@/shared/ui/PopupLine";
 import { FC, Fragment, useCallback } from "react";
 import PopupIdle from "./PopupIdle";

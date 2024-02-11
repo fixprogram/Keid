@@ -1,4 +1,4 @@
-import { updateProgress } from "@/app/lib/data/challenge/updateProgress";
+// import { updateProgress } from "@/app/lib/data/challenge/updateProgress";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ data: "Challenge id can't be empty" });
   }
 
-  const challenge = await updateProgress(id, progress, comment);
+  // const challenge = await updateProgress(id, progress, comment);
 
-  return NextResponse.json(challenge);
+  return NextResponse.json({});
 }

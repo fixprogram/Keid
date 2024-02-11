@@ -38,6 +38,7 @@ export function useTaskFormSubmit() {
           : state.activeProject.title,
       repeats: state.activeRepeatsOption,
       points: state.points,
+      metrics: state.activeMetrics,
     }),
     shallow
   );

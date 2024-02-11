@@ -9,7 +9,7 @@ export enum PopupAddState {
 }
 
 type NavigationDataType = {
-  userProjectNames: Project[];
+  userProjects: Project[];
   projectAmount: number;
   userId: string;
 };
@@ -19,7 +19,7 @@ export interface NavigationState {
   popupStyle: "gray" | "black";
   popupAddState: "idle" | PopupAddState;
   popupAddOpened: boolean;
-  userProjectNames: Project[];
+  userProjects: Project[];
   projectAmount: number;
   openPopupAdd: () => void;
   closePopupAdd: () => void;
@@ -34,10 +34,11 @@ export const useNavigationStore = createWithEqualityFn<NavigationState>(
     popupStyle: "gray",
     popupAddState: "idle",
     popupAddOpened: false,
-    userProjectNames: [
+    userProjects: [
       {
         title: "No project",
         style: "01",
+        metrics: [],
       },
     ],
     projectAmount: 0,

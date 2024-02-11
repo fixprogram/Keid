@@ -21,6 +21,7 @@ export const useTaskStore = createWithEqualityFn<TaskState>((set) => ({
     repeats: "Once",
     description: "",
     points: 0,
+    metrics: [],
   },
   setTaskData: (data: Task) => set(() => ({ data })),
 }));

@@ -8,6 +8,7 @@ import AddButton from "@/shared/ui/AddButton";
 import { PopupRepeatsOption } from "./PopupRepeatsOption";
 import { PopupStyleList } from "./PopupStyleList";
 import { PopupPoints } from "./PopupPoints";
+import { PopupMetrics } from "./PopupMetrics";
 
 export default function PopupTask() {
   const handleFormSubmit = useTaskFormSubmit();
@@ -59,6 +60,8 @@ export default function PopupTask() {
         <div className="flex justify-between mt-6">
           <PopupRepeatsOption />
         </div>
+
+        <PopupMetrics />
 
         <div className="flex justify-between mt-6">
           <PopupPoints />

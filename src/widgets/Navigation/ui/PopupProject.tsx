@@ -5,6 +5,7 @@ import { usePopupStore } from "../model/usePopupStore";
 import { useProjectFormSubmit } from "../model/useProjectFormSubmit";
 import { PopupInputTitle } from "./PopupInputTitle";
 import AddButton from "@/shared/ui/AddButton";
+import Icon from "@/shared/ui/Icon";
 
 export default function PopupProject() {
   const [isStyleListOpened, setProjectStyle] = usePopupStore((state) => [
@@ -26,6 +27,14 @@ export default function PopupProject() {
     <section className="px-5 my-5">
       <form method="post" onSubmit={handleFormSubmit}>
         <PopupInputTitle placeholder="Project title..." />
+
+        <div className="mt-6">
+          <span className="font-bold text-deactive uppercase text-xxs">
+            Metrics
+          </span>
+
+          <Icon name="add" width={48} height={48} />
+        </div>
 
         <div className="mt-6">
           <span className="font-bold text-deactive uppercase text-xxs">

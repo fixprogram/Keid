@@ -1,13 +1,15 @@
 "use client";
 
-import { getIsCompletedForToday, ChallengeCard } from "@/entities/challenge";
+import { ChallengeCard } from "@/entities/challenge";
+import { HabitCard } from "@/entities/habit";
 import { mapTasksIntoHierarchy } from "@/entities/task";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { DailyTasks } from "@/features/DailyTasks";
 import { links } from "@/shared/config/links";
 import { fetcher } from "@/shared/lib/utils/fetcher";
+import { hasCompletedToday } from "@/shared/lib/utils/hasCompletedToday";
 import { useDashboardStore, DateType } from "@/templates/DashboardPage";
-import { HabitCard } from "@/templates/DashboardPage/ui/HabitCard";
+import { Habit } from "@prisma/client";
 import useSWR, { SWRConfig } from "swr";
 
 function OverviewContent() {
@@ -37,7 +39,7 @@ function OverviewContent() {
             </h3>
             {taskTrees.length ? (
               <section
-                className="mt-4 flex flex-col gap-4"
+                className="mt-5 flex flex-col gap-4"
                 style={{ maxHeight: 272, overflowY: "scroll" }}
               >
                 {taskTrees.map((task) => (
@@ -51,15 +53,11 @@ function OverviewContent() {
             <h3 className="font-poppins font-semibold text-xl text-white">
               Habits
             </h3>
-            <section
-              className="flex align-center mt-4 gap-4"
-              style={{ overflowX: "scroll" }}
-            >
-              {habits.map((habit: any) => (
+            <section className="flex align-center mt-5 gap-4 flex-col">
+              {habits.map((habit: Habit) => (
                 <HabitCard
-                  link={`/habits/${habit.id}`}
                   {...habit}
-                  isCompletedForToday={getIsCompletedForToday(habit)}
+                  hasCompletedToday={hasCompletedToday(habit)}
                   key={habit.id}
                 />
               ))}
@@ -71,7 +69,7 @@ function OverviewContent() {
               Challenges
             </h3>
           </section>
-          <section className="flex flex-col mt-4 gap-4">
+          <section className="flex flex-col mt-5 gap-4">
             {challenges.map((challenge: any) => (
               <ChallengeCard {...challenge} key={challenge.id} />
             ))}

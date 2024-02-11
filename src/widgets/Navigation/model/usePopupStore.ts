@@ -19,6 +19,7 @@ interface PopupStateType {
   points: number;
   isMembersOpened: boolean;
   members: string[];
+  activeMetrics: string[];
   setTitle: (newTitle: string) => void;
   setStyle: (newStyle: string) => void;
   openStyleList: () => void;
@@ -35,6 +36,7 @@ interface PopupStateType {
   closeMembers: () => void;
   setMembers: (newMembers: string[]) => void;
   reset: () => void;
+  setActiveMetrics: (newActiveMetrics: string[]) => void;
 }
 
 const initialDeadline = new Date();
@@ -57,6 +59,7 @@ const INITIAL_STATE = {
   points: 0,
   members: [],
   isMembersOpened: false,
+  activeMetrics: [],
 };
 
 export const usePopupStore = createWithEqualityFn<PopupStateType>(
@@ -88,5 +91,8 @@ export const usePopupStore = createWithEqualityFn<PopupStateType>(
     closeMembers: () => set(() => ({ isMembersOpened: false })),
     setMembers: (newMembers) => set({ members: newMembers }),
     reset: () => set(() => ({ ...INITIAL_STATE })),
+    setActiveMetrics: (newActiveMetrics: string[]) => ({
+      activeMetrics: newActiveMetrics,
+    }),
   })
 );

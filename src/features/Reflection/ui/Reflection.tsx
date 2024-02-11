@@ -1,6 +1,5 @@
 import { addReflection } from "@/server/actions";
 import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
-import AddButton from "@/shared/ui/AddButton";
 import { Button } from "@/shared/ui/Button";
 import { SubmitButton } from "@/shared/ui/SubmitButton";
 import { Reflection as ReflectionType } from "@prisma/client";
@@ -11,8 +10,6 @@ interface ReflectionPropsType {
 }
 
 export const Reflection: FC<ReflectionPropsType> = ({ data }) => {
-  // const [mood, setMood] = useState(0)
-
   if (!data) {
     return (
       <div className="mt-8 w-full">
@@ -30,7 +27,7 @@ export const Reflection: FC<ReflectionPropsType> = ({ data }) => {
             <label className="text-white">Note</label>
             <textarea style={{ margin: "24px 0" }} name="note" />
 
-            <SubmitButton>{"Save"}</SubmitButton>
+            <SubmitButton>Save</SubmitButton>
           </form>
         </PopupWithOverlay>
       </div>

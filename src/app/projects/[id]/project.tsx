@@ -50,7 +50,7 @@ export default function Project({ id }: ProjectPropsType) {
     <Layout isBottomGradientShowed={false}>
       <ProjectHeader title={title} style={style} isStarred={isStarred} />
 
-      <Component initialTasks={tasks} />
+      <Component initialTasks={tasks} {...data} />
     </Layout>
   );
 }

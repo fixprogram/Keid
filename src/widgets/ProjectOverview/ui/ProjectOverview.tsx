@@ -1,5 +1,17 @@
+import { Metric } from "@/entities/metric";
+import { ProjectMetrics } from "@/widgets/ProjectMetrics";
+import { Metric as MetricType } from "@prisma/client";
 import { FC } from "react";
 
-export const ProjectOverview: FC = () => {
-  return <div className="text-white">Project overview</div>;
+interface ProjectOverviewPropsType {
+  metrics: MetricType[];
+}
+
+export const ProjectOverview: FC<ProjectOverviewPropsType> = ({ metrics }) => {
+  return (
+    <div className="text-white">
+      Project overview
+      <ProjectMetrics metrics={metrics} />
+    </div>
+  );
 };

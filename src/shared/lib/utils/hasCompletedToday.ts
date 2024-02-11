@@ -1,11 +1,7 @@
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { Challenge, CommentType, Habit } from "@prisma/client";
 
-// TODO: Move lower in architecture
-export const getIsCompletedForToday = (
-  entity: Challenge | Habit,
-  userId?: string
-) => {
+export const hasCompletedToday = (entity: Challenge | Habit) => {
   return Boolean(
     entity.comments.filter(
       (entity) =>

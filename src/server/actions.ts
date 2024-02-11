@@ -14,6 +14,7 @@ import {
   Challenge,
   CommentType,
   Habit,
+  Metric,
   Reflection,
   Task,
 } from "@prisma/client";
@@ -23,6 +24,8 @@ import { getTaskById } from "@/app/lib/data/task/getTaskById";
 import { getTasksByIds } from "@/app/lib/data/task/getTasksByIds";
 import { getTodayReflection } from "@/templates/DashboardPage/api/getTodayReflection";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { sortCompletedToday } from "@/shared/lib/utils/sortCompletedToday";
 
 export const getOverviewData = cache(async (dateType: DateType) => {
   const user = await getServerUser();
@@ -84,23 +87,16 @@ export const getOverviewData = cache(async (dateType: DateType) => {
     getTodayHabits(userId),
     getTodayChallenges(userId),
   ]);
-  //
-
-  //   Task & {
-  //     isFavorite: boolean;
-  //     projectTitle: string;
-  //   }
 
   return {
     projectAmount,
-    // overdueTaskAmount,
     totalTaskAmount,
     tasks: mapAndSortTasks(tasks, projects),
     userName: user.name,
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,
-    habits,
-    challenges,
+    habits: sortCompletedToday(habits),
+    challenges: sortCompletedToday(challenges),
   };
 });
 
@@ -422,4 +418,47 @@ export async function addReflection(formData: FormData) {
   });
 
   revalidatePath("/dashboard/productivity");
+}
+
+const schema = z.object({
+  title: z.string({
+    invalid_type_error: "Empty Title",
+  }),
+  currentValue: z.string({
+    invalid_type_error: "Empty Title",
+  }),
+  goalValue: z.string().nullable(),
+});
+
+export async function addMetric(projectId: string, formData: FormData) {
+  const user = await getServerUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
+  const validatedFields = schema.safeParse({
+    title: formData.get("title"),
+    currentValue: formData.get("currentValue"),
+    goalValue: formData.get("goalValue"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const metric: Metric = {
+    ...validatedFields.data,
+    // goalValue: validatedFields.data.goalValue ?? null,
+    comments: [],
+  };
+
+  await prisma.project.update({
+    where: { id: projectId },
+    data: { metrics: { push: metric } },
+  });
+
+  revalidatePath(`/projects/${projectId}`);
 }

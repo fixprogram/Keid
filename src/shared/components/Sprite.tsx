@@ -783,6 +783,28 @@ export default function Sprite() {
             strokeLinejoin="round"
           />
         </symbol>
+
+        <symbol
+          id="icon-short-complete"
+          width="40"
+          height="40"
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="20.9883"
+            cy="20"
+            r="19"
+            stroke="#35383F"
+            strokeWidth="2"
+          />
+          <path
+            d="M26.9883 17.6471L25.2383 16L20.2383 20.7059L17.7383 18.3529L15.9883 20L20.2383 24L26.9883 17.6471Z"
+            fill="white"
+            fillOpacity="0.4"
+          />
+        </symbol>
       </defs>
     </svg>
   );

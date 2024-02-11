@@ -3,7 +3,7 @@ import { useAddComment } from "@/features/Comments/models/useAddComment";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import AddButton from "@/shared/ui/AddButton";
 import Overlay from "@/shared/ui/Overlay";
-import Popup from "@/shared/ui/Popup";
+import { Popup } from "@/shared/ui/Popup";
 import PopupLine from "@/shared/ui/PopupLine";
 import {
   FC,

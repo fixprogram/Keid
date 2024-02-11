@@ -15,12 +15,12 @@ const getNavData = cache(async () => {
   }
 
   const userId = user.id;
-  const userProjectNames = await getUserProjectNames(userId);
-  const projectAmount = userProjectNames.length;
+  const userProjects = await getUserProjectNames(userId);
+  const projectAmount = userProjects.length;
 
   return {
     projectAmount,
-    userProjectNames,
+    userProjects,
     userId,
     userName: user.name,
   };
@@ -47,7 +47,7 @@ export default async function Layout({ children }: LayoutPropsType) {
         </Container>
         <Navigation navData={navData} />
       </section>
-
+      {/* 
       <div
         className="absolute w-[310px] h-[310px] blur-[40.7742px] opacity-50 top-[-11.15%] left-[-32.53%] mix-blend-overlay rounded-full z-10"
         style={{
@@ -62,7 +62,7 @@ export default async function Layout({ children }: LayoutPropsType) {
           background:
             "radial-gradient(57.72% 57.72% at 61.86% 38.92%, #EF88ED 0%, #7269E3 54.46%, #8350DB 100%)",
         }}
-      />
+      /> */}
     </section>
   );
 }

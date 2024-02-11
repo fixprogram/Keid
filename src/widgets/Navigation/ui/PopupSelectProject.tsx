@@ -6,17 +6,19 @@ import { shallow } from "zustand/shallow";
 import { usePopupStore } from "@/widgets/Navigation/model/usePopupStore";
 
 export const PopupSelectProject: FC = () => {
-  const projects = useNavigationStore((state) => state.userProjectNames);
-  const [taskProject, setTaskProject] = usePopupStore(
+  const projects = useNavigationStore((state) => state.userProjects);
+  const [activeProject, setTaskProject] = usePopupStore(
     (state) => [state.activeProject, state.setProject],
     shallow
   );
 
+  console.log("projects: ", projects);
+
   useEffect(() => {
-    if (taskProject.title === "") {
+    if (activeProject.title === "") {
       setTaskProject(projects[0]);
     }
-  }, [projects, taskProject.title, setTaskProject]);
+  }, [projects, activeProject.title, setTaskProject]);
 
   const handleSelectChange = (event: SyntheticEvent) => {
     const target = event.target as HTMLSelectElement;
@@ -41,7 +43,7 @@ export const PopupSelectProject: FC = () => {
       <select
         className="text-white font-bold"
         style={{ background: "inherit" }}
-        value={taskProject.title}
+        value={activeProject.title}
         onChange={handleSelectChange}
       >
         {projects.map((pr) => (

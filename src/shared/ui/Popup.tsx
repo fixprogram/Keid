@@ -10,7 +10,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Popup = ({
+export const Popup = ({
   isHidden = true,
   popupStyle,
   children,
@@ -47,5 +47,3 @@ const Popup = ({
     </section>
   );
 };
-
-export default Popup;

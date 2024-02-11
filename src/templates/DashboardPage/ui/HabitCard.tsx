@@ -12,7 +12,7 @@ type HabitCardPropsType = {
   style: string;
   streak: number;
   repeats: number;
-  isCompletedForToday: boolean;
+  hasCompletedToday: boolean;
 };
 
 export const HabitCard: FC<HabitCardPropsType> = ({
@@ -21,7 +21,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
   style,
   streak,
   repeats,
-  isCompletedForToday,
+  hasCompletedToday,
 }) => {
   const taskStyle = projectStyles[style as ProjectStyleKey];
   const setScrollY = useDashboardStore((state) => state.setScrollY);
@@ -39,7 +39,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
     >
       <div className="min-w-[80px] h-[70px] rounded-full grid place-items-center relative">
         <div className="absolute">
-          {isCompletedForToday ? (
+          {hasCompletedToday ? (
             <Icon name="completed" width={40} height={40} />
           ) : (
             <b

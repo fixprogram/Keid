@@ -1,18 +1,17 @@
 import { FC } from "react";
 
-interface Props {
+interface ContainerPropsType {
   withNav?: boolean;
   children: React.ReactNode;
 }
 
-const Container: FC<Props> = ({ withNav = true, children }) => {
+const Container: FC<ContainerPropsType> = ({ withNav = true, children }) => {
   return (
     <section
       className={`${
-        withNav ? "px-6 pt-6 pb-[120px]" : "p-6"
+        withNav ? "px-3 pt-3 pb-[120px]" : "p-3"
       } flex flex-col grow`}
     >
-      {/* <section className={`${withNav ? "px-6 pt-6 pb-[120px]" : "p-10"}`}> */}
       {children}
     </section>
   );

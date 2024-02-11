@@ -49,7 +49,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
   const progress = Math.floor((streak / repeats) * 100);
 
   const challengeStyle = projectStyles[style as ProjectStyleKey];
-  // const isCompletedForToday = getIsCompletedForToday(data)
+  // const hasCompletedToday = gethasCompletedToday(data)
 
   return (
     <Layout withNav={false} isBottomGradientShowed={false}>

@@ -1,121 +1,70 @@
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
+import { CompleteButton } from "@/shared/ui/CompleteButton";
+import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC } from "react";
+import { HabitProgress } from "./HabitProgress";
+import { useCompleteForToday } from "../models/useCompleteForToday";
 
 type HabitCardPropsType = {
-  link: string;
+  id: string;
   title: string;
-  //   deadline: string | null;
   style: string;
   streak: number;
-  //   isStarred?: boolean;
+  repeats: number;
+  hasCompletedToday: boolean;
 };
 
 export const HabitCard: FC<HabitCardPropsType> = ({
-  link,
+  id,
   title,
   style,
   streak,
-  //   isStarred = false,
+  repeats,
+  hasCompletedToday,
 }) => {
-  const taskStyle = projectStyles[style as ProjectStyleKey];
+  const habitStyle = projectStyles[style as ProjectStyleKey];
+  const progress = Math.floor((streak / repeats) * 100);
+
+  const { handleComplete, isLoadingComplete } = useCompleteForToday(id);
 
   return (
-    <Link href={link}>
-      <div className="bg-background2 p-5 flex gap-5 rounded-xl relative">
-        {/* {isStarred ? (
-          <div className="absolute top-3 left-3">
-            <Icon name="star-sm" width={8} height={8} />
-          </div>
-        ) : null} */}
-
-        {/* <RoundProgressBar
-          id={link}
-          progress={progress}
-          stopColors={taskStyle.progressGradient}
-        /> */}
-
-        <div>
-          <b className="text-white">{streak}</b>
+    <div
+      className={`${
+        hasCompletedToday ? "border-[1px] border-deactive" : "bg-background2"
+      } p-3 flex gap-5 rounded-xl relative`}
+    >
+      {hasCompletedToday ? (
+        <div className="w-[40px]">
+          <Icon name="completed" width={40} height={40} />
         </div>
+      ) : (
+        <CompleteButton
+          onClick={handleComplete}
+          isLoading={isLoadingComplete}
+        />
+      )}
 
-        {/* <div className="flex flex-col justify-center align-center"> */}
-        <b className="text-lg text-white font-semibold">{title}</b>
+      <Link
+        href={`/habits/${id}`}
+        className="w-full flex justify-between flex-wrap"
+      >
+        <b
+          className={`text-lg text-white font-semibold ${
+            hasCompletedToday ? "line-through	" : ""
+          }`}
+        >
+          {title}
+        </b>
 
-        {/* </div> */}
-      </div>
-    </Link>
+        <b style={{ color: habitStyle.background, fontSize: "10px" }}>
+          {streak}/{repeats}
+        </b>
+
+        <HabitProgress style={style} progress={progress} />
+      </Link>
+
+      {/* Settings button */}
+    </div>
   );
 };
-
-// import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
-// import Icon from "@/shared/ui/Icon";
-// import Link from "next/link";
-// import { FC } from "react";
-
-// type RepeatedTaskPropsType = {
-//   link: string;
-//   title: string;
-//   deadline: string | null;
-//   style: string;
-//   progress: number;
-//   daysToRepeat: number;
-//   isStarred?: boolean;
-// };
-
-// export const RepeatedTask: FC<RepeatedTaskPropsType> = ({
-//   link,
-//   title,
-//   deadline,
-//   style,
-//   progress,
-//   daysToRepeat,
-//   isStarred = false,
-// }) => {
-//   const taskStyle = projectStyles[style as ProjectStyleKey];
-
-//   return (
-//     <Link
-//       href={link}
-//       className="min-h-[100px] p-4 pl-5 rounded-xl bg-background2"
-//     >
-//       <div className="grid grid-cols-task gap-x-5 gap-y-4 relative">
-//         {isStarred ? (
-//           <div className="absolute top-3 left-3">
-//             <Icon name="star-sm" width={8} height={8} />
-//           </div>
-//         ) : null}
-
-//         <div>
-//           <h3 className="text-white text-lg font-semibold">{title}</h3>
-//         </div>
-
-//         {deadline ? (
-//           <p
-//             className="font-medium text-deactive text-sm"
-//             style={{ color: taskStyle.background }}
-//           >
-//             {deadline}
-//           </p>
-//         ) : null}
-
-//         <div
-//           className="w-full h-3 bg-white/10 rounded-full"
-//           style={{ gridArea: "2 / 1 / 2 / 4" }}
-//         >
-//           <div
-//             className="rounded-full h-full flex items-center justify-center"
-//             style={{
-//               width: `${progress}%`,
-//               background: taskStyle.background,
-//             }}
-//           >
-//             <span className="text-sm text-white font-bold px-3 rounded-full h-[24px]">
-//               {Math.floor((progress / 100) * daysToRepeat)}/{daysToRepeat}
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-//     </Link>
-//   );
-// };

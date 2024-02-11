@@ -6,27 +6,13 @@ import { NAV_LINKS } from "../config/consts";
 import Icon from "@/shared/ui/Icon";
 import { usePathname } from "next/navigation";
 import { useNavigationStore } from "../model/useNavigationStore";
-import { useQuery } from "@tanstack/react-query";
 import { AddPopup } from "./AddPopup";
 import { MAX_WIDTH } from "@/shared/config/consts";
-import { useUser } from "@/entities/user/models/userContext";
-
-// async function getData() {
-//   const res = await fetch(`/api/navigation`);
-//   return await res.json();
-// }
 
 export default function Navigation({ navData }: { navData: any }) {
   const pathname = usePathname();
 
   const setData = useNavigationStore((state) => state.setData);
-
-  // const user = useUser();
-
-  // const { data } = useQuery({
-  //   queryKey: ["navigation", user?.userId],
-  //   queryFn: getData,
-  // });
 
   // TODO: get rid of it and download user info only in userProvider
   useEffect(() => {

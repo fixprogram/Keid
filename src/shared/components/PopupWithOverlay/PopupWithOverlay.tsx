@@ -1,6 +1,6 @@
 import Overlay from "@/shared/ui/Overlay";
-import Popup from "@/shared/ui/Popup";
-import { FC, ReactNode, useEffect } from "react";
+import { Popup } from "@/shared/ui/Popup";
+import { FC, ReactElement, ReactNode, cloneElement, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { usePopupWithOverlay } from "./PopupWithOverlay.hook";
 import { MAX_WIDTH } from "@/shared/config/consts";
@@ -24,7 +24,7 @@ const STYLES: Record<Position, {}> = {
 
 interface PopupWithOverlayPropsType {
   children: ReactNode;
-  btn: ReactNode;
+  btn: ReactElement;
   positioned: Position;
   isBlack?: boolean;
   isClosed?: boolean;
@@ -39,11 +39,11 @@ export const PopupWithOverlay: FC<PopupWithOverlayPropsType> = ({
 }) => {
   const { isOpened, handleClosePopup, handleOpenPopup } = usePopupWithOverlay();
 
+  const button = cloneElement(btn, { onClick: handleOpenPopup });
+
   return (
     <>
-      <button type="button" onClick={handleOpenPopup}>
-        {btn}
-      </button>
+      {button}
 
       {isOpened && !isClosed
         ? createPortal(

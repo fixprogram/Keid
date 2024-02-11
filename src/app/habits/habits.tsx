@@ -12,6 +12,7 @@ import { useState } from "react";
 import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
+import { hasCompletedToday } from "@/shared/lib/utils/hasCompletedToday";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
@@ -75,7 +76,11 @@ export default function Habits() {
 
       <List>
         {filteredHabits[activeFilter as FilterType].map((habit) => (
-          <HabitCard key={habit.id} link={`/habits/${habit.id}`} {...habit} />
+          <HabitCard
+            key={habit.id}
+            {...habit}
+            hasCompletedToday={hasCompletedToday(habit)}
+          />
         ))}
       </List>
     </Layout>

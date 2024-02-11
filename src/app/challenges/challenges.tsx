@@ -9,7 +9,7 @@ import React, { FC, useMemo } from "react";
 import { useState } from "react";
 import { Challenge, CommentType, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
-import { ChallengeCard, getIsCompletedForToday } from "@/entities/challenge";
+import { ChallengeCard } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 
 type FilterType = "Active" | "Completed" | "Archived";
@@ -76,11 +76,7 @@ export const Challenges: FC = () => {
 
       <List>
         {filteredChallenges[activeFilter as FilterType].map((challenge) => (
-          <ChallengeCard
-            key={challenge.id}
-            {...challenge}
-            // isCompletedForToday={getIsCompletedForToday(challenge, userId)}
-          />
+          <ChallengeCard key={challenge.id} {...challenge} />
         ))}
       </List>
     </Layout>

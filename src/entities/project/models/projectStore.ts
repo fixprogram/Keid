@@ -27,8 +27,9 @@ export const useProjectStore = createWithEqualityFn<ProjectState>(
       userProjectNames: [],
       completed: 0,
       isArchived: false,
+      metrics: [],
     },
-    activeScreen: PROJECT_SCREENS[1],
+    activeScreen: PROJECT_SCREENS[0],
     setActiveScreen: (newActiveScreen: ProjectScreenType) =>
       set(() => ({ activeScreen: newActiveScreen })),
     setData: (newData: DataType) => set(() => ({ data: newData })),

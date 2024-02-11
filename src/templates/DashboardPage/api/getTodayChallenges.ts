@@ -23,14 +23,14 @@ export async function transformChallenges(challenges: Challenge[]) {
   const mappedChallenges = challenges.map((challenge) => {
     const host = hosts.find((host) => host.id === challenge.userId);
 
-    let isCompletedForToday = false;
+    let hasCompletedToday = false;
 
     if (userId && userId !== challenge.userId) {
       const member = challenge.members.find(
         (member) => member.id === userId
       ) as Member;
 
-      isCompletedForToday = Boolean(
+      hasCompletedToday = Boolean(
         member.comments.filter(
           (comment) =>
             comment.type === CommentType.PROGRESS_UPDATE &&
@@ -38,7 +38,7 @@ export async function transformChallenges(challenges: Challenge[]) {
         ).length
       );
     } else {
-      isCompletedForToday = Boolean(
+      hasCompletedToday = Boolean(
         challenge.comments.filter(
           (comment) =>
             comment.type === CommentType.PROGRESS_UPDATE &&
@@ -53,7 +53,7 @@ export async function transformChallenges(challenges: Challenge[]) {
         hostId: host?.id,
         userId,
         hostName: host?.name,
-        isCompletedForToday,
+        hasCompletedToday,
       },
     });
   });
@@ -65,8 +65,13 @@ export const getTodayChallenges = async (userId: string) => {
   const challenges = await prisma.challenge.findMany({
     where: {
       OR: [
-        { userId, isArchived: false },
-        { members: { some: { id: userId } }, isArchived: false },
+        { userId, isArchived: false, failed: 0, completed: 0 },
+        {
+          members: { some: { id: userId } },
+          isArchived: false,
+          failed: 0,
+          completed: 0,
+        },
       ],
     },
   });

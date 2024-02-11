@@ -5,6 +5,9 @@ import Icon from "@/shared/ui/Icon";
 import { useDashboardStore } from "@/templates/DashboardPage";
 import Link from "next/link";
 import { FC } from "react";
+import { ChallengeProgress } from "./ChallengeProgress";
+import { CompleteButton } from "@/shared/ui/CompleteButton";
+import { useCompleteForToday } from "../model/useCompleteForToday";
 
 interface ChallengeCardPropsType {
   id: string;
@@ -12,7 +15,7 @@ interface ChallengeCardPropsType {
   style: string;
   streak: number;
   repeats: number;
-  isCompletedForToday: boolean;
+  hasCompletedToday: boolean;
 }
 
 export const ChallengeCard: FC<ChallengeCardPropsType> = ({
@@ -21,56 +24,53 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
   style,
   streak,
   repeats,
-  isCompletedForToday,
+  hasCompletedToday,
 }) => {
   const setScrollY = useDashboardStore((state) => state.setScrollY);
 
-  const progress = Math.floor((streak / repeats) * 100);
-
-  const gradient = projectStyles[style as ProjectStyleKey].gradient;
+  const { handleComplete, isLoadingComplete } = useCompleteForToday(id);
 
   return (
-    <Link
-      href={`/challenges/${id}`}
-      className="p-1 rounded-[20px] relative block"
-      style={{
-        background: gradient,
-      }}
-      onClick={() => setScrollY(window.scrollY)}
+    <section
+      className={`${
+        hasCompletedToday ? "border-[1px] border-deactive" : "bg-background2"
+      } p-3 flex gap-9 rounded-xl relative max-w-[160px] flex-wrap`}
     >
-      <section className={` p-5 rounded-[18px]`}>
-        <div className={`text-active`}>
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="font-poppins font-semibold text-xl">{title}</h3>
-              <p className="font-medium text-base">
-                {streak}/{repeats} is completed
-              </p>
-            </div>
-          </div>
+      <Link
+        href={`/challenges/${id}`}
+        className="w-full flex justify-between flex-wrap"
+      >
+        <b
+          className={`text-lg text-white font-semibold ${
+            hasCompletedToday ? "line-through	" : ""
+          }`}
+        >
+          {title}
+        </b>
+      </Link>
 
-          <div className="flex gap-[25px] items-center mt-[10px]">
-            <div className="h-[12px] w-auto flex-grow bg-white rounded-[5px]">
-              <div
-                className="h-full"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #353843 0%, #181A20 100%)",
-                  borderRadius: "5px 2px 2px 5px",
-                  width: `${progress}%`,
-                }}
-              ></div>
-            </div>
-            {isCompletedForToday ? (
-              <Icon name="completed" width={40} height={40} />
-            ) : (
-              <span className="text-active text-base font-bold">
-                {progress}%
-              </span>
-            )}
+      <div className="flex justify-between w-full">
+        {/* <b style={{ color: habitStyle.background, fontSize: "10px" }}>
+          {streak}/{repeats}
+        </b>
+
+        <HabitProgress style={style} progress={progress} /> */}
+
+        <ChallengeProgress style={style} repeats={repeats} streak={streak} />
+
+        {hasCompletedToday ? (
+          <div className="w-[40px]">
+            <Icon name="completed" width={40} height={40} />
           </div>
-        </div>
-      </section>
-    </Link>
+        ) : (
+          <CompleteButton
+            onClick={handleComplete}
+            isLoading={isLoadingComplete}
+          />
+        )}
+      </div>
+
+      {/* Settings button */}
+    </section>
   );
 };
