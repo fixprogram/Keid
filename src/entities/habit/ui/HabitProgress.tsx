@@ -18,7 +18,7 @@ export const HabitProgress: FC<HabitProgressPropsType> = ({
         className="h-full rounded-full"
         style={{
           background: habitStyle.gradient,
-          width: `${progress}%`,
+          width: `${progress > 100 ? 100 : progress}%`,
         }}
       />
     </div>
