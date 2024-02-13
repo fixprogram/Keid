@@ -27,7 +27,8 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { sortCompletedToday } from "@/shared/lib/utils/sortCompletedToday";
 
-export const getOverviewData = cache(async (dateType: DateType) => {
+export const getOverviewData = async (dateType: DateType) => {
+  // export const getOverviewData = cache(async (dateType: DateType) => {
   const user = await getServerUser();
 
   if (!user) {
@@ -98,7 +99,7 @@ export const getOverviewData = cache(async (dateType: DateType) => {
     habits: sortCompletedToday(habits),
     challenges: sortCompletedToday(challenges),
   };
-});
+};
 
 export async function getProductivityData(dateType: DateType) {
   const user = await getServerUser();

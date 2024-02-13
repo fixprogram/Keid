@@ -2,7 +2,7 @@ import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import { CompleteButton } from "@/shared/ui/CompleteButton";
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { HabitProgress } from "./HabitProgress";
 import { useCompleteForToday } from "../models/useCompleteForToday";
 
@@ -26,15 +26,16 @@ export const HabitCard: FC<HabitCardPropsType> = ({
   const habitStyle = projectStyles[style as ProjectStyleKey];
   const progress = Math.floor((streak / repeats) * 100);
 
-  const { handleComplete, isLoadingComplete } = useCompleteForToday(id);
+  const { handleComplete, isLoadingComplete, hasCompleted } =
+    useCompleteForToday(id, hasCompletedToday);
 
   return (
     <div
       className={`${
-        hasCompletedToday ? "border-[1px] border-deactive" : "bg-background2"
+        hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
       } p-3 flex gap-5 rounded-xl relative`}
     >
-      {hasCompletedToday ? (
+      {hasCompleted ? (
         <div className="w-[40px]">
           <Icon name="completed" width={40} height={40} />
         </div>
@@ -50,7 +51,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
       >
         <b
           className={`text-lg text-white font-semibold ${
-            hasCompletedToday ? "line-through	" : ""
+            hasCompleted ? "line-through	" : ""
           }`}
         >
           {title}
