@@ -30,8 +30,8 @@ export const HabitCard: FC<HabitCardPropsType> = ({
     <section
       className={`${
         hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
-      } p-3 flex gap-9 rounded-xl relative max-w-[48%] flex-wrap`}
-      style={{ aspectRatio: "1 / 1" }}
+      } p-3 flex gap-9 rounded-xl relative flex-wrap`}
+      style={{ aspectRatio: "1 / 1", maxWidth: "calc(50% - 8px)" }}
     >
       <Link
         href={`/habits/${id}`}
