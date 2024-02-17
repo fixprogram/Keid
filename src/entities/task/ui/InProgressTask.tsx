@@ -45,7 +45,7 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
   const { handleComplete, isLoadingComplete } = useComplete(id);
 
   return (
-    <div className={`flex flex-col gap-5`}>
+    <div className={`flex flex-col gap-4`}>
       <div
         className={`${
           isOpened || parentOpened ? "bg-background1" : "bg-background2"
@@ -59,11 +59,11 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
         `}
       >
         <div
-          className={`flex gap-5 p-5 ${
+          className={`flex gap-4 p-3 ${
             !projectTitle.length ? "items-center" : ""
           }`}
         >
-          <form action={handleComplete}>
+          <form action={handleComplete} style={{ height: 40 }}>
             <CompleteButton
               // onClick={handleComplete}
               isLoading={isLoadingComplete}
@@ -76,18 +76,18 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
           >
             {projectTitle ? (
               <div className="relative flex">
-                {isStarred ? (
+                {/* {isStarred ? (
                   <div className="absolute top-0 left-0">
                     <Icon name="starred" width={12} height={12} />
                   </div>
-                ) : null}
+                ) : null} */}
                 <Link
                   href={link}
                   style={{
                     color: taskStyle.background,
                     fontSize: 10,
                     lineHeight: "14px",
-                    marginLeft: isStarred ? "18px" : "0",
+                    // marginLeft: isStarred ? "18px" : "0",
                     display: "block",
                   }}
                 >
