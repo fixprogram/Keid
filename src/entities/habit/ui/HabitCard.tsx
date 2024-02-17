@@ -30,7 +30,8 @@ export const HabitCard: FC<HabitCardPropsType> = ({
     <section
       className={`${
         hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
-      } p-3 flex gap-9 rounded-xl relative max-w-[160px] flex-wrap`}
+      } p-3 flex gap-9 rounded-xl relative max-w-[48%] flex-wrap`}
+      style={{ aspectRatio: "1 / 1" }}
     >
       <Link
         href={`/habits/${id}`}
@@ -45,7 +46,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
         </b>
       </Link>
 
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between items-end w-full">
         <HabitProgress style={style} repeats={repeats} streak={streak} />
 
         {hasCompleted ? (
