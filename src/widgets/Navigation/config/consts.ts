@@ -48,23 +48,27 @@ export const NAV_LINKS = [
     iconSize: { width: 20, height: 20 },
     alt: "Dashboard page",
     to: "/dashboard/overview",
+    title: "Home",
   },
   {
     iconName: "goals",
     iconSize: { width: 19, height: 20 },
     alt: "Projects page",
     to: "/projects",
+    title: "Storage",
   },
   {
     iconName: "notification",
     iconSize: { width: 20, height: 22 },
     alt: "Notifications page",
     to: "/notifications",
+    title: "Statistics",
   },
   {
     iconName: "search",
     iconSize: { width: 21, height: 21 },
     alt: "Search page",
     to: "/search",
+    title: "Network",
   },
 ];

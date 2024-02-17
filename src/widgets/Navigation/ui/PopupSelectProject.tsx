@@ -12,8 +12,6 @@ export const PopupSelectProject: FC = () => {
     shallow
   );
 
-  console.log("projects: ", projects);
-
   useEffect(() => {
     if (activeProject.title === "") {
       setTaskProject(projects[0]);

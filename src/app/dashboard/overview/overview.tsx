@@ -32,48 +32,51 @@ function OverviewContent() {
     <>
       {dateType === DateType.Today ? (
         <>
-          {/* <DailyTasks tasks={tasks} /> */}
-          <section className="mt-8 relative">
-            <h3 className="font-poppins font-semibold text-xl text-white">
-              Tasks
-            </h3>
-            {taskTrees.length ? (
-              <section
+          {taskTrees.length ? (
+            <section className="mt-8 relative">
+              <h3 className="font-poppins font-semibold text-xl text-white">
+                Tasks
+              </h3>
+              <div
                 className="mt-5 flex flex-col gap-4"
                 style={{ maxHeight: 272, overflowY: "scroll" }}
               >
                 {taskTrees.map((task) => (
                   <TaskCard key={task.id} {...task} withoutDeadline />
                 ))}
-              </section>
-            ) : null}
-          </section>
-
-          <section className="mt-8">
-            <h3 className="font-poppins font-semibold text-xl text-white">
-              Habits
-            </h3>
-            <section className="flex align-center mt-5 gap-4 flex-col">
-              {habits.map((habit: Habit) => (
-                <HabitCard
-                  {...habit}
-                  hasCompletedToday={hasCompletedToday(habit)}
-                  key={habit.id}
-                />
-              ))}
+              </div>
             </section>
-          </section>
+          ) : null}
 
-          <section className="mt-8">
-            <h3 className="font-poppins font-semibold text-xl text-white">
-              Challenges
-            </h3>
-          </section>
-          <section className="flex flex-col mt-5 gap-4">
-            {challenges.map((challenge: any) => (
-              <ChallengeCard {...challenge} key={challenge.id} />
-            ))}
-          </section>
+          {habits.length ? (
+            <section className="mt-8">
+              <h3 className="font-poppins font-semibold text-xl text-white">
+                Habits
+              </h3>
+              <div className="flex align-center mt-5 gap-4 flex-wrap">
+                {habits.map((habit: Habit) => (
+                  <HabitCard
+                    {...habit}
+                    hasCompletedToday={hasCompletedToday(habit)}
+                    key={habit.id}
+                  />
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {challenges.length ? (
+            <section className="mt-8">
+              <h3 className="font-poppins font-semibold text-xl text-white">
+                Challenges
+              </h3>
+              <div className="flex flex-col mt-5 gap-4">
+                {challenges.map((challenge: any) => (
+                  <ChallengeCard {...challenge} key={challenge.id} />
+                ))}
+              </div>
+            </section>
+          ) : null}
         </>
       ) : null}
 

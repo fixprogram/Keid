@@ -40,6 +40,11 @@ export function useChallengeFormSubmit() {
   );
 
   const resetTask = usePopupStore((state) => state.reset);
+  // TODO: Дефолтный дедлайн не вызывает функцию подсчета повторений. Поэтому устанавливаем ее повторно. Пока костыль.
+  const setDeadline = usePopupStore((state) => state.setDeadline);
+
+  setDeadline(data.deadline);
+  //////////
 
   const mutation = useMutation({
     mutationKey: ["challenges"],

@@ -2,9 +2,8 @@ import "./globals.css";
 import Providers from "@/utils/providers";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import { Metadata, Viewport } from "next";
-import { inter, poppins } from "./ui/fonts";
+import { nunito } from "./ui/fonts";
 import { auth } from "./lib/auth";
-import { redirect } from "next/navigation";
 
 export const viewport: Viewport = {
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
@@ -22,8 +21,8 @@ export const metadata: Metadata = {
   keywords: ["nextjs", "nextjs13", "next13", "pwa", "next-pwa"],
   authors: [],
   icons: [
-    { rel: "apple-touch-icon", url: "/apple-touch-icon.png" },
-    { rel: "icon", url: "/icon-192.png" },
+    { rel: "apple-touch-icon", url: "/logo.svg" },
+    { rel: "icon", url: "/logo.svg" },
   ],
 };
 
@@ -42,7 +41,7 @@ export default async function RootLayout({ children }: RootLayoutPropsType) {
         <title>Keid</title>
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} font-sans`}
+        className={`${nunito.variable} font-sans`}
         style={{ maxWidth: MAX_WIDTH }}
       >
         <Providers session={session}>{children}</Providers>

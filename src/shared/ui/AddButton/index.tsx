@@ -10,10 +10,10 @@ export default function AddButton({
   return (
     <button
       type={type}
-      className="w-10 h-10 bg-primary rounded-full flex justify-center items-center	shadow-addBtn"
+      className="w-12 h-12 bg-primary rounded-full flex justify-center items-center	shadow-addBtn"
       onClick={() => handleClick()}
     >
-      <Icon name="plus" height={10} width={10} color={"#fff"} />
+      <Icon name="plus" height={16} width={16} color={"#fff"} />
     </button>
   );
 }

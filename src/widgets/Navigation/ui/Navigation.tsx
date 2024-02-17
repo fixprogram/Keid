@@ -30,7 +30,7 @@ export default function Navigation({ navData }: { navData: any }) {
       className="fixed bottom-0 w-full bg-background1/[.85] backdrop-blur-[10.8731px] z-20"
       style={{ maxWidth: MAX_WIDTH }}
     >
-      <ul className="flex pt-4 pb-10 px-[20px] mx-auto max-w-xs	 justify-between items-center">
+      <ul className="flex pt-4 pb-4 px-5 mx-auto justify-between items-center">
         {NAV_LINKS.map((navItem, index, arr) => {
           const isActive =
             pathname === navItem.to || pathname?.startsWith(navItem.to);
@@ -44,29 +44,23 @@ export default function Navigation({ navData }: { navData: any }) {
               className={`relative`}
               style={{ order: orderNumber }}
             >
-              <Link href={navItem.to}>
+              <Link href={navItem.to} className="flex items-center flex-col">
                 <Icon
                   name={`${navItem.iconName}${isActive ? "-active" : ""}`}
                   width={navItem.iconSize.width}
                   height={navItem.iconSize.height}
                   color={"#fff"}
                 />
-              </Link>
 
-              {isActive ? (
-                <div
-                  className="absolute w-16 h-16 rounded-2xl rotate-45	bg-secondary "
-                  style={{
-                    left: `calc(-32px + ${navItem.iconSize.width / 2}px)`,
-                    top: 64,
-                  }}
-                />
-              ) : null}
+                <span className="mt-1 text-white" style={{ fontSize: "10px" }}>
+                  {navItem.title}
+                </span>
+              </Link>
             </li>
           );
         })}
 
-        <li className="order-1">
+        <li className="order-1" style={{ marginTop: "-24px" }}>
           <AddPopup />
         </li>
       </ul>

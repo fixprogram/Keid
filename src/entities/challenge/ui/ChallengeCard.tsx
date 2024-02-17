@@ -29,36 +29,29 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
   const setScrollY = useDashboardStore((state) => state.setScrollY);
 
   const { handleComplete, isLoadingComplete, hasCompleted } =
-    useCompleteForToday(id, hasCompletedToday);
+    useCompleteForToday(id, hasCompletedToday, streak, repeats);
+
+  const challengeStyle = projectStyles[style as ProjectStyleKey];
 
   return (
     <section
       className={`${
         hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
-      } p-3 flex gap-9 rounded-xl relative max-w-[160px] flex-wrap`}
+      } p-3 flex gap-9 rounded-xl relative flex-wrap`}
     >
-      <Link
-        href={`/challenges/${id}`}
-        className="w-full flex justify-between flex-wrap"
-      >
-        <b
-          className={`text-lg text-white font-semibold ${
-            hasCompleted ? "line-through	" : ""
-          }`}
+      <div className="flex justify-between w-full gap-4">
+        <Link
+          href={`/challenges/${id}`}
+          className="w-full flex justify-between flex-wrap"
         >
-          {title}
-        </b>
-      </Link>
-
-      <div className="flex justify-between w-full">
-        {/* <b style={{ color: habitStyle.background, fontSize: "10px" }}>
-          {streak}/{repeats}
-        </b>
-
-        <HabitProgress style={style} progress={progress} /> */}
-
-        <ChallengeProgress style={style} repeats={repeats} streak={streak} />
-
+          <b
+            className={`text-lg text-white font-semibold ${
+              hasCompleted ? "line-through	" : ""
+            }`}
+          >
+            {title}
+          </b>
+        </Link>
         {hasCompleted ? (
           <div className="w-[40px]">
             <Icon name="completed" width={40} height={40} />
@@ -68,6 +61,27 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
             <CompleteButton isLoading={isLoadingComplete} />
           </form>
         )}
+      </div>
+
+      <div className="flex justify-between w-full flex-wrap gap-4">
+        <ChallengeProgress style={style} repeats={repeats} streak={streak} />
+
+        <div className="flex justify-between w-full">
+          <div>
+            <Icon name="avatar" width={24} height={24} />
+          </div>
+
+          <div
+            className="text-white py-2 px-3 rounded-full"
+            style={{
+              backgroundColor: challengeStyle.background,
+              fontSize: "10px",
+              fontWeight: 800,
+            }}
+          >
+            {streak}/{repeats}
+          </div>
+        </div>
       </div>
 
       {/* Settings button */}

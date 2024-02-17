@@ -1,6 +1,7 @@
 import { createWithEqualityFn } from "zustand/traditional";
 import { RepeatsOptionType } from "../config/types";
 import { REPEATS_OPTIONS } from "../config/consts";
+import { isDateToday } from "@/shared/lib/utils/isDateToday";
 
 interface PopupStateType {
   title: string;
@@ -76,7 +77,12 @@ export const usePopupStore = createWithEqualityFn<PopupStateType>(
         new Date(newDeadline).getTime() - new Date().getTime()
       );
 
-      const repeats = Math.floor(differenceInTime / (1000 * 3600 * 24));
+      const repeats = isDateToday(new Date(newDeadline))
+        ? 1
+        : Math.floor(differenceInTime / (1000 * 3600 * 24));
+
+      console.log("repeats: ", 0);
+
       return set(() => ({ deadline: newDeadline, repeats }));
     },
     openCalendar: () => set(() => ({ isCalendarOpened: true })),

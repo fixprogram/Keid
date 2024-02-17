@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        addBtn: "0px 8px 12px rgba(0, 0, 0, 0.25)",
+        addBtn: "0px 8px 12px rgba(36, 107, 253, 0.25)",
         button: "0px 8px 16px rgba(0, 0, 0, 0.5)",
         switch: "0px 4px 4px rgba(0, 0, 0, 0.25",
       },
@@ -13,8 +13,8 @@ module.exports = {
         popup: "0px 8px 12px rgba(0, 0, 0, 0.25)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)"],
-        poppins: ["var(--font-poppins)"],
+        sans: ["var(--font-nunito)"],
+        poppins: ["var(--font-nunito)"],
       },
       fontSize: {
         xxxl: ["40px", "48px"],
