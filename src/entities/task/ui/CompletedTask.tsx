@@ -64,7 +64,7 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
           </b>
         </div>
 
-        {completed ?? (
+        {/* {completed ?? (
           <p
             className={`text-smm font-medium ml-auto ${
               isExpired ? "text-expired" : "text-green"
@@ -72,7 +72,7 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
           >
             {completed}
           </p>
-        )}
+        )} */}
       </div>
     </Link>
   );

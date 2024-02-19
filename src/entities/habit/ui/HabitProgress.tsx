@@ -14,10 +14,11 @@ export const HabitProgress: FC<HabitProgressPropsType> = ({
 }) => {
   const habitStyle = projectStyles[style as ProjectStyleKey];
   const progress = Math.floor((streak / repeats) * 100);
+  const isOverdone = progress > 100;
 
   return (
     <div className="flex items-center">
-      {progress <= 100 ? (
+      {isOverdone ? null : (
         <div
           className="h-[10px] w-10 bg-deactive rounded-full"
           style={{ transform: "rotate(-90deg)", marginLeft: -15 }}
@@ -30,11 +31,11 @@ export const HabitProgress: FC<HabitProgressPropsType> = ({
             }}
           />
         </div>
-      ) : null}
+      )}
 
       <div className="flex flex-col" style={{ marginLeft: -3 }}>
         <b style={{ color: habitStyle.background }}>
-          {streak}/{repeats}
+          {isOverdone ? `${streak}` : `${streak}/${repeats}`}
         </b>
         <span style={{ color: habitStyle.background }}>days</span>
       </div>

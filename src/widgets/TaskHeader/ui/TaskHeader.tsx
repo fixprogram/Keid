@@ -20,13 +20,13 @@ export const TaskHeader: FC<TaskHeaderPropsType> = ({ style, progress }) => {
       </button>
 
       <div className="flex gap-10">
-        {progress < 100 ? <Complete itemType="task" /> : null}
+        {/* {progress < 100 ? <Complete itemType="task" /> : null} */}
 
-        <UpdateProgress
+        {/* <UpdateProgress
           style={style}
           initialProgress={progress}
           itemType="task"
-        />
+        /> */}
 
         <TaskSettings />
       </div>

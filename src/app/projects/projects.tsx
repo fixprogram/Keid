@@ -56,9 +56,9 @@ export default function Projects() {
         activeFilter={activeFilter}
         filterClickHandler={handleFilterClick}
       >
-        <button type="button" onClick={toggleListStyle}>
+        {/* <button type="button" onClick={toggleListStyle}>
           <Icon name={actionIconName} width={22} height={22} />
-        </button>
+        </button> */}
       </FilterBar>
 
       <ProjectList listStyle={listStyle} />

@@ -8,7 +8,11 @@ export const TaskSettings: FC = () => {
   return (
     <PopupWithOverlay
       positioned="Top"
-      btn={<Icon name="settings" height={24} width={24} />}
+      btn={
+        <button type="button">
+          <Icon name="settings" height={24} width={24} />
+        </button>
+      }
     >
       <PopupLine />
 

@@ -57,9 +57,9 @@ export default function PopupTask() {
           {isWithDeadline ? <PopupDeadline /> : null}
         </div>
 
-        <div className="flex justify-between mt-6">
+        {/* <div className="flex justify-between mt-6">
           <PopupRepeatsOption />
-        </div>
+        </div> */}
 
         <PopupMetrics />
 

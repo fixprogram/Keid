@@ -15,6 +15,7 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
   initialPoints,
 }) => {
   const [points, setPoints] = useState(initialPoints);
+  const [isClosed, setClosed] = useState(false);
 
   const updatePoints = useUpdatePoints(todoType);
 
@@ -34,10 +35,14 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
     pointsColor = "#FF968E";
   }
 
+  const handleClose = useCallback(() => {
+    setClosed(true);
+  }, []);
+
   return (
     <PopupWithOverlay
       btn={
-        <div
+        <button
           className="font-semibold"
           style={{
             lineHeight: "20px",
@@ -48,10 +53,16 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
             width: 24,
             textAlign: "center",
           }}
+          // onClick={() => {
+          //   console.log("click123");
+          //   setClosed(false);
+          // }}
+          tabIndex={0}
         >
           {points}
-        </div>
+        </button>
       }
+      isClosed={isClosed}
       positioned="Top"
     >
       <div className="mt-6 flex justify-between">
@@ -69,7 +80,7 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
       <div className="flex justify-between items-end mt-5">
         <button
           type="button"
-          // onClick={handlePopupClose}
+          onClick={handleClose}
           className="text-red font-bold py-3 px-8"
         >
           Cancel
