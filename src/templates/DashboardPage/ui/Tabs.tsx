@@ -52,7 +52,7 @@ export const Tabs: FC = () => {
         })}
       </ul>
 
-      <PopupWithOverlay
+      {/* <PopupWithOverlay
         positioned="Bottom"
         btn={<Icon name="filter" width={25} height={25} />}
       >
@@ -94,7 +94,7 @@ export const Tabs: FC = () => {
             Save changes
           </button>
         </div>
-      </PopupWithOverlay>
+      </PopupWithOverlay> */}
     </div>
   );
 };
