@@ -699,8 +699,8 @@ export default function Sprite() {
               y2="48"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#FFA500" />
-              <stop offset="1" stopColor="#E38A05" />
+              <stop stopColor="#C25FFF" />
+              <stop offset="1" stopColor="#B256EB" />
             </linearGradient>
           </defs>
         </symbol>

@@ -32,7 +32,7 @@ export const TodoBody: FC<TodoBodyPropsType> = ({ tabs, tabsContent }) => {
                 className="text-lg font-medium border-b-2 pb-3 flex-grow"
                 style={{
                   color: isActive ? "#fff" : "rgba(255,255,255, .3)",
-                  borderColor: isActive ? "#246BFD" : "rgba(255,255,255, .3)",
+                  borderColor: isActive ? "#FFF" : "rgba(255,255,255, .3)",
                 }}
                 onClick={() => setActiveTab(tab)}
               >

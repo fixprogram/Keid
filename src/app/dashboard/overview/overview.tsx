@@ -35,7 +35,7 @@ function OverviewContent() {
           {taskTrees.length ? (
             <section className="mt-8 relative">
               <h3 className="font-poppins font-semibold text-xl text-white">
-                Tasks
+                {`Today's Tasks`}
               </h3>
               <div
                 className="mt-5 flex flex-col gap-4"
