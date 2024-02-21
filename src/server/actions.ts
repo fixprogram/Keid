@@ -46,26 +46,28 @@ export const getOverviewData = async (dateType: DateType) => {
   const projectIDs = projects.map((projectId) => projectId.id);
   projectIDs.push(userId);
 
-  let tasks: Task[] = [];
+  const tasks: Task[] = await getTodayTasks(userId);
+  const weekTasks: Task[] = await getThisWeekTasks(projectIDs);
+  const monthTasks: Task[] = await getThisMonthTasks(projectIDs);
 
-  switch (dateType) {
-    case DateType.Today: {
-      tasks = await getTodayTasks(userId);
+  // switch (dateType) {
+  //   case DateType.Today: {
+  //     tasks = await getTodayTasks(userId);
 
-      break;
-    }
-    case DateType.Week: {
-      tasks = await getThisWeekTasks(projectIDs);
-      break;
-    }
-    case DateType.Month: {
-      tasks = await getThisMonthTasks(projectIDs);
-      break;
-    }
-    default: {
-      throw new Error(`Date type ${dateType} doesn't exist`);
-    }
-  }
+  //     break;
+  //   }
+  //   case DateType.Week: {
+  //     tasks = await getThisWeekTasks(projectIDs);
+  //     break;
+  //   }
+  //   case DateType.Month: {
+  //     tasks = await getThisMonthTasks(projectIDs);
+  //     break;
+  //   }
+  //   default: {
+  //     throw new Error(`Date type ${dateType} doesn't exist`);
+  //   }
+  // }
 
   const projectAmount = userProjectNames.length;
   const totalTasksIds: string[] = [];
@@ -93,6 +95,8 @@ export const getOverviewData = async (dateType: DateType) => {
     projectAmount,
     totalTaskAmount,
     tasks: mapAndSortTasks(tasks, projects),
+    weekTasks: mapAndSortTasks(weekTasks, projects),
+    monthTasks: mapAndSortTasks(monthTasks, projects),
     userName: user.name,
     projects: weeklyActivityData.projects,
     activityFeed: weeklyActivityData.activityFeed,

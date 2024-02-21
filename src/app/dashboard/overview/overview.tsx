@@ -2,13 +2,11 @@
 
 import { ChallengeCard } from "@/entities/challenge";
 import { HabitCard } from "@/entities/habit";
-import { mapTasksIntoHierarchy } from "@/entities/task";
-import { TaskCard } from "@/entities/task/ui/TaskCard";
-import { DailyTasks } from "@/features/DailyTasks";
+import { TasksBlock } from "@/shared/components/TasksBlock";
 import { links } from "@/shared/config/links";
 import { fetcher } from "@/shared/lib/utils/fetcher";
 import { hasCompletedToday } from "@/shared/lib/utils/hasCompletedToday";
-import { useDashboardStore, DateType } from "@/templates/DashboardPage";
+import { useDashboardStore } from "@/templates/DashboardPage";
 import { Habit } from "@prisma/client";
 import useSWR, { SWRConfig } from "swr";
 
@@ -24,65 +22,49 @@ function OverviewContent() {
     return null;
   }
 
-  const { projectAmount, totalTaskAmount, tasks, habits, challenges } = data;
-
-  const taskTrees = mapTasksIntoHierarchy(tasks);
+  const { tasks, weekTasks, monthTasks, habits, challenges } = data;
 
   return (
     <>
-      {dateType === DateType.Today ? (
-        <>
-          {taskTrees.length ? (
-            <section className="mt-8 relative">
-              <h3 className="font-poppins font-semibold text-xl text-white">
-                {`Today's Tasks`}
-              </h3>
-              <div
-                className="mt-5 flex flex-col gap-4"
-                style={{ maxHeight: 272, overflowY: "scroll" }}
-              >
-                {taskTrees.map((task) => (
-                  <TaskCard key={task.id} {...task} withoutDeadline />
-                ))}
-              </div>
-            </section>
-          ) : null}
+      {tasks.length ? <TasksBlock tasks={tasks} title="Today's Tasks" /> : null}
 
-          {habits.length ? (
-            <section className="mt-8">
-              <h3 className="font-poppins font-semibold text-xl text-white">
-                Habits
-              </h3>
-              <div className="flex align-center mt-5 gap-4 flex-wrap">
-                {habits.map((habit: Habit) => (
-                  <HabitCard
-                    {...habit}
-                    hasCompletedToday={hasCompletedToday(habit)}
-                    key={habit.id}
-                  />
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {challenges.length ? (
-            <section className="mt-8">
-              <h3 className="font-poppins font-semibold text-xl text-white">
-                Challenges
-              </h3>
-              <div className="flex flex-col mt-5 gap-4">
-                {challenges.map((challenge: any) => (
-                  <ChallengeCard {...challenge} key={challenge.id} />
-                ))}
-              </div>
-            </section>
-          ) : null}
-        </>
+      {habits.length ? (
+        <section className="mt-8">
+          <h3 className="font-poppins font-semibold text-xl text-white">
+            Habits
+          </h3>
+          <div className="flex align-center mt-5 gap-4 flex-wrap">
+            {habits.map((habit: Habit) => (
+              <HabitCard
+                {...habit}
+                hasCompletedToday={hasCompletedToday(habit)}
+                key={habit.id}
+              />
+            ))}
+          </div>
+        </section>
       ) : null}
 
-      {dateType === DateType.Week ? <DailyTasks tasks={tasks} /> : null}
+      {challenges.length ? (
+        <section className="mt-8">
+          <h3 className="font-poppins font-semibold text-xl text-white">
+            Challenges
+          </h3>
+          <div className="flex flex-col mt-5 gap-4">
+            {challenges.map((challenge: any) => (
+              <ChallengeCard {...challenge} key={challenge.id} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
-      {dateType === DateType.Month ? <DailyTasks tasks={tasks} /> : null}
+      {weekTasks.length ? (
+        <TasksBlock tasks={weekTasks} title="Week's Tasks" />
+      ) : null}
+
+      {monthTasks.length ? (
+        <TasksBlock tasks={monthTasks} title="Month's Tasks" />
+      ) : null}
     </>
   );
 }

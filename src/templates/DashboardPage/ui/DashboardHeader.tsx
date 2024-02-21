@@ -3,25 +3,27 @@
 import Icon from "@/shared/ui/Icon";
 import Link from "next/link";
 import { FC } from "react";
-import { useNavigationStore } from "@/widgets/Navigation/model/useNavigationStore";
-import { usePathname } from "next/navigation";
 import { useUser } from "@/entities/user/models/userContext";
 
 export const DashboardHeader: FC = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   // const userId = useNavigationStore((state) => state.userId);
   const user = useUser();
 
-  const page = pathname?.split("/").at(-1);
+  // const page = pathname?.split("/").at(-1);
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-2" style={{ alignItems: "flex-end" }}>
-        <h2 className="text-white text-xl font-poppins font-semibold">
-          {page === "overview" ? "Overview" : "Productivity"}
+        <h2
+          className="text-white text-xl font-poppins font-bold"
+          style={{ fontSize: "20px" }}
+        >
+          {/* {page === "overview" ? "Overview" : "Productivity"} */}
+          Keid
         </h2>
-        <p className="text-white opacity-30">|</p>
-        <Link
+        {/* <p className="text-white opacity-30">|</p> */}
+        {/* <Link
           className="text-white text-xl font-poppins font-semibold"
           href={`/dashboard/${
             page === "overview" ? "productivity" : "overview"
@@ -34,7 +36,7 @@ export const DashboardHeader: FC = () => {
           }}
         >
           {page === "overview" ? "Productivity" : "Overview"}
-        </Link>
+        </Link> */}
       </div>
 
       <Link
