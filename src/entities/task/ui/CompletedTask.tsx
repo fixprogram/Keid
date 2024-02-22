@@ -23,7 +23,7 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
 }) => {
   return (
     <Link href={link}>
-      <div className="border-[1px] border-deactive p-5 flex gap-5 rounded-xl relative">
+      <div className="border-[1px] border-deactive p-3 flex gap-3 rounded-xl relative">
         {isStarred ? (
           <div className="absolute top-3 left-3">
             <Icon name="star-sm" width={8} height={8} />
