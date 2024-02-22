@@ -41,36 +41,23 @@ export default async function Layout({ children }: LayoutPropsType) {
         <Container withNav={true}>
           <DashboardHeader />
 
+          <h2
+            style={{
+              fontSize: "36px",
+              color: "#fff",
+              fontWeight: 800,
+              marginTop: 32,
+            }}
+          >
+            Happy Birthday, bro 🎉
+          </h2>
+
           <Tabs />
 
           {children}
         </Container>
         <Navigation navData={navData} />
       </section>
-      {/* 
-      <div
-        className="absolute w-[310px] h-[310px] blur-[40.7742px] opacity-50 top-[-11.15%] left-[-32.53%] mix-blend-overlay rounded-full z-10"
-        style={{
-          background:
-            "radial-gradient(57.72% 57.72% at 61.86% 38.92%, #EF88ED 0%, #7269E3 54.46%, #8350DB 100%)",
-        }}
-      />
-
-      <div
-        className="absolute w-[376px] h-[376px] blur-[40.7742px] opacity-50 bottom-[-11.76%] right-[-32.27%] mix-blend-overlay rounded-full z-10"
-        style={{
-          background:
-            "radial-gradient(57.72% 57.72% at 61.86% 38.92%, #EF88ED 0%, #7269E3 54.46%, #8350DB 100%)",
-        }}
-      /> */}
     </section>
   );
 }
-
-// interface LayoutPropsType {
-//   children: React.ReactNode;
-// }
-
-// export default async function Layout({ children }: LayoutPropsType) {
-//   return children;
-// }

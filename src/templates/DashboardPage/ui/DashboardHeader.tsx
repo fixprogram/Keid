@@ -6,37 +6,18 @@ import { FC } from "react";
 import { useUser } from "@/entities/user/models/userContext";
 
 export const DashboardHeader: FC = () => {
-  // const pathname = usePathname();
-  // const userId = useNavigationStore((state) => state.userId);
   const user = useUser();
-
-  // const page = pathname?.split("/").at(-1);
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex gap-2" style={{ alignItems: "flex-end" }}>
+        <Icon name="logo-short" width={32} height={32} />
         <h2
           className="text-white text-xl font-poppins font-bold"
           style={{ fontSize: "20px" }}
         >
-          {/* {page === "overview" ? "Overview" : "Productivity"} */}
           Keid
         </h2>
-        {/* <p className="text-white opacity-30">|</p> */}
-        {/* <Link
-          className="text-white text-xl font-poppins font-semibold"
-          href={`/dashboard/${
-            page === "overview" ? "productivity" : "overview"
-          }`}
-          style={{
-            opacity: 0.3,
-            fontWeight: 400,
-            fontSize: "13px",
-            lineHeight: "17px",
-          }}
-        >
-          {page === "overview" ? "Productivity" : "Overview"}
-        </Link> */}
       </div>
 
       <Link
