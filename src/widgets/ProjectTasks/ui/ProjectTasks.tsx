@@ -1,4 +1,4 @@
-import FilterBar from "@/features/FilterBar";
+import FilterBar from "@/shared/components/FilterBar";
 // import AllTaskAccordions from "./AllTaskAccordions";
 import { FC, useState } from "react";
 import { sortTasks } from "@/shared/lib/utils/sortTasks";

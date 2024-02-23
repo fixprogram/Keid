@@ -8,8 +8,7 @@ interface PopupStateType {
   style: string;
   error?: string;
   isStyleListOpened: boolean;
-  deadline: number;
-  isWithDeadline: boolean;
+  deadline: Date | null;
   isCalendarOpened: boolean;
   activeProject: {
     title: string;
@@ -25,8 +24,7 @@ interface PopupStateType {
   setStyle: (newStyle: string) => void;
   openStyleList: () => void;
   closeStyleList: () => void;
-  toggleWithDeadline: () => void;
-  setDeadline: (newDeadline: number) => void;
+  setDeadline: (newDeadline: Date | null) => void;
   openCalendar: () => void;
   closeCalendar: () => void;
   setProject: (newProject: { title: string; style: string }) => void;
@@ -40,16 +38,12 @@ interface PopupStateType {
   setActiveMetrics: (newActiveMetrics: string[]) => void;
 }
 
-const initialDeadline = new Date();
-initialDeadline.setHours(23, 59, 59, 999);
-
 const INITIAL_STATE = {
   title: "",
   style: "01",
   error: "",
   isStyleListOpened: false,
-  deadline: initialDeadline.getTime(),
-  isWithDeadline: true,
+  deadline: null,
   isCalendarOpened: false,
   activeProject: {
     title: "No project",
@@ -70,9 +64,11 @@ export const usePopupStore = createWithEqualityFn<PopupStateType>(
     setStyle: (newStyle: string) => set(() => ({ style: newStyle })),
     openStyleList: () => set(() => ({ isStyleListOpened: true })),
     closeStyleList: () => set(() => ({ isStyleListOpened: false })),
-    toggleWithDeadline: () =>
-      set(() => ({ isWithDeadline: !get().isWithDeadline })),
-    setDeadline: (newDeadline: number) => {
+    setDeadline: (newDeadline: Date | null) => {
+      if (!newDeadline) {
+        return set(() => ({ deadline: newDeadline }));
+      }
+
       const differenceInTime = Math.abs(
         new Date(newDeadline).getTime() - new Date().getTime()
       );
@@ -80,8 +76,6 @@ export const usePopupStore = createWithEqualityFn<PopupStateType>(
       const repeats = isDateToday(new Date(newDeadline))
         ? 1
         : Math.floor(differenceInTime / (1000 * 3600 * 24));
-
-      console.log("repeats: ", 0);
 
       return set(() => ({ deadline: newDeadline, repeats }));
     },

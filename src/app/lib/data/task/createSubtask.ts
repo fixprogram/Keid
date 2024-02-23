@@ -6,7 +6,7 @@ type Props = {
   userId: string;
   taskId: string;
   title: string;
-  deadline: number;
+  deadline: Date | null;
 };
 
 export const createSubtask = async ({
@@ -37,7 +37,7 @@ export const createSubtask = async ({
       title,
       deadline,
       progress: 0,
-      completed: 0,
+      completed: null,
       comments: [],
       description: "",
       subtaskIds: [],

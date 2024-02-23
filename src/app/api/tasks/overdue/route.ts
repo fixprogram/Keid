@@ -1,5 +1,6 @@
 import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/app/lib/prisma/db.server";
+import { getTodayTimestamps } from "@/shared/lib/utils/getTodayTimestamps";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -32,12 +33,13 @@ export async function GET(request: Request) {
     tasksIds.push(...project.taskIds);
   });
 
+  const { endTimestamp } = getTodayTimestamps();
   const overdueTasks = await prisma.task.findMany({
     where: {
       id: { in: tasksIds },
-      deadline: { lt: new Date().setHours(23, 59, 59, 999) },
-      AND: { completed: 0 },
-      NOT: { deadline: 0 },
+      deadline: { lt: new Date(endTimestamp) },
+      AND: { completed: null },
+      NOT: { deadline: null },
     },
   });
 

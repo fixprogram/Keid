@@ -1,3 +1,3 @@
 export const fetcher = (url: string) => {
-  return fetch(url).then((res) => res.json());
+  return fetch(url, { next: { revalidate: false } }).then((res) => res.json());
 };

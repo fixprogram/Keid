@@ -1,7 +1,7 @@
 "use client";
 
 import { ProjectList, PROJECT_FILTERS } from "@/entities/project";
-import FilterBar from "@/features/FilterBar";
+import FilterBar from "@/shared/components/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import Icon from "@/shared/ui/Icon";
 import {

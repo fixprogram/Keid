@@ -7,8 +7,6 @@ import styles from "./TaskCard.module.css";
 type CompletedTaskPropsType = {
   link: string;
   title: string;
-  isExpired: boolean;
-  completed: string | null;
   isStarred?: boolean;
   projectTitle?: string;
 };
@@ -16,8 +14,6 @@ type CompletedTaskPropsType = {
 export const CompletedTask: FC<CompletedTaskPropsType> = ({
   link,
   title,
-  isExpired,
-  completed,
   isStarred = false,
   projectTitle,
 }) => {

@@ -26,18 +26,12 @@ export const completeChallengeForToday = async (id: string, userId: string) => {
 
   const newComments = [...challenge.comments, newComment];
 
-  const data = {
-    streak: newStreak,
-    comments: newComments,
-    completed: newCompleted,
-  };
-
   await prisma.challenge.update({
     where: { id },
     data: {
       streak: newStreak,
       comments: newComments,
-      completed: newCompleted,
+      completed: new Date(),
     },
   });
 

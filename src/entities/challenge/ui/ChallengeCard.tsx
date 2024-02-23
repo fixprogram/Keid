@@ -28,15 +28,14 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
 }) => {
   const setScrollY = useDashboardStore((state) => state.setScrollY);
 
-  const { handleComplete, isLoadingComplete, hasCompleted } =
-    useCompleteForToday(id, hasCompletedToday, streak, repeats);
+  const { handleComplete, isLoadingComplete } = useCompleteForToday(id);
 
   const challengeStyle = projectStyles[style as ProjectStyleKey];
 
   return (
     <section
       className={`${
-        hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
+        hasCompletedToday ? "border-[1px] border-deactive" : "bg-background2"
       } p-3 flex gap-9 rounded-xl relative flex-wrap`}
     >
       <div className="flex justify-between w-full gap-4">
@@ -46,13 +45,13 @@ export const ChallengeCard: FC<ChallengeCardPropsType> = ({
         >
           <b
             className={`text-lg text-white font-bold ${
-              hasCompleted ? "line-through	" : ""
+              hasCompletedToday ? "line-through	" : ""
             }`}
           >
             {title}
           </b>
         </Link>
-        {hasCompleted ? (
+        {hasCompletedToday ? (
           <div className="w-[40px]">
             <Icon name="completed" width={40} height={40} />
           </div>

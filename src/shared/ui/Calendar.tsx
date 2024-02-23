@@ -3,8 +3,8 @@ import Icon from "./Icon";
 import { FC } from "react";
 
 interface CalendarPropsType {
-  date: Date;
-  setDate: (date: number) => void;
+  date?: Date;
+  setDate: (date: Date | null) => void;
 }
 
 export const Calendar: FC<CalendarPropsType> = ({ date, setDate }) => {
@@ -12,12 +12,7 @@ export const Calendar: FC<CalendarPropsType> = ({ date, setDate }) => {
     <ReactCalendar
       value={date}
       onChange={(value) => {
-        if (value === null) {
-          return setDate(0);
-        }
-        const newDate = value as Date;
-
-        setDate(newDate.setHours(23, 59, 59, 999));
+        setDate(value as Date | null);
       }}
       className="px-2 pb-6 text-white text-base font-bold mt-4 bg-background2 rounded-2xl"
       formatShortWeekday={(locale, date) =>

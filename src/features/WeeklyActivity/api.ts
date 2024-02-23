@@ -59,11 +59,11 @@ export async function getWeeklyActivityData(userId: string) {
       );
 
       const previouslyCompletedTasks = completedTasks.filter((task) => {
-        return task.completed < firstWeekdayTimestamp;
+        return (task.completed as Date) < new Date(firstWeekdayTimestamp);
       });
 
       const lastWeekCompletedTasks = completedTasks.filter((task) => {
-        return task.completed >= firstWeekdayTimestamp;
+        return (task.completed as Date) >= new Date(firstWeekdayTimestamp);
       });
 
       const prevProgress = Math.floor(

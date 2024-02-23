@@ -51,9 +51,9 @@ model Task {
   title          String    
   projectId      String    @db.ObjectId
   style          String
-  deadline       Int
+  deadline       DateTime?
   progress       Int
-  completed      Int 
+  completed      DateTime?
   parentId       String
   subtaskIds     String[]
   comments       Comment[]
@@ -69,7 +69,6 @@ model Habit {
   userId         String
   style          String
   streak         Int
-  completed      Int
   comments       Comment[]
   repeats        Int       @default(28)
   isArchived     Boolean
@@ -98,10 +97,10 @@ model Challenge {
   userId         String
   title          String    
   style          String
-  deadline       Int
+  deadline       DateTime
   streak         Int
-  completed      Int
-  failed         Int
+  completed      DateTime?
+  failed         DateTime?
   comments       Comment[]
   repeats        Int        @default(28)
   description    String
@@ -153,7 +152,7 @@ enum NotificationType {
 type Member {
   id             String
   streak         Int
-  completed      Int 
-  failed         Int
+  completed      DateTime?
+  failed         DateTime?
   comments       Comment[]
 }

@@ -53,10 +53,6 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
             width: 24,
             textAlign: "center",
           }}
-          // onClick={() => {
-          //   console.log("click123");
-          //   setClosed(false);
-          // }}
           tabIndex={0}
         >
           {points}

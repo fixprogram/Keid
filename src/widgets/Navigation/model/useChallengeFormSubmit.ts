@@ -12,7 +12,7 @@ type MutationChallengeType = {
   userId: string;
   title: string;
   style: string;
-  deadline: number;
+  deadline: string;
   members: string[];
   points: number;
 };
@@ -68,6 +68,7 @@ export function useChallengeFormSubmit() {
       mutation.mutate({
         userId,
         ...data,
+        deadline: (data.deadline as Date).toJSON(),
       });
     },
     [userId, data, mutation]

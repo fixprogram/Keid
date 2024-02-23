@@ -1,6 +1,5 @@
 "use client";
 
-import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { sortTasks } from "@/shared/lib/utils/sortTasks";
@@ -13,9 +12,10 @@ import { TaskFilterType, TASK_FILTERS } from "@/entities/task/config/consts";
 import { Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
 import { hasCompletedToday } from "@/shared/lib/utils/hasCompletedToday";
+import FilterBar from "@/shared/components/FilterBar";
 
-type FilterType = "Active" | "Completed" | "Archived";
-const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];
+type FilterType = "Active" | "Archived";
+const FILTERS: FilterType[] = ["Active", "Archived"];
 
 type HabitsDataType = {
   habits: Habit[];
@@ -46,9 +46,7 @@ export default function Habits() {
   const filteredHabits: Record<FilterType, Habit[]> = useMemo(() => {
     if (habits.length)
       return {
-        Active: habits.filter((habit) => !habit.isArchived && !habit.completed),
-
-        Completed: habits.filter((habit) => habit.completed), // For test purposes. In the future we add a field 'Completed' to projects
+        Active: habits.filter((habit) => !habit.isArchived),
 
         Archived: habits.filter((habit) => habit.isArchived),
       };
@@ -74,7 +72,7 @@ export default function Habits() {
         filterClickHandler={handleFilterClick}
       />
 
-      <List>
+      <div className="flex align-center mt-5 gap-4 flex-wrap">
         {filteredHabits[activeFilter as FilterType].map((habit) => (
           <HabitCard
             key={habit.id}
@@ -82,7 +80,7 @@ export default function Habits() {
             hasCompletedToday={hasCompletedToday(habit)}
           />
         ))}
-      </List>
+      </div>
     </Layout>
   );
 }

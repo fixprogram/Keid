@@ -22,7 +22,6 @@ export const createHabit = async (
       title: habitName,
       style: habitStyle,
       streak: 0,
-      completed: 0,
       isArchived: false,
       points,
       repeats,

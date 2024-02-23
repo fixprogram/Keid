@@ -86,7 +86,9 @@ export default function Task({ id }: TaskPropType) {
         <div className="flex flex-wrap items-end gap-6 mt-6">
           <TodoPoints initialPoints={points} todoType="task" />
 
-          <TodoDeadline style={style} deadline={deadline} todoType="task" />
+          {deadline ? (
+            <TodoDeadline style={style} deadline={deadline} todoType="task" />
+          ) : null}
         </div>
 
         <Description itemType="task" initialValue={description} />

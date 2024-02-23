@@ -12,7 +12,7 @@ type MutationTaskType = {
   userId: string;
   taskName: string;
   taskStyle: string;
-  deadline: number;
+  deadline: string | null;
   projectName: string;
   repeats: string;
 };
@@ -67,6 +67,9 @@ export function useTaskFormSubmit() {
       mutation.mutate({
         userId,
         ...taskData,
+        deadline: taskData.deadline
+          ? new Date(taskData.deadline).toJSON()
+          : null,
       });
     },
     [userId, taskData, mutation]

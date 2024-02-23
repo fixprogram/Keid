@@ -1,7 +1,7 @@
 "use client";
 
-import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
+import FilterBar from "@/shared/components/FilterBar";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import Icon from "@/shared/ui/Icon";
 import Layout from "@/widgets/Layout";

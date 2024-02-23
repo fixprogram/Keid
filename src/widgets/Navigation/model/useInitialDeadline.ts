@@ -2,7 +2,7 @@
 import { useRef, useEffect } from "react";
 
 export default function useInitialDeadline(
-  deadline: number,
+  deadline: Date | null,
   isCalendarOpen: boolean
 ) {
   const initialDeadline = useRef(deadline);

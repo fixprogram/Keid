@@ -1,12 +1,13 @@
 import { prisma } from "@/app/lib/prisma/db.server";
 import { serviceComments } from "@/shared/config/serviceComments";
 import { Notification, NotificationType } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 type Props = {
   userId: string;
   title: string;
   style: string;
-  deadline: number;
+  deadline: Date;
   repeats: number;
   memberIds: string[];
   points: number;
@@ -29,8 +30,8 @@ export const createChallenge = async ({
     style,
     deadline,
     streak: 0,
-    completed: 0,
-    failed: 0,
+    completed: null,
+    failed: null,
     repeats,
     description: "",
     isPublic,
@@ -46,8 +47,8 @@ export const createChallenge = async ({
     members: memberIds.map((memberId) => ({
       id: memberId,
       streak: 0,
-      failed: 0,
-      completed: 0,
+      failed: null,
+      completed: null,
       comments: [],
     })),
     points,
@@ -79,6 +80,9 @@ export const createChallenge = async ({
       data: { notifications: { push: notification } },
     });
   }
+
+  revalidatePath("/dashboard/overview");
+  revalidatePath("/challenges");
 
   return challenge;
 };

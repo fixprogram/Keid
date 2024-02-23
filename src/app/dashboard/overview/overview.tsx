@@ -6,22 +6,21 @@ import { TasksBlock } from "@/shared/components/TasksBlock";
 import { links } from "@/shared/config/links";
 import { fetcher } from "@/shared/lib/utils/fetcher";
 import { hasCompletedToday } from "@/shared/lib/utils/hasCompletedToday";
+import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { useDashboardStore } from "@/templates/DashboardPage";
 import { Habit } from "@prisma/client";
 import useSWR, { SWRConfig } from "swr";
 
-function OverviewContent() {
+function OverviewContent({ data }: { data: any }) {
   // const [dateType] = useDashboardStore((state) => [state.dateType]);
 
-  const { data } = useSWR(`${links.dashboardOverview}`, fetcher);
+  // const { data } = useSWR(`${links.dashboardOverview}`, fetcher);
 
   if (!data) {
     return null;
   }
 
   const { tasks, weekTasks, monthTasks, habits, challenges } = data;
-
-  // console.log()
 
   return (
     <>
@@ -49,7 +48,13 @@ function OverviewContent() {
           </h3>
           <div className="flex flex-col mt-5 gap-4">
             {challenges.map((challenge: any) => (
-              <ChallengeCard {...challenge} key={challenge.id} />
+              <ChallengeCard
+                {...challenge}
+                hasCompletedToday={isDateToday(
+                  new Date(Number(challenge.completed))
+                )}
+                key={challenge.id}
+              />
             ))}
           </div>
         </section>
@@ -67,19 +72,19 @@ function OverviewContent() {
 }
 
 export default function Overview({ initialData }: { initialData: any }) {
-  const [dateType] = useDashboardStore((state) => [state.dateType]);
+  // const [dateType] = useDashboardStore((state) => [state.dateType]);
 
-  const key = `${links.dashboardOverview}?dateType=${dateType}`;
+  const key = `${links.dashboardOverview}`;
 
   return (
-    <SWRConfig
-      value={{
-        fallback: {
-          [key]: initialData,
-        },
-      }}
-    >
-      <OverviewContent />
-    </SWRConfig>
+    // <SWRConfig
+    //   value={{
+    //     fallback: {
+    //       [key]: initialData,
+    //     },
+    //   }}
+    // >
+    <OverviewContent data={initialData} />
+    // </SWRConfig>
   );
 }

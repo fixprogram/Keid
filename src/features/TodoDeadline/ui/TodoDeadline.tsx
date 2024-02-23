@@ -11,7 +11,7 @@ import { useUpdateTodoDeadline } from "../model/useUpdateTodoDeadline";
 
 interface TodoDeadlinePropType {
   style: string;
-  deadline: number;
+  deadline: Date;
   todoType: ItemType;
 }
 
@@ -20,7 +20,7 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
   deadline,
   todoType,
 }) => {
-  const [newDeadline, setNewDeadline] = useState(deadline);
+  const [newDeadline, setNewDeadline] = useState<Date | null>(deadline);
   const [isClosed, setClosed] = useState(false);
 
   const taskStyle = projectStyles[style as ProjectStyleKey];
@@ -40,7 +40,7 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
     setClosed(true);
   }, []);
 
-  if (deadline === 0) {
+  if (deadline === null) {
     return null;
   }
   return (
@@ -59,7 +59,7 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
       isClosed={isClosed}
     >
       <Calendar
-        date={new Date(newDeadline)}
+        date={newDeadline ?? undefined}
         setDate={(date) => setNewDeadline(date)}
       />
 
@@ -72,10 +72,10 @@ export const TodoDeadline: FC<TodoDeadlinePropType> = ({
             className="hidden peer"
             onChange={(e) => {
               if (e.target.checked) {
-                setNewDeadline(Date.now());
+                setNewDeadline(new Date());
               }
               if (!e.target.checked) {
-                setNewDeadline(0);
+                setNewDeadline(null);
               }
             }}
             checked={Boolean(newDeadline)}

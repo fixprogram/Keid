@@ -10,7 +10,7 @@ export const updateDeadline = async (taskId: string, newDeadline: number) => {
   }
 
   const data = {
-    deadline: newDeadline,
+    deadline: new Date(newDeadline),
   };
 
   await prisma.task.update({ where: { id: task.id }, data });

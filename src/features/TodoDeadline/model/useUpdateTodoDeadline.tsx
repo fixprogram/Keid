@@ -16,7 +16,7 @@ export function useUpdateTodoDeadline(todoType: ItemType) {
 
   const mutation = useMutation({
     mutationKey: [todoType, todoId],
-    mutationFn: (newDeadline: number) =>
+    mutationFn: (newDeadline: string | null) =>
       axios.post(todoPost.updateDeadline, { todoId, deadline: newDeadline }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [todoType, todoId] });
@@ -24,8 +24,8 @@ export function useUpdateTodoDeadline(todoType: ItemType) {
   });
 
   const handleUpdateTodoDeadline = useCallback(
-    (newDeadline: number) => {
-      mutation.mutate(newDeadline);
+    (newDeadline: Date | null) => {
+      mutation.mutate(newDeadline ? newDeadline.toJSON() : null);
     },
     [mutation]
   );

@@ -19,15 +19,13 @@ export const PopupCalendar = () => {
       ],
       shallow
     );
-  const initialDeadline = useInitialDeadline(deadline, isCalendarOpen);
-
-  const date = new Date(deadline);
+  const date = useInitialDeadline(deadline, isCalendarOpen);
 
   const handleCancel = useCallback(() => {
-    setTaskDeadline(initialDeadline);
+    setTaskDeadline(date);
     setPopupStyle("gray");
     closeCalendar();
-  }, [closeCalendar, initialDeadline, setPopupStyle, setTaskDeadline]);
+  }, [closeCalendar, date, setPopupStyle, setTaskDeadline]);
 
   const handleClose = useCallback(() => {
     setPopupStyle("gray");
@@ -40,7 +38,10 @@ export const PopupCalendar = () => {
 
   return (
     <section className="pb-6">
-      <Calendar date={date} setDate={setTaskDeadline} />
+      <Calendar
+        date={date ? new Date(date) : undefined}
+        setDate={setTaskDeadline}
+      />
       <div className="flex justify-between items-end mt-[20px]">
         <button
           type="button"

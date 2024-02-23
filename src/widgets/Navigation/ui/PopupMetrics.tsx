@@ -17,8 +17,6 @@ export const PopupMetrics: FC = () => {
     (title: string) => {
       const arrayIndex = activeMetrics.indexOf(title);
 
-      console.log("arrayIndex: ", arrayIndex);
-
       if (arrayIndex !== -1) {
         return setActiveMetrics(
           activeMetrics.filter((_, i) => i !== arrayIndex)

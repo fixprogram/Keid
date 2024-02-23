@@ -4,7 +4,7 @@ import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC } from "react";
 import InputText from "@/shared/ui/InputText";
-import FilterBar from "@/features/FilterBar";
+import FilterBar from "@/shared/components/FilterBar";
 import { List } from "@/shared/ui/List";
 import Link from "next/link";
 import Icon from "@/shared/ui/Icon";

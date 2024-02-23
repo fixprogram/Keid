@@ -17,7 +17,7 @@ export const completeTaskAndSubtasks = async (
   const completedTask = await prisma.task.update({
     where: { id: taskId },
     data: {
-      completed: Date.now(),
+      completed: new Date(),
       progress: 100,
       comments: [...task.comments, comment],
     },

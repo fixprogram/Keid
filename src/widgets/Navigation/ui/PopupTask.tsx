@@ -9,20 +9,28 @@ import { PopupRepeatsOption } from "./PopupRepeatsOption";
 import { PopupStyleList } from "./PopupStyleList";
 import { PopupPoints } from "./PopupPoints";
 import { PopupMetrics } from "./PopupMetrics";
+import { useCallback, useState } from "react";
 
 export default function PopupTask() {
   const handleFormSubmit = useTaskFormSubmit();
-  const [
-    isCalendarOpen,
-    isStyleListOpened,
-    isWithDeadline,
-    toggleTaskWithDeadline,
-  ] = usePopupStore((state) => [
-    state.isCalendarOpened,
-    state.isStyleListOpened,
-    state.isWithDeadline,
-    state.toggleWithDeadline,
-  ]);
+  const [isCalendarOpen, isStyleListOpened, deadline, setDeadline] =
+    usePopupStore((state) => [
+      state.isCalendarOpened,
+      state.isStyleListOpened,
+      state.deadline,
+      state.setDeadline,
+    ]);
+  const [isWithDeadline, setWithDeadline] = useState(Boolean(deadline));
+
+  const toggleTaskWithDeadline = useCallback(() => {
+    if (isWithDeadline) {
+      setWithDeadline(false);
+      setDeadline(null);
+    } else {
+      setWithDeadline(true);
+      setDeadline(new Date());
+    }
+  }, [setDeadline, setWithDeadline, isWithDeadline]);
 
   if (isCalendarOpen) return <PopupCalendar />;
 

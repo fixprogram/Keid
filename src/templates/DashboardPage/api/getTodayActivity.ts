@@ -8,8 +8,8 @@ export async function getTodayTasks(projectIDs: string[]) {
     where: {
       projectId: { in: projectIDs },
       deadline: {
-        lte: endTimestamp,
-        gte: startTimestamp,
+        lte: new Date(endTimestamp),
+        gte: new Date(startTimestamp),
       },
     },
   });

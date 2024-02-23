@@ -18,16 +18,24 @@ export const mapAndSortTasks = (
           project.taskIds.some((taskId) => taskId === task.id)
         )?.title ?? "";
 
-      const completed = task.isCompleted
-        ? Number(
-            task.comments
-              .reverse()
-              .find((comment) => comment.type === CommentType.COMPLETED)
-              ?.time ?? 0
-          )
+      const lastCompleted = task.comments
+        .reverse()
+        .find((comment) => comment.type === CommentType.COMPLETED)?.time;
+      const completedDate = task.isCompleted
+        ? lastCompleted
+          ? new Date(lastCompleted)
+          : null
         : task.completed;
 
-      return { ...task, isFavorite, projectTitle, completed };
+      return { ...task, isFavorite, projectTitle, completed: completedDate };
     })
-    .sort((a: Task, b: Task) => a.completed - b.completed);
+    .sort((a: Task, b: Task) => {
+      if (a.completed !== null && b.completed !== null) {
+        return (
+          new Date(a.completed).getTime() - new Date(b.completed).getTime()
+        );
+      }
+
+      return 0;
+    });
 };

@@ -1,9 +1,5 @@
-import {
-  CompletedTask,
-  InProgressTask,
-  OverdueTask,
-  RepeatedTask,
-} from "@/entities/task";
+import { CompletedTask, InProgressTask, OverdueTask } from "@/entities/task";
+import { EnhancedTask } from "@/server/actions";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { getDifferenceBetweenDates } from "@/shared/lib/utils/getDifferenceBetweenDates";
 import { Task } from "@prisma/client";
@@ -16,6 +12,7 @@ export type TaskCardType = Omit<Task, "projectId"> & {
   withoutDeadline?: boolean;
   subtasks?: Task[];
   parentOpened?: boolean;
+  isCompleted?: boolean;
 };
 
 export const TaskCard: FC<TaskCardType> = ({
@@ -34,48 +31,20 @@ export const TaskCard: FC<TaskCardType> = ({
   withoutDeadline = false,
   subtasks = [],
   parentOpened = false,
+  isCompleted,
+  // isCompleted,
 }) => {
   const link = defaultLink ?? `/tasks/${id}`;
-  const isCompleted = Boolean(completed);
   // const isOverdue = deadline === 0 ? false : Date.now() > deadline;
-  // const isRepeated = repeats !== "Once";
-  const isExpired = completed > deadline;
 
   const formattedDeadline =
-    withoutDeadline || deadline === 0
+    withoutDeadline || deadline === null
       ? null
       : getDateString(new Date(deadline), false);
-  const formattedCompleted =
-    withoutDeadline || deadline === 0
-      ? null
-      : getDateString(new Date(completed), false);
 
   if (isCompleted) {
-    return (
-      <CompletedTask
-        link={link}
-        title={title}
-        isExpired={isExpired}
-        completed={formattedCompleted}
-        isStarred={isFavorite}
-      />
-    );
+    return <CompletedTask link={link} title={title} isStarred={isFavorite} />;
   }
-
-  // if (isRepeated) {
-  //   const daysToRepeat = getDifferenceBetweenDates(+comments[0].time, deadline);
-  //   return (
-  //     <RepeatedTask
-  //       link={link}
-  //       title={title}
-  //       deadline={formattedDeadline}
-  //       style={style}
-  //       progress={progress}
-  //       daysToRepeat={daysToRepeat}
-  //       isStarred={isFavorite}
-  //     />
-  //   );
-  // }
 
   // if (isOverdue) {
   //   return (

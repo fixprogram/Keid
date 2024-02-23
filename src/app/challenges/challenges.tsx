@@ -1,6 +1,5 @@
 "use client";
 
-import FilterBar from "@/features/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import { List } from "@/shared/ui/List";
 import Layout from "@/widgets/Layout";
@@ -11,6 +10,7 @@ import { Challenge, CommentType, Habit } from "@prisma/client";
 import { HabitCard } from "@/entities/habit";
 import { ChallengeCard } from "@/entities/challenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
+import FilterBar from "@/shared/components/FilterBar";
 
 type FilterType = "Active" | "Completed" | "Archived";
 const FILTERS: FilterType[] = ["Active", "Completed", "Archived"];

@@ -29,12 +29,14 @@ export const SubtaskList: FC<SubtaskListPropsType> = ({
               <CompletedSubtask
                 link={`/tasks/${subtask.id}`}
                 title={subtask.title}
-                completed={getDateString(new Date(subtask.completed), false)}
+                completed={getDateString(subtask.completed, false)}
               />
             ) : (
               <SubtaskInProgress
                 link={`/tasks/${subtask.id}`}
-                deadline={getDateString(new Date(subtask.deadline), false)}
+                deadline={
+                  subtask.deadline ? getDateString(subtask.deadline, false) : ""
+                }
                 title={subtask.title}
                 style={style}
               />

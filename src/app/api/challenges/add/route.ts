@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     });
   }
 
-  const habit = await createChallenge({
+  const challenge = await createChallenge({
     userId,
     title,
     style,
@@ -21,5 +21,5 @@ export async function POST(request: Request) {
     points,
   });
 
-  return NextResponse.json({ id: habit.id });
+  return NextResponse.json({ id: challenge.id });
 }

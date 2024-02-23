@@ -8,7 +8,7 @@ type Props = {
   projectName?: string;
   taskName: string;
   taskStyle: string;
-  deadline: number;
+  deadline: Date | null;
   repeats: RepeatsOptionType;
   points: number;
 };
@@ -34,7 +34,7 @@ export const createTask = async ({
     style: taskStyle,
     deadline,
     progress: 0,
-    completed: 0,
+    completed: null,
     repeats,
     description: "",
     comments: [

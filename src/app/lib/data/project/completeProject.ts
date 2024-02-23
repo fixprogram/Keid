@@ -20,11 +20,9 @@ export const completeProject = async (projectId: string) => {
   });
 
   await prisma.task.updateMany({
-    where: { projectId, completed: { lt: 1 } },
-    data: { completed: Date.now() },
+    where: { projectId, completed: null },
+    data: { completed: new Date() },
   });
-
-  //   await prisma.subtask.deleteMany({ where: { id: { in: subtaskIds } } });
 
   return project;
 };

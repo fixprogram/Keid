@@ -2,6 +2,10 @@ import { isDateToday } from "./isDateToday";
 import { isDateTomorrow } from "./isDateTomorrow";
 
 export function getDateString(date: Date, withYear = true) {
+  if (!date) {
+    return "";
+  }
+
   let da = date;
   const day = date.getDate();
   const year = date.getFullYear();

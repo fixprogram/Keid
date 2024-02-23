@@ -1,7 +1,7 @@
 "use client";
 
 import { mapTasks } from "@/entities/task/lib/mapTasks";
-import FilterBar from "@/features/FilterBar";
+import FilterBar from "@/shared/components/FilterBar";
 import PageHeader from "@/features/PageHeader";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { sortTasks } from "@/shared/lib/utils/sortTasks";

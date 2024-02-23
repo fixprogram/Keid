@@ -10,8 +10,8 @@ export async function getThisWeekTasks(projectIDs: string[]) {
     where: {
       projectId: { in: projectIDs },
       deadline: {
-        lte: lastDayTimestamp,
-        gte: firstDayTimestamp,
+        lte: new Date(lastDayTimestamp),
+        gte: new Date(firstDayTimestamp),
       },
       repeats: "Once",
     },

@@ -9,6 +9,11 @@ export const PopupDeadline: FC = () => {
     (state) => [state.deadline, state.openCalendar],
     shallow
   );
+
+  if (!deadline) {
+    return null;
+  }
+
   const date = getDateString(new Date(deadline), false);
 
   return <DueDate date={date} onClick={openCalendar} />;

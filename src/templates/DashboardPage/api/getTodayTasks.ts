@@ -20,8 +20,8 @@ export async function getTodayTasks(userId: string): Promise<EnhancedTask[]> {
         {
           projectId: { in: projectIDs },
           deadline: {
-            lte: endTimestamp,
-            gte: startTimestamp,
+            lte: new Date(endTimestamp),
+            gte: new Date(startTimestamp),
           },
         },
         {

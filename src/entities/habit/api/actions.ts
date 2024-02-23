@@ -34,5 +34,5 @@ export async function completeHabitForToday(id: string, userId: string) {
   }
 
   revalidatePath("/dashboard/overview");
-  // revalidatePath(`/habits/${id}`);
+  revalidatePath(`/habits/${id}`);
 }

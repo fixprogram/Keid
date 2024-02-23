@@ -36,6 +36,16 @@ export const getOverviewData = async () => {
     return { error: "Unauthorized" };
   }
 
+  // await prisma.task.updateMany({
+  //   where: { completed: 0 },
+  //   data: { completed: null },
+  // });
+
+  // await prisma.habit.updateMany({
+  //   where: { completed: 0 },
+  //   data: { completed: null },
+  // });
+
   const userId = user.id;
 
   const userProjectNames = await getUserProjectNames(userId);

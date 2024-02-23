@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/app/lib/prisma/db.server";
-import { Comment, CommentType } from "@prisma/client";
+import { Comment, CommentType, Task } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const completeTask = async (id: string, userId: string) => {
@@ -21,14 +21,14 @@ export const completeTask = async (id: string, userId: string) => {
     type: CommentType.COMPLETED,
   };
 
-  const newData = {
-    completed: Date.now(),
+  const newData: Pick<Task, "completed" | "progress" | "comments"> = {
+    completed: new Date(),
     progress: 100,
     comments: [...task.comments, newComment],
   };
 
   if (task.repeats === "Everyday") {
-    (newData.completed = 0), (newData.progress = 0);
+    (newData.completed = null), (newData.progress = 0);
   }
 
   await prisma.task.update({

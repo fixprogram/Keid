@@ -30,7 +30,7 @@ export const useAddSubtask = () => {
         title: newSubtaskTitle,
         userId,
         taskId,
-        deadline,
+        deadline: new Date(deadline).toJSON(),
       }),
     onSuccess: () => {
       queryClient.invalidateQueries(["task", taskId]);

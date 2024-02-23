@@ -3,6 +3,7 @@ import { transformChallenge } from "../lib/transformChallenge";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
 import { Challenge, CommentType, Member } from "@prisma/client";
 import { getServerUser } from "@/app/lib/getServerUser";
+import { getTodayTimestamps } from "@/shared/lib/utils/getTodayTimestamps";
 
 export async function transformChallenges(challenges: Challenge[]) {
   const user = await getServerUser();
@@ -62,15 +63,30 @@ export async function transformChallenges(challenges: Challenge[]) {
 }
 
 export const getTodayChallenges = async (userId: string) => {
+  const { startTimestamp, endTimestamp } = getTodayTimestamps();
   const challenges = await prisma.challenge.findMany({
     where: {
       OR: [
-        { userId, isArchived: false, failed: 0, completed: 0 },
+        {
+          userId,
+          isArchived: false,
+          failed: null,
+          completed: null,
+        },
         {
           members: { some: { id: userId } },
           isArchived: false,
-          failed: 0,
-          completed: 0,
+          failed: null,
+          completed: null,
+        },
+        {
+          userId,
+          isArchived: false,
+          failed: null,
+          completed: {
+            gte: new Date(startTimestamp),
+            lte: new Date(endTimestamp),
+          },
         },
       ],
     },

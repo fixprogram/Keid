@@ -23,13 +23,12 @@ export const HabitCard: FC<HabitCardPropsType> = ({
   repeats,
   hasCompletedToday,
 }) => {
-  const { handleComplete, isLoadingComplete, hasCompleted } =
-    useCompleteForToday(id, hasCompletedToday);
+  const { handleComplete, isLoadingComplete } = useCompleteForToday(id);
 
   return (
     <section
       className={`${
-        hasCompleted ? "border-[1px] border-deactive" : "bg-background2"
+        hasCompletedToday ? "border-[1px] border-deactive" : "bg-background2"
       } p-3 flex gap-9 rounded-xl relative flex-wrap`}
       style={{ aspectRatio: "1 / 1", maxWidth: "calc(50% - 8px)" }}
     >
@@ -39,7 +38,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
       >
         <b
           className={`text-lg text-white font-bold ${
-            hasCompleted ? "line-through	" : ""
+            hasCompletedToday ? "line-through	" : ""
           }`}
         >
           {title}
@@ -49,7 +48,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
       <div className="flex justify-between items-end w-full">
         <HabitProgress style={style} repeats={repeats} streak={streak} />
 
-        {hasCompleted ? (
+        {hasCompletedToday ? (
           <div className="w-[40px]">
             <Icon name="completed" width={40} height={40} />
           </div>
