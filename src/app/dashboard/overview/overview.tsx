@@ -11,12 +11,9 @@ import { Habit } from "@prisma/client";
 import useSWR, { SWRConfig } from "swr";
 
 function OverviewContent() {
-  const [dateType] = useDashboardStore((state) => [state.dateType]);
+  // const [dateType] = useDashboardStore((state) => [state.dateType]);
 
-  const { data } = useSWR(
-    `${links.dashboardOverview}?dateType=${dateType}`,
-    fetcher
-  );
+  const { data } = useSWR(`${links.dashboardOverview}`, fetcher);
 
   if (!data) {
     return null;
@@ -24,15 +21,15 @@ function OverviewContent() {
 
   const { tasks, weekTasks, monthTasks, habits, challenges } = data;
 
+  // console.log()
+
   return (
     <>
       {tasks.length ? <TasksBlock tasks={tasks} title="Today's Tasks" /> : null}
 
       {habits.length ? (
         <section className="mt-8">
-          <h3 className="font-poppins font-semibold text-xl text-white">
-            Habits
-          </h3>
+          <h3 className="font-poppins font-bold text-xl text-white">Habits</h3>
           <div className="flex align-center mt-5 gap-4 flex-wrap">
             {habits.map((habit: Habit) => (
               <HabitCard
@@ -47,7 +44,7 @@ function OverviewContent() {
 
       {challenges.length ? (
         <section className="mt-8">
-          <h3 className="font-poppins font-semibold text-xl text-white">
+          <h3 className="font-poppins font-bold text-xl text-white">
             Challenges
           </h3>
           <div className="flex flex-col mt-5 gap-4">

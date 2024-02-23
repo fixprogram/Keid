@@ -69,7 +69,7 @@ export const OverdueTask: FC<OverdueTaskPropsType> = ({
           ) : null}
           <Link
             href={link}
-            className="text-lg text-white font-semibold"
+            className="text-lg text-white font-bold"
             style={{ overflowX: "hidden" }}
           >
             {title}

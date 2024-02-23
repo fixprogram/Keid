@@ -28,7 +28,7 @@ export const TodoMetrics: FC<TodoMetricsPropsType> = ({ metrics }) => {
           <div>
             <div className="text-deactive text-sm font-medium">{name}</div>
             <div
-              className="font-semibold text-lg"
+              className="font-bold text-lg"
               style={{ color: valueColor ? valueColor : "#FFFFFF" }}
             >
               {value}

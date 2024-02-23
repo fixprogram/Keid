@@ -41,17 +41,6 @@ export default async function Layout({ children }: LayoutPropsType) {
         <Container withNav={true}>
           <DashboardHeader />
 
-          <h2
-            style={{
-              fontSize: "36px",
-              color: "#fff",
-              fontWeight: 800,
-              marginTop: 32,
-            }}
-          >
-            Happy Birthday, bro 🎉
-          </h2>
-
           <Tabs />
 
           {children}

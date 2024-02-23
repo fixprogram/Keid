@@ -1,4 +1,4 @@
-import StyleList from "@/features/StyleList";
+import StyleList from "@/shared/components/StyleList";
 import { usePopupStore } from "@/widgets/Navigation/model/usePopupStore";
 import { FC, useRef } from "react";
 import { shallow } from "zustand/shallow";

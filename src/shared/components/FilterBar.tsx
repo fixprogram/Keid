@@ -21,7 +21,7 @@ const FilterBar: FC<Props> = ({
             <li key={filter}>
               <button
                 type="button"
-                className={`font-semibold text-base py-1 px-4 rounded-2xl	 ${
+                className={`font-bold text-base py-1 px-4 rounded-2xl	 ${
                   isActive ? "text-white bg-primary" : "text-deactive"
                 }`}
                 onClick={() => filterClickHandler(filter)}

@@ -16,7 +16,7 @@ export const TasksBlock: FC<TasksBlockPropsType> = ({
 
   return (
     <section className="mt-8 relative">
-      <h3 className="font-poppins font-semibold text-xl text-white">{title}</h3>
+      <h3 className="font-poppins font-bold text-xl text-white">{title}</h3>
 
       {taskTrees.length ? (
         <section

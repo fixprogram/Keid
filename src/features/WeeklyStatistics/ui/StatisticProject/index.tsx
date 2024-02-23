@@ -52,7 +52,7 @@ export const StatisticProject: FC<StatisticProjectPropsType> = ({
         <div className="flex-grow">
           <div className="flex justify-between">
             <Link
-              className="text-lg text-white font-semibold"
+              className="text-lg text-white font-bold"
               href={`projects/${id}`}
             >
               {title}

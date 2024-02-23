@@ -1,6 +1,6 @@
 "use client";
 
-import { Comments } from "@/features/Comments";
+import { Comments } from "@/widgets/Comments";
 import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";

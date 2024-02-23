@@ -1,4 +1,4 @@
-import DueDate from "@/features/DueDate";
+import DueDate from "@/shared/components/DueDate";
 import { getDateString } from "@/shared/lib/utils/getDateString";
 import { usePopupStore } from "@/widgets/Navigation/model/usePopupStore";
 import { FC } from "react";

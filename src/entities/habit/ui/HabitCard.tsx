@@ -38,7 +38,7 @@ export const HabitCard: FC<HabitCardPropsType> = ({
         className="w-full flex justify-between flex-wrap"
       >
         <b
-          className={`text-lg text-white font-semibold ${
+          className={`text-lg text-white font-bold ${
             hasCompleted ? "line-through	" : ""
           }`}
         >

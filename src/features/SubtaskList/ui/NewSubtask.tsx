@@ -69,14 +69,14 @@ export const NewSubtask = ({}) => {
             backgroundColor: "inherit",
             zIndex: isPopupOpened ? 9999 : "auto",
           }}
-          className="text-lg flex-grow text-white font-semibold"
+          className="text-lg flex-grow text-white font-bold"
           onFocus={openPopup}
           //   onBlur={closePopup}
         />
 
         {/* {text.length ? <AddButton /> : null} */}
 
-        {/* <b className="text-lg flex-grow text-white font-semibold">{title}</b> */}
+        {/* <b className="text-lg flex-grow text-white font-bold">{title}</b> */}
       </div>
 
       {isPopupOpened ? <NewSubtaskPopup /> : null}

@@ -37,7 +37,7 @@ export const RepeatedTask: FC<RepeatedTaskPropsType> = ({
         ) : null}
 
         <div>
-          <h3 className="text-white text-lg font-semibold">{title}</h3>
+          <h3 className="text-white text-lg font-bold">{title}</h3>
         </div>
 
         {deadline ? (

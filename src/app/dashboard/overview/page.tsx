@@ -6,9 +6,9 @@ import Overview from "./overview";
 export const revalidate = 3600;
 
 export default async function Page() {
-  const dateType = DateType.Today;
+  // const dateType = DateType.Today;
 
-  const data = await getOverviewData(dateType);
+  const data = await getOverviewData();
 
   return (
     <Suspense fallback={null}>

@@ -24,7 +24,7 @@ export const ProjectTitle: FC<ProjectTitlePropsType> = ({ initialTitle }) => {
   return (
     <>
       {/* <h2
-        className="text-xl text-white font-semibold"
+        className="text-xl text-white font-bold"
         onClick={handleOpenPopup}
       >
         {title}
@@ -35,9 +35,7 @@ export const ProjectTitle: FC<ProjectTitlePropsType> = ({ initialTitle }) => {
         // onClose={handleClosePopup}
         positioned="Top"
         btn={
-          <h2 className="text-xl text-white font-semibold text-left">
-            {title}
-          </h2>
+          <h2 className="text-xl text-white font-bold text-left">{title}</h2>
         }
       >
         <div className="flex gap-3 py-5 px-10">

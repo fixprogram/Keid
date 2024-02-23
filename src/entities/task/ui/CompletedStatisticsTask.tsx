@@ -57,7 +57,7 @@ export const CompletedStatisticsTask: FC<CompletedTaskPropsType> = ({
               </b>
             </div>
           ) : null}
-          <b className={`text-lg text-white font-semibold ${styles.taskTitle}`}>
+          <b className={`text-lg text-white font-bold ${styles.taskTitle}`}>
             {title}
           </b>
         </div>

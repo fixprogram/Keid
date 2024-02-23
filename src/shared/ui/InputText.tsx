@@ -6,7 +6,7 @@ export default function InputText({
   return (
     <input
       {...props}
-      className="block text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
+      className="block text-lg text-white font-bold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
       style={{ background: "inherit" }}
     />
   );

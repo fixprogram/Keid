@@ -6,7 +6,7 @@ interface GreetingPropsType {
 
 export const Greeting: FC<GreetingPropsType> = ({ name }) => {
   return (
-    <h2 className="text-white font-poppins font-semibold text-xxl mt-[22px]">
+    <h2 className="text-white font-poppins font-bold text-xxl mt-[22px]">
       {`Hello, ${name}`}
     </h2>
   );

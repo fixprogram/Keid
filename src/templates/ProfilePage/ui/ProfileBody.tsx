@@ -28,7 +28,7 @@ export const ProfileBody: FC<ProfileBodyPropType> = ({ name, email }) => {
 
       <a
         href={`mailto:${email}`}
-        className="block mt-1 font-semibold"
+        className="block mt-1 font-bold"
         style={{ color: "#BBFFE7" }}
       >
         {email}

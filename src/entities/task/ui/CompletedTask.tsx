@@ -58,7 +58,7 @@ export const CompletedTask: FC<CompletedTaskPropsType> = ({
             </div>
           ) : null}
           <b
-            className={`text-lg text-white font-semibold line-through ${styles.taskTitle}`}
+            className={`text-lg text-white font-bold line-through ${styles.taskTitle}`}
           >
             {title}
           </b>

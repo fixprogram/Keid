@@ -1,5 +1,5 @@
 import { useTaskStore } from "@/entities/task/models/taskStore";
-import DueDate from "@/features/DueDate";
+import DueDate from "@/shared/components/DueDate";
 import { PopupWithOverlay } from "@/shared/components/PopupWithOverlay";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import { ItemType } from "@/shared/config/types";

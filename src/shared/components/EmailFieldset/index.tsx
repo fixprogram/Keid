@@ -18,7 +18,7 @@ export default function EmailFieldset({ email, setEmail, error }: Props) {
         type="search"
         name="email"
         placeholder="Email"
-        className="w-full text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
+        className="w-full text-lg text-white font-bold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
         required
         style={{ background: "inherit" }}
         value={email}

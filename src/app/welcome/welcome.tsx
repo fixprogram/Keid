@@ -18,7 +18,7 @@ export default function Welcome() {
       />
 
       <section className="flex mt-[-24px] flex-col">
-        <h2 className="text-white font-poppins font-semibold text-xxxl pr-5">
+        <h2 className="text-white font-poppins font-bold text-xxxl pr-5">
           Manage Everything on your Phone
         </h2>
 

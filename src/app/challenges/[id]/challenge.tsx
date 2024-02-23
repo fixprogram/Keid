@@ -1,6 +1,6 @@
 "use client";
 
-import { Comments } from "@/features/Comments";
+import { Comments } from "@/widgets/Comments";
 import Layout from "@/widgets/Layout";
 import { useQuery } from "@tanstack/react-query";
 import React, { FC, useMemo } from "react";
@@ -71,7 +71,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
 
         <div className=" mt-4">
           <div className="flex justify-between mb-2">
-            <h3 className="font-poppins font-semibold text-xl text-white">
+            <h3 className="font-poppins font-bold text-xl text-white">
               Progress
             </h3>
             <p className="font-medium text-base text-white">
@@ -90,7 +90,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
           </div>
         </div>
 
-        <h3 className="font-poppins font-semibold text-xl text-white mt-8">
+        <h3 className="font-poppins font-bold text-xl text-white mt-8">
           Members progress
         </h3>
         {members.length ? (
@@ -106,7 +106,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
                       <Icon name="avatar" width={32} height={32} />
                     </div>
 
-                    <b className="font-semibold text-lg text-white block">
+                    <b className="font-bold text-lg text-white block">
                       {member.name}
                     </b>
                   </div>
@@ -128,7 +128,7 @@ export const Challenge: FC<ChallengePropsType> = ({ id }) => {
         ) : null}
 
         <div className="mt-auto">
-          <h3 className="font-poppins font-semibold text-xl text-white">
+          <h3 className="font-poppins font-bold text-xl text-white">
             Comments
           </h3>
           <Comments comments={comments} itemType="challenge" />

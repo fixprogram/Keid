@@ -70,7 +70,7 @@ export const PopupMembers: FC = () => {
                     <Icon name="avatar" width={40} height={40} />
                   </div>
 
-                  <b className="font-semibold text-lg text-white block">
+                  <b className="font-bold text-lg text-white block">
                     {user.name}
                   </b>
 

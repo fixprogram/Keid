@@ -27,8 +27,9 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { sortCompletedToday } from "@/shared/lib/utils/sortCompletedToday";
 
-export const getOverviewData = async (dateType: DateType) => {
-  // export const getOverviewData = cache(async (dateType: DateType) => {
+export type EnhancedTask = Task & { isCompleted: boolean };
+
+export const getOverviewData = async () => {
   const user = await getServerUser();
 
   if (!user) {
@@ -46,28 +47,9 @@ export const getOverviewData = async (dateType: DateType) => {
   const projectIDs = projects.map((projectId) => projectId.id);
   projectIDs.push(userId);
 
-  const tasks: Task[] = await getTodayTasks(userId);
-  const weekTasks: Task[] = await getThisWeekTasks(projectIDs);
-  const monthTasks: Task[] = await getThisMonthTasks(projectIDs);
-
-  // switch (dateType) {
-  //   case DateType.Today: {
-  //     tasks = await getTodayTasks(userId);
-
-  //     break;
-  //   }
-  //   case DateType.Week: {
-  //     tasks = await getThisWeekTasks(projectIDs);
-  //     break;
-  //   }
-  //   case DateType.Month: {
-  //     tasks = await getThisMonthTasks(projectIDs);
-  //     break;
-  //   }
-  //   default: {
-  //     throw new Error(`Date type ${dateType} doesn't exist`);
-  //   }
-  // }
+  const tasks: EnhancedTask[] = await getTodayTasks(userId);
+  const weekTasks: EnhancedTask[] = await getThisWeekTasks(projectIDs);
+  const monthTasks: EnhancedTask[] = await getThisMonthTasks(projectIDs);
 
   const projectAmount = userProjectNames.length;
   const totalTasksIds: string[] = [];
@@ -121,7 +103,7 @@ export async function getProductivityData(dateType: DateType) {
   const projectIDs = projects.map((projectId) => projectId.id);
   projectIDs.push(userId);
 
-  let tasks: Task[] = [];
+  let tasks: EnhancedTask[] = [];
   let habits: Habit[] = [];
   let challenges: Challenge[] = [];
   let reflection: Reflection | undefined = undefined;

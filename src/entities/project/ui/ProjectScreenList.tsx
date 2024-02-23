@@ -30,7 +30,7 @@ export const ProjectScreenList: FC = () => {
                   onClick={() => {
                     setActiveScreen(screen);
                   }}
-                  className={`text-left font-semibold p-5 pl-10 w-full  ${
+                  className={`text-left font-bold p-5 pl-10 w-full  ${
                     activeScreen === screen ? "text-white" : "text-deactive"
                   }`}
                 >

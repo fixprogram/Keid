@@ -15,7 +15,7 @@ export const SubtaskInProgress = ({ link, title, deadline, style }: Props) => {
         <div className="min-w-[24px] h-6 rounded-full border-2 border-deactive m-2"></div>
 
         <div className="flex flex-grow items-center gap-2 mr-3">
-          <b className="text-lg flex-grow text-white font-semibold">{title}</b>
+          <b className="text-lg flex-grow text-white font-bold">{title}</b>
           <p
             className="text-smm font-medium ml-auto min-w-[37px]"
             style={{ color: style.background }}

@@ -18,7 +18,7 @@ export const CompletedSubtask = ({ link, title, completed }: Props) => {
           style={{ width: "calc(100% - 64px)" }}
         >
           <b
-            className="text-lg flex-grow text-deactive font-semibold"
+            className="text-lg flex-grow text-deactive font-bold"
             style={{ overflowX: "hidden" }}
           >
             {title}

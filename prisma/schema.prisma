@@ -57,7 +57,7 @@ model Task {
   parentId       String
   subtaskIds     String[]
   comments       Comment[]
-  repeats        String
+  repeats        String // Repeats interval: "Once" | "Daily" | "Weekly" | "Custom"
   description    String
   points         Int        @default(0)
   metrics        String[]

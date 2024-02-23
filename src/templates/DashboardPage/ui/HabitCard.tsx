@@ -43,7 +43,7 @@
 //     //         <Icon name="completed" width={40} height={40} />
 //     //       ) : (
 //     //         <b
-//     //           className="text-lg text-white font-semibold mt-4"
+//     //           className="text-lg text-white font-bold mt-4"
 //     //           style={{ fontSize: 14 }}
 //     //         >
 //     //           {progress}%
@@ -101,7 +101,7 @@
 //     //     </svg>
 //     //   </div>
 
-//     //   <b className="text-lg text-white font-semibold mt-4 block max-w-[80px] text-center">
+//     //   <b className="text-lg text-white font-bold mt-4 block max-w-[80px] text-center">
 //     //     {title}
 //     //   </b>
 //     // </Link>

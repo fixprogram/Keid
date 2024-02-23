@@ -43,7 +43,7 @@ export const TodoPoints: FC<TodoPointsPropsType> = ({
     <PopupWithOverlay
       btn={
         <button
-          className="font-semibold"
+          className="font-bold"
           style={{
             lineHeight: "20px",
             fontSize: "12px",

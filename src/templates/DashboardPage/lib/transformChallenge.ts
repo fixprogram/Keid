@@ -1,4 +1,4 @@
-import { CommentType } from "@/features/Comments/config/types";
+import { CommentType } from "@/widgets/Comments/config/types";
 import { Member } from "@prisma/client";
 
 export type MappedMember = Member & { name: string };

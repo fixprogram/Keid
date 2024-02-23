@@ -12,13 +12,6 @@ export async function getThisMonthTasks(projectIDs: string[]) {
   endOfMonth.setTime(endOfMonth.getTime() - 1); // Subtract 1 millisecond to get end of current month
   const endTimestamp = endOfMonth.getTime();
 
-  // const allTasks = await prisma.task.findMany({
-  //   where: { projectId: { in: projectIDs } },
-  //   select: { id: true },
-  // });
-
-  // const taskIds = allTasks.map((task) => task.id);
-
   const tasks = await prisma.task.findMany({
     where: {
       projectId: { in: projectIDs },
@@ -26,33 +19,12 @@ export async function getThisMonthTasks(projectIDs: string[]) {
         lte: endTimestamp,
         gte: startTimestamp,
       },
+      repeats: "Once",
     },
   });
 
-  // const subtaskIds: string[] = [];
-  // tasks.forEach((task) => subtaskIds.push(...task.subtaskIds));
-
-  // const subtasks = await prisma.subtask.findMany({
-  //   where: {
-  //     taskId: { in: taskIds },
-  //     deadline: {
-  //       lte: endTimestamp,
-  //       gte: startTimestamp,
-  //     },
-  //   },
-  // });
-
-  // const mappedSubtasks = subtasks.map((subtask) => ({
-  //   ...subtask,
-  //   repeats: "Once",
-  //   subtaskIds: [],
-  //   style: "01",
-  //   type: "subtask",
-  //   projectId: tasks.find((task) => subtask.id in task.subtaskIds)
-  //     ?.projectId as string,
-  //   parentId: subtask.taskId,
-  // }));
-
-  return tasks;
-  // return [...tasks, ...mappedSubtasks];
+  return tasks.map((task) => ({
+    ...task,
+    isCompleted: Boolean(task.completed),
+  }));
 }

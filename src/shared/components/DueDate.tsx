@@ -24,7 +24,7 @@ export default function DueDate({
       <div className="text-left">
         <p className="text-deactive font-medium text-sm">Due Date</p>
         <b
-          className={`font-semibold`}
+          className={`font-bold`}
           style={{ color: dateColor ? dateColor : "#A5F59C" }}
         >
           {date}

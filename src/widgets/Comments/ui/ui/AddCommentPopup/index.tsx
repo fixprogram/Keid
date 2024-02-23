@@ -1,5 +1,5 @@
-import { useCommentsStore } from "@/features/Comments/models/commentsStore";
-import { useAddComment } from "@/features/Comments/models/useAddComment";
+import { useCommentsStore } from "@/widgets/Comments/models/commentsStore";
+import { useAddComment } from "@/widgets/Comments/models/useAddComment";
 import { MAX_WIDTH } from "@/shared/config/consts";
 import AddButton from "@/shared/ui/AddButton";
 import Overlay from "@/shared/ui/Overlay";

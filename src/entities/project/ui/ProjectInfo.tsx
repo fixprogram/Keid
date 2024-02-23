@@ -34,7 +34,7 @@ export const ProjectInfo: FC<ProjectInfoPropsType> = ({
       </div>
 
       <div>
-        <h3 className="text-white text-lg font-semibold">
+        <h3 className="text-white text-lg font-bold">
           {isStarred ? (
             <Icon name="starred" height={18} width={18} isInline={true} />
           ) : null}{" "}

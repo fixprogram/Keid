@@ -97,7 +97,7 @@ export const InProgressTask: FC<InProgressTaskPropsType> = ({
             ) : null}
             <Link
               href={link}
-              className={`text-lg text-white font-semibold ${styles.taskTitle}`}
+              className={`text-lg text-white font-bold ${styles.taskTitle}`}
             >
               {title}
             </Link>

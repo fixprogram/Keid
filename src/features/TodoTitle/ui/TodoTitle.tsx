@@ -31,7 +31,7 @@ export const TodoTitle: FC<TodoTitlePropsType> = ({
     <textarea
       value={value}
       onChange={handleValueChange}
-      className="text-xxl text-poppins text-white font-semibold w-full"
+      className="text-xxl text-poppins text-white font-bold w-full"
       style={{
         backgroundColor: "inherit",
         overflowY: "hidden",

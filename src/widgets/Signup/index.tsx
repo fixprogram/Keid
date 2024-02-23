@@ -83,7 +83,7 @@ export default function Signup({ email, goBack }: Props) {
             name="name"
             placeholder="Name"
             required
-            className="block text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
+            className="block text-lg text-white font-bold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
             style={{ background: "inherit" }}
             ref={nameRef}
             autoComplete="off"
@@ -98,7 +98,7 @@ export default function Signup({ email, goBack }: Props) {
             name="password"
             placeholder="Password"
             required
-            className="block text-lg text-white font-semibold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
+            className="block text-lg text-white font-bold pt-3 border-none border-b border-b-background2 placeholder:text-deactive"
             style={{ background: "inherit" }}
             ref={passwordRef}
           />

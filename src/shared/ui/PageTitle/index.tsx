@@ -7,7 +7,7 @@ type Props = {
 const PageTitle: FC<Props> = ({ children }) => {
   return (
     <h1
-      className="text-white font-poppins font-semibold mt-10 pr-[18%]"
+      className="text-white font-poppins font-bold mt-10 pr-[18%]"
       style={{ fontSize: 32, lineHeight: "40px" }}
     >
       {children}

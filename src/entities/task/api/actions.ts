@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 export const completeTask = async (id: string, userId: string) => {
   const task = await prisma.task.findUnique({
     where: { id },
-    select: { comments: true, progress: true, subtaskIds: true },
+    select: { comments: true, progress: true, subtaskIds: true, repeats: true },
   });
 
   if (!task) {
@@ -21,13 +21,19 @@ export const completeTask = async (id: string, userId: string) => {
     type: CommentType.COMPLETED,
   };
 
+  const newData = {
+    completed: Date.now(),
+    progress: 100,
+    comments: [...task.comments, newComment],
+  };
+
+  if (task.repeats === "Everyday") {
+    (newData.completed = 0), (newData.progress = 0);
+  }
+
   await prisma.task.update({
     where: { id },
-    data: {
-      completed: Date.now(),
-      progress: 100,
-      comments: [...task.comments, newComment],
-    },
+    data: newData,
   });
 
   // If there are subtasks, recursively update each one

@@ -2,11 +2,12 @@
 
 import { Challenge, CommentType, Habit, Task } from "@prisma/client";
 import { FC } from "react";
-import ProgressBar from "../WeeklyProgress/ui/ProgressBar";
+import ProgressBar from "../../shared/components/ProgressBar";
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
+import { EnhancedTask } from "@/server/actions";
 
 interface DailyProgressPropsType {
-  tasks: Task[];
+  tasks: EnhancedTask[];
   habits: Habit[];
   challenges: Challenge[];
 }
@@ -21,7 +22,7 @@ export const DailyProgress: FC<DailyProgressPropsType> = ({
   }
 
   const totalTaskAmount = tasks.length;
-  const completedTasks = tasks.filter((task) => task.completed);
+  const completedTasks = tasks.filter((task) => task.isCompleted);
   const completedTaskAmount = completedTasks.length;
 
   const totalHabitAmount = habits.length;

@@ -43,9 +43,7 @@ export default function PageHeader({ title }: Props) {
 
       <PopupWithOverlay
         btn={
-          <h2 className="font-semibold text-xl text-white font-poppins">
-            {title}
-          </h2>
+          <h2 className="font-bold text-xl text-white font-poppins">{title}</h2>
         }
         positioned="Top"
       >
@@ -55,7 +53,7 @@ export default function PageHeader({ title }: Props) {
               <li>
                 <Link
                   href={screen.link}
-                  className={`block text-left font-semibold p-5 pl-10 w-full  ${
+                  className={`block text-left font-bold p-5 pl-10 w-full  ${
                     pathname === screen.link ? "text-white" : "text-deactive"
                   }`}
                 >

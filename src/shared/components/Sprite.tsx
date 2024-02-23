@@ -783,58 +783,58 @@ export default function Sprite() {
             d="M14.2222 1.0264C15.3223 0.391262 16.6777 0.391262 17.7778 1.0264L28.0786 6.9736C29.1787 7.60874 29.8564 8.78252 29.8564 10.0528V21.9472C29.8564 23.2175 29.1787 24.3913 28.0786 25.0264L17.7778 30.9736C16.6777 31.6087 15.3223 31.6087 14.2222 30.9736L3.92137 25.0264C2.82128 24.3913 2.14359 23.2175 2.14359 21.9472V10.0528C2.14359 8.78252 2.82128 7.60874 3.92137 6.9736L14.2222 1.0264Z"
             fill="#246BFD"
           />
-          <g clip-path="url(#clip0_212_1419)">
+          <g clipPath="url(#clip0_212_1419)">
             <path
               d="M14.8887 10.4443V20.4443"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               opacity="0.5"
               d="M12.667 13.7778V18.2223"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               opacity="0.3"
               d="M10.4443 15.4443V16.5554"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M17.1113 11.5557V21.5557"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               opacity="0.3"
               d="M19.333 13.7778V18.2223"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               opacity="0.3"
               d="M21.5557 15.4443V16.5554"
               stroke="white"
-              stroke-width="1.11111"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.11111"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </g>
           <defs>

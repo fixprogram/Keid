@@ -1,6 +1,6 @@
 "use client";
 
-import { Comments } from "@/features/Comments";
+import { Comments } from "@/widgets/Comments";
 import { ProjectInfo } from "@/entities/project";
 import { projectStyles, ProjectStyleKey } from "@/shared/config/projectStyles";
 import Layout from "@/widgets/Layout";
@@ -13,7 +13,7 @@ import { SubtaskList } from "@/features/SubtaskList/ui/SubtaskList";
 import { TodoDeadline } from "@/features/TodoDeadline";
 import Loading from "@/app/loading";
 import { Task as TaskType } from "@prisma/client";
-import { CommentType } from "@/features/Comments/config/types";
+import { CommentType } from "@/widgets/Comments/config/types";
 import { TodoPoints } from "@/features/TodoPoints";
 
 type DataType = Omit<TaskType, "comments"> & {
@@ -73,7 +73,7 @@ export default function Task({ id }: TaskPropType) {
       <section className="flex flex-col grow">
         <Link
           href={parentLink}
-          className="mt-8 font-semibold font-lg block"
+          className="mt-8 font-bold font-lg block"
           style={{ color: parentProjectStyle.background }}
         >
           {parentTitle}
