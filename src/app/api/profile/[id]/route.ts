@@ -1,5 +1,5 @@
 import { prisma } from "@/app/lib/prisma/db.server";
-import { getWeeklyActivityData } from "@/features/Activity/api";
+// import { getWeeklyActivityData } from "@/features/Activity/api";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -16,10 +16,10 @@ export async function GET(request: Request) {
     );
   }
 
-  const activityData = await getWeeklyActivityData(id);
+  // const activityData = await getWeeklyActivityData(id);
 
   const data = {
-    activityData,
+    // activityData,
     userName: user.name,
     userEmail: user.email,
   };

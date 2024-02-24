@@ -1,7 +1,7 @@
 import getQueryClient from "@/utils/getQueryClient";
 import Hydrate from "@/utils/hydrate.client";
 import { dehydrate } from "@tanstack/query-core";
-import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
+// import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { prisma } from "@/app/lib/prisma/db.server";
 import { Profile } from "./profile";
 import { getServerUser } from "@/app/lib/getServerUser";

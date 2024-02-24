@@ -1,26 +1,44 @@
 import { getStartOfWeek } from "@/shared/lib/utils/getStartOfWeek";
-import { Comment } from "@prisma/client";
+import { Comment, CommentType, Task } from "@prisma/client";
 
-type LastWeekActiveTasks = {
+export type Day = {
+  // Название дня недели (M, T, W...)
+  title: string;
+  // Всего поинтов заработано за день
+  totalPoints: number;
+  // Массив идентификаторов запланированных на день задач
+  plannedTasks: string[];
+  // Массив идентификаторов выполненных за день задач
+  completedTasks: string[];
+  plannedHabits: string[];
+  completedHabits: string[];
+};
+
+type LastWeekPlannedTasks = {
+  id: string;
+  comments: Comment[];
+  points: number;
+  deadline: Date | null;
+}[];
+
+type LastWeekPlannedHabits = {
+  id: string;
   comments: Comment[];
   points: number;
 }[];
 
-type LastWeekActiveHabits = {
-  comments: Comment[];
-  points: number;
-}[];
-
-type LastWeekActiveChallenges = {
+type LastWeekPlannedChallenges = {
   comments: Comment[];
   points: number;
 }[];
 
 export function getActivityDays(
-  lastWeekActiveTasks: LastWeekActiveTasks,
-  lastWeekActiveHabits: LastWeekActiveHabits,
-  lastWeekActiveChallenges: LastWeekActiveChallenges
-) {
+  lastWeekPlannedTasks: LastWeekPlannedTasks,
+  // lastWeekCompletedTasks: LastWeekCompletedTasks,
+  lastWeekPlannedHabits: LastWeekPlannedHabits,
+  // lastWeekCompletedHabits: LastWeekCompletedHabits,
+  lastWeekActiveChallenges: LastWeekPlannedChallenges
+): Day[] {
   const startOfWeek = getStartOfWeek();
 
   const days = [
@@ -40,40 +58,51 @@ export function getActivityDays(
     const nextDayStart = new Date(dayStart);
     nextDayStart.setDate(dayStart.getDate() + 1);
 
-    const taskAmount = lastWeekActiveTasks
-      .filter((task) =>
-        task.comments.some((comment) => {
-          return (
-            Number(comment.time) > dayStart.getTime() &&
-            Number(comment.time) <= nextDayStart.getTime()
-          );
-        })
-      )
-      .reduce((sum, task) => sum + task.points, 0);
+    const startTimestamp = dayStart.getTime();
+    const endTimestamp = nextDayStart.getTime();
 
-    const habitPoints = lastWeekActiveHabits
-      .filter((habit) =>
-        habit.comments.some((comment) => {
-          return (
-            Number(comment.time) > dayStart.getTime() &&
-            Number(comment.time) <= nextDayStart.getTime()
-          );
-        })
-      )
-      .reduce((sum, task) => sum + task.points, 0);
+    const plannedTasks = lastWeekPlannedTasks.filter(
+      (task) =>
+        task.deadline &&
+        task.deadline > new Date(startTimestamp) &&
+        task.deadline <= new Date(endTimestamp)
+    );
+    const completedTasks = plannedTasks.filter((task) =>
+      task.comments.some((comment) => {
+        return (
+          comment.type === CommentType.COMPLETED &&
+          Number(comment.time) > startTimestamp &&
+          Number(comment.time) <= endTimestamp
+        );
+      })
+    );
+    const taskPoints = completedTasks.reduce(
+      (sum, task) => sum + task.points,
+      0
+    );
 
-    const challengePoints = lastWeekActiveChallenges
-      .filter((challenge) =>
-        challenge.comments.some((comment) => {
-          return (
-            Number(comment.time) > dayStart.getTime() &&
-            Number(comment.time) <= nextDayStart.getTime()
-          );
-        })
-      )
-      .reduce((sum, task) => sum + task.points, 0);
+    const completedHabits = lastWeekPlannedHabits.filter((habit) =>
+      habit.comments.some((comment) => {
+        return (
+          comment.type === CommentType.PROGRESS_UPDATE &&
+          Number(comment.time) > startTimestamp &&
+          Number(comment.time) <= endTimestamp
+        );
+      })
+    );
+    const habitPoints = completedHabits.reduce(
+      (sum, habit) => sum + habit.points,
+      0
+    );
 
-    return { ...day, taskAmount: taskAmount + habitPoints + challengePoints };
+    return {
+      ...day,
+      plannedTasks: plannedTasks.map((item) => item.id),
+      completedTasks: completedTasks.map((item) => item.id),
+      plannedHabits: lastWeekPlannedHabits.map((item) => item.id),
+      completedHabits: completedHabits.map((item) => item.id),
+      totalPoints: taskPoints + habitPoints,
+    };
   });
 
   return days;

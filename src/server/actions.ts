@@ -2,7 +2,7 @@
 import getUserProjectNames from "@/app/lib/data/user/getUserProjectNames";
 import { getServerUser } from "@/app/lib/getServerUser";
 import { prisma } from "@/app/lib/prisma/db.server";
-import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
+// import { getWeeklyActivityData } from "@/features/WeeklyActivity/api";
 import { DateType } from "@/templates/DashboardPage/model/useDashboardStore";
 import { getThisMonthTasks } from "@/templates/DashboardPage/api/getThisMonthTasks";
 import { getThisWeekTasks } from "@/templates/DashboardPage/api/getThisWeekTasks";
@@ -77,8 +77,8 @@ export const getOverviewData = async () => {
 
   const totalTaskAmount = totalTasksIds.length;
 
-  const [weeklyActivityData, habits, challenges] = await Promise.all([
-    getWeeklyActivityData(userId),
+  const [habits, challenges] = await Promise.all([
+    // getWeeklyActivityData(userId),
     getTodayHabits(userId),
     getTodayChallenges(userId),
   ]);
@@ -90,8 +90,8 @@ export const getOverviewData = async () => {
     weekTasks: mapAndSortTasks(weekTasks, projects),
     monthTasks: mapAndSortTasks(monthTasks, projects),
     userName: user.name,
-    projects: weeklyActivityData.projects,
-    activityFeed: weeklyActivityData.activityFeed,
+    // projects: weeklyActivityData.projects,
+    // activityFeed: weeklyActivityData.activityFeed,
     habits: sortCompletedToday(habits),
     challenges: sortCompletedToday(challenges),
   };
@@ -139,18 +139,18 @@ export async function getProductivityData(dateType: DateType) {
     }
   }
 
-  const weeklyActivityData = await getWeeklyActivityData(userId);
+  // const weeklyActivityData = await getWeeklyActivityData(userId);
 
   return {
-    activity: {
-      maxActivity: Math.max(
-        ...weeklyActivityData.days.map((day) => day.taskAmount)
-      ),
-      allProjects: weeklyActivityData.projects.length,
-      allTasks: weeklyActivityData.allTasksAmount,
-      days: weeklyActivityData.days,
-    },
-    projects: weeklyActivityData.projects,
+    // activity: {
+    //   maxActivity: Math.max(
+    //     ...weeklyActivityData.days.map((day) => day.taskAmount)
+    //   ),
+    //   allProjects: weeklyActivityData.projects.length,
+    //   allTasks: weeklyActivityData.allTasksAmount,
+    //   days: weeklyActivityData.days,
+    // },
+    // projects: weeklyActivityData.projects,
     tasks,
     habits,
     challenges,

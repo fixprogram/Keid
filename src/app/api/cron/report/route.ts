@@ -10,30 +10,30 @@ export async function GET() {
     select: { id: true, name: true, followers: true },
   });
 
-  await Promise.all(
-    users.map(async (user) => {
-      if (user.followers.length) {
-        const { allTasks, allProjects, maxActivity } =
-          await getWeeklyActivityData(user.id);
+  // await Promise.all(
+  //   users.map(async (user) => {
+  //     if (user.followers.length) {
+  //       const { allTasks, allProjects, maxActivity } =
+  //         await getWeeklyActivityData(user.id);
 
-        const notification: Notification = {
-          date: new Date().getTime().toString(),
-          userId: user.id,
-          type: NotificationType.REPORT,
-          content: `${user.name} finished the day with ${allTasks} tasks completed from ${allProjects} projects and total points are ${maxActivity}`,
-        };
+  //       const notification: Notification = {
+  //         date: new Date().getTime().toString(),
+  //         userId: user.id,
+  //         type: NotificationType.REPORT,
+  //         content: `${user.name} finished the day with ${allTasks} tasks completed from ${allProjects} projects and total points are ${maxActivity}`,
+  //       };
 
-        await prisma.user.updateMany({
-          where: { id: { in: user.followers } },
-          data: {
-            notifications: {
-              push: notification,
-            },
-          },
-        });
-      }
-    })
-  );
+  //       await prisma.user.updateMany({
+  //         where: { id: { in: user.followers } },
+  //         data: {
+  //           notifications: {
+  //             push: notification,
+  //           },
+  //         },
+  //       });
+  //     }
+  //   })
+  // );
 
   return NextResponse.json(true);
 }
