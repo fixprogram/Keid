@@ -16,10 +16,15 @@ interface StatisticsPropsType {
 }
 
 export const Statistics: FC<StatisticsPropsType> = ({ stats }) => {
+  const days = [...stats.days];
+  const scale =
+    200 / days.sort((a, b) => b.totalPoints - a.totalPoints)[0].totalPoints;
+
   const columns = distributeHeightAmongColumns(
     stats.days.map((item) => ({
       title: item.title,
       maxHeight: 0,
+      totalPoints: item.totalPoints,
       entities: [
         {
           name: "Task",
@@ -27,6 +32,7 @@ export const Statistics: FC<StatisticsPropsType> = ({ stats }) => {
           completedItems: item.completedTasks.length,
           height: 0,
           plannedItems: item.plannedTasks,
+          totalPoints: item.taskPoints,
         },
         {
           name: "Habit",
@@ -34,9 +40,11 @@ export const Statistics: FC<StatisticsPropsType> = ({ stats }) => {
           completedItems: item.completedHabits.length,
           height: 0,
           plannedItems: item.plannedHabits,
+          totalPoints: item.habitPoints,
         },
       ],
-    }))
+    })),
+    scale
   );
 
   return (
@@ -64,6 +72,7 @@ export const Statistics: FC<StatisticsPropsType> = ({ stats }) => {
                           borderRadius: 8,
                           minHeight: 40,
                           height: entity.height,
+                          //   maxHeight: 80,
                           fontSize: "12px",
                         }}
                         href={`/statistics?entity=${
@@ -131,53 +140,57 @@ interface Entity {
   completedItems: number;
   height: number;
   plannedItems: string[];
+  totalPoints: number;
 }
 
 interface Column {
   title: string;
   entities: Entity[];
   maxHeight: number;
+  totalPoints: number;
 }
 
-function calculateEntityHeight(entity: Entity): number {
+function calculateEntityHeight(entity: Entity, scale: number): number {
   // Calculate the height of the entity, ensuring a minimum of 40 pixels
-  return entity.items > 0 ? Math.max(entity.items * 30, 40) : 0;
+  return entity.items > 0 ? Math.max(entity.totalPoints * scale, 40) : 0;
+  //   return entity.items > 0 ? Math.max(entity.items * 30, 40) : 0;
 }
 
-function calculateColumnHeight(column: Column): number {
+function calculateColumnHeight(column: Column, scale: number): number {
   // Calculate the total height of the column based on the entities it contains
-  return column.entities.reduce(
-    (totalHeight, entity) => totalHeight + calculateEntityHeight(entity),
-    0
-  );
+  return column.totalPoints * scale;
 }
 
-function distributeHeightAmongColumns(columns: Column[]): Column[] {
+function distributeHeightAmongColumns(
+  columns: Column[],
+  scale: number
+): Column[] {
   // Calculate the total height available for all columns
-  const maxBlockHeight = 240;
+  const maxBlockHeight = 200;
 
   // Distribute available height among columns, ensuring each column does not exceed 240 pixels
-  const totalColumnHeight = columns.reduce(
-    (total, column) => total + calculateColumnHeight(column),
-    0
-  );
-  const scale = Math.min(1, (maxBlockHeight * 7) / totalColumnHeight);
+  //   const totalColumnHeight = columns.reduce(
+  //     (total, column) => total + calculateColumnHeight(column),
+  //     0
+  //   );
 
   columns.forEach((column) => {
-    const columnHeight = calculateColumnHeight(column) * scale;
+    // const columnHeight = calculateColumnHeight(column);
+    // const scale = Math.min(1, maxBlockHeight / columnHeight);
+    // console.log("scale: ", scale);
 
     // Distribute the height among entities in the column
-    let remainingHeight = columnHeight;
+    // let remainingHeight = columnHeight;
     column.entities.forEach((entity) => {
-      const height = calculateEntityHeight(entity) * scale;
+      const height = calculateEntityHeight(entity, scale);
       entity.height = height;
-      remainingHeight -= height;
+      //   remainingHeight -= height;
     });
 
     // Assign the remaining height to the last entity in the column if any
-    if (column.entities.length > 0) {
-      column.entities[column.entities.length - 1].height += remainingHeight;
-    }
+    // if (column.entities.length > 0) {
+    //   column.entities[column.entities.length - 1].height += remainingHeight;
+    // }
   });
 
   return columns;

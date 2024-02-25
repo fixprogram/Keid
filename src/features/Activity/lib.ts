@@ -12,6 +12,8 @@ export type Day = {
   completedTasks: string[];
   plannedHabits: string[];
   completedHabits: string[];
+  taskPoints: number;
+  habitPoints: number;
 };
 
 type LastWeekPlannedTasks = {
@@ -76,12 +78,17 @@ export function getActivityDays(
         );
       })
     );
-    const taskPoints = completedTasks.reduce(
-      (sum, task) => sum + task.points,
-      0
-    );
+    const taskPoints = plannedTasks.reduce((sum, task) => sum + task.points, 0);
 
-    const completedHabits = lastWeekPlannedHabits.filter((habit) =>
+    const plannedHabits = lastWeekPlannedHabits.filter((habit) =>
+      habit.comments.some((comment) => {
+        return (
+          comment.type === CommentType.STARTED &&
+          Number(comment.time) <= endTimestamp
+        );
+      })
+    );
+    const completedHabits = plannedHabits.filter((habit) =>
       habit.comments.some((comment) => {
         return (
           comment.type === CommentType.PROGRESS_UPDATE &&
@@ -90,7 +97,7 @@ export function getActivityDays(
         );
       })
     );
-    const habitPoints = completedHabits.reduce(
+    const habitPoints = plannedHabits.reduce(
       (sum, habit) => sum + habit.points,
       0
     );
@@ -99,9 +106,11 @@ export function getActivityDays(
       ...day,
       plannedTasks: plannedTasks.map((item) => item.id),
       completedTasks: completedTasks.map((item) => item.id),
-      plannedHabits: lastWeekPlannedHabits.map((item) => item.id),
+      plannedHabits: plannedHabits.map((item) => item.id),
       completedHabits: completedHabits.map((item) => item.id),
       totalPoints: taskPoints + habitPoints,
+      taskPoints,
+      habitPoints,
     };
   });
 
