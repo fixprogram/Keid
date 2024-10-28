@@ -31,11 +31,7 @@ function OverviewContent({ data }: { data: any }) {
           <h3 className="font-poppins font-bold text-xl text-white">Habits</h3>
           <div className="flex align-center mt-5 gap-4 flex-wrap">
             {habits.map((habit: Habit) => (
-              <HabitCard
-                {...habit}
-                hasCompletedToday={hasCompletedToday(habit)}
-                key={habit.id}
-              />
+              <HabitCard {...habit} key={habit.id} />
             ))}
           </div>
         </section>

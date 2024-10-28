@@ -3,6 +3,7 @@
 import { HabitCard } from "@/entities/habit";
 import { TaskCard } from "@/entities/task/ui/TaskCard";
 import { TasksBlock } from "@/shared/components/TasksBlock";
+import { Habit } from "@prisma/client";
 import { useSearchParams } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
 
@@ -44,7 +45,7 @@ export function Details() {
           </h2>
 
           <div className="flex align-center mt-5 gap-4 flex-wrap">
-            {data.map((item: any) => {
+            {data.map((item: Habit) => {
               return <HabitCard key={item.id} {...item} />;
             })}
           </div>

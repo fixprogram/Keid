@@ -1,12 +1,12 @@
 import { isDateToday } from "@/shared/lib/utils/isDateToday";
-import { Challenge, CommentType, Habit } from "@prisma/client";
+import { Challenge, Comment, CommentType } from "@prisma/client";
 
-export const hasCompletedToday = (entity: Challenge | Habit) => {
+export const hasCompletedToday = (comments: Comment[]) => {
   return Boolean(
-    entity.comments.filter(
-      (entity) =>
-        entity.type === CommentType.PROGRESS_UPDATE &&
-        isDateToday(new Date(Number(entity.time)))
+    comments.filter(
+      (comment) =>
+        comment.type === CommentType.PROGRESS_UPDATE &&
+        isDateToday(new Date(Number(comment.time)))
     ).length
   );
 };

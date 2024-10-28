@@ -5,8 +5,12 @@ import { hasCompletedToday } from "./hasCompletedToday";
 // Сортируем список с завершенными задачами по дате завершения
 // Соединяем оба списка вместе
 export const sortCompletedToday = (entities: Habit[] | Challenge[]) => {
-  const completedToday = entities.filter((item) => hasCompletedToday(item));
-  const uncompletedToday = entities.filter((item) => !hasCompletedToday(item));
+  const completedToday = entities.filter((item) =>
+    hasCompletedToday(item.comments)
+  );
+  const uncompletedToday = entities.filter(
+    (item) => !hasCompletedToday(item.comments)
+  );
 
   const sortedCompleted = completedToday.sort((a, b) => {
     const lastAUpdate = Number(
